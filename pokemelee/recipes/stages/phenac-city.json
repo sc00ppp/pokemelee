@@ -1,0 +1,355 @@
+{
+  "clear_dobjs": [
+    [
+      1,
+      1,
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ]
+  ],
+  "joint_xform": [
+    {
+      "group": 1,
+      "joint": 0,
+      "t": [
+        160.0,
+        18.5,
+        -450.25
+      ],
+      "s": 0.9
+    }
+  ],
+  "shrink_tex": [
+    [
+      1,
+      3,
+      0,
+      64
+    ],
+    [
+      1,
+      3,
+      1,
+      64
+    ],
+    [
+      1,
+      4,
+      0,
+      64
+    ],
+    [
+      1,
+      4,
+      1,
+      64
+    ],
+    [
+      1,
+      5,
+      0,
+      64
+    ],
+    [
+      1,
+      6,
+      0,
+      64
+    ],
+    [
+      1,
+      6,
+      1,
+      64
+    ],
+    [
+      1,
+      7,
+      0,
+      64
+    ],
+    [
+      1,
+      7,
+      1,
+      64
+    ],
+    [
+      1,
+      8,
+      0,
+      64
+    ],
+    [
+      1,
+      8,
+      1,
+      64
+    ],
+    [
+      1,
+      9,
+      0,
+      64
+    ],
+    [
+      1,
+      9,
+      1,
+      64
+    ]
+  ],
+  "clear_groups": [],
+  "receive_group": 2,
+  "wrappers": [
+    {
+      "t": [
+        0.0,
+        -115.0,
+        -452.5
+      ],
+      "s": 2.5
+    }
+  ],
+  "hide_untextured_xlu": true,
+  "donors": [
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 6,
+      "wrapper": 0,
+      "flatten": true,
+      "bake_envelopes": true,
+      "strip_ptcl": true,
+      "anim": true,
+      "joint_anim": false,
+      "loop": true,
+      "hide": [
+        [
+          58,
+          0
+        ],
+        [
+          61,
+          0
+        ],
+        [
+          130,
+          0
+        ],
+        [
+          130,
+          1
+        ],
+        [
+          150,
+          0
+        ],
+        [
+          150,
+          1
+        ]
+      ]
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 7,
+      "wrapper": 0,
+      "flatten": true
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 8,
+      "wrapper": 0,
+      "anim": true,
+      "loop": true
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 0,
+      "wrapper": 0
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 1,
+      "wrapper": 0
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 2,
+      "wrapper": 0
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 3,
+      "wrapper": 0
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 4,
+      "wrapper": 0
+    },
+    {
+      "file": "${colosseum}/M1_out/04_M1_out.rdat",
+      "desc": 5,
+      "wrapper": 0
+    }
+  ],
+  "drop_image_roots": true,
+  "clear_joints": [
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      5,
+      1
+    ]
+  ],
+  "clear_mat_anims": [
+    5
+  ],
+  "fog": {
+    "start": 60000,
+    "end": 70000,
+    "color": [
+      214,
+      222,
+      228
+    ],
+    "group": 2
+  },
+  "cs": {
+    "meshes": [
+      {
+        "name": "ring",
+        "mesh": "${generated}/ps2/stage/v7/ring.mesh",
+        "tex": "${generated}/ps2/stage/v7/ring.img",
+        "wrap": "repeat",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "pit",
+        "mesh": "${generated}/ps2/stage/v7/pit.mesh",
+        "tex": "${generated}/ps2/stage/v7/pit.img",
+        "wrap": "repeat",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "floor",
+        "mesh": "${generated}/ps2/stage/v7/floor.mesh",
+        "tex": "${generated}/ps2/stage/v7/floor.img",
+        "wrap": "clamp",
+        "mips": true,
+        "colors": true,
+        "joint": [
+          5,
+          0
+        ]
+      },
+      {
+        "name": "plat_top",
+        "mesh": "${generated}/ps2/stage/v7/plat_top.mesh",
+        "tex": "${generated}/ps2/stage/v7/plat_top.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true,
+        "joint": [
+          5,
+          1
+        ],
+        "minus_joint": true
+      },
+      {
+        "name": "plat_side",
+        "mesh": "${generated}/ps2/stage/v7/plat_side.mesh",
+        "tex": "${generated}/ps2/stage/v7/plat_top.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true,
+        "joint": [
+          5,
+          1
+        ],
+        "minus_joint": true
+      },
+      {
+        "name": "face",
+        "mesh": "${generated}/ps2/stage/v7/face.mesh",
+        "tex": "${generated}/ps2/stage/v7/face.img",
+        "wrap": "clamp",
+        "mips": false,
+        "colors": true
+      },
+      {
+        "name": "under",
+        "mesh": "${generated}/ps2/stage/v7/under.mesh",
+        "tex": "${generated}/ps2/stage/v7/under.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "pier",
+        "mesh": "${generated}/ps2/stage/v7/pier.mesh",
+        "tex": "${generated}/ps2/stage/v7/pier.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "pier_side",
+        "mesh": "${generated}/ps2/stage/v7/pier_side.mesh",
+        "tex": "${generated}/ps2/stage/v7/pier.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "housing",
+        "mesh": "${generated}/ps2/stage/v7/housing.mesh",
+        "tex": "${generated}/ps2/stage/v7/housing.img",
+        "wrap": "mirror",
+        "mips": true,
+        "colors": true
+      },
+      {
+        "name": "posts",
+        "mesh": "${generated}/ps2/stage/v7/posts.mesh",
+        "tex": "${generated}/ps2/stage/v7/posts.img",
+        "wrap": "repeat",
+        "mips": true,
+        "colors": true
+      }
+    ]
+  },
+  "downscale": [
+    1024,
+    744,
+    false
+  ],
+  "target": "${generated}/ps/san/GrPs.dat",
+  "out": "${generated}/ps2/stage/v7/GrPs.dat"
+}

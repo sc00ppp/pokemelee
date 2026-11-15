@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pokemelee-builder"
+version = "0.1.0"
+description = "Source-only PokéMelee build tooling for user-supplied GameCube discs"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+art = ["Pillow==11.2.1", "numpy==2.2.6"]
+
+[project.scripts]
+pokemelee = "pokemelee.cli:main"
+
+[tool.setuptools]
+packages = ["pokemelee"]
+
+[tool.setuptools.package-data]
+pokemelee = ["recipes/*.json", "recipes/stages/*.json", "dependencies.lock.json"]

@@ -1,0 +1,469 @@
+{
+  "target": "${melee}/GrNBa.dat",
+  "out": "${generated}/bf/GrNBa_lobby_v10.dat",
+  "clear_groups": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "receive_group": 6,
+  "strip_ptcl_groups": [
+    1,
+    2,
+    4,
+    5
+  ],
+  "donors": [
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "place": {
+        "t": [
+          0,
+          -150,
+          -164
+        ],
+        "s": [
+          4.0,
+          5.0,
+          4.0
+        ]
+      },
+      "vtx_scale": 1.7,
+      "desc": 2,
+      "anim": true,
+      "joint_anim": false,
+      "mat_anim": true,
+      "loop": true,
+      "hide": [
+        [
+          5,
+          0
+        ],
+        [
+          87,
+          0
+        ],
+        [
+          88,
+          0
+        ],
+        [
+          82,
+          0
+        ],
+        [
+          85,
+          0
+        ],
+        [
+          86,
+          0
+        ],
+        [
+          84,
+          0
+        ],
+        [
+          134,
+          0
+        ],
+        [
+          135,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          131,
+          0
+        ],
+        [
+          113,
+          0
+        ],
+        [
+          114,
+          0
+        ],
+        [
+          117,
+          0
+        ],
+        [
+          118,
+          0
+        ]
+      ],
+      "water_scroll": {
+        "fall_speed": 2.0,
+        "pool_speed": 0.3,
+        "modulate": true,
+        "alpha": 0.72,
+        "drop_tex1": false,
+        "color_scale": 0.8
+      }
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "place": {
+        "t": [
+          0,
+          -150,
+          -164
+        ],
+        "s": [
+          4.0,
+          5.0,
+          4.0
+        ]
+      },
+      "vtx_scale": 1.7,
+      "desc": 3,
+      "hide": [
+        [
+          5,
+          0
+        ]
+      ]
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "place": {
+        "t": [
+          0,
+          -150,
+          -164
+        ],
+        "s": [
+          4.0,
+          5.0,
+          4.0
+        ]
+      },
+      "vtx_scale": 1.7,
+      "desc": 0,
+      "anim": true,
+      "joint_anim": false,
+      "mat_anim": true,
+      "loop": true
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "place": {
+        "t": [
+          0,
+          -150,
+          -164
+        ],
+        "s": [
+          4.0,
+          5.0,
+          4.0
+        ]
+      },
+      "vtx_scale": 1.7,
+      "desc": 1,
+      "anim": true,
+      "joint_anim": false,
+      "mat_anim": true,
+      "loop": true
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "desc": 2,
+      "fresh": true,
+      "only": [
+        [
+          87,
+          0
+        ],
+        [
+          134,
+          0
+        ]
+      ],
+      "place": {
+        "t": [
+          0,
+          -51.540000000000006,
+          -194.9
+        ],
+        "s": 2.9
+      },
+      "vtx_scale": 1.7
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "desc": 2,
+      "fresh": true,
+      "only": [
+        [
+          135,
+          0
+        ]
+      ],
+      "vtx_scale": 1.7,
+      "mat_alpha": 1.0,
+      "place": {
+        "t": [
+          1.74,
+          -65.54,
+          55.1
+        ],
+        "s": 2.9
+      },
+      "path": {
+        "points": [
+          [
+            0.4,
+            14.0,
+            -250.0
+          ],
+          [
+            0.28284271247461906,
+            14.848528137423857,
+            -249.71715728752537
+          ],
+          [
+            2.4492935982947065e-17,
+            15.2,
+            -249.6
+          ],
+          [
+            -0.282842712474619,
+            14.848528137423857,
+            -249.71715728752537
+          ],
+          [
+            -0.4,
+            14.0,
+            -250.0
+          ],
+          [
+            -0.28284271247461906,
+            13.151471862576143,
+            -250.28284271247463
+          ],
+          [
+            -7.347880794884119e-17,
+            12.8,
+            -250.4
+          ],
+          [
+            0.28284271247461895,
+            13.151471862576143,
+            -250.28284271247463
+          ]
+        ],
+        "frames": 720,
+        "step": 10,
+        "yaw_offset": 0
+      }
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "desc": 2,
+      "fresh": true,
+      "only": [
+        [
+          5,
+          0
+        ]
+      ],
+      "place": {
+        "t": [
+          0,
+          -51.540000000000006,
+          -194.9
+        ],
+        "s": [
+          2.9,
+          3.6,
+          2.9
+        ]
+      },
+      "vtx_scale": 1.7
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+      "desc": 3,
+      "fresh": true,
+      "only": [
+        [
+          5,
+          0
+        ]
+      ],
+      "place": {
+        "t": [
+          0,
+          -51.49000000000001,
+          -194.9
+        ],
+        "s": 2.9
+      },
+      "vtx_scale": 1.7
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/06_traner_f_b1.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -300,
+          -150,
+          -225
+        ],
+        "ry": 35,
+        "s": 4.0
+      },
+      "anim": true,
+      "loop": true,
+      "anim_index": 1,
+      "strip_cubes": true,
+      "mat_anim": false,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.45
+    },
+    {
+      "file": "${colosseum}/M1_stadium_1F/07_traner_m_b1.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          300,
+          -150,
+          -225
+        ],
+        "ry": -35,
+        "s": 4.0
+      },
+      "anim": true,
+      "loop": true,
+      "anim_index": 1,
+      "strip_cubes": true,
+      "mat_anim": false,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.45
+    },
+    {
+      "file": "${colosseum}/M1_out/06_maril.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -120,
+          -176,
+          -110
+        ],
+        "ry": 25,
+        "s": 4.0
+      },
+      "anim": true,
+      "loop": true,
+      "anim_index": 0,
+      "strip_cubes": true,
+      "mat_anim": false,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.45
+    }
+  ],
+  "bf": {
+    "file": "${colosseum}/M1_stadium_1F/04_M1_stadium_1F.rdat",
+    "material": [
+      3,
+      3,
+      0
+    ],
+    "atlas": [
+      3,
+      3,
+      0
+    ],
+    "wall_tex": [
+      2,
+      8,
+      0
+    ],
+    "top_tile": [
+      192,
+      256,
+      320,
+      384
+    ],
+    "medallion": [
+      556,
+      724,
+      724,
+      876
+    ],
+    "medallion_px": 96,
+    "frieze": [
+      0,
+      430,
+      192,
+      528
+    ],
+    "wall_box": [
+      210,
+      0,
+      494,
+      284
+    ],
+    "plat_tile": [
+      576,
+      0,
+      704,
+      128
+    ],
+    "depth": 32,
+    "band": 4.5,
+    "wall_tile": 40,
+    "frieze_len": 8.8,
+    "emblem": [
+      11,
+      -7,
+      -33
+    ],
+    "emblem_box": [
+      512,
+      704,
+      768,
+      896
+    ],
+    "plat_depth": 14,
+    "plat_thick": 3.5
+  },
+  "fog": {
+    "start": 300,
+    "end": 2600,
+    "color": [
+      70,
+      64,
+      58
+    ],
+    "group": 6
+  },
+  "drop_image_roots": true,
+  "cut_regions": [
+    [
+      -3000,
+      3000,
+      -1000,
+      1000,
+      230,
+      3000
+    ]
+  ],
+  "cut_min_diag": 150,
+  "keep_if_larger": 950
+}

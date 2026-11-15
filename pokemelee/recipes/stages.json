@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "profile": "plain",
+  "stages": [
+    {
+      "id": "agate",
+      "melee_stage": "Dream Land",
+      "scene": "Agate Village",
+      "revision": "v32",
+      "spec": "stages/agate.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrOp.dat",
+          "sha256": "fa62d0eb6266f35694ef2d261e3e9627d594df564f78a326d569ecdaa51c80c7"
+        }
+      ]
+    },
+    {
+      "id": "realgam",
+      "melee_stage": "Fountain of Dreams",
+      "scene": "Realgam Colosseum",
+      "revision": "v10",
+      "spec": "stages/realgam.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrIz.dat",
+          "sha256": "85dd13749d574d9edae5fa4daf700669a000d769a6a6b87b5100f745ee39efb0"
+        }
+      ]
+    },
+    {
+      "id": "phenac-lobby",
+      "melee_stage": "Battlefield",
+      "scene": "Phenac Stadium lobby",
+      "revision": "v10",
+      "spec": "stages/phenac-lobby.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrNBa.dat",
+          "sha256": "cba86c7b591d170bc9dd983c6f948d2c7ed56adcd5eb035599309c5be425b0c7"
+        }
+      ]
+    },
+    {
+      "id": "mt-battle-crater",
+      "melee_stage": "Final Destination",
+      "scene": "Mt. Battle crater",
+      "revision": "v6",
+      "spec": "stages/mt-battle-crater.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrNLa.dat",
+          "sha256": "3a62dc72edb6339d14d67d08621d369022188373010498429f796a67e89ba078"
+        }
+      ]
+    },
+    {
+      "id": "mt-battle-garden",
+      "melee_stage": "Yoshi's Story",
+      "scene": "Mt. Battle garden",
+      "revision": "v9",
+      "spec": "stages/mt-battle-garden.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrSt.dat",
+          "sha256": "2be9d4510b2a221232836c9228fed3e8c3b5c19120407607da63f28740c1dd1d"
+        }
+      ]
+    },
+    {
+      "id": "phenac-city",
+      "melee_stage": "Pokemon Stadium",
+      "scene": "Phenac City",
+      "revision": "v7",
+      "spec": "stages/phenac-city.json",
+      "recipe_state": "needs-cold-build-verification",
+      "approved_outputs": [
+        {
+          "name": "GrPs.dat",
+          "sha256": "8db3c1e3b06a8211609abee8ecaa2d706bb5063ad44f8c2e7812fe3188780a0f"
+        },
+        {
+          "name": "GrPs.usd",
+          "sha256": "b4cf62051278110695b600f97eff2ba0a7ed35b2221801af571cbeb0155199b9"
+        },
+        {
+          "name": "GrPs1.dat",
+          "sha256": "17410a47b5e67a6c4ddc7d316fd5163f0780455b9919887c91c922aabc118631"
+        },
+        {
+          "name": "GrPs2.dat",
+          "sha256": "ef8f77c1f88332432ca635dddd2843328de50dfcfa1ab6a983be885d014292f1"
+        },
+        {
+          "name": "GrPs3.dat",
+          "sha256": "207016e348ce2eda1129a52c8886cd1158d587936f11d9665c49b854efd764fe"
+        },
+        {
+          "name": "GrPs4.dat",
+          "sha256": "207e84891dea49059f72c7eea4a19f453ff41b3ce7439e6e9c113ff2eddb6e28"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "SHA-256 fingerprints identify approved local outputs; those files are not distributed.",
+    "Specs contain authored graft settings, not source meshes, textures or copied stage collision.",
+    "Stadium transformations retain the first-round treatment; the main stage uses the approved second-round v7.",
+    "The lined AniMelee variant has extra authored recipes and is outside the initial plain profile."
+  ]
+}

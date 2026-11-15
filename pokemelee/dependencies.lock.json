@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "tools": {
+    "hsdlib": {
+      "repo": "sc00ppp/ssbmNucleus-hsdlib",
+      "tag": "v2026.11.09.1",
+      "license": {
+        "spdx": "MIT",
+        "note": "Fork of HSDLib / HSDRawViewer (Ploaj); source lives in the fork repo."
+      },
+      "platforms": {
+        "win-x64": {
+          "asset": "hsdrawviewer-win-x64.zip",
+          "sha256": "b912bd9830b6389ced4a8a5c3eb7876e6f8132f3161efc6fac6d3b95e803dd2a",
+          "entrypoint": "HSDRawViewer.exe",
+          "required": [
+            "HSDRawViewer.exe",
+            "HSDRaw.dll",
+            "HSDRawViewer.dll",
+            "Scripts/command_fighter.yml"
+          ]
+        },
+        "linux-x64": {
+          "asset": "hsdrawheadless-linux-x64.zip",
+          "sha256": "d15ada16de7659f1d4f805cca416f77fb6ed7f59d2e68bad3df723bebac15a06",
+          "entrypoint": "hsdrawviewer",
+          "required": [
+            "hsdrawviewer",
+            "hsdrawviewer.dll"
+          ]
+        },
+        "osx-arm64": {
+          "asset": "hsdrawheadless-osx-arm64.zip",
+          "sha256": "797920a11f99556ff28f0f9c51b0d4cee3d2803470b640860859d223225c4499",
+          "entrypoint": "hsdrawviewer",
+          "required": [
+            "hsdrawviewer",
+            "hsdrawviewer.dll"
+          ]
+        }
+      }
+    },
+    "mex": {
+      "repo": "sc00ppp/ssbmNucleus-mex",
+      "tag": "v2026.11.09.1",
+      "license": {
+        "spdx": null,
+        "note": "Upstream m-ex / MexManager / MexCLI publish no license; see THIRD_PARTY_NOTICES.md. Source lives in the fork repo."
+      },
+      "platforms": {
+        "win-x64": {
+          "asset": "mexcli-win-x64.zip",
+          "sha256": "b35a6cad3b25f14b6d7ca5eeea83b37d86a0ea8e21a919b39562102e4300355a",
+          "entrypoint": "mexcli.exe",
+          "required": [
+            "mexcli.exe",
+            "codes.gct",
+            "seed_codes.ini",
+            "HSDRaw.dll",
+            "mexLib.dll"
+          ]
+        },
+        "linux-x64": {
+          "asset": "mexcli-linux-x64.zip",
+          "sha256": "7b73d169f7838847fc91ab1977f6f2f84f956968ca64d227f8a312827ae51c93",
+          "entrypoint": "mexcli",
+          "required": [
+            "mexcli",
+            "codes.gct",
+            "seed_codes.ini",
+            "HSDRaw.dll",
+            "mexLib.dll"
+          ]
+        },
+        "osx-arm64": {
+          "asset": "mexcli-osx-arm64.zip",
+          "sha256": "92b5f58e0fa0b3f9559b5d05fbd9c1d80d330a3aa020a331ab2db3c83de8717b",
+          "entrypoint": "mexcli",
+          "required": [
+            "mexcli",
+            "codes.gct",
+            "seed_codes.ini",
+            "HSDRaw.dll",
+            "mexLib.dll"
+          ]
+        }
+      }
+    }
+  },
+  "unresolved": [
+    {
+      "tool": "rigswap + Blender",
+      "reason": "Resolve the accepted cast recipes and pin their tested engine/runtime; current local run folders are not recipes."
+    },
+    {
+      "tool": "stagegraft + menugraft",
+      "reason": "Build small native command-line helpers against the pinned HSDRaw library; confirm all six recipes against approved outputs."
+    }
+  ],
+  "distribution": "Maintainers assemble runtimes; end users should not need GitHub credentials or clones. No tool/game binaries are stored in this repository."
+}

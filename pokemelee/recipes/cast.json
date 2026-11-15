@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "baseline": "Cast Test 30",
+  "recipe_state": "needs-source-model-and-rig-recipes",
+  "fighters": [
+    {
+      "fighter": "Mario",
+      "pokemon": "Magmar",
+      "art_index": "126",
+      "accepted_run": "feet-1112/colomagmar-Mario"
+    },
+    {
+      "fighter": "Dr. Mario",
+      "pokemon": "Miltank",
+      "art_index": "241",
+      "accepted_run": "cast-11/colomiltank-DrMario"
+    },
+    {
+      "fighter": "Luigi",
+      "pokemon": "Breloom",
+      "art_index": "307",
+      "accepted_run": "cast-11/colobreloom-Luigi"
+    },
+    {
+      "fighter": "Bowser",
+      "pokemon": "Blastoise",
+      "art_index": "009",
+      "accepted_run": "blastoise-hand-3/blastoise-Bowser"
+    },
+    {
+      "fighter": "Peach",
+      "pokemon": "Gardevoir",
+      "art_index": "394",
+      "accepted_run": "round-all/hand-gardevoir-Peach"
+    },
+    {
+      "fighter": "Captain Falcon",
+      "pokemon": "Blaziken",
+      "art_index": "282",
+      "accepted_run": "blaziken-v2-3/coloblaziken-CaptainFalcon"
+    },
+    {
+      "fighter": "Ganondorf",
+      "pokemon": "Machoke",
+      "art_index": "067",
+      "accepted_run": "fix4-1101/colomachoke-Ganondorf"
+    },
+    {
+      "fighter": "Fox",
+      "pokemon": "Quilava",
+      "art_index": "156",
+      "accepted_run": "fire-1101/coloquilava-Fox"
+    },
+    {
+      "fighter": "Falco",
+      "pokemon": "Combusken",
+      "art_index": "281",
+      "accepted_run": "cast-11/combusken-Falco"
+    },
+    {
+      "fighter": "Samus",
+      "pokemon": "Deoxys",
+      "art_index": "410",
+      "accepted_run": "deoxys-soft-1/hand-deoxys-Samus"
+    },
+    {
+      "fighter": "Zelda",
+      "pokemon": "Alakazam",
+      "art_index": "065",
+      "accepted_run": "alakazam-hand-6/coloalakazam-Zelda"
+    },
+    {
+      "fighter": "Sheik",
+      "pokemon": "Sceptile",
+      "art_index": "279",
+      "accepted_run": "cast-14/colosceptile-Sheik"
+    },
+    {
+      "fighter": "Link",
+      "pokemon": "Scyther",
+      "art_index": "123",
+      "accepted_run": "scyther-hand-3/coloscyther-Link"
+    },
+    {
+      "fighter": "Donkey Kong",
+      "pokemon": "Swampert",
+      "art_index": "285",
+      "accepted_run": "swampert-joints-1/swampert-DonkeyKong"
+    },
+    {
+      "fighter": "Young Link",
+      "pokemon": "Farfetchd",
+      "art_index": "083",
+      "accepted_run": "fix-1031/farfetchd-YoungLink"
+    },
+    {
+      "fighter": "Kirby",
+      "pokemon": "Wigglytuff",
+      "art_index": "040",
+      "accepted_run": "wiggly-jump/wigglytuff-Kirby"
+    },
+    {
+      "fighter": "Yoshi",
+      "pokemon": "Kecleon",
+      "art_index": "317",
+      "accepted_run": "fix-1031/colokecleon-Yoshi"
+    },
+    {
+      "fighter": "Roy",
+      "pokemon": "Charmeleon",
+      "art_index": "005",
+      "accepted_run": "fire-1101/charmeleon-Roy"
+    },
+    {
+      "fighter": "Ness",
+      "pokemon": "Ralts",
+      "art_index": "392",
+      "accepted_run": "ness-ralts-hand-3/coloralts-Ness"
+    },
+    {
+      "fighter": "Marth",
+      "pokemon": "Scizor",
+      "art_index": "212",
+      "accepted_run": "fix2-1031/coloscizor-Marth"
+    },
+    {
+      "fighter": "Mr. Game & Watch",
+      "pokemon": "UnownX",
+      "art_index": "201x",
+      "accepted_run": "gw-unown-5/unownx-GameAndWatch"
+    },
+    {
+      "fighter": "Pikachu",
+      "pokemon": "Pikachu",
+      "art_index": "025",
+      "accepted_run": "cast-11/pikachu-Pikachu"
+    },
+    {
+      "fighter": "Jigglypuff",
+      "pokemon": "Jigglypuff",
+      "art_index": "039",
+      "accepted_run": "jigglypuff-hand-2/jigglypuff-Jigglypuff"
+    },
+    {
+      "fighter": "Mewtwo",
+      "pokemon": "Mewtwo",
+      "art_index": "150",
+      "accepted_run": "mewtwo-hand-5/colomewtwo-Mewtwo"
+    },
+    {
+      "fighter": "Pichu",
+      "pokemon": "Pichu",
+      "art_index": "172",
+      "accepted_run": "pichu-hand-1/colopichu-Pichu"
+    }
+  ],
+  "partners": [
+    {
+      "fighter": "Popo",
+      "pokemon": "Jynx",
+      "art_index": "124",
+      "pair": "Ice Climbers"
+    },
+    {
+      "fighter": "Nana",
+      "pokemon": "Smoochum",
+      "art_index": "238",
+      "pair": "Ice Climbers"
+    },
+    {
+      "fighter": "Pichu clone leader",
+      "pokemon": "Plusle",
+      "art_index": "353",
+      "pair": "Plusle & Minun"
+    },
+    {
+      "fighter": "Pichu clone partner",
+      "pokemon": "Minun",
+      "art_index": "354",
+      "pair": "Plusle & Minun"
+    }
+  ],
+  "note": "Accepted run IDs are provenance, not input directories. Do not use them as caches in a cold build."
+}

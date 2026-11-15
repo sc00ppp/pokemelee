@@ -1,0 +1,533 @@
+{
+  "target": "${melee}/GrOp.dat",
+  "out": "${generated}/GrOp_agate_v32.dat",
+  "clear_groups": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "receive_group": 5,
+  "wrappers": [
+    {
+      "t": [
+        8.28,
+        -244.4,
+        -193.6
+      ],
+      "s": 0.8
+    },
+    {
+      "t": [
+        8.28,
+        -96.4,
+        6.4
+      ],
+      "s": 0.8
+    }
+  ],
+  "donors": [
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 0,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 1,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 2,
+      "wrapper": 0,
+      "hide": [
+        [
+          1,
+          0
+        ]
+      ],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 3,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 4,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 5,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "wrapper": 0,
+      "hide": [
+        [
+          156,
+          0
+        ],
+        [
+          41,
+          0
+        ],
+        [
+          57,
+          0
+        ],
+        [
+          111,
+          0
+        ]
+      ],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 7,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 8,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 9,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 10,
+      "wrapper": 0,
+      "hide": [
+        [
+          1,
+          0
+        ]
+      ],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 11,
+      "wrapper": 0,
+      "hide": [],
+      "anim": true,
+      "loop": true,
+      "joint_anim": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "wrapper": 1,
+      "only": [
+        [
+          156,
+          0
+        ],
+        [
+          41,
+          0
+        ],
+        [
+          57,
+          0
+        ],
+        [
+          111,
+          0
+        ]
+      ],
+      "fresh": true,
+      "cut": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 2,
+      "wrapper": 1,
+      "only": [
+        [
+          1,
+          0
+        ]
+      ],
+      "fresh": true,
+      "cut": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 10,
+      "wrapper": 1,
+      "only": [
+        [
+          1,
+          0
+        ]
+      ],
+      "fresh": true,
+      "cut": false,
+      "bake_light": true
+    },
+    {
+      "file": "${colosseum}/M3_out/08_jiji_a_b1.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -46,
+          0,
+          -48
+        ],
+        "ry": 10,
+        "s": 0.8
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 1,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/05_baba_a_b1.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          46,
+          0,
+          -48
+        ],
+        "ry": -10,
+        "s": 0.8
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 2,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/16_traner_m_b1.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -70,
+          0,
+          -48
+        ],
+        "ry": 15,
+        "s": 0.8
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 5,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/13_hassboh.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -58,
+          0,
+          -48
+        ],
+        "ry": 15,
+        "s": 0.9
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 0,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/14_hasubrero.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          58,
+          0,
+          -48
+        ],
+        "ry": -15,
+        "s": 0.8
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 0,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/09_guraena.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          70,
+          0,
+          -51
+        ],
+        "ry": -20,
+        "s": 0.8
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 0,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/M3_out/07_subame.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          -24,
+          93.0,
+          -60
+        ],
+        "ry": 25,
+        "s": 1.2
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 0,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    },
+    {
+      "file": "${colosseum}/celebi/celebi.dat",
+      "desc": 0,
+      "place": {
+        "t": [
+          54,
+          -54,
+          -60
+        ],
+        "ry": -20,
+        "s": 2.4
+      },
+      "anim": true,
+      "loop": true,
+      "strip_cubes": true,
+      "cut": false,
+      "anim_index": 0,
+      "pin": true,
+      "mat_anim": false,
+      "tex_modulate": true,
+      "decode_ci4": true,
+      "ambient": 0.4
+    }
+  ],
+  "island2": {
+    "file": "${colosseum}/M3_out/04_M3_out.rdat",
+    "desc": 6,
+    "joint": 113,
+    "seed": 11,
+    "roots": 10,
+    "shade": 0.66
+  },
+  "drop_image_roots": true,
+  "fog": {
+    "start": 450,
+    "end": 2600,
+    "color": [
+      190,
+      214,
+      238
+    ]
+  },
+  "props": [
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 157,
+      "t": [
+        -60,
+        0,
+        -38
+      ],
+      "h": 5,
+      "ry": 0
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 157,
+      "t": [
+        60,
+        0,
+        -38
+      ],
+      "h": 5,
+      "ry": 0
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 90,
+      "t": [
+        -58,
+        0,
+        -70
+      ],
+      "h": 28,
+      "ry": 15
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 93,
+      "t": [
+        -42,
+        0,
+        -84
+      ],
+      "h": 16,
+      "ry": -30
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 97,
+      "t": [
+        60,
+        0,
+        -70
+      ],
+      "h": 24,
+      "ry": -20
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 101,
+      "t": [
+        44,
+        0,
+        -86
+      ],
+      "h": 14,
+      "ry": 40
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 140,
+      "t": [
+        -36,
+        -1.5,
+        -60
+      ],
+      "h": 14,
+      "ry": 160
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 142,
+      "t": [
+        36,
+        -1.5,
+        -60
+      ],
+      "h": 12,
+      "ry": -30
+    },
+    {
+      "file": "${colosseum}/M3_out/04_M3_out.rdat",
+      "desc": 6,
+      "joint": 30,
+      "t": [
+        -40,
+        0,
+        -36
+      ],
+      "h": 7,
+      "ry": 30
+    }
+  ],
+  "brighten_baked": true
+}
