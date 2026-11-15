@@ -340,6 +340,9 @@ def door_rivets(door):
         rivet(d, cx * SS, cy * SS, r, ring=(110, 104, 140, 255))
     rv = reduce(big, (w, h))
     a = np.asarray(im)[..., 3].copy()
+    # The second sliding half uses 1 - texture alpha. Its visible RGB lives
+    # under alpha zero, so composite the decoration onto an opaque panel first.
+    im.putalpha(255)
     im.alpha_composite(rv)
     out = np.asarray(im).copy()
     out[..., 3] = a       # the door's own halves
@@ -470,7 +473,9 @@ def css_spec(dump, out):
             quads.append(q)
     door_md5 = by_use(dump, 'MenuModel j138 d0 t0')
     door_now = load_image(dump, door_md5)
-    images.append({**emit(out, 'door', door_rivets(door_now), 'CI8'), 'md5': door_md5})
+    # CI8 quantization discards RGB under alpha zero, turning the half drawn
+    # with inverted alpha black. RGB5A3 preserves both halves' colour data.
+    images.append({**emit(out, 'door', door_rivets(door_now), 'RGB5A3'), 'md5': door_md5})
     for use, text in (('MenuMaterialAnimation j166 m1 a0 f0', 'CPU'), ('MenuModel j166 d1 t0', 'HMN'),
                       ('MenuMaterialAnimation j166 m1 a0 f2', 'N/A')):
         images.append({**emit(out, 'tag-' + text.replace('/', ''), tag(text), 'IA4'), 'md5': by_use(dump, use)})
