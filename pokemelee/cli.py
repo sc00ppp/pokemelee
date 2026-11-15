@@ -30,6 +30,15 @@ def parser():
     art.add_argument("--index", action="append", help="Internal species art index; default: full cast")
     sub.add_parser("plan", help="Show the accepted cast, stages, and unresolved build steps")
     sub.add_parser("tools", help="Show exact native runtime pins")
+    native = sub.add_parser("compile-stages", help="Compile the authored stage helpers against the pinned HSDRaw runtime")
+    native.add_argument("--runtime", default="runtime")
+    stages = sub.add_parser("stages", help="Rebuild the approved stages directly from the two source discs")
+    stages.add_argument("--melee", required=True)
+    stages.add_argument("--colosseum", required=True)
+    stages.add_argument("--out", required=True)
+    stages.add_argument("--runtime", default="runtime")
+    stages.add_argument("--profile", choices=("normal", "animelee"), default="normal")
+    stages.add_argument("--stage", action="append", dest="selected")
     fetch = sub.add_parser("fetch-tools", help="Download pinned releases directly from the fork repositories")
     fetch.add_argument("--tool", choices=("hsdlib", "mex", "xdelta", "all"), default="all")
     fetch.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), default="win-x64")
@@ -53,6 +62,18 @@ def parser():
 
 
 def run(args):
+    if args.command == "compile-stages":
+        from .stages import compile_tools
+        compile_tools(args.runtime)
+        return {"compiled": True}
+    if args.command == "stages":
+        try:
+            import numpy, PIL, scipy
+        except ImportError as exc:
+            raise ValueError('Stage generation needs: python -m pip install ".[stages]"') from exc
+        from .stages import build_stages
+        return build_stages(Disc(args.melee, "melee"), Disc(args.colosseum, "colosseum"),
+                            args.out, args.runtime, args.selected, args.profile)
     if args.command == "plan":
         return plan()
     if args.command == "tools":

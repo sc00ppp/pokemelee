@@ -1,8 +1,16 @@
 {
   "schema": 1,
   "build_contract": {
-    "inputs": ["user_melee_iso", "user_colosseum_iso"],
-    "outputs": ["pokemelee.iso", "pokemelee.xdelta"],
+    "inputs": [
+      "user_melee_iso",
+      "user_colosseum_iso"
+    ],
+    "outputs": [
+      "normal/pokemelee.iso",
+      "normal/pokemelee.xdelta",
+      "animelee/pokemelee.iso",
+      "animelee/pokemelee.xdelta"
+    ],
     "execution": "replay_fixed_reviewed_recipes",
     "llm_inference": false,
     "api_keys_required": false,
@@ -32,9 +40,10 @@
     },
     {
       "id": "stages",
-      "state": "needs-generator-integration",
+      "state": "verified",
       "source": "recipes/stages/*.json",
-      "remaining": "Wire source model extraction and native stage builders to the six accepted graft specs. Generate Phenac meshes/materials and sanitized Stadium input from the discs. Verify the approved stage output fingerprints."
+      "implementation": "pokemelee.stages, pokemelee.phenac, pokemelee.anime_stage, native stage helpers",
+      "result": "All 22 stage files rebuilt from the two source discs in empty directories; SHA-256 matches both desktop reference builds. Windows native path verified."
     },
     {
       "id": "portraits-and-menus",

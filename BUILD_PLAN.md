@@ -1,11 +1,11 @@
 # From the accepted build to a portable builder
 
-The target is Cast Test 30's plain PokéMelee content, rebuilt from the user's two
-discs. Repo setup does not authorize changing the cast, choosing different stage
-revisions, or reorganizing Nucleus, VAMP or rigswap.
+The targets are the finished Cast Test 30 and AniMelee Test 23 desktop builds,
+rebuilt from the user's two source discs. Do not change the cast, choose different stage
+revisions, or reorganize Nucleus, VAMP or rigswap.
 
-The build contract is fixed: two user-supplied ISOs in, a local ISO and verified
-xdelta out. It must replay the accepted result with no LLM calls, prompts, API
+The build contract is fixed: two user-supplied source ISOs in, both existing
+variants as local ISOs and verified xdeltas out. Replay the accepted result with no LLM calls, prompts, API
 keys, new rigging choices or authoring sessions. After dependency setup it must
 work offline. The user never has to run Rigswap or operate Blender.
 
@@ -34,13 +34,11 @@ Remaining conversion, in dependency order:
    conversion APIs, so an automatic bundled headless converter may be retained
    if a specific operation requires it. Do not replace accepted runs with a
    newer-looking filename: some approved DATs were copied over older run directories.
-2. **Stage inputs and generators.** The six graft specs are in this repository.
-   `${melee}` means extracted Melee files, `${colosseum}` means extracted and
-   decoded Colosseum sources, `${generated}` means local generated intermediates.
-   These are placeholders, not paths resolved from the developer's machine.
-   Phenac requires generated mesh/material files and a sanitized Stadium base;
-   Agate also uses an extracted/converted Celebi. Integrate the native stage
-   helpers and verify the output against `stages.json` fingerprints.
+2. **Stages complete.** All six stages, both Stadium language files and its four
+   transformations rebuild from the two original discs. All 22 normal/AniMelee
+   outputs match the accepted desktop builds exactly. The build resolves its
+   own source archives, extracts Celebi, sanitizes Stadium, generates Phenac
+   geometry/materials and applies the accepted AniMelee exceptions.
 3. **Presentation.** Migrate the actual model-rendered CSS icons, costume
    portraits, menu art, stage images, voice/music selection, recolors and pair
    composition. The working party-face icon generator is the old fallback;

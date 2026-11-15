@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <ImplicitUsings Condition="'$(Flavor)' == 'colodump'">enable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>stagegraft-$(Flavor)</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Flavor)/*.cs" />
+    <Compile Include="Animation.cs" Condition="'$(Flavor)' != 'stadium' And '$(Flavor)' != 'colodump'" />
+    <Reference Include="HSDRaw"><HintPath>$(HSDRawPath)</HintPath></Reference>
+  </ItemGroup>
+  <Target Name="RequireInputs" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(HSDRawPath)')" Text="Pass -p:HSDRawPath with the pinned HSDRaw.dll." />
+    <Error Condition="!Exists('$(Flavor)/Program.cs')" Text="Unknown stage recipe flavor." />
+  </Target>
+</Project>

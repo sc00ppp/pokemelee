@@ -12,7 +12,7 @@ def load(name):
 def plan():
     cast, stages, pipeline = load("cast.json"), load("stages.json"), load("pipeline.json")
     blockers = [row for row in pipeline["steps"] if row["state"] != "verified"]
-    return {"profile": "pokemelee-plain", "baseline": "Cast Test 30",
+    return {"profiles": load("profiles.json"),
             "build_contract": pipeline["build_contract"],
             "iso_build_ready": not blockers, "cast": cast, "stages": stages,
             "pipeline": pipeline["steps"], "blocking_steps": [b["id"] for b in blockers]}

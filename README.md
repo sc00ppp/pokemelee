@@ -13,8 +13,10 @@ No LLM, prompts, API keys, model downloads or newly generated rigging choices.
 Once the tools are installed, the build must work offline.
 
 **Status: repository preparation is underway; the complete two-ISO build is not
-ready yet.** Disc extraction and stock/fallback menu-icon generation work. The
-accepted cast and all six stage graft specs are recorded. The old Cast Test 30
+ready yet.** Disc extraction, stock/fallback menu-icon generation, and all six
+stages in both versions work. All 22 stage files rebuilt from the original discs
+match the normal Cast Test 30 and AniMelee Test 23 references byte for byte.
+The accepted cast is recorded. The old Cast Test 30
 assembler still depends on edited Blender files and generated DAT/PNG/audio
 caches; those must become recipes before this is an end-user builder.
 `build` currently fails with the remaining steps and writes no ISO.
@@ -77,6 +79,22 @@ python -m pokemelee menu-art --colosseum "path/to/colosseum.iso" --out work/menu
 python -m pokemelee plan
 ```
 
+The stage generator currently runs on Windows with the .NET 8 runtime and a
+.NET SDK installed. These are maintainer commands while the complete builder
+is being assembled:
+
+```powershell
+python -m pip install ".[stages]"
+python -m pokemelee compile-stages
+python -m pokemelee stages --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso" --profile normal --out work/normal-stages
+python -m pokemelee stages --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso" --profile animelee --out work/animelee-stages
+```
+
+Each stage build extracts its own inputs into a new directory and verifies its
+outputs against the reference fingerprints. It does not read either finished
+PokéMelee ISO, old stage caches, or any Nucleus installation. The AniMelee recipes
+include the accepted garden silhouette treatment and Phenac crest preservation.
+
 ## ISO and xdelta output
 
 The local export step already works independently of the unfinished assembler.
@@ -123,9 +141,10 @@ Uncompressed ISO/GCM inputs are supported; RVZ inputs must be converted locally.
 - `tests/`: synthetic fixtures; no game files needed for CI.
 - `work/`, `runtime/`, `dist/`: local generated data, excluded from Git.
 
-The initial profile is ordinary PokéMelee. AniMelee's lined variants are separate
-recipes; replacing their custom outline treatment with a generic filter would
-change the approved look.
+Both finished builds are targets: **normal Cast Test 30** and **AniMelee Test 23**.
+The desktop ISOs are verification references; the user still provides only the
+original Melee and Colosseum discs. Both variants must produce an ISO and xdelta.
+AniMelee's custom outline treatment is preserved by its existing recipes.
 
 ## Development checks
 

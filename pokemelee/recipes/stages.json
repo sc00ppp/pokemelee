@@ -1,6 +1,5 @@
 {
   "schema": 1,
-  "profile": "plain",
   "stages": [
     {
       "id": "agate",
@@ -8,7 +7,7 @@
       "scene": "Agate Village",
       "revision": "v32",
       "spec": "stages/agate.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrOp.dat",
@@ -22,7 +21,7 @@
       "scene": "Realgam Colosseum",
       "revision": "v10",
       "spec": "stages/realgam.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrIz.dat",
@@ -36,7 +35,7 @@
       "scene": "Phenac Stadium lobby",
       "revision": "v10",
       "spec": "stages/phenac-lobby.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrNBa.dat",
@@ -50,7 +49,7 @@
       "scene": "Mt. Battle crater",
       "revision": "v6",
       "spec": "stages/mt-battle-crater.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrNLa.dat",
@@ -64,7 +63,7 @@
       "scene": "Mt. Battle garden",
       "revision": "v9",
       "spec": "stages/mt-battle-garden.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrSt.dat",
@@ -78,7 +77,7 @@
       "scene": "Phenac City",
       "revision": "v7",
       "spec": "stages/phenac-city.json",
-      "recipe_state": "needs-cold-build-verification",
+      "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrPs.dat",
@@ -111,6 +110,10 @@
     "SHA-256 fingerprints identify approved local outputs; those files are not distributed.",
     "Specs contain authored graft settings, not source meshes, textures or copied stage collision.",
     "Stadium transformations retain the first-round treatment; the main stage uses the approved second-round v7.",
-    "The lined AniMelee variant has extra authored recipes and is outside the initial plain profile."
+    "Both profiles reproduce their approved stage fingerprints; AniMelee includes its garden and Phenac exceptions."
+  ],
+  "profiles": [
+    "normal",
+    "animelee"
   ]
 }

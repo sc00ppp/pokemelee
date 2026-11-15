@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-ALLOWED = {".py", ".json", ".toml", ".md", ".yml", ".yaml"}
+ALLOWED = {".py", ".json", ".toml", ".md", ".yml", ".yaml", ".cs", ".csproj"}
 EXACT = {".gitignore", ".gitattributes"}
 PERSONAL_PATH = re.compile(r"(?:[A-Z]:[\\/](?:Users|randall-runs|rigswap-core|colo_tmp|projects|SSBM Nucleus)[\\/])", re.I)
 

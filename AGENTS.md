@@ -4,6 +4,9 @@ This repository owns the reproducible PokéMelee build, not Nucleus or rigswap
 development. Work on this repository only unless the user expands the scope.
 
 - The only game inputs are the user's Melee and Pokémon Colosseum ISOs.
+- Reproduce BOTH finished reference builds: normal Cast Test 30 and AniMelee
+  Test 23. The desktop ISOs are verification references, never user build inputs.
+  Preserve their existing cast, rigging, stages and presentation.
 - The build replays fixed, reviewed recipes. No LLM inference (local or remote),
   prompts, agent runs, API keys, model downloads, or new rigging decisions.
   After tool setup, it must run offline with the two ISOs and bundled recipes.

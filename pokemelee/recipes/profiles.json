@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "default": "both",
+  "profiles": [
+    {
+      "id": "normal",
+      "reference_name": "Pokemon Colosseum Cast Test 30.iso",
+      "fingerprints": "references/normal.json",
+      "outputs": [
+        "normal/pokemelee.iso",
+        "normal/pokemelee.xdelta"
+      ]
+    },
+    {
+      "id": "animelee",
+      "reference_name": "Pokemon Colosseum AniMelee Test 23.iso",
+      "fingerprints": "references/animelee.json",
+      "outputs": [
+        "animelee/pokemelee.iso",
+        "animelee/pokemelee.xdelta"
+      ]
+    }
+  ],
+  "note": "The finished normal and AniMelee desktop builds are reference outputs, never build inputs or distributed assets."
+}
