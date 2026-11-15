@@ -44,9 +44,15 @@
       "remaining": "Replace Nucleus vault/project/finish imports with a standalone adapter to pinned MexCLI. Include pair behavior and required game modifications. Fail on missing components; preserve unrelated media."
     },
     {
+      "id": "iso-and-xdelta-export",
+      "state": "verified",
+      "implementation": "pokemelee.export",
+      "result": "Copy the built ISO, encode an xdelta against the exact original Melee disc, decode and hash-verify it, then publish both outputs locally. No game output uploads."
+    },
+    {
       "id": "cold-build-and-package",
       "state": "pending-upstream-steps",
-      "remaining": "Run the complete build from two discs in an empty directory, read back installed files, check the resulting game, then assemble an end-user download with pinned runtimes."
+      "remaining": "Run the complete build from two discs in an empty directory, read back installed files, check the resulting game, then call the ISO-and-xdelta exporter. Package tools for end users; do not upload generated ISOs or patches."
     }
   ]
 }

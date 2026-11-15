@@ -31,15 +31,20 @@ def parser():
     sub.add_parser("plan", help="Show the accepted cast, stages, and unresolved build steps")
     sub.add_parser("tools", help="Show exact native runtime pins")
     fetch = sub.add_parser("fetch-tools", help="Download pinned releases directly from the fork repositories")
-    fetch.add_argument("--tool", choices=("hsdlib", "mex", "all"), default="all")
+    fetch.add_argument("--tool", choices=("hsdlib", "mex", "xdelta", "all"), default="all")
     fetch.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), default="win-x64")
     fetch.add_argument("--out", default="runtime")
     fetch.add_argument("--github-auth", action="store_true", help="Maintainer access to private releases through gh")
     runtime = sub.add_parser("runtime-install", help="Verify and install a maintainer-supplied runtime ZIP")
-    runtime.add_argument("name", choices=("hsdlib", "mex"))
+    runtime.add_argument("name", choices=("hsdlib", "mex", "xdelta"))
     runtime.add_argument("archive")
     runtime.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), required=True)
     runtime.add_argument("--out", required=True)
+    package = sub.add_parser("package", help="Export a built ISO and verified xdelta together, locally")
+    package.add_argument("--melee", required=True, help="Original base Melee ISO for the patch")
+    package.add_argument("--built-iso", required=True, help="An already assembled PokéMelee ISO")
+    package.add_argument("--out", required=True, help="A new local output directory")
+    package.add_argument("--xdelta", help="xdelta3 executable; default: fetched Windows tool or xdelta3 on PATH")
     build = sub.add_parser("build", help="Build-readiness gate (ISO assembly is not yet portable)")
     build.add_argument("--melee", required=True)
     build.add_argument("--colosseum", required=True)
@@ -55,14 +60,17 @@ def run(args):
         return lock()
     if args.command == "fetch-tools":
         from pathlib import Path
-        from .runtime import fetch
-        names = ("hsdlib", "mex") if args.tool == "all" else (args.tool,)
+        from .runtime import fetch, lock
+        names = tuple(name for name, tool in lock()["tools"].items() if args.platform in tool["platforms"]) if args.tool == "all" else (args.tool,)
         results = {}
         for name in names:
             target = Path(args.out) / name / args.platform
             result = fetch(name, args.platform, target, github_auth=args.github_auth)
             results[name] = {"path": str(target.resolve()), "files": len(result["outputs"]), "sha256": result["inputs"]["sha256"]}
         return results
+    if args.command == "package":
+        from .export import export_artifacts
+        return export_artifacts(args.melee, args.built_iso, args.out, xdelta=args.xdelta)
     if args.command == "runtime-install":
         from .runtime import install
         return install(args.name, args.platform, args.archive, args.out)

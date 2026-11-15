@@ -4,6 +4,8 @@ Build PokéMelee locally from your own **Super Smash Bros. Melee USA v1.02**
 (`GALE01`, revision 2) and **Pokémon Colosseum USA** (`GC6E01`, revision 0) discs.
 This repository contains authored build code and recipes. It contains no game
 ISOs, extracted Nintendo assets/code, edited model caches, or binary game patches.
+The finished builder must produce **both `pokemelee.iso` and `pokemelee.xdelta`**
+locally. Generated game outputs are never uploaded to this repo or its releases.
 
 **Status: repository preparation is underway; the complete two-ISO build is not
 ready yet.** Disc extraction and stock/fallback menu-icon generation work. The
@@ -18,6 +20,7 @@ caches; those must become recipes before this is an end-user builder.
 | --- | --- | --- |
 | HSDRaw / HSDRawViewer | [ssbmNucleus-hsdlib](https://github.com/sc00ppp/ssbmNucleus-hsdlib) | DAT library, conversion and rendering |
 | m-ex / MexCLI | [ssbmNucleus-mex](https://github.com/sc00ppp/ssbmNucleus-mex) | Project creation, imports and ISO export |
+| xdelta3 | [xdelta-gpl](https://github.com/jmacd/xdelta-gpl) | Create and verify local patches |
 | rigswap + Blender | Shared rigswap engine; exact compatible pin still being resolved | Deterministic costume generation |
 
 **No fork code is copied into this repo.** `pokemelee/dependencies.lock.json`
@@ -62,6 +65,36 @@ python -m pokemelee menu-art --colosseum "path/to/colosseum.iso" --out work/menu
 python -m pokemelee plan
 ```
 
+## ISO and xdelta output
+
+The local export step already works independently of the unfinished assembler.
+It can package an existing local PokéMelee build:
+
+```powershell
+python -m pokemelee package --melee "path/to/original-melee.iso" --built-iso "path/to/built-pokemelee.iso" --out dist/pokemelee
+```
+
+It writes `pokemelee.iso`, `pokemelee.xdelta`, and `receipt.json`. The receipt
+records the exact base Melee checksum, output hashes and xdelta tool identity.
+The exporter decodes the patch back against that base and checks that the result
+matches the built ISO before publishing the output pair. An unchanged vanilla
+ISO, mismatched round trip, failed tool or existing output directory stops it.
+
+Only the original **Melee** disc is the patch base; Colosseum supplied the content
+during the build. The generated xdelta therefore contains imported Pokémon
+content and stays local, just like the generated ISO. Neither output belongs in
+Git, a GitHub release or CI artifacts. Sharing local outputs is a separate user
+action; the builder never uploads them.
+
+The Windows xdelta tool is pinned to upstream 3.1.0 and is fetched with the other
+tools. On Linux/macOS, supply `--xdelta PATH` or install `xdelta3` on PATH until
+platform bundles are prepared. Patches use standard VCDIFF without secondary
+compression or local filename headers for broad decoder compatibility. See the
+[upstream command reference](https://github.com/jmacd/xdelta/blob/main/site/docs/commandline.md).
+
+The final two-disc `build` must call this exporter automatically; it is still
+blocked on the character/stage/assembly work listed by `plan`.
+
 Output directories must be new. Each successful extraction/generation records
 input and output hashes in a local receipt. Failures leave a failed receipt and
 never count as complete. `check` validates the header and filesystem bounds;
@@ -88,6 +121,9 @@ change the approved look.
 python -m unittest discover -s tests -v
 python tools/check_source.py
 ```
+
+Set `POKEMELEE_TEST_XDELTA=1` to include a real patch round trip using synthetic
+disc fixtures. CI runs it on Windows and Linux; no game data is needed.
 
 See [BUILD_PLAN.md](BUILD_PLAN.md) for the remaining conversion work and
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for dependency provenance.

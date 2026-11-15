@@ -7,6 +7,9 @@ development. Work on this repository only unless the user expands the scope.
 - Commit authored source, recipes, synthetic fixtures and dependency manifests.
   Never commit game assets/code, extracted textures/models, generated pixel
   headers, compiled game modifications containing copied game data, or ISO deltas.
+- A successful final build must produce both a local ISO and an xdelta against
+  the user's original Melee ISO. Verify the patch by decoding and hashing it.
+  Never upload generated ISOs/patches to Git, releases, or CI artifacts.
 - Every finished component must rebuild from those inputs and pinned tools in
   an empty work directory. A cache or a local `.blend` is not a source recipe.
 - Keep HSDLib, MexCLI and rigswap source in their own repositories. Pin the

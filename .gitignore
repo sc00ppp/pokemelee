@@ -9,6 +9,8 @@ __pycache__/
 .pytest_cache/
 *.egg-info/
 *.iso
+*.xdelta
+*.vcdiff
 *.gcm
 *.rvz
 *.wbfs

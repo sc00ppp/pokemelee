@@ -85,6 +85,24 @@
           ]
         }
       }
+    },
+    "xdelta": {
+      "repo": "jmacd/xdelta-gpl",
+      "tag": "v3.1.0",
+      "license": {
+        "spdx": "GPL-2.0-or-later",
+        "note": "External xdelta3 tool; upstream COPYING and source accompany its redistribution obligations."
+      },
+      "platforms": {
+        "win-x64": {
+          "asset": "xdelta3-3.1.0-x86_64.exe.zip",
+          "sha256": "b10e0d1df3e212e5a2d37d5c088d2f72ecec760bc3c26caeca51499c3118b93a",
+          "entrypoint": "xdelta3-3.1.0-x86_64.exe",
+          "required": [
+            "xdelta3-3.1.0-x86_64.exe"
+          ]
+        }
+      }
     }
   },
   "unresolved": [

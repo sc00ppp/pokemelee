@@ -10,6 +10,8 @@ Completed preparation:
 - Disc identification and bounded filesystem/archive extraction.
 - Real Colosseum stock/fallback CSS icon generation for all 29 cast members.
 - Exact fork release pins and direct fetch/install with hash verification.
+- A local ISO-and-xdelta exporter with base/output fingerprints and a decoded
+  patch verification. This is ready for the final assembler to call.
 - The accepted cast inventory and six authored stage graft specs, with personal
   drive paths replaced by explicit input placeholders.
 
@@ -38,8 +40,9 @@ Remaining conversion, in dependency order:
    shortcut or silently continue with missing costumes.
 5. **Cold build and release.** Run from an empty directory with only the discs
    and pinned tools. Read back installed files and exercise the game. Then
-   produce an end-user download; users should not install Nucleus, configure an
-   AI service, or locate historical caches.
+   call the exporter to produce both the ISO and xdelta locally. The end-user
+   download contains the builder/tools, never a generated ISO or patch. Users
+   should not install Nucleus, configure an AI service, or locate historical caches.
 
 The stage revisions were resolved against the accepted local outputs:
 
