@@ -192,6 +192,21 @@ class RuntimeTests(LocalTest):
         self.assertEqual(url, "https://github.com/example/fork/releases/download/v1/runtime.zip")
         self.assertTrue((self.root / "out/receipt.json").exists())
 
+    def test_repeated_setup_reuses_verified_install_without_network(self):
+        archive = self.archive()
+        expected = runtime.install('test', 'win-x64', archive, self.root / 'out')
+        with patch('pokemelee.runtime.fetch', side_effect=AssertionError('must not download again')):
+            self.assertEqual(runtime.ensure('test', 'win-x64', self.root / 'out'), expected)
+
+    def test_repeated_setup_rejects_changed_executable_without_overwriting(self):
+        archive = self.archive()
+        runtime.install('test', 'win-x64', archive, self.root / 'out')
+        executable = self.root / 'out/tool.exe'
+        executable.write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError, 'incomplete or differs'):
+            runtime.ensure('test', 'win-x64', self.root / 'out')
+        self.assertEqual(executable.read_bytes(), b'changed')
+
 
 class ReadinessTests(LocalTest):
     def test_build_refuses_partial_iso(self):

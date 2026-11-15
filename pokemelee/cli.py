@@ -204,12 +204,12 @@ def run(args):
         return lock()
     if args.command == "fetch-tools":
         from pathlib import Path
-        from .runtime import fetch, lock
+        from .runtime import ensure, lock
         names = tuple(name for name, tool in lock()["tools"].items() if args.platform in tool["platforms"]) if args.tool == "all" else (args.tool,)
         results = {}
         for name in names:
             target = Path(args.out) / name / args.platform
-            result = fetch(name, args.platform, target, github_auth=args.github_auth)
+            result = ensure(name, args.platform, target, github_auth=args.github_auth)
             results[name] = {"path": str(target.resolve()), "files": len(result["outputs"]), "sha256": result["inputs"]["sha256"]}
         if args.tool == "all" and args.platform == "win-x64":
             from .geometry import configure_geometry

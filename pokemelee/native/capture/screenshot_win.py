@@ -8,8 +8,8 @@ exact failure mode of a plain desktop grab, and the reason the throwaway test
 Dolphin (which never takes the foreground) used to screenshot whatever was on top
 of it. Pure stdlib ctypes (user32 + gdi32) + Pillow; no Node/PowerShell/ffmpeg.
 
-FALLBACK path: a desktop-region grab of the window's client rect via PIL
-ImageGrab (the old behaviour) -- only if PrintWindow comes back empty/black.
+Only the owned render window is captured. Empty/black captures are retried;
+this builder never falls back to grabbing the desktop.
 
 Dolphin's own "Take Screenshot" hotkey and "Dump Frames" were both evaluated and
 rejected: on this Ishiiruka/Slippi build hotkeys don't fire over the input pipe
@@ -28,9 +28,8 @@ import os
 import time
 
 try:
-    from PIL import ImageGrab, Image  # bundled with the backend (Pillow)
+    from PIL import Image
 except Exception:  # pragma: no cover - PIL is expected to be present
-    ImageGrab = None
     Image = None
 
 _u32 = ctypes.WinDLL("user32", use_last_error=True)
@@ -48,6 +47,12 @@ _u32.ReleaseDC.restype = ctypes.c_int
 _u32.GetClientRect.argtypes = [wt.HWND, ctypes.POINTER(wt.RECT)]
 
 _u32.GetClientRect.restype = wt.BOOL
+
+_u32.GetWindowRect.argtypes = [wt.HWND, ctypes.POINTER(wt.RECT)]
+_u32.GetWindowRect.restype = wt.BOOL
+_u32.SetWindowPos.argtypes = [wt.HWND, wt.HWND, ctypes.c_int, ctypes.c_int,
+                            ctypes.c_int, ctypes.c_int, wt.UINT]
+_u32.SetWindowPos.restype = wt.BOOL
 
 _u32.PrintWindow.argtypes = [wt.HWND, wt.HDC, wt.UINT]
 
@@ -233,11 +238,36 @@ def _render_candidates(pid):
         _HWND_MEMO.pop(pid, None)
     return out
 
+def ensure_render_size(pid, width, height):
+    """Set our renderer's physical client size without changing focus or display mode.
+
+    Windows can clamp the initial window to the desktop work area, and DPI
+    scaling can enlarge Dolphin's requested logical size. Correct the owned
+    window after creation; never stretch a differently framed screenshot.
+    """
+    _ensure_dpi_aware()
+    for hwnd in _render_candidates(pid):
+        client, outer = wt.RECT(), wt.RECT()
+        if not _u32.GetClientRect(hwnd, ctypes.byref(client)):
+            continue
+        cw, ch = client.right - client.left, client.bottom - client.top
+        if (cw, ch) == (width, height):
+            return True
+        if not _u32.GetWindowRect(hwnd, ctypes.byref(outer)):
+            continue
+        # NOMOVE | NOZORDER | NOACTIVATE: only our render window's size changes.
+        _u32.SetWindowPos(hwnd, None, 0, 0,
+                          width + outer.right - outer.left - cw,
+                          height + outer.bottom - outer.top - ch, 0x16)
+        if _u32.GetClientRect(hwnd, ctypes.byref(client)):
+            return (client.right - client.left, client.bottom - client.top) == (width, height)
+    return False
+
+
 def _printwindow_grab(hwnd):
     """PrintWindow(PW_RENDERFULLCONTENT) the window's client area into a PIL image,
     or None. Returns None for an all-black grab (PrintWindow occasionally yields a
-    black frame for a GPU surface -- the caller then tries the next window / the
-    desktop fallback)."""
+    black frame for a GPU surface -- the caller retries the owned window)."""
     r = wt.RECT()
     if not _u32.GetClientRect(hwnd, ctypes.byref(r)):
         return None
@@ -286,7 +316,7 @@ def capture_via_printwindow(pid, max_width=960, tries=10):
     """Capture Dolphin's render output via PrintWindow -- the window's OWN pixels,
     so it works while the window is occluded / backgrounded / unfocused. Returns
     PNG bytes (downscaled to max_width), or None if it couldn't get a non-black
-    frame (caller falls back to the desktop grab).
+    frame.
 
     Retries because PrintWindow on an occluded GPU (flip-model) window often
     returns a BLACK frame on the first call(s) until DWM re-composites it -- a

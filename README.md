@@ -91,7 +91,9 @@ python -m pokemelee fetch-tools --platform win-x64 --github-auth
 Use `--github-auth` on the fetch command while the fork releases are private.
 Downloads go to ignored `runtime/<tool>/<platform>/` and are checked against the
 lockfile before unpacking. `fetch-tools` also configures the isolated geometry
-interpreter. Once setup finishes, building does not access the network.
+interpreter. It is safe to rerun after an interrupted download: complete pinned
+installations are verified and reused. Once setup finishes, building does not
+access the network.
 
 Choose a new output directory on a drive with **at least 30 GB free** for the
 intermediate projects, models and output copies. Then run:

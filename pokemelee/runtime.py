@@ -25,6 +25,31 @@ def release_url(name, platform):
     return f"https://github.com/{tool['repo']}/releases/download/{tool['tag']}/{tool['platforms'][platform]['asset']}"
 
 
+def ensure(name, platform, output, *, github_auth=False):
+    """Resume setup by reusing a complete installation of exactly the pinned tool."""
+    target = Path(output).expanduser().absolute()
+    if not target.exists() and not target.is_symlink():
+        return fetch(name, platform, target, github_auth=github_auth)
+    spec = lock()['tools'][name]['platforms'][platform]
+    try:
+        record = json.loads((target / 'receipt.json').read_text(encoding='utf-8'))
+        inputs = record['inputs']
+        if (not isinstance(inputs, dict)
+                or record.get('operation') != 'runtime-install' or record.get('complete') is not True
+                or inputs.get('tool') != name or inputs.get('platform') != platform
+                or inputs.get('sha256') != spec['sha256']):
+            raise ValueError('different pin or incomplete receipt')
+        files = {row['path']: row['sha256'] for row in record['outputs']}
+        for relative in spec['required']:
+            with (target / relative).open('rb') as stream:
+                if hashlib.file_digest(stream, 'sha256').hexdigest() != files[relative]:
+                    raise ValueError('required file changed: ' + relative)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        raise ValueError(f'Existing {name}/{platform} installation is incomplete or differs from its pin. '
+                         f'Choose an empty runtime directory or restore this installation: {target}') from exc
+    return record
+
+
 def fetch(name, platform, output, *, github_auth=False):
     """Public releases need no login. Private maintainer setup can use gh auth."""
     target = Path(output).expanduser().absolute()

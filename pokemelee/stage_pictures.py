@@ -55,6 +55,9 @@ def capture(iso, renderer, output, stage):
     def config(upsert, _):
         upsert('Core', 'GFXBackend', 'D3D')
         upsert('Core', 'SlippiJukeboxEnabled', 'False')
+        upsert('Core', 'SlippiSaveReplays', 'False')
+        upsert('Core', 'SlippiEnableSpectator', 'False')
+        upsert('Core', 'SlippiReplayDir', str(output / 'replays'))
         upsert('Core', 'EmulationSpeed', '1')
         upsert('DSP', 'Backend', 'No audio output')
         upsert('DSP', 'Volume', '0')
@@ -76,12 +79,17 @@ def capture(iso, renderer, output, stage):
             d = Dolphin(process.pid)
             wait_for(lambda: d.locate() if process.poll() is None else False, 45, 'Renderer did not boot Melee')
             address = wait_for(lambda: memory_input.mailbox_address(d), 30, 'Renderer input did not initialize')
+            heartbeat = d.u32(address + memory_input.HEARTBEAT)
+            wait_for(lambda: d.u32(address + memory_input.HEARTBEAT) != heartbeat,
+                     30, 'Renderer did not start polling input')
             pad = memory_input.MemoryInput(d, address)
             # Patch before the first match compiles these functions into JIT code.
             for at, value in CLEAN_PATCHES:
                 d.write_u32(at, value)
             if not nav.nav_to_css(d, pad, timeout=60, log=lambda s: print(stage, s, flush=True)):
                 raise ValueError('Renderer could not reach the offline character select')
+            wait_for(lambda: screenshot_win.ensure_render_size(process.pid, 1280, 960),
+                     10, 'Renderer could not set its required picture dimensions')
             observe.wait_game_frames(d, 120)
             if not match_setup.patch_one_player(d):
                 raise ValueError('Renderer solo-stage setup failed')
