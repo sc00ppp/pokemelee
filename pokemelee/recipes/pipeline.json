@@ -54,21 +54,24 @@
     },
     {
       "id": "portraits-and-menus",
-      "state": "integration-in-progress",
+      "state": "verified",
       "source": "css_icons.py, menu_art.py, stage_shots.py, sss_art.py, menugraft",
-      "remaining": "The 54 CSS icons and three menu source images match the accepted pixels. Costume portraits and menus have standalone generators; complete the stage picture capture and assembled-project comparison."
+      "implementation": "pokemelee.portraits, pokemelee.icons, pokemelee.menus, pokemelee.stage_pictures",
+      "result": "All base and alternate portraits, 54 CSS icons and both sets of six stage pictures regenerated. Both assembled CSS/SSS menus compared with the accepted desktop ISOs."
     },
     {
       "id": "costume-colors",
-      "state": "integration-in-progress",
+      "state": "verified",
       "source": "recolor.py, recolor_specs.json, recolor_install.py",
-      "remaining": "All 102 shiny/team costumes regenerate using the authored maps. Verify final portraits and normal/AniMelee packages in the assembled projects."
+      "implementation": "pokemelee.colors, pokemelee.costumes",
+      "result": "All 102 alternate costumes and 131 packages per variant rebuilt. Paired/team costume slots installed and exercised in game."
     },
     {
       "id": "iso-assembly",
-      "state": "integration-in-progress",
+      "state": "verified",
       "source": "build_iso.py (Cast Test 30), pair_ics.py, pair_pichu.py",
-      "remaining": "Standalone m-ex adapter, paired costume installation, aliases, menus and playlists are implemented. Complete the cold assembled-project and game checks."
+      "implementation": "pokemelee.assembly, pokemelee.builder, native/install_project.py",
+      "result": "Both complete projects exported and booted. Paired fighters, alternate costumes and contact attacks checked; 45 installed stage/audio files and costume models read back. Original bonus movie preserved."
     },
     {
       "id": "fighter-and-announcer-voices",
@@ -96,8 +99,8 @@
     },
     {
       "id": "cold-build-and-package",
-      "state": "pending-upstream-steps",
-      "remaining": "Run the complete build from two discs in an empty directory, read back installed files, check the resulting game, then call the ISO-and-xdelta exporter. Package tools for end users; do not upload generated ISOs or patches."
+      "state": "verification-in-progress",
+      "remaining": "Complete the single-command empty-directory build of both variants. Both assembled integration ISOs already have decode/hash-verified xdeltas, and the source-only wheel imports and generates art independently of the checkout."
     }
   ]
 }

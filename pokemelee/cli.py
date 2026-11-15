@@ -1,4 +1,4 @@
-"""Source-only builder tools. Incomplete ISO builds fail before writing output."""
+"""Source-only builder and component tools for the user's two original discs."""
 import argparse
 import json
 import subprocess
@@ -122,10 +122,13 @@ def parser():
     package.add_argument("--built-iso", required=True, help="An already assembled PokéMelee ISO")
     package.add_argument("--out", required=True, help="A new local output directory")
     package.add_argument("--xdelta", help="xdelta3 executable; default: fetched Windows tool or xdelta3 on PATH")
-    build = sub.add_parser("build", help="Build-readiness gate (ISO assembly is not yet portable)")
+    build = sub.add_parser("build", help="Replay the two-disc build and create local ISO/xdelta outputs")
     build.add_argument("--melee", required=True)
     build.add_argument("--colosseum", required=True)
     build.add_argument("--out", required=True)
+    build.add_argument("--runtime", default="runtime")
+    build.add_argument("--jobs", type=int, default=2)
+    build.add_argument("--profile", choices=("normal", "animelee"), action="append")
     return root
 
 
@@ -221,8 +224,9 @@ def run(args):
     if args.command in ("check", "build"):
         discs = {name: Disc(getattr(args, name), name) for name in ("melee", "colosseum")}
         if args.command == "build":
-            pending = plan()["blocking_steps"]
-            raise ValueError("Two-ISO build is not ready. No output written. Remaining: " + ", ".join(pending))
+            from .builder import build_all
+            return build_all(discs['melee'], discs['colosseum'], args.out, args.runtime,
+                             args.profile or ('normal', 'animelee'), args.jobs)
         return {name: disc.info(args.hash) for name, disc in discs.items()}
     if args.command == "menu-art":
         try:

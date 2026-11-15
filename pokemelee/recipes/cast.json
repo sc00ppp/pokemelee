@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "baseline": "Cast Test 30",
-  "recipe_state": "needs-source-model-and-rig-recipes",
+  "recipe_state": "fixed-source-and-rig-recipes-verified",
   "fighters": [
     {
       "fighter": "Mario",

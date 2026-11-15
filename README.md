@@ -4,29 +4,24 @@ Build PokéMelee locally from your own **Super Smash Bros. Melee USA v1.02**
 (`GALE01`, revision 2) and **Pokémon Colosseum USA** (`GC6E01`, revision 0) discs.
 This repository contains authored build code and recipes. It contains no game
 ISOs, extracted Nintendo assets/code, edited model caches, or binary game patches.
-The finished builder must produce **both `pokemelee.iso` and `pokemelee.xdelta`**
+The builder produces **both `pokemelee.iso` and `pokemelee.xdelta`**
 locally. Generated game outputs are never uploaded to this repo or its releases.
 
 **No AI runs during a build.** The program extracts the source data from the two
 discs, applies fixed mappings and authored edits, and assembles the outputs.
 No LLM, prompts, API keys, model downloads or newly generated rigging choices.
-Once the tools are installed, the build must work offline.
+Once the tools are installed, the build runs offline.
 
-**Status: repository preparation is underway; the complete two-ISO build is not
-ready yet.** Disc extraction, stock/fallback menu-icon generation, and all six
-stages in both versions, all 29 source models, fighter/announcer cries, menu
-sounds and music work. All 29 character recipes now rebuild in an empty work
-folder through the standalone offline converter. Twenty-seven final exports are
-byte-identical; Pikachu and Scyther retain the original authored recipes
-with the small conversion/packing differences recorded in `cast-finishing.json`.
-All 54 rendered character-select tiles (27 per profile) also match the accepted
-images pixel for pixel. The three Colosseum menu source images rebuild exactly.
-All 22 stage files rebuilt from the original discs
-match the normal Cast Test 30 and AniMelee Test 23 references byte for byte.
-The standalone assembler now installs the regenerated cast, paired slots,
-team colors, menus and playlists through pinned MexCLI. Its full integration
-check is underway, including generated costume portraits and stage pictures.
-`build` currently fails with the remaining steps and writes no ISO.
+**Status: both variants assemble, boot, and produce verified patches. The final
+single-command cold build check is running.** The accepted Cast Test 30 and
+AniMelee Test 23 are comparison references only. A normal build never reads them.
+
+The fixed recipes regenerate all 29 characters, 102 alternate costumes, paired
+portraits, character/stage menus, six stages, voices and music. The stage files,
+source models, audio, menu source images and CSS icons match the accepted assets.
+Twenty-seven base character exports match byte for byte. Pikachu and Scyther
+retain the small documented conversion differences in `cast-finishing.json`.
+The original Melee bonus movie is preserved.
 
 ## Dependencies live in their own repositories
 
@@ -70,14 +65,21 @@ can use `--github-auth` with an authenticated GitHub CLI. We do not change the
 forks' visibility from this project. A later end-user package can include these
 runtimes for convenience, without duplicating their source repositories.
 
-## Working commands
+## Build both variants
 
-Python 3.11 or newer. For menu art, install the optional dependencies:
+The complete builder currently supports **Windows x64**. Source setup needs
+Python 3.11 or newer (tested with 3.13), the .NET 8 SDK, and Visual Studio C++
+build tools. The pinned viewer and exporter carry their own runtimes. Automatic
+portrait/stage rendering needs a working graphics driver and Windows desktop.
+No controller input or manual emulator operation is required.
+
+Install the Python dependencies and download the pinned tools once:
 
 ```powershell
-python -m pip install ".[art]"
-python -m pokemelee check --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso"
+python -m pip install ".[stages,presentation]"
 python -m pokemelee fetch-tools --platform win-x64
+python -m pokemelee compile-stages
+python -m pokemelee compile-audio
 ```
 
 For the current private forks:
@@ -86,9 +88,47 @@ For the current private forks:
 python -m pokemelee fetch-tools --platform win-x64 --github-auth
 ```
 
-Downloads go to ignored `runtime/<tool>/<platform>/`. They are verified before
-unpacking; there is no fallback to a moving `latest` version. A supplied ZIP
-can also be checked with `runtime-install NAME ARCHIVE --platform win-x64 --out DIR`.
+Use `--github-auth` on the fetch command while the fork releases are private.
+Downloads go to ignored `runtime/<tool>/<platform>/` and are checked against the
+lockfile before unpacking. `fetch-tools` also configures the isolated geometry
+interpreter. Once setup finishes, building does not access the network.
+
+Choose a new output directory on a drive with **at least 30 GB free** for the
+intermediate projects, models and output copies. Then run:
+
+```powershell
+python -m pokemelee build --melee "path/to/original-melee.iso" --colosseum "path/to/original-colosseum.iso" --out "build/pokemelee"
+```
+
+The result contains:
+
+```text
+build/pokemelee/
+  normal/pokemelee.iso
+  normal/pokemelee.xdelta
+  normal/receipt.json
+  animelee/pokemelee.iso
+  animelee/pokemelee.xdelta
+  animelee/receipt.json
+  receipt.json
+  components/
+```
+
+Both versions build by default. Use `--profile normal` or `--profile animelee`
+for one version. `--runtime PATH` selects an installed tool directory and
+`--jobs 2` controls concurrent character conversions. The output directory must
+be new; the builder never overwrites an earlier build. A failed component stops
+the build and leaves its log and `failed.json`, without a success receipt.
+
+Every finished ISO is read back to check installed costumes, stages, audio and
+the preserved bonus movie. Each xdelta is decoded against the original Melee
+disc and hash-compared with its ISO before the output pair is marked complete.
+
+## Component commands
+
+These commands are useful for development and diagnosing a failed component;
+the full `build` command runs the required steps itself. A supplied tool ZIP
+can be installed with `runtime-install NAME ARCHIVE --platform win-x64 --out DIR`.
 
 ```powershell
 python -m pokemelee list --game colosseum --iso "path/to/colosseum.iso"
@@ -97,9 +137,7 @@ python -m pokemelee menu-art --colosseum "path/to/colosseum.iso" --out work/menu
 python -m pokemelee plan
 ```
 
-The stage generator currently runs on Windows with the .NET 8 runtime and a
-.NET SDK installed. These are maintainer commands while the complete builder
-is being assembled:
+The stage generator uses the authored helpers compiled during setup:
 
 ```powershell
 python -m pip install ".[stages]"
@@ -120,9 +158,9 @@ Each generated GLB matches the original authoring input byte for byte.
 python -m pokemelee source-models --colosseum "path/to/colosseum.iso" --out work/source-models
 ```
 
-Fixed character replay is available for the verified subset. These maintainer
-commands create new directories and verify component receipts and final costume
-hashes. Omitting `--pokemon` rejects an incomplete cast; it never skips a recipe.
+Fixed character replay covers the complete accepted cast. These commands create
+new directories and verify component receipts and final costume hashes.
+Omitting `--pokemon` builds the entire cast; a failed recipe stops the build.
 
 ```powershell
 python -m pokemelee setup-geometry --github-auth
@@ -150,8 +188,7 @@ on a drive with several GB free; runtime downloads use the destination drive.
 
 ## ISO and xdelta output
 
-The local export step already works independently of the unfinished assembler.
-It can package an existing local PokéMelee build:
+The export step can also package an already assembled local PokéMelee build:
 
 ```powershell
 python -m pokemelee package --melee "path/to/original-melee.iso" --built-iso "path/to/built-pokemelee.iso" --out dist/pokemelee
@@ -175,8 +212,7 @@ platform bundles are prepared. Patches use standard VCDIFF without secondary
 compression or local filename headers for broad decoder compatibility. See the
 [upstream command reference](https://github.com/jmacd/xdelta/blob/main/site/docs/commandline.md).
 
-The final two-disc `build` must call this exporter automatically; it is still
-blocked on the character/presentation/assembly work listed by `plan`.
+The two-disc `build` calls this exporter automatically for each requested variant.
 
 Output directories must be new. Each successful extraction/generation records
 input and output hashes in a local receipt. Failures leave a failed receipt and

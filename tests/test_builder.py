@@ -197,7 +197,8 @@ class ReadinessTests(LocalTest):
     def test_build_refuses_partial_iso(self):
         melee, colo = self.disc(), self.disc("colosseum")
         with contextlib.redirect_stderr(io.StringIO()) as errors:
-            code = cli.main(["build", "--melee", str(melee.path), "--colosseum", str(colo.path), "--out", str(self.root / "out.iso")])
+            code = cli.main(["build", "--melee", str(melee.path), "--colosseum", str(colo.path),
+                             "--runtime", str(self.root / "missing-runtime"), "--out", str(self.root / "out.iso")])
         self.assertEqual(code, 2)
         self.assertIn("No output written", errors.getvalue())
         self.assertFalse((self.root / "out.iso").exists())
@@ -207,7 +208,8 @@ class ReadinessTests(LocalTest):
         self.assertEqual(len(load("stages.json")["stages"]), 6)
         self.assertFalse(plan()["iso_build_ready"])
         self.assertNotIn("cast-models", plan()["blocking_steps"])
-        self.assertIn("iso-assembly", plan()["blocking_steps"])
+        self.assertNotIn("iso-assembly", plan()["blocking_steps"])
+        self.assertIn("cold-build-and-package", plan()["blocking_steps"])
 
 
 if __name__ == "__main__":
