@@ -159,5 +159,5 @@ def build_stage_pictures(melee, stages, output, runtime, profile='normal', selec
             target = root / (stage + '.png')
             target.write_bytes(picture)
             outputs.append({'stage': stage, 'path': target.name, **fingerprint(target)})
-        return receipt(root, 'stage-pictures', {'melee': melee.info(), 'stages': stages},
+        return receipt(root, 'stage-pictures', {'melee': melee.info(), 'stages': [str(p) for p in stages]},
                        outputs, profile=profile)

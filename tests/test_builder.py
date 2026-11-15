@@ -209,6 +209,13 @@ class RuntimeTests(LocalTest):
 
 
 class ReadinessTests(LocalTest):
+    def test_nonserializable_receipt_never_creates_partial_file(self):
+        from pokemelee.workspace import write_json
+        path = self.root / 'receipt.json'
+        with self.assertRaises(TypeError):
+            write_json(path, {'complete': True, 'invalid': Path('not-json')})
+        self.assertFalse(path.exists())
+
     def test_build_refuses_partial_iso(self):
         melee, colo = self.disc(), self.disc("colosseum")
         with contextlib.redirect_stderr(io.StringIO()) as errors:
@@ -221,10 +228,8 @@ class ReadinessTests(LocalTest):
     def test_accepted_roster_and_stages_recorded(self):
         self.assertEqual(len(art_indices()), 29)
         self.assertEqual(len(load("stages.json")["stages"]), 6)
-        self.assertFalse(plan()["iso_build_ready"])
-        self.assertNotIn("cast-models", plan()["blocking_steps"])
-        self.assertNotIn("iso-assembly", plan()["blocking_steps"])
-        self.assertIn("cold-build-and-package", plan()["blocking_steps"])
+        self.assertTrue(plan()["iso_build_ready"])
+        self.assertEqual(plan()["blocking_steps"], [])
 
 
 if __name__ == "__main__":

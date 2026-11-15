@@ -11,9 +11,9 @@ def digest(data):
 
 
 def write_json(path, value):
+    text = json.dumps(value, indent=2, ensure_ascii=False) + "\n"
     with Path(path).open("x", encoding="utf-8", newline="\n") as stream:
-        json.dump(value, stream, indent=2, ensure_ascii=False)
-        stream.write("\n")
+        stream.write(text)
 
 
 @contextmanager

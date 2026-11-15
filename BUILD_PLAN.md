@@ -42,8 +42,19 @@ Validation:
   exercised in game. These are developer checks, not user-run harness steps.
 - The source-only wheel was installed separately and generated art from the
   original disc without importing the checkout.
-- The final single-command build in an empty directory is in progress; `plan`
-  retains that final verification step until its complete receipt exists.
+- Every component was regenerated in an initially empty build directory from
+  the two original discs and pinned tools. The run resumed its own verified
+  components after renderer startup/window-size fixes and a receipt serialization
+  fix; no historical generated assets were used. Both final ISO/xdelta pairs
+  have complete receipts and passed decoded-patch hash verification.
+- All 27 fighter identities were loaded and exercised in Dolphin across the
+  integration checks. Both final ISOs passed additional gameplay smoke tests;
+  their 138 costume/code files match the tested integration ISOs exactly.
+- Synthetic tests and source-only patch round trips run on Windows and Linux.
+  The complete game build is Windows-only and is checked locally; game content
+  is never uploaded to CI. AniMelee retains the full original bonus movie and
+  exceeds standard disc size by about 12 MB, so physical-disc/hardware support
+  is not claimed.
 
 Tool setup downloads exact pinned dependencies from their own repositories.
 The source setup currently compiles the small stage/menu and audio helpers with

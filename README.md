@@ -12,8 +12,8 @@ discs, applies fixed mappings and authored edits, and assembles the outputs.
 No LLM, prompts, API keys, model downloads or newly generated rigging choices.
 Once the tools are installed, the build runs offline.
 
-**Status: both variants assemble, boot, and produce verified patches. The final
-single-command cold build check is running.** The accepted Cast Test 30 and
+**Status: the complete two-disc builder is implemented and locally verified for
+both variants, including ISO export and patch round trips.** The accepted Cast Test 30 and
 AniMelee Test 23 are comparison references only. A normal build never reads them.
 
 The fixed recipes regenerate all 29 characters, 102 alternate costumes, paired
@@ -22,6 +22,18 @@ source models, audio, menu source images and CSS icons match the accepted assets
 Twenty-seven base character exports match byte for byte. Pikachu and Scyther
 retain the small documented conversion differences in `cast-finishing.json`.
 The original Melee bonus movie is preserved.
+
+Validation regenerated every component in an initially empty work directory.
+That run resumed its own verified components after renderer startup/window-size
+fixes; it did not reuse historical assets. Both final ISOs passed installed-file
+checks and Dolphin smoke tests, and both patches decoded to the exact output
+ISO hashes. The broader gameplay check covered all 27 fighter identities,
+including the paired followers, alternate colors and attacks against opponents.
+This validates reproduction of the accepted builds, not a new balance pass.
+
+The AniMelee ISO is about 12 MB larger than a standard GameCube disc because the
+original bonus movie is retained. It is tested in Dolphin; hardware and physical
+disc compatibility have not been validated.
 
 ## Dependencies live in their own repositories
 
@@ -227,7 +239,7 @@ Uncompressed ISO/GCM inputs are supported; RVZ inputs must be converted locally.
 - `pokemelee/`: standalone commands, disc/FSYS readers and asset generators.
 - `pokemelee/recipes/cast.json`: accepted 25-fighter cast and the two pairs.
 - `pokemelee/recipes/stages/`: authored graft settings for six approved stages.
-- `pokemelee/recipes/pipeline.json`: exact remaining work, consumed by `plan`.
+- `pokemelee/recipes/pipeline.json`: implementation and verification status, consumed by `plan`.
 - `pokemelee/dependencies.lock.json`: external runtime links and checksums.
 - `tests/`: synthetic fixtures; no game files needed for CI.
 - `work/`, `runtime/`, `dist/`: local generated data, excluded from Git.
@@ -247,5 +259,5 @@ python tools/check_source.py
 Set `POKEMELEE_TEST_XDELTA=1` to include a real patch round trip using synthetic
 disc fixtures. CI runs it on Windows and Linux; no game data is needed.
 
-See [BUILD_PLAN.md](BUILD_PLAN.md) for the remaining conversion work and
+See [BUILD_PLAN.md](BUILD_PLAN.md) for the implemented pipeline and validation and
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for dependency provenance.

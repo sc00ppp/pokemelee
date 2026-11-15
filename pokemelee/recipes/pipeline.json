@@ -99,8 +99,9 @@
     },
     {
       "id": "cold-build-and-package",
-      "state": "verification-in-progress",
-      "remaining": "Complete the single-command empty-directory build of both variants. Both assembled integration ISOs already have decode/hash-verified xdeltas, and the source-only wheel imports and generates art independently of the checkout."
+      "state": "verified",
+      "implementation": "pokemelee.builder, pokemelee.export",
+      "result": "Every component regenerated in an initially empty directory from the two original discs and pinned tools. The run resumed its own verified components after renderer and receipt fixes. Both final ISOs passed installed-file checks and Dolphin smoke tests; both xdeltas decoded to their exact ISO hashes. The source-only wheel imports and generates art independently of the checkout."
     }
   ]
 }
