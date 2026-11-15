@@ -1,5 +1,16 @@
 {
   "schema": 1,
+  "build_contract": {
+    "inputs": ["user_melee_iso", "user_colosseum_iso"],
+    "outputs": ["pokemelee.iso", "pokemelee.xdelta"],
+    "execution": "replay_fixed_reviewed_recipes",
+    "llm_inference": false,
+    "api_keys_required": false,
+    "interactive_authoring": false,
+    "offline_after_tool_setup": true,
+    "rigswap_application_required": false,
+    "blender": "not_an_assumed_dependency; bundle a pinned offline converter only for an identified required operation"
+  },
   "steps": [
     {
       "id": "disc-inputs",
@@ -17,7 +28,7 @@
       "id": "cast-models",
       "state": "needs-recipe-conversion",
       "source": "round_cast.sh, hand_finish.py and per-character hand scripts",
-      "remaining": "Replace cached build.blend1/edited.blend inputs with extraction, rig mapping and deterministic authored edit recipes; preserve the accepted 25 fighters and two pairs. Pin the compatible rigswap and Blender versions."
+      "remaining": "Preserve the accepted 25 fighters and two pairs as fixed source-to-target mappings, transforms, weighting rules and material/edit recipes applied to assets extracted from the two ISOs. Recover existing authoring choices; do not rerun LLM authoring or rigging decisions. Reuse only needed deterministic conversion helpers, with any required native converter pinned and bundled."
     },
     {
       "id": "stages",

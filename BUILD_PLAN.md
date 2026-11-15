@@ -4,6 +4,11 @@ The target is Cast Test 30's plain PokéMelee content, rebuilt from the user's t
 discs. Repo setup does not authorize changing the cast, choosing different stage
 revisions, or reorganizing Nucleus, VAMP or rigswap.
 
+The build contract is fixed: two user-supplied ISOs in, a local ISO and verified
+xdelta out. It must replay the accepted result with no LLM calls, prompts, API
+keys, new rigging choices or authoring sessions. After dependency setup it must
+work offline. The user never has to run Rigswap or operate Blender.
+
 Completed preparation:
 
 - A standalone Python package, with no Nucleus path injection or vault dependency.
@@ -20,9 +25,15 @@ Remaining conversion, in dependency order:
 1. **Cast recipes.** Recover the initial source-model extraction and rig mapping
    for each accepted costume. `round_cast.sh` starts several paths from
    `build.blend1`/`edited.blend`; hand scripts apply corrections to those inputs.
-   Transcribe the edits as deterministic operations, then pin the working
-   rigswap/Blender version. Do not replace accepted runs with a newer-looking
-   filename: some approved DATs were copied over older run directories.
+   Preserve the already-approved source-to-target mappings, transforms, weighting
+   rules and material settings as fixed recipes; do not ask an agent to recreate
+   them. Replay those recipes against data extracted from the two discs. Reuse
+   deterministic conversion functions where useful, without depending on the
+   Rigswap authoring application or its project folders. Blender is not an
+   assumed dependency: the old prep/export path uses its geometry and Collada
+   conversion APIs, so an automatic bundled headless converter may be retained
+   if a specific operation requires it. Do not replace accepted runs with a
+   newer-looking filename: some approved DATs were copied over older run directories.
 2. **Stage inputs and generators.** The six graft specs are in this repository.
    `${melee}` means extracted Melee files, `${colosseum}` means extracted and
    decoded Colosseum sources, `${generated}` means local generated intermediates.

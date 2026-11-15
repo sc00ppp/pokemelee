@@ -7,6 +7,11 @@ ISOs, extracted Nintendo assets/code, edited model caches, or binary game patche
 The finished builder must produce **both `pokemelee.iso` and `pokemelee.xdelta`**
 locally. Generated game outputs are never uploaded to this repo or its releases.
 
+**No AI runs during a build.** The program extracts the source data from the two
+discs, applies fixed mappings and authored edits, and assembles the outputs.
+No LLM, prompts, API keys, model downloads or newly generated rigging choices.
+Once the tools are installed, the build must work offline.
+
 **Status: repository preparation is underway; the complete two-ISO build is not
 ready yet.** Disc extraction and stock/fallback menu-icon generation work. The
 accepted cast and all six stage graft specs are recorded. The old Cast Test 30
@@ -21,7 +26,6 @@ caches; those must become recipes before this is an end-user builder.
 | HSDRaw / HSDRawViewer | [ssbmNucleus-hsdlib](https://github.com/sc00ppp/ssbmNucleus-hsdlib) | DAT library, conversion and rendering |
 | m-ex / MexCLI | [ssbmNucleus-mex](https://github.com/sc00ppp/ssbmNucleus-mex) | Project creation, imports and ISO export |
 | xdelta3 | [xdelta-gpl](https://github.com/jmacd/xdelta-gpl) | Create and verify local patches |
-| rigswap + Blender | Shared rigswap engine; exact compatible pin still being resolved | Deterministic costume generation |
 
 **No fork code is copied into this repo.** `pokemelee/dependencies.lock.json`
 links to exact release tags, filenames and SHA-256 checksums. Setup downloads
@@ -32,6 +36,14 @@ The current HSDRaw and MexCLI pins are `v2026.11.09.1`, inherited from the worki
 Nucleus tool manifests. MexCLI is already the console build; the MexManager GUI
 is unnecessary here. Keep the current runtime intact until trimming is tested.
 Stage/menu helpers can link HSDRaw.dll without carrying the viewer GUI source.
+
+Rigswap and Blender were used to author the existing character swaps. Neither
+is installed by this builder or declared a required runtime. The migration work
+is to preserve the already-approved bone mappings, mesh transforms, material
+settings and corrections as fixed recipes. Some old export functions use
+Blender's geometry/conversion APIs; retain a bundled headless converter only if
+a concrete operation needs it. Reusing deterministic helper code does not mean
+running Rigswap's authoring/agent pipeline.
 
 Once the forks are public, setup needs no GitHub login. Until then, maintainers
 can use `--github-auth` with an authenticated GitHub CLI. We do not change the

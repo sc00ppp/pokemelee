@@ -107,8 +107,8 @@
   },
   "unresolved": [
     {
-      "tool": "rigswap + Blender",
-      "reason": "Resolve the accepted cast recipes and pin their tested engine/runtime; current local run folders are not recipes."
+      "tool": "deterministic model conversion",
+      "reason": "Recover fixed approved mappings and edit recipes from authoring outputs. Reuse only offline conversion helpers where needed; no Rigswap agent pipeline, LLM calls, model downloads or API keys. Blender is not an assumed dependency; any required headless converter must be explicitly justified, pinned and bundled."
     },
     {
       "tool": "stagegraft + menugraft",
