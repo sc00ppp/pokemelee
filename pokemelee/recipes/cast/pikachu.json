@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "pokemon": "Pikachu",
+  "fighter": "Pikachu",
+  "source_model": "025_Pikachu.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_02": "legs",
+    "Bone_09": "legs",
+    "Bone_32": "arms",
+    "Bone_38": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "pikachu_mesh_00",
+    "pikachu_mesh_01",
+    "pikachu_mesh_08",
+    "pikachu_mesh_09",
+    "pikachu_mesh_10",
+    "pikachu_mesh_11",
+    "pikachu_mesh_12"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_44"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_27",
+        "Bone_29"
+      ],
+      "kind": "ear",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "pikachu_mesh_13 / pikachu_mat_13",
+      "2": "pikachu_mesh_14 / pikachu_mat_14",
+      "3": "pikachu_mesh_15 / pikachu_mat_15",
+      "4": "pikachu_mesh_16 / pikachu_mat_16",
+      "5": "pikachu_mesh_18 / pikachu_mat_17",
+      "6": "pikachu_mesh_23 / pikachu_mat_23",
+      "7": "pikachu_mesh_25 / pikachu_mat_25"
+    },
+    "selected": [
+      7
+    ],
+    "half": [
+      {
+        "surface": 7,
+        "box": [
+          7,
+          204,
+          23,
+          35
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": []
+  }
+}

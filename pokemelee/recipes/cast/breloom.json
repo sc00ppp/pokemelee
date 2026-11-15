@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "pokemon": "Breloom",
+  "fighter": "Luigi",
+  "source_model": "g3_kinogassa.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_05": "legs",
+    "Bone_19": "legs",
+    "Bone_60": "arms",
+    "Bone_66": "arms"
+  },
+  "forks": {
+    "Bone_61": null,
+    "Bone_67": null
+  },
+  "digits": [
+    "Bone_65",
+    "Bone_64",
+    "Bone_71",
+    "Bone_70"
+  ],
+  "source_drop": [
+    "kinogassa_mesh_11",
+    "kinogassa_mesh_12",
+    "kinogassa_mesh_13",
+    "kinogassa_mesh_14",
+    "kinogassa_mesh_15",
+    "kinogassa_mesh_16",
+    "kinogassa_mesh_17"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_56"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_72"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_36",
+        "Bone_46"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_38",
+        "Bone_44"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_40",
+        "Bone_42"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_59"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "kinogassa_mesh_00 / kinogassa_mat_0",
+      "2": "kinogassa_mesh_01 / kinogassa_mat_1",
+      "3": "kinogassa_mesh_02 / kinogassa_mat_2",
+      "4": "kinogassa_mesh_03 / kinogassa_mat_3",
+      "5": "kinogassa_mesh_05 / kinogassa_mat_5",
+      "6": "kinogassa_mesh_07 / kinogassa_mat_5",
+      "7": "kinogassa_mesh_08 / kinogassa_mat_8",
+      "8": "kinogassa_mesh_09 / kinogassa_mat_9"
+    },
+    "selected": [
+      3
+    ],
+    "half": [],
+    "closed": [
+      {
+        "surface": 3,
+        "box": [
+          8,
+          31,
+          158,
+          93
+        ],
+        "mirrored": true
+      }
+    ],
+    "fixed": {
+      "half": [
+        -128,
+        0
+      ],
+      "closed": [
+        -384,
+        0
+      ]
+    }
+  }
+}

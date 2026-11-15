@@ -15,12 +15,15 @@ Once the tools are installed, the build must work offline.
 **Status: repository preparation is underway; the complete two-ISO build is not
 ready yet.** Disc extraction, stock/fallback menu-icon generation, and all six
 stages in both versions, all 29 source models, fighter/announcer cries, menu
-sounds and music work.
+sounds and music work. Twenty regular character costumes now also rebuild
+through the standalone converter and match the accepted exports exactly.
+Plusle, Minun and Jynx match in isolated recipe checks; partner integration and
+the remaining six character recipes are still being completed.
 All 22 stage files rebuilt from the original discs
 match the normal Cast Test 30 and AniMelee Test 23 references byte for byte.
-The accepted cast is recorded. The old Cast Test 30
-assembler still depends on edited Blender files and generated DAT/PNG
-caches; those must become recipes before this is an end-user builder.
+The old Cast Test 30 assembler still depends on generated portrait/menu caches
+and Nucleus project services. Those remaining steps must become standalone
+recipes before this is an end-user builder.
 `build` currently fails with the remaining steps and writes no ISO.
 
 ## Dependencies live in their own repositories
@@ -31,6 +34,9 @@ caches; those must become recipes before this is an end-user builder.
 | m-ex / MexCLI | [ssbmNucleus-mex](https://github.com/sc00ppp/ssbmNucleus-mex) | Project creation, imports and ISO export |
 | xdelta3 | [xdelta-gpl](https://github.com/jmacd/xdelta-gpl) | Create and verify local patches |
 | Blender 4.5.7 | [Blender](https://projects.blender.org/blender/blender) | Fixed headless source-model conversion |
+| Blender 4.3.2 | [Blender](https://projects.blender.org/blender/blender) | Original Melee Collada target reader |
+| Offline geometry helpers | [rigswap](https://github.com/sc00ppp/rigswap) at `ade3152` | Pure conversion functions; authoring imports disabled |
+| Python 3.13.3 + bpy 5.2.2 | Official Python/PyPI distributions, pinned in the lockfile | Isolated character recipe runtime |
 | GameCube model reader | [Blender-Addon-Gamecube-Models](https://github.com/StarsMmd/Blender-Addon-Gamecube-Models) | Read Colosseum models with the original converter |
 | MusyX | [musyx](https://github.com/AxioDL/musyx) | Render disc-supplied songs and sound effects |
 
@@ -49,6 +55,11 @@ That converter runs headlessly with saved options; users do not operate Blender.
 The package pins the exact official runtime and reader source archive.
 The character migration preserves the accepted mappings, transforms, material
 settings and corrections. Rigswap's authoring/agent pipeline is not a build step.
+The character interpreter has its own pinned packages. It does not use a
+Rigswap installation, project folder, user Python environment, or agent cache.
+Its workers reject authoring imports and network connections. The 4.3.2 target
+reader is separate because Blender 4.5.7 crashes on the original Melee Collada
+meshes; the accepted target files are reproduced with 4.3.2.
 
 Once the forks are public, setup needs no GitHub login. Until then, maintainers
 can use `--github-auth` with an authenticated GitHub CLI. We do not change the
@@ -103,6 +114,16 @@ Each generated GLB matches the original authoring input byte for byte.
 
 ```powershell
 python -m pokemelee source-models --colosseum "path/to/colosseum.iso" --out work/source-models
+```
+
+Fixed character replay is available for the verified subset. These maintainer
+commands create new directories and verify component receipts and final costume
+hashes. Omitting `--pokemon` rejects an incomplete cast; it never skips a recipe.
+
+```powershell
+python -m pokemelee setup-geometry --github-auth
+python -m pokemelee melee-targets --melee "path/to/melee.iso" --out work/melee-targets
+python -m pokemelee cast --colosseum "path/to/colosseum.iso" --models work/source-models --targets work/melee-targets --pokemon Magmar --pokemon Gardevoir --out work/cast
 ```
 
 Audio generation also reads the two source discs directly. The verified outputs

@@ -1,0 +1,762 @@
+{
+  "schema": 1,
+  "recipes": {
+    "magmar": {
+      "pokemon": "Magmar",
+      "fighter": "Mario",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "hand_magmar_fire.py",
+          "{build}"
+        ],
+        [
+          "hand_magmar_feet.py",
+          "{build}",
+          "Mario"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ],
+        [
+          "anim_fire.py",
+          "{out}",
+          "{out}",
+          "64",
+          "128"
+        ],
+        [
+          "anim_fire.py",
+          "{out}",
+          "{out}",
+          "64",
+          "32",
+          "--ripple"
+        ],
+        [
+          "anim_fire.py",
+          "{out}",
+          "{out}",
+          "128",
+          "64",
+          "--ripple"
+        ]
+      ],
+      "sha256": "832592510e67a35196800e2d525f557f6b3d157e9f5ade010666e0629d7c96be",
+      "bytes": 479090
+    },
+    "miltank": {
+      "pokemon": "Miltank",
+      "fighter": "DrMario",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "stand_feet.py",
+          "{finish}",
+          "DrMario"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "cead9a7557cc220545ce0107d34396e9187d32101fc8dac1a5e0b26eaa78182b",
+      "bytes": 392442
+    },
+    "breloom": {
+      "pokemon": "Breloom",
+      "fighter": "Luigi",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "stand_feet.py",
+          "{finish}",
+          "Luigi"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "148c40446a510afa4e36a885458926e8cc718917aee9d7831760eb244417a016",
+      "bytes": 260410
+    },
+    "blastoise": {
+      "pokemon": "Blastoise",
+      "fighter": "Bowser",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "blastoise_inspect.py"
+        ],
+        [
+          "hand_blastoise.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "copy",
+          "{finish}/build.blend",
+          "{finish}/rounded.blend"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ],
+        [
+          "blastoise_shell_state.py"
+        ],
+        [
+          "blastoise_low_shell.py",
+          "{out}",
+          "{out}"
+        ]
+      ],
+      "sha256": "3d0eb5e348e1ee4c3a65c6bf66acdbf4266ef0f975c68fc43b925d2c1ec83e08",
+      "bytes": 1038198
+    },
+    "alakazam": {
+      "pokemon": "Alakazam",
+      "fighter": "Zelda",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "alakazam_inspect.py"
+        ],
+        [
+          "hand_alakazam.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "1dee5425ad9d5994bcdae706d7dd23b602158f2b8637c96e6e3ece3fc42dd918",
+      "bytes": 214290
+    },
+    "combusken": {
+      "pokemon": "Combusken",
+      "fighter": "Falco",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "combusken_inspect.py"
+        ],
+        [
+          "hand_combusken.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "Falco"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "60bcb454c093f9861b7c400cb9df68bb0d224f0686f52a6616aedffc5bb41ad2",
+      "bytes": 249126
+    },
+    "farfetchd": {
+      "pokemon": "Farfetchd",
+      "fighter": "YoungLink",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "hand_farfetchd.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "YoungLink"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "e795d04bf6e488d2434fcbfb7c7b22fbbbdb1ab0b4259f10df50cdb2a222260b",
+      "bytes": 307398
+    },
+    "kecleon": {
+      "pokemon": "Kecleon",
+      "fighter": "Yoshi",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "hand_kecleon.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "Yoshi"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "058624eebbbb31641c3268053cad12460f3ed1ef4b5bf9d4841e8df0774c055b",
+      "bytes": 280402
+    },
+    "pichu": {
+      "pokemon": "Pichu",
+      "fighter": "Pichu",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "hand_pichu_inspect.py"
+        ],
+        [
+          "hand_pichu.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "e36a2432ef2ea6932be3e7545c3e73bb74f9a06be514dc0d0b21bf4166a1d638",
+      "bytes": 224962
+    },
+    "mewtwo": {
+      "pokemon": "Mewtwo",
+      "fighter": "Mewtwo",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "mewtwo_inspect.py"
+        ],
+        [
+          "hand_mewtwo.py"
+        ],
+        [
+          "mewtwo_surface.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ],
+        [
+          "mewtwo_blink.py"
+        ]
+      ],
+      "sha256": "403af4cb093ad86312c2044976be4e0fb596d8da168208f42d691b3f26f9fd58",
+      "bytes": 399756
+    },
+    "swampert": {
+      "pokemon": "Swampert",
+      "fighter": "DonkeyKong",
+      "seed": "v3/3-build",
+      "finish": "v3/3-build",
+      "directories": [
+        "{home}/v2"
+      ],
+      "steps": [
+        [
+          "swampert_v2_idle.py"
+        ],
+        [
+          "swampert_v3_hand.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "DonkeyKong"
+        ],
+        [
+          "round_out.py",
+          "{finish}",
+          "--idle",
+          "DonkeyKong"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "97411f7757308e595acd6e56eac1ad3ee95cda2987995ee97b2faf0acf696cd4",
+      "bytes": 292784
+    },
+    "jigglypuff": {
+      "pokemon": "Jigglypuff",
+      "fighter": "Jigglypuff",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "jigglypuff_inspect.py"
+        ],
+        [
+          "hand_jigglypuff.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "9e5eee076781c3088b7e328f0e52d370e55c25c67a2c8f6eecc78cdd29cbace1",
+      "bytes": 363918
+    },
+    "sceptile": {
+      "pokemon": "Sceptile",
+      "fighter": "Sheik",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [
+        "{root}/hand/sceptile-Marth"
+      ],
+      "steps": [
+        [
+          "sceptile_inspect.py",
+          "{source}",
+          "{root}/hand/sceptile-Marth/source.json"
+        ],
+        [
+          "sceptile_inspect.py",
+          "{build}/base.blend",
+          "{home}/base.json"
+        ],
+        [
+          "hand_sceptile_sheik.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "Sheik"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "soft_legs.py",
+          "{finish}",
+          "Sheik"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "395b0305c0cec2b13e0e681bcca1511f6f40acd3aea554019a6e39f954682c42",
+      "bytes": 331756
+    },
+    "wigglytuff": {
+      "pokemon": "Wigglytuff",
+      "fighter": "Kirby",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "hand_wigglytuff.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ],
+        [
+          "wigglytuff_jump.py",
+          "{out}",
+          "{out}"
+        ]
+      ],
+      "sha256": "412565664c601ab7b7e742b7711aa57ee9f52f4f8c049e233c2c9dca60840294",
+      "bytes": 296834
+    },
+    "ralts": {
+      "pokemon": "Ralts",
+      "fighter": "Ness",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "ralts_inspect.py"
+        ],
+        [
+          "ralts_assets.py"
+        ],
+        [
+          "hand_ralts.py"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "0f1066b48262be4bee272a4e8d0e3eb5a922f462edc77fca91fa17aa5e797bc4",
+      "bytes": 159060
+    },
+    "blaziken": {
+      "pokemon": "Blaziken",
+      "fighter": "CaptainFalcon",
+      "seed": "3-build",
+      "finish": "v2/3-build",
+      "directories": [],
+      "steps": [
+        [
+          "blaziken_inspect.py"
+        ],
+        [
+          "blaziken_feet.py"
+        ],
+        [
+          "hand_blaziken_v2.py"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "sha256": "d2a9602110b87ad8a9924d8e537e344890f661313e00c2a73469615d40c76b40",
+      "bytes": 213965
+    },
+    "charmeleon": {
+      "pokemon": "Charmeleon",
+      "fighter": "Roy",
+      "seed": "3-build",
+      "finish": "fire/3-build",
+      "directories": [],
+      "steps": [
+        [
+          "charmeleon_inspect.py"
+        ],
+        [
+          "hand_charmeleon.py"
+        ],
+        [
+          "hand_charmeleon_tail.py"
+        ],
+        [
+          "hand_charmeleon_fire.py"
+        ],
+        [
+          "stand_feet.py",
+          "{finish}",
+          "Roy"
+        ],
+        [
+          "round_out.py",
+          "{finish}"
+        ],
+        [
+          "hand_finish.py",
+          "{finish}",
+          "{out}"
+        ],
+        [
+          "anim_fire.py",
+          "{out}",
+          "{out}",
+          "64",
+          "128"
+        ]
+      ],
+      "sha256": "3683b1575539bdbbae9d722a0399b924d5eaea7ffb912d8d6b39e4d2a3546ec3",
+      "bytes": 466152
+    },
+    "scizor": {
+      "pokemon": "Scizor",
+      "fighter": "Marth",
+      "seed": "v4/3-build",
+      "finish": "v6/round/3-build",
+      "directories": [
+        "{home}/v4/review"
+      ],
+      "steps": [
+        [
+          "source_images.py",
+          "{source}",
+          "{home}/textures"
+        ],
+        [
+          "hand_scizor_v4.py"
+        ],
+        [
+          "copy_tree",
+          "{build}",
+          "{home}/v4/round/3-build"
+        ],
+        [
+          "stand_feet.py",
+          "{home}/v4/round/3-build",
+          "Marth"
+        ],
+        [
+          "hand_scizor_v4.py",
+          "--round-shells"
+        ],
+        [
+          "hand_scizor_v6.py"
+        ],
+        [
+          "copy_tree",
+          "{home}/v6/3-build",
+          "{finish}"
+        ],
+        [
+          "hand_scizor_v6.py",
+          "--round-shells"
+        ],
+        [
+          "hand_scizor_v6.py",
+          "--finish"
+        ],
+        [
+          "copy",
+          "{home}/v6/round/4-export/Marth.dat",
+          "{out}"
+        ]
+      ],
+      "sha256": "cf38ba5803802bbe46079cdcd09a6d135244b34ae38da2b4495b99f412c5ed99",
+      "bytes": 508820
+    },
+    "gardevoir": {
+      "pokemon": "Gardevoir",
+      "fighter": "Peach",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "vanilla_blend.py",
+          "Peach",
+          "{home}/look/vanilla.blend"
+        ],
+        [
+          "gardevoir_assets.py"
+        ],
+        [
+          "hand_gown.py",
+          "{build}/base.blend",
+          "{build}/edited.blend",
+          "{home}/look/vanilla.blend",
+          "--zig",
+          "1.3",
+          "--top",
+          "10",
+          "--vee",
+          "6"
+        ],
+        [
+          "hand_eyes.py",
+          "{build}/edited.blend",
+          "{build}/edited.blend",
+          "{build}",
+          "{home}/look/eye.png",
+          "{home}/look/mouth.png",
+          "{model}"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ],
+      "sha256": "f56cf33b9bc08aa4c8de9214465784d19043faf11299272f8ca4ea9c3e463cb7",
+      "bytes": 717870
+    },
+    "unownx": {
+      "pokemon": "UnownX",
+      "fighter": "GameAndWatch",
+      "seed": "3-build",
+      "finish": "3-build",
+      "procedural": true,
+      "directories": [],
+      "steps": [
+        [
+          "vanilla_blend.py",
+          "GameAndWatch",
+          "{build}/base.blend"
+        ],
+        [
+          "unown_assets.py",
+          "{home}/eye.png"
+        ],
+        [
+          "hand_unownx.py",
+          "{build}/base.blend",
+          "{build}/build.blend",
+          "{home}/eye.png",
+          "{build}"
+        ],
+        [
+          "copy",
+          "{build}/build.blend",
+          "{build}/edited.blend"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ],
+        [
+          "hand_unownx_post.py",
+          "{out}",
+          "{build}/export/readback.json",
+          "{out}"
+        ]
+      ],
+      "sha256": "75b890073689594ed2a45ccd8e14cbb88826386fb417bad3c045914677a708a9",
+      "bytes": 230943
+    },
+    "plusle": {
+      "pokemon": "Plusle",
+      "fighter": "Pichu",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "vanilla_blend.py",
+          "Pichu",
+          "{home}/vanilla.blend"
+        ],
+        [
+          "plusle_edit.py",
+          "{build}/base.blend",
+          "{build}/edited.blend",
+          "{replay}/ends.npz",
+          "{home}/vanilla.blend"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ],
+      "sha256": "73972ee3be1e737c7c91f9c16dc7c068e0da2f58d71a687a956bb1d89e16c5cd",
+      "bytes": 248930
+    },
+    "minun": {
+      "pokemon": "Minun",
+      "fighter": "Pichu",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "steps": [
+        [
+          "vanilla_blend.py",
+          "Pichu",
+          "{home}/vanilla.blend"
+        ],
+        [
+          "plusle_edit.py",
+          "{build}/base.blend",
+          "{build}/edited.blend",
+          "{replay}/ends.npz",
+          "{home}/vanilla.blend"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ],
+      "sha256": "1794947b765f3b04b9fa5102e64d0e3a2e8a5a113122f205a85f0ad5141df1fc",
+      "bytes": 246738
+    }
+  }
+}

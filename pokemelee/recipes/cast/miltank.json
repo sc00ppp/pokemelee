@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "pokemon": "Miltank",
+  "fighter": "DrMario",
+  "source_model": "241_Miltank.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_55": "legs",
+    "Bone_68": "legs",
+    "Bone_07": "arms",
+    "Bone_34": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "miltank_mesh_00",
+    "miltank_mesh_01",
+    "miltank_mesh_02",
+    "miltank_mesh_03",
+    "miltank_mesh_04",
+    "miltank_mesh_05",
+    "miltank_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_46"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_19",
+        "Bone_23"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_16"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_05",
+        "Bone_06"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_44",
+        "Bone_45"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "miltank_mesh_08 / miltank_mat_8",
+      "2": "miltank_mesh_09 / miltank_mat_9",
+      "3": "miltank_mesh_10 / miltank_mat_10",
+      "4": "miltank_mesh_11 / miltank_mat_11",
+      "5": "miltank_mesh_17 / miltank_mat_16",
+      "6": "miltank_mesh_18 / miltank_mat_18",
+      "7": "miltank_mesh_21 / miltank_mat_21",
+      "8": "miltank_mesh_22 / miltank_mat_22",
+      "9": "miltank_mesh_23 / miltank_mat_23",
+      "10": "miltank_mesh_25 / miltank_mat_25"
+    },
+    "selected": [
+      8
+    ],
+    "half": [
+      {
+        "surface": 8,
+        "box": [
+          0,
+          83,
+          32,
+          59
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 8,
+        "box": [
+          0,
+          246,
+          32,
+          59
+        ],
+        "mirrored": true
+      }
+    ]
+  }
+}

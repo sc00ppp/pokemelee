@@ -162,6 +162,265 @@
           ]
         }
       }
+    },
+    "geometry-python": {
+      "repo": "https://www.python.org",
+      "tag": "3.13.3",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "python-3.13.3-embed-amd64.zip",
+          "url": "https://www.python.org/ftp/python/3.13.3/python-3.13.3-embed-amd64.zip",
+          "sha256": "59ff76e16e6597de47474fb22be69e7191a89116910d728ab735079b078e52db",
+          "entrypoint": "python.exe",
+          "required": [
+            "python.exe"
+          ]
+        }
+      }
+    },
+    "geometry-bpy": {
+      "repo": "https://pypi.org/project/bpy",
+      "tag": "5.2.2",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "bpy-5.2.2-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/3f/43/07ffaf5f8cc23a02258d03d972784e93e1fdacbd5422fd75fc9dd7c1738b/bpy-5.2.2-cp313-cp313-win_amd64.whl",
+          "sha256": "a2d29dca205e094f8f501544c73009ab15b643fb611a27ddc1155dce2fc6995d",
+          "entrypoint": "bpy/__init__.pyd",
+          "required": [
+            "bpy/__init__.pyd"
+          ]
+        }
+      }
+    },
+    "geometry-numpy": {
+      "repo": "https://pypi.org/project/numpy",
+      "tag": "2.5.3",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "numpy-2.5.3-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/f3/ec/100f2b1794ede74a9b3d7ec6b9736927f56713414c1dfe19ab6c383494bf/numpy-2.5.3-cp313-cp313-win_amd64.whl",
+          "sha256": "71cad2b2a7451ab79d8f5e71b453485b6775963d5cf794179144a7463fe6e8ec",
+          "entrypoint": "numpy/conftest.py",
+          "required": [
+            "numpy/conftest.py"
+          ]
+        }
+      }
+    },
+    "geometry-pillow": {
+      "repo": "https://pypi.org/project/pillow",
+      "tag": "12.3.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "pillow-12.3.0-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/a6/9b/7a58e61d62be561da3a356fe2384d4059a6345fc130e23ef1c36a5b81d24/pillow-12.3.0-cp313-cp313-win_amd64.whl",
+          "sha256": "1cca606cd25738df4ed873d5ad46bbdb3d83b5cbca291f6b4ff13a4df6b0bbe8",
+          "entrypoint": "PIL/AvifImagePlugin.py",
+          "required": [
+            "PIL/AvifImagePlugin.py"
+          ]
+        }
+      }
+    },
+    "geometry-cattrs": {
+      "repo": "https://pypi.org/project/cattrs",
+      "tag": "26.2.1",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "cattrs-26.2.1-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/e8/cf/22794a399d99480486120e26e879ef008e21f5e85274c2ed591d568bb326/cattrs-26.2.1-py3-none-any.whl",
+          "sha256": "a12aaa3453dc8f633a815293179f08b7421ed18d2575c459c3c736f840beac24",
+          "entrypoint": "cattr/__init__.py",
+          "required": [
+            "cattr/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-attrs": {
+      "repo": "https://pypi.org/project/attrs",
+      "tag": "26.1.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "attrs-26.1.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl",
+          "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309",
+          "entrypoint": "attr/__init__.py",
+          "required": [
+            "attr/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-cython": {
+      "repo": "https://pypi.org/project/cython",
+      "tag": "3.3.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "cython-3.3.0-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/d8/d7/376572ff69ef39a9bdcd727124f6c38aa066300e97734a4902a3ae0d2af0/cython-3.3.0-cp313-cp313-win_amd64.whl",
+          "sha256": "ab24d1a4fb6aaf0b5b6fcd75a6d70255fbd3130fa78884c26991f8d5502616b5",
+          "entrypoint": "cython.py",
+          "required": [
+            "cython.py"
+          ]
+        }
+      }
+    },
+    "geometry-requests": {
+      "repo": "https://pypi.org/project/requests",
+      "tag": "2.34.2",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "requests-2.34.2-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+          "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0",
+          "entrypoint": "requests/__init__.py",
+          "required": [
+            "requests/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-zstandard": {
+      "repo": "https://pypi.org/project/zstandard",
+      "tag": "0.25.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "zstandard-0.25.0-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/d9/82/b9c06c870f3bd8767c201f1edbdf9e8dc34be5b0fbc5682c4f80fe948475/zstandard-0.25.0-cp313-cp313-win_amd64.whl",
+          "sha256": "1f830a0dac88719af0ae43b8b2d6aef487d437036468ef3c2ea59c51f9d55fd5",
+          "entrypoint": "zstandard/__init__.py",
+          "required": [
+            "zstandard/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-typing-extensions": {
+      "repo": "https://pypi.org/project/typing-extensions",
+      "tag": "4.16.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "entrypoint": "typing_extensions.py",
+          "required": [
+            "typing_extensions.py"
+          ]
+        }
+      }
+    },
+    "geometry-charset-normalizer": {
+      "repo": "https://pypi.org/project/charset-normalizer",
+      "tag": "3.5.2",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "charset_normalizer-3.5.2-cp313-cp313-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/9c/76/b8ec57f4e9ee3253541abf95e4a462c0175fe8032dcd070f1f2421240942/charset_normalizer-3.5.2-cp313-cp313-win_amd64.whl",
+          "sha256": "78456a747de8dc58360ffa581f30a002baf5aa28cb262536545e91f113ed7639",
+          "entrypoint": "charset_normalizer/__init__.py",
+          "required": [
+            "charset_normalizer/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-idna": {
+      "repo": "https://pypi.org/project/idna",
+      "tag": "3.20",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "idna-3.20-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+          "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+          "entrypoint": "idna/__init__.py",
+          "required": [
+            "idna/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-urllib3": {
+      "repo": "https://pypi.org/project/urllib3",
+      "tag": "2.8.0",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "urllib3-2.8.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+          "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+          "entrypoint": "urllib3/__init__.py",
+          "required": [
+            "urllib3/__init__.py"
+          ]
+        }
+      }
+    },
+    "geometry-certifi": {
+      "repo": "https://pypi.org/project/certifi",
+      "tag": "2026.7.22",
+      "purpose": "Isolated offline geometry runtime for replaying the accepted character recipes.",
+      "platforms": {
+        "win-x64": {
+          "asset": "certifi-2026.7.22-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl",
+          "sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775",
+          "entrypoint": "certifi/__init__.py",
+          "required": [
+            "certifi/__init__.py"
+          ]
+        }
+      }
+    },
+    "cast-helpers": {
+      "repo": "sc00ppp/rigswap",
+      "tag": "ade3152b413c2ba96ce13ac356df662c3f899124",
+      "purpose": "Pinned deterministic model, geometry and Melee export functions. Agent entry points are forbidden in recipe workers.",
+      "platforms": {
+        "win-x64": {
+          "asset": "rigswap-ade3152b413c2ba96ce13ac356df662c3f899124.zip",
+          "url": "https://api.github.com/repos/sc00ppp/rigswap/zipball/ade3152b413c2ba96ce13ac356df662c3f899124",
+          "github_api": "repos/sc00ppp/rigswap/zipball/ade3152b413c2ba96ce13ac356df662c3f899124",
+          "sha256": "5ce8e1508f70f9112b93a10506420496f1c778177c5b84b0d90f3316cdaf229d",
+          "entrypoint": "sc00ppp-rigswap-ade3152b413c2ba96ce13ac356df662c3f899124/rigswap/plugins/melee/__init__.py",
+          "required": [
+            "sc00ppp-rigswap-ade3152b413c2ba96ce13ac356df662c3f899124/rigswap/core/build.py",
+            "sc00ppp-rigswap-ade3152b413c2ba96ce13ac356df662c3f899124/rigswap/plugins/melee/__init__.py"
+          ]
+        }
+      }
+    },
+    "blender-target-reader": {
+      "repo": "https://www.blender.org/",
+      "tag": "4.3.2",
+      "purpose": "Pinned Collada target reader; 4.5.7 crashes importing the original HSD meshes.",
+      "license": "GPL-3.0-or-later",
+      "platforms": {
+        "win-x64": {
+          "asset": "blender-4.3.2-windows-x64.zip",
+          "url": "https://download.blender.org/release/Blender4.3/blender-4.3.2-windows-x64.zip",
+          "sha256": "933a62a770c941e316535f893629ff106ddd2aa5a956f0081ec557439073d4f6",
+          "entrypoint": "blender-4.3.2-windows-x64/blender.exe",
+          "required": [
+            "blender-4.3.2-windows-x64/blender.exe"
+          ]
+        }
+      }
     }
   },
   "unresolved": [
@@ -174,5 +433,24 @@
       "reason": "Build the authored menu helper against the pinned HSDRaw library and wire generated art inputs."
     }
   ],
-  "distribution": "Maintainers assemble runtimes; end users should not need GitHub credentials or clones. No tool/game binaries are stored in this repository."
+  "distribution": "Maintainers assemble runtimes; end users should not need GitHub credentials or clones. No tool/game binaries are stored in this repository.",
+  "geometry": {
+    "python": "geometry-python",
+    "libraries": [
+      "geometry-bpy",
+      "geometry-numpy",
+      "geometry-pillow",
+      "geometry-cattrs",
+      "geometry-attrs",
+      "geometry-cython",
+      "geometry-requests",
+      "geometry-zstandard",
+      "geometry-typing-extensions",
+      "geometry-charset-normalizer",
+      "geometry-idna",
+      "geometry-urllib3",
+      "geometry-certifi"
+    ],
+    "helpers": "cast-helpers"
+  }
 }

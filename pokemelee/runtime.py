@@ -35,7 +35,13 @@ def fetch(name, platform, output, *, github_auth=False):
     target.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".pokemelee-download-", dir=target.parent) as folder:
         archive = Path(folder) / spec["asset"]
-        if github_auth and "url" not in spec:
+        if github_auth and spec.get("github_api"):
+            with archive.open("xb") as stream:
+                result = subprocess.run(["gh", "api", spec["github_api"]], stdout=stream,
+                                        stderr=subprocess.PIPE, timeout=600)
+            if result.returncode:
+                raise ValueError(f"Could not download {name}; check access to {tool['repo']}")
+        elif github_auth and "url" not in spec:
             result = subprocess.run(["gh", "release", "download", tool["tag"], "--repo", tool["repo"],
                                      "--pattern", spec["asset"], "--dir", folder],
                                     capture_output=True, text=True, timeout=600)

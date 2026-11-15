@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "pokemon": "Wigglytuff",
+  "fighter": "Kirby",
+  "source_model": "040_Wigglytuff.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_02": "legs",
+    "Bone_08": "legs",
+    "Bone_30": "arms",
+    "Bone_34": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "pukurin_mesh_00",
+    "pukurin_mesh_01",
+    "pukurin_mesh_02",
+    "pukurin_mesh_03",
+    "pukurin_mesh_04",
+    "pukurin_mesh_05",
+    "pukurin_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_24",
+        "Bone_27"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_23"
+      ],
+      "kind": "hair",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_39",
+        "Bone_41"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "pukurin_mesh_08 / pukurin_mat_8",
+      "2": "pukurin_mesh_09 / pukurin_mat_9",
+      "3": "pukurin_mesh_10 / pukurin_mat_10",
+      "4": "pukurin_mesh_11 / pukurin_mat_11",
+      "5": "pukurin_mesh_12 / pukurin_mat_12",
+      "6": "pukurin_mesh_13 / pukurin_mat_13",
+      "7": "pukurin_mesh_14 / pukurin_mat_14"
+    },
+    "selected": [
+      1
+    ],
+    "half": [
+      {
+        "surface": 1,
+        "box": [
+          0,
+          128,
+          64,
+          86
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": []
+  }
+}

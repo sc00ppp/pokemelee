@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "pokemon": "Ralts",
+  "fighter": "Ness",
+  "source_model": "g3_ralts.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_06": "legs",
+    "Bone_21": "legs",
+    "Bone_38": "arms",
+    "Bone_43": "arms"
+  },
+  "forks": {
+    "Bone_09": null,
+    "Bone_24": null
+  },
+  "digits": [
+    "Bone_14",
+    "Bone_15",
+    "Bone_16",
+    "Bone_18",
+    "Bone_29",
+    "Bone_30",
+    "Bone_31",
+    "Bone_33"
+  ],
+  "source_drop": [
+    "ralts_mesh_00",
+    "ralts_mesh_01",
+    "ralts_mesh_02",
+    "ralts_mesh_03",
+    "ralts_mesh_04",
+    "ralts_mesh_05",
+    "ralts_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_13",
+        "Bone_28"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "ralts_mesh_09 / ralts_mat_7",
+      "2": "ralts_mesh_13 / ralts_mat_13",
+      "3": "ralts_mesh_14 / ralts_mat_14",
+      "4": "ralts_mesh_15 / ralts_mat_15",
+      "5": "ralts_mesh_16 / ralts_mat_16"
+    },
+    "selected": [
+      2
+    ],
+    "half": [
+      {
+        "surface": 2,
+        "box": [
+          25,
+          64,
+          39,
+          64
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 2,
+        "box": [
+          18,
+          141,
+          39,
+          64
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

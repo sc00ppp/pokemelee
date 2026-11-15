@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "pokemon": "Machoke",
+  "fighter": "Ganondorf",
+  "source_model": "067_Machoke.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_03": "legs",
+    "Bone_14": "legs",
+    "Bone_27": "arms",
+    "Bone_43": "arms"
+  },
+  "forks": {
+    "Bone_29": "Bone_32",
+    "Bone_33": "Bone_38",
+    "Bone_45": "Bone_48",
+    "Bone_49": "Bone_54"
+  },
+  "digits": [],
+  "source_drop": [
+    "goriky_mesh_00",
+    "goriky_mesh_01",
+    "goriky_mesh_02",
+    "goriky_mesh_03",
+    "goriky_mesh_04",
+    "goriky_mesh_05",
+    "goriky_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_61"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_71"
+      ],
+      "kind": "other",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "goriky_mesh_09 / goriky_mat_9",
+      "2": "goriky_mesh_13 / goriky_mat_13",
+      "3": "goriky_mesh_15 / goriky_mat_15",
+      "4": "goriky_mesh_16 / goriky_mat_16",
+      "5": "goriky_mesh_17 / goriky_mat_17",
+      "6": "goriky_mesh_20 / goriky_mat_20"
+    },
+    "selected": [
+      2
+    ],
+    "half": [],
+    "closed": [
+      {
+        "surface": 2,
+        "box": [
+          3,
+          200,
+          29,
+          33
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

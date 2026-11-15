@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "pokemon": "Farfetchd",
+  "fighter": "YoungLink",
+  "source_model": "083_Farfetchd.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_47": "legs",
+    "Bone_60": "legs"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "kamonegi_mesh_16",
+    "kamonegi_mesh_17",
+    "kamonegi_mesh_18",
+    "kamonegi_mesh_19",
+    "kamonegi_mesh_20",
+    "kamonegi_mesh_21",
+    "kamonegi_mesh_22"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_21"
+      ],
+      "kind": "wing",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_35"
+      ],
+      "kind": "wing",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_54"
+      ],
+      "kind": "prop",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_18"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_19"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_14"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_13"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_45"
+      ],
+      "kind": "tail",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "kamonegi_mesh_00 / kamonegi_mat_0",
+      "2": "kamonegi_mesh_03 / kamonegi_mat_3",
+      "3": "kamonegi_mesh_04 / kamonegi_mat_4",
+      "4": "kamonegi_mesh_08 / kamonegi_mat_8",
+      "5": "kamonegi_mesh_09 / kamonegi_mat_9",
+      "6": "kamonegi_mesh_10 / kamonegi_mat_10",
+      "7": "kamonegi_mesh_11 / kamonegi_mat_11",
+      "8": "kamonegi_mesh_12 / kamonegi_mat_12"
+    },
+    "selected": [
+      5
+    ],
+    "half": [
+      {
+        "surface": 5,
+        "box": [
+          32,
+          7,
+          31,
+          57
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 5,
+        "box": [
+          64,
+          7,
+          31,
+          57
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "pokemon": "Mewtwo",
+  "fighter": "Mewtwo",
+  "source_model": "150_Mewtwo.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_04": "legs",
+    "Bone_60": "legs",
+    "Bone_19": "arms",
+    "Bone_31": "arms"
+  },
+  "forks": {
+    "Bone_23": null,
+    "Bone_35": null
+  },
+  "digits": [
+    "Bone_25",
+    "Bone_26",
+    "Bone_27",
+    "Bone_39",
+    "Bone_38",
+    "Bone_37"
+  ],
+  "source_drop": [
+    "mewtwo_mesh_00",
+    "mewtwo_mesh_01",
+    "mewtwo_mesh_02",
+    "mewtwo_mesh_03",
+    "mewtwo_mesh_04",
+    "mewtwo_mesh_05",
+    "mewtwo_mesh_06"
+  ],
+  "drop": [
+    "mewtwo_mesh_20"
+  ],
+  "chains": [
+    {
+      "roots": [
+        "Bone_75"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_56"
+      ],
+      "kind": "other",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_59"
+      ],
+      "kind": "face",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "mewtwo_mesh_07 / mewtwo_mat_7",
+      "2": "mewtwo_mesh_17 / mewtwo_mat_17",
+      "3": "mewtwo_mesh_18 / mewtwo_mat_18",
+      "4": "mewtwo_mesh_19 / mewtwo_mat_19",
+      "5": "mewtwo_mesh_21 / mewtwo_mat_21"
+    },
+    "selected": [
+      5
+    ],
+    "half": [
+      {
+        "surface": 5,
+        "box": [
+          0,
+          57,
+          32,
+          41
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": []
+  }
+}

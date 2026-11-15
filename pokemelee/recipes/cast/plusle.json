@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "pokemon": "Plusle",
+  "fighter": "Pichu",
+  "source_model": "g3_prasle.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_06": "legs",
+    "Bone_15": "legs",
+    "Bone_41": "arms",
+    "Bone_47": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "prasle_mesh_16",
+    "prasle_mesh_17",
+    "prasle_mesh_18",
+    "prasle_mesh_19",
+    "prasle_mesh_20",
+    "prasle_mesh_21",
+    "prasle_mesh_22"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_35",
+        "Bone_37"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_54"
+      ],
+      "kind": "tail",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "prasle_mesh_04 / prasle_mat_1",
+      "2": "prasle_mesh_06 / prasle_mat_1",
+      "3": "prasle_mesh_07 / prasle_mat_7",
+      "4": "prasle_mesh_08 / prasle_mat_8",
+      "5": "prasle_mesh_09 / prasle_mat_9",
+      "6": "prasle_mesh_10 / prasle_mat_10",
+      "7": "prasle_mesh_13 / prasle_mat_13",
+      "8": "prasle_mesh_14 / prasle_mat_14",
+      "9": "prasle_mesh_15 / prasle_mat_14"
+    },
+    "selected": [
+      4
+    ],
+    "half": [],
+    "closed": [],
+    "fixed": {
+      "eyes": [
+        "prasle_mesh_08"
+      ],
+      "half": [
+        0,
+        48
+      ],
+      "closed": [
+        0,
+        96
+      ]
+    }
+  },
+  "source_edit": "plusle_rebind",
+  "save_mapping": true
+}

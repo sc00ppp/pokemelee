@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "pokemon": "Deoxys",
+  "fighter": "Samus",
+  "source_model": "g3_deoxys.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_008": "legs",
+    "Bone_015": "legs",
+    "Bone_062": "arms",
+    "Bone_087": "arms",
+    "Bone_034": "arms",
+    "Bone_048": "arms"
+  },
+  "forks": {
+    "Bone_040": "Bone_041",
+    "Bone_054": "Bone_055",
+    "Bone_070": null,
+    "Bone_095": null
+  },
+  "digits": [
+    "Bone_084",
+    "Bone_074",
+    "Bone_076",
+    "Bone_078",
+    "Bone_080",
+    "Bone_082",
+    "Bone_105",
+    "Bone_099",
+    "Bone_101",
+    "Bone_103",
+    "Bone_107",
+    "Bone_109"
+  ],
+  "source_drop": [
+    "deoxys_mesh_23",
+    "deoxys_mesh_24",
+    "deoxys_mesh_25",
+    "deoxys_mesh_26",
+    "deoxys_mesh_27",
+    "deoxys_mesh_28",
+    "deoxys_mesh_29"
+  ],
+  "drop": [
+    "deoxys_mesh_15"
+  ],
+  "chains": [
+    {
+      "roots": [
+        "Bone_071",
+        "Bone_096"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_045",
+        "Bone_059"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_044",
+        "Bone_058"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [
+    "tex_4CA0"
+  ],
+  "eyes": {
+    "skip": "no surface draws the eyes apart from the rest of the head"
+  }
+}

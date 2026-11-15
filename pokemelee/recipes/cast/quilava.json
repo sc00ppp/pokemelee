@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "pokemon": "Quilava",
+  "fighter": "Fox",
+  "source_model": "156_Quilava.glb",
+  "up": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "front": [
+    -0.0,
+    -0.0,
+    1.0
+  ],
+  "roles": {
+    "Bone_08": "legs",
+    "Bone_18": "legs",
+    "Bone_35": "front legs",
+    "Bone_42": "front legs"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "magmarashi_mesh_10",
+    "magmarashi_mesh_11",
+    "magmarashi_mesh_12",
+    "magmarashi_mesh_13",
+    "magmarashi_mesh_14",
+    "magmarashi_mesh_15",
+    "magmarashi_mesh_16"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_68",
+        "Bone_71"
+      ],
+      "kind": "ear",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "skip": "no surface draws the eyes apart from the rest of the head"
+  }
+}

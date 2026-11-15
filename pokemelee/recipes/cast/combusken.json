@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "pokemon": "Combusken",
+  "fighter": "Falco",
+  "source_model": "g3_wakasyamo.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    1.0,
+    -0.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_058": "legs",
+    "Bone_077": "legs",
+    "Bone_006": "arms",
+    "Bone_020": "arms"
+  },
+  "forks": {
+    "Bone_012": null,
+    "Bone_026": null,
+    "Bone_064": null,
+    "Bone_083": null
+  },
+  "digits": [
+    "Bone_013",
+    "Bone_015",
+    "Bone_018",
+    "Bone_065",
+    "Bone_070",
+    "Bone_067",
+    "Bone_072",
+    "Bone_027",
+    "Bone_029",
+    "Bone_032",
+    "Bone_084",
+    "Bone_089",
+    "Bone_086",
+    "Bone_091"
+  ],
+  "source_drop": [
+    "wakasyamo_mesh_00",
+    "wakasyamo_mesh_04",
+    "wakasyamo_mesh_08",
+    "wakasyamo_mesh_09",
+    "wakasyamo_mesh_10",
+    "wakasyamo_mesh_11",
+    "wakasyamo_mesh_12"
+  ],
+  "drop": [
+    "wakasyamo_mesh_01",
+    "wakasyamo_mesh_02",
+    "wakasyamo_mesh_03",
+    "wakasyamo_mesh_05",
+    "wakasyamo_mesh_06",
+    "wakasyamo_mesh_07"
+  ],
+  "chains": [
+    {
+      "roots": [
+        "Bone_054"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_048"
+      ],
+      "kind": "hair",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_044"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "wakasyamo_mesh_22 / wakasyamo_mat_22",
+      "2": "wakasyamo_mesh_26 / wakasyamo_mat_26",
+      "3": "wakasyamo_mesh_27 / wakasyamo_mat_27",
+      "4": "wakasyamo_mesh_36 / wakasyamo_mat_36",
+      "5": "wakasyamo_mesh_37 / wakasyamo_mat_37",
+      "6": "wakasyamo_mesh_40 / wakasyamo_mat_40"
+    },
+    "selected": [
+      2
+    ],
+    "half": [
+      {
+        "surface": 2,
+        "box": [
+          7,
+          211,
+          25,
+          62
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 2,
+        "box": [
+          0,
+          299,
+          25,
+          62
+        ],
+        "mirrored": true
+      }
+    ],
+    "fixed": {
+      "half": [
+        0,
+        216
+      ],
+      "closed": [
+        0,
+        288
+      ]
+    }
+  }
+}

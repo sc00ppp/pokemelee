@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "pokemon": "UnownX",
+  "fighter": "GameAndWatch",
+  "source_model": "g3_unknown_x.glb",
+  "construction": "hand_unownx.py"
+}

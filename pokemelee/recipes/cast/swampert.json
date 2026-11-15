@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "pokemon": "Swampert",
+  "fighter": "DonkeyKong",
+  "source_model": "g3_laglarge.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_60": "legs",
+    "Bone_67": "legs",
+    "Bone_09": "arms",
+    "Bone_23": "arms"
+  },
+  "forks": {
+    "Bone_15": null,
+    "Bone_27": null
+  },
+  "digits": [
+    "Bone_16",
+    "Bone_21",
+    "Bone_30",
+    "Bone_32",
+    "Bone_35"
+  ],
+  "source_drop": [
+    "laglarge_mesh_13",
+    "laglarge_mesh_14",
+    "laglarge_mesh_15",
+    "laglarge_mesh_16",
+    "laglarge_mesh_17",
+    "laglarge_mesh_18",
+    "laglarge_mesh_19"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_47"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_52",
+        "Bone_56"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_74"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_51"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_18"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_49",
+        "Bone_50"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_46"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "body_fix": {
+    "skull": "Bone_40"
+  },
+  "eyes": {
+    "surfaces": {
+      "1": "laglarge_mesh_01 / laglarge_mat_1",
+      "2": "laglarge_mesh_03 / laglarge_mat_3",
+      "3": "laglarge_mesh_04 / laglarge_mat_4",
+      "4": "laglarge_mesh_05 / laglarge_mat_5",
+      "5": "laglarge_mesh_06 / laglarge_mat_6",
+      "6": "laglarge_mesh_11 / laglarge_mat_11",
+      "7": "laglarge_mesh_12 / laglarge_mat_12"
+    },
+    "selected": [
+      4
+    ],
+    "half": [],
+    "closed": []
+  },
+  "source_edit": "swampert_straighten"
+}

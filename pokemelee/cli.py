@@ -32,6 +32,23 @@ def parser():
     art.add_argument("--index", action="append", help="Internal species art index; default: full cast")
     sub.add_parser("plan", help="Show the accepted cast, stages, and unresolved build steps")
     sub.add_parser("tools", help="Show exact native runtime pins")
+    geometry = sub.add_parser("setup-geometry", help="Install the pinned offline character converter")
+    geometry.add_argument("--runtime", default="runtime")
+    geometry.add_argument("--github-auth", action="store_true")
+    targets = sub.add_parser("melee-targets", help="Generate the accepted cast's Melee targets from the original disc")
+    targets.add_argument("--melee", required=True)
+    targets.add_argument("--out", required=True)
+    targets.add_argument("--runtime", default="runtime")
+    targets.add_argument("--hsd")
+    targets.add_argument("--blender")
+    cast = sub.add_parser("cast", help="Replay the verified character recipes from regenerated disc components")
+    for name in ("colosseum", "models", "targets", "out"):
+        cast.add_argument("--" + name, required=True)
+    cast.add_argument("--runtime", default="runtime")
+    cast.add_argument("--pokemon", action="append")
+    cast.add_argument("--hsd")
+    cast.add_argument("--blender")
+    cast.add_argument("--jobs", type=int, default=2)
     native = sub.add_parser("compile-stages", help="Compile the authored stage helpers against the pinned HSDRaw runtime")
     native.add_argument("--runtime", default="runtime")
     stages = sub.add_parser("stages", help="Rebuild the approved stages directly from the two source discs")
@@ -85,6 +102,16 @@ def parser():
 
 
 def run(args):
+    if args.command == "cast":
+        from .cast import build_cast
+        return build_cast(Disc(args.colosseum, "colosseum"), args.models, args.targets, args.out, args.runtime,
+                          args.pokemon, hsd=args.hsd, blender=args.blender, jobs=args.jobs)
+    if args.command == "setup-geometry":
+        from .geometry import setup_geometry
+        return setup_geometry(args.runtime, github_auth=args.github_auth)
+    if args.command == "melee-targets":
+        from .targets import prepare_targets
+        return prepare_targets(Disc(args.melee, "melee"), args.out, args.runtime, hsd=args.hsd, blender=args.blender)
     if args.command == "compile-audio":
         from .audio_tools import compile_audio
         compile_audio(args.runtime)
@@ -133,6 +160,9 @@ def run(args):
             target = Path(args.out) / name / args.platform
             result = fetch(name, args.platform, target, github_auth=args.github_auth)
             results[name] = {"path": str(target.resolve()), "files": len(result["outputs"]), "sha256": result["inputs"]["sha256"]}
+        if args.tool == "all" and args.platform == "win-x64":
+            from .geometry import configure_geometry
+            configure_geometry(args.out)
         return results
     if args.command == "package":
         from .export import export_artifacts

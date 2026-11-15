@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "pokemon": "Jigglypuff",
+  "fighter": "Jigglypuff",
+  "source_model": "039_Jigglypuff.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_09": "legs",
+    "Bone_13": "legs"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "purin_mesh_00",
+    "purin_mesh_01",
+    "purin_mesh_02",
+    "purin_mesh_03",
+    "purin_mesh_04",
+    "purin_mesh_05",
+    "purin_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_19",
+        "Bone_20"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_21"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_25"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "skip": "no surface draws the eyes apart from the rest of the head"
+  }
+}

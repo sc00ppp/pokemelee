@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "pokemon": "Alakazam",
+  "fighter": "Zelda",
+  "source_model": "065_Alakazam.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_55": "legs",
+    "Bone_64": "legs",
+    "Bone_07": "arms",
+    "Bone_23": "arms"
+  },
+  "forks": {
+    "Bone_11": null,
+    "Bone_27": null,
+    "Bone_58": null,
+    "Bone_67": null
+  },
+  "digits": [
+    "Bone_18",
+    "Bone_16",
+    "Bone_61",
+    "Bone_62",
+    "Bone_29",
+    "Bone_34",
+    "Bone_72",
+    "Bone_70"
+  ],
+  "source_drop": [
+    "foodin_mesh_25",
+    "foodin_mesh_26",
+    "foodin_mesh_27",
+    "foodin_mesh_28",
+    "foodin_mesh_29",
+    "foodin_mesh_30",
+    "foodin_mesh_31"
+  ],
+  "drop": [
+    "foodin_mesh_23",
+    "foodin_mesh_24"
+  ],
+  "chains": [
+    {
+      "roots": [
+        "Bone_47",
+        "Bone_51"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_13",
+        "Bone_31"
+      ],
+      "kind": "prop",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "foodin_mesh_06 / foodin_mat_6",
+      "2": "foodin_mesh_07 / foodin_mat_7",
+      "3": "foodin_mesh_08 / foodin_mat_8",
+      "4": "foodin_mesh_09 / foodin_mat_9",
+      "5": "foodin_mesh_10 / foodin_mat_10",
+      "6": "foodin_mesh_11 / foodin_mat_11",
+      "7": "foodin_mesh_12 / foodin_mat_12",
+      "8": "foodin_mesh_13 / foodin_mat_13",
+      "9": "foodin_mesh_14 / foodin_mat_14"
+    },
+    "selected": [
+      4
+    ],
+    "half": [],
+    "closed": []
+  }
+}

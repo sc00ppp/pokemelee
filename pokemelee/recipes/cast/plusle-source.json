@@ -1,0 +1,13 @@
+{
+  "pokemon": "plusle",
+  "source_model": "g3_prasle.glb",
+  "source_drop": [
+    "prasle_mesh_16",
+    "prasle_mesh_17",
+    "prasle_mesh_18",
+    "prasle_mesh_19",
+    "prasle_mesh_20",
+    "prasle_mesh_21",
+    "prasle_mesh_22"
+  ]
+}

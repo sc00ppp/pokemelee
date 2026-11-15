@@ -17,7 +17,7 @@
     "interactive_authoring": false,
     "offline_after_tool_setup": true,
     "rigswap_application_required": false,
-    "blender": "pinned automatic headless 4.5.7 converter for the original Colosseum model reader; no interactive authoring"
+    "blender": "Pinned automatic offline converters: 4.3.2 for Melee target reading, 4.5.7 for Colosseum/glTF-Collada conversion, bpy 5.2.2 for fixed character recipes; no interactive authoring"
   },
   "steps": [
     {
@@ -40,9 +40,11 @@
     },
     {
       "id": "cast-models",
-      "state": "needs-recipe-conversion",
+      "state": "partially-verified",
       "source": "round_cast.sh, hand_finish.py and per-character hand scripts",
-      "remaining": "Preserve the accepted 25 fighters and two pairs as fixed source-to-target mappings, transforms, weighting rules and material/edit recipes applied to assets extracted from the two ISOs. Recover existing authoring choices; do not rerun LLM authoring or rigging decisions. Reuse only needed deterministic conversion helpers, with any required native converter pinned and bundled."
+      "remaining": "Finish Quilava, Machoke, Deoxys, Scyther, Pikachu and Smoochum; integrate and verify both partner workflows. All ordinary recipes use disc-derived models and saved decisions only.",
+      "implementation": "pokemelee.targets, pokemelee.cast, recipes/cast-finishing.json, native/cast",
+      "result": "20 regular costumes verified through the standalone builder against the accepted exports; Plusle, Minun and Jynx also match in isolated recipe checks."
     },
     {
       "id": "stages",

@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "pokemon": "Sceptile",
+  "fighter": "Sheik",
+  "source_model": "g3_jukain.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_20": "legs",
+    "Bone_35": "legs",
+    "Bone_61": "arms",
+    "Bone_74": "arms"
+  },
+  "forks": {
+    "Bone_64": null,
+    "Bone_61": "Bone_64",
+    "Bone_77": null,
+    "Bone_74": "Bone_77"
+  },
+  "digits": [
+    "Bone_66",
+    "Bone_67",
+    "Bone_68",
+    "Bone_79",
+    "Bone_81",
+    "Bone_80"
+  ],
+  "source_drop": [
+    "jukain_mesh_21",
+    "jukain_mesh_22",
+    "jukain_mesh_23",
+    "jukain_mesh_24",
+    "jukain_mesh_25",
+    "jukain_mesh_26",
+    "jukain_mesh_27"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_51"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_96",
+        "Bone_97"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_98",
+        "Bone_99"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_93"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_70",
+        "Bone_83"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_71",
+        "Bone_84"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_94"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_95"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "jukain_mesh_00 / jukain_mat_0",
+      "2": "jukain_mesh_01 / jukain_mat_0",
+      "3": "jukain_mesh_04 / jukain_mat_4",
+      "4": "jukain_mesh_05 / jukain_mat_5",
+      "5": "jukain_mesh_08 / jukain_mat_8",
+      "6": "jukain_mesh_10 / jukain_mat_10",
+      "7": "jukain_mesh_11 / jukain_mat_11",
+      "8": "jukain_mesh_12 / jukain_mat_12",
+      "9": "jukain_mesh_20 / jukain_mat_20",
+      "10": "jukain_mesh_28 / jukain_mat_28",
+      "11": "jukain_mesh_29 / jukain_mat_29"
+    },
+    "selected": [
+      5
+    ],
+    "half": [
+      {
+        "surface": 5,
+        "box": [
+          9,
+          58,
+          55,
+          38
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 5,
+        "box": [
+          9,
+          106,
+          55,
+          38
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

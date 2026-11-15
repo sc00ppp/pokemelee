@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "pokemon": "Kecleon",
+  "fighter": "Yoshi",
+  "source_model": "g3_kakureon.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_005": "legs",
+    "Bone_018": "legs",
+    "Bone_042": "arms",
+    "Bone_054": "arms"
+  },
+  "forks": {
+    "Bone_008": null,
+    "Bone_021": null,
+    "Bone_045": null,
+    "Bone_057": null
+  },
+  "digits": [
+    "Bone_010",
+    "Bone_011",
+    "Bone_012",
+    "Bone_047",
+    "Bone_048",
+    "Bone_049",
+    "Bone_023",
+    "Bone_024",
+    "Bone_025",
+    "Bone_059",
+    "Bone_060",
+    "Bone_061"
+  ],
+  "source_drop": [
+    "kakureon_mesh_00",
+    "kakureon_mesh_01",
+    "kakureon_mesh_21",
+    "kakureon_mesh_22",
+    "kakureon_mesh_23",
+    "kakureon_mesh_24",
+    "kakureon_mesh_25"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_105"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_093"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_082"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_079"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_036",
+        "Bone_039"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_069"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_075"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_077"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_070"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_072"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_071"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_074"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_078"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_073"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_076"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "kakureon_mesh_02 / kakureon_mat_2",
+      "2": "kakureon_mesh_03 / kakureon_mat_2",
+      "3": "kakureon_mesh_06 / kakureon_mat_6",
+      "4": "kakureon_mesh_11 / kakureon_mat_9",
+      "5": "kakureon_mesh_12 / kakureon_mat_9",
+      "6": "kakureon_mesh_14 / kakureon_mat_14",
+      "7": "kakureon_mesh_15 / kakureon_mat_15",
+      "8": "kakureon_mesh_16 / kakureon_mat_15",
+      "9": "kakureon_mesh_17 / kakureon_mat_15",
+      "10": "kakureon_mesh_26 / kakureon_mat_26",
+      "11": "kakureon_mesh_27 / kakureon_mat_27"
+    },
+    "selected": [
+      3
+    ],
+    "half": [],
+    "closed": []
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": 1,
+  "pokemon": "Gardevoir",
+  "fighter": "Peach",
+  "source_model": "g3_sirnight.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_005": "legs",
+    "Bone_014": "legs",
+    "Bone_050": "arms",
+    "Bone_061": "arms"
+  },
+  "forks": {
+    "Bone_055": "Bone_056",
+    "Bone_066": "Bone_070"
+  },
+  "digits": [],
+  "source_drop": [
+    "sirnight_mesh_00",
+    "sirnight_mesh_01",
+    "sirnight_mesh_02",
+    "sirnight_mesh_03",
+    "sirnight_mesh_04",
+    "sirnight_mesh_05",
+    "sirnight_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_036",
+        "Bone_044"
+      ],
+      "kind": "cloth",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_023"
+      ],
+      "kind": "cloth",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_032",
+        "Bone_040"
+      ],
+      "kind": "cloth",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_078",
+        "Bone_080"
+      ],
+      "kind": "hair",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_082"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_058",
+        "Bone_069"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_059",
+        "Bone_067"
+      ],
+      "kind": null,
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [
+    "tex_3DC8"
+  ],
+  "eyes": {
+    "surfaces": {
+      "1": "sirnight_mesh_14 / sirnight_mat_14",
+      "2": "sirnight_mesh_15 / sirnight_mat_15",
+      "3": "sirnight_mesh_16 / sirnight_mat_16",
+      "4": "sirnight_mesh_22 / sirnight_mat_22",
+      "5": "sirnight_mesh_23 / sirnight_mat_23",
+      "6": "sirnight_mesh_24 / sirnight_mat_24",
+      "7": "sirnight_mesh_25 / sirnight_mat_25",
+      "8": "sirnight_mesh_26 / sirnight_mat_26"
+    },
+    "selected": [
+      7
+    ],
+    "half": [],
+    "closed": [],
+    "fixed": {
+      "eyes": [
+        "sirnight_mesh_25"
+      ],
+      "uv": 1,
+      "band": 96,
+      "wrap": "mirror",
+      "open": [
+        0,
+        288
+      ],
+      "half": [
+        0,
+        96
+      ],
+      "closed": [
+        0,
+        0
+      ],
+      "still": {
+        "columns": [
+          0,
+          64
+        ],
+        "at": [
+          0,
+          0
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "pokemon": "Magmar",
+  "fighter": "Mario",
+  "source_model": "126_Magmar.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_060_Additional1": "legs",
+    "Bone_074": "legs",
+    "Bone_012": "arms",
+    "Bone_023": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "boober_mesh_13",
+    "boober_mesh_14",
+    "boober_mesh_15",
+    "boober_mesh_16",
+    "boober_mesh_17",
+    "boober_mesh_18",
+    "boober_mesh_19"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_043"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_039",
+        "Bone_047"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_088"
+      ],
+      "kind": "tail",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "boober_mesh_00 / boober_mat_0",
+      "2": "boober_mesh_01 / boober_mat_1",
+      "3": "boober_mesh_03 / boober_mat_3",
+      "4": "boober_mesh_05 / boober_mat_5",
+      "5": "boober_mesh_06 / boober_mat_6",
+      "6": "boober_mesh_07 / boober_mat_7",
+      "7": "boober_mesh_11 / boober_mat_11"
+    },
+    "selected": [
+      1
+    ],
+    "half": [],
+    "closed": []
+  }
+}

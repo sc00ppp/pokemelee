@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "pokemon": "Scyther",
+  "fighter": "Link",
+  "source_model": "123_Scyther.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_34": "legs",
+    "Bone_40": "legs",
+    "Bone_04": "arms",
+    "Bone_09": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "strike_mesh_13",
+    "strike_mesh_14",
+    "strike_mesh_15",
+    "strike_mesh_16",
+    "strike_mesh_17",
+    "strike_mesh_18",
+    "strike_mesh_19"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_32"
+      ],
+      "kind": "face",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_15",
+        "Bone_22"
+      ],
+      "kind": "wing",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_18",
+        "Bone_19"
+      ],
+      "kind": "wing",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_25"
+      ],
+      "kind": "face",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "body_fix": {
+    "skull": "Bone_24"
+  },
+  "eyes": {
+    "skip": "failed: TypeError: only integer scalar arrays can be converted to a scalar index"
+  }
+}

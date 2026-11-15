@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "pokemon": "Blaziken",
+  "fighter": "CaptainFalcon",
+  "source_model": "g3_bursyamo.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_016": "legs",
+    "Bone_029": "legs",
+    "Bone_046_Additional2": "arms",
+    "Bone_065": "arms"
+  },
+  "forks": {
+    "Bone_019": null,
+    "Bone_018": "Bone_019",
+    "Bone_032": null,
+    "Bone_031": "Bone_032",
+    "Bone_052": null,
+    "Bone_048": "Bone_052",
+    "Bone_071": null,
+    "Bone_067": "Bone_071"
+  },
+  "digits": [
+    "Bone_020",
+    "Bone_055",
+    "Bone_058",
+    "Bone_061",
+    "Bone_033",
+    "Bone_074",
+    "Bone_077",
+    "Bone_080"
+  ],
+  "source_drop": [
+    "bursyamo_mesh_01",
+    "bursyamo_mesh_04",
+    "bursyamo_mesh_07",
+    "bursyamo_mesh_09",
+    "bursyamo_mesh_10",
+    "bursyamo_mesh_11",
+    "bursyamo_mesh_12"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_051",
+        "Bone_070"
+      ],
+      "kind": null,
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_023",
+        "Bone_036"
+      ],
+      "kind": "body",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_087",
+        "Bone_090"
+      ],
+      "kind": "hair",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_099"
+      ],
+      "kind": "hair",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_027",
+        "Bone_040_Additional3"
+      ],
+      "kind": "other",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_101"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_086"
+      ],
+      "kind": "face",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "bursyamo_mesh_21 / bursyamo_mat_21",
+      "2": "bursyamo_mesh_22 / bursyamo_mat_22",
+      "3": "bursyamo_mesh_23 / bursyamo_mat_23",
+      "4": "bursyamo_mesh_24 / bursyamo_mat_24",
+      "5": "bursyamo_mesh_25 / bursyamo_mat_25",
+      "6": "bursyamo_mesh_26 / bursyamo_mat_26",
+      "7": "bursyamo_mesh_27 / bursyamo_mat_27",
+      "8": "bursyamo_mesh_37 / bursyamo_mat_37"
+    },
+    "selected": [
+      5
+    ],
+    "half": [],
+    "closed": [],
+    "fixed": {
+      "half": [
+        0,
+        64
+      ],
+      "closed": [
+        0,
+        128
+      ]
+    }
+  }
+}

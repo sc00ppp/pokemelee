@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "pokemon": "Pichu",
+  "fighter": "Pichu",
+  "source_model": "172_Pichu.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_27": "legs",
+    "Bone_34": "legs",
+    "Bone_04": "arms",
+    "Bone_10": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "pichu_mesh_00",
+    "pichu_mesh_01",
+    "pichu_mesh_02",
+    "pichu_mesh_03",
+    "pichu_mesh_04",
+    "pichu_mesh_05",
+    "pichu_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_25",
+        "Bone_26"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_41"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_23",
+        "Bone_24"
+      ],
+      "kind": "face",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "pichu_mesh_09 / pichu_mat_7",
+      "2": "pichu_mesh_13 / pichu_mat_13",
+      "3": "pichu_mesh_14 / pichu_mat_14",
+      "4": "pichu_mesh_15 / pichu_mat_15",
+      "5": "pichu_mesh_16 / pichu_mat_16",
+      "6": "pichu_mesh_17 / pichu_mat_17",
+      "7": "pichu_mesh_18 / pichu_mat_18"
+    },
+    "selected": [
+      2
+    ],
+    "half": [
+      {
+        "surface": 2,
+        "box": [
+          0,
+          51,
+          47,
+          37
+        ],
+        "mirrored": true
+      }
+    ],
+    "closed": [
+      {
+        "surface": 2,
+        "box": [
+          0,
+          32,
+          64,
+          17
+        ],
+        "mirrored": false
+      },
+      {
+        "surface": 2,
+        "box": [
+          0,
+          45,
+          64,
+          17
+        ],
+        "mirrored": false
+      },
+      {
+        "surface": 2,
+        "box": [
+          0,
+          79,
+          64,
+          17
+        ],
+        "mirrored": false
+      },
+      {
+        "surface": 2,
+        "box": [
+          0,
+          92,
+          64,
+          17
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

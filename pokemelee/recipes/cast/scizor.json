@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "pokemon": "Scizor",
+  "fighter": "Marth",
+  "source_model": "212_Scizor.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_16": "legs",
+    "Bone_73": "legs",
+    "Bone_31": "arms",
+    "Bone_52": "arms"
+  },
+  "forks": {
+    "Bone_18": null,
+    "Bone_75": null
+  },
+  "digits": [
+    "Bone_27",
+    "Bone_76"
+  ],
+  "source_drop": [
+    "hassam_mesh_14",
+    "hassam_mesh_15",
+    "hassam_mesh_16",
+    "hassam_mesh_17",
+    "hassam_mesh_18",
+    "hassam_mesh_19",
+    "hassam_mesh_20"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_65",
+        "Bone_69"
+      ],
+      "kind": "wing",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_19",
+        "Bone_84"
+      ],
+      "kind": "body",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "hassam_mesh_00 / hassam_mat_0",
+      "2": "hassam_mesh_01 / hassam_mat_1",
+      "3": "hassam_mesh_05 / hassam_mat_5"
+    },
+    "selected": [
+      1
+    ],
+    "half": [
+      {
+        "surface": 1,
+        "box": [
+          3,
+          48,
+          29,
+          38
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": [
+      {
+        "surface": 2,
+        "box": [
+          12,
+          115,
+          20,
+          53
+        ],
+        "mirrored": false
+      }
+    ]
+  }
+}

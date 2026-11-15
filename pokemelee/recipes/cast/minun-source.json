@@ -1,0 +1,13 @@
+{
+  "pokemon": "minun",
+  "source_model": "g3_minun.glb",
+  "source_drop": [
+    "minun_mesh_16",
+    "minun_mesh_17",
+    "minun_mesh_18",
+    "minun_mesh_19",
+    "minun_mesh_20",
+    "minun_mesh_21",
+    "minun_mesh_22"
+  ]
+}

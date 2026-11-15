@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "pokemon": "Minun",
+  "fighter": "Pichu",
+  "source_model": "g3_minun.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_07": "legs",
+    "Bone_16": "legs",
+    "Bone_42": "arms",
+    "Bone_48": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "minun_mesh_16",
+    "minun_mesh_17",
+    "minun_mesh_18",
+    "minun_mesh_19",
+    "minun_mesh_20",
+    "minun_mesh_21",
+    "minun_mesh_22"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_36",
+        "Bone_38"
+      ],
+      "kind": "ear",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_55"
+      ],
+      "kind": "tail",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "minun_mesh_04 / minun_mat_1",
+      "2": "minun_mesh_06 / minun_mat_1",
+      "3": "minun_mesh_07 / minun_mat_7",
+      "4": "minun_mesh_08 / minun_mat_8",
+      "5": "minun_mesh_09 / minun_mat_9",
+      "6": "minun_mesh_10 / minun_mat_10",
+      "7": "minun_mesh_11 / minun_mat_11",
+      "8": "minun_mesh_12 / minun_mat_12",
+      "9": "minun_mesh_13 / minun_mat_12"
+    },
+    "selected": [
+      4
+    ],
+    "half": [],
+    "closed": [],
+    "fixed": {
+      "eyes": [
+        "minun_mesh_08"
+      ],
+      "half": [
+        0,
+        48
+      ],
+      "closed": [
+        0,
+        96
+      ]
+    }
+  },
+  "source_edit": "plusle_rebind",
+  "save_mapping": true
+}

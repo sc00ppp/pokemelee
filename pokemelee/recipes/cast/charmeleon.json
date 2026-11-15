@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "pokemon": "Charmeleon",
+  "fighter": "Roy",
+  "source_model": "005_Charmeleon.glb",
+  "up": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "front": [
+    -0.0,
+    -1.0,
+    -0.0
+  ],
+  "roles": {
+    "Bone_03": "legs",
+    "Bone_23": "legs",
+    "Bone_48": "arms",
+    "Bone_58": "arms"
+  },
+  "forks": {},
+  "digits": [],
+  "source_drop": [
+    "lizardo_mesh_00",
+    "lizardo_mesh_01",
+    "lizardo_mesh_02",
+    "lizardo_mesh_03",
+    "lizardo_mesh_04",
+    "lizardo_mesh_05",
+    "lizardo_mesh_06"
+  ],
+  "drop": [],
+  "chains": [
+    {
+      "roots": [
+        "Bone_14"
+      ],
+      "kind": "tail",
+      "held_out": false
+    },
+    {
+      "roots": [
+        "Bone_38"
+      ],
+      "kind": "face",
+      "held_out": false
+    }
+  ],
+  "equipment": {},
+  "opaque": [],
+  "eyes": {
+    "surfaces": {
+      "1": "lizardo_mesh_08 / lizardo_mat_8",
+      "2": "lizardo_mesh_10 / lizardo_mat_10",
+      "3": "lizardo_mesh_12 / lizardo_mat_12",
+      "4": "lizardo_mesh_13 / lizardo_mat_13",
+      "5": "lizardo_mesh_16 / lizardo_mat_16"
+    },
+    "selected": [
+      1
+    ],
+    "half": [
+      {
+        "surface": 1,
+        "box": [
+          1,
+          48,
+          31,
+          38
+        ],
+        "mirrored": false
+      }
+    ],
+    "closed": []
+  }
+}
