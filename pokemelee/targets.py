@@ -35,10 +35,11 @@ def prepare_targets(melee, output, runtime, *, hsd=None, blender=None):
         # fighter. Keep neutral costumes, move tables and animation archives.
         names = {"PlCo.dat"}
         codes = ("Mr", "Dr", "Lg", "Kp", "Pe", "Ca", "Gn", "Fx", "Fc", "Ss", "Zd",
-                 "Sk", "Lk", "Dk", "Cl", "Kb", "Ys", "Fe", "Ns", "Ms", "Gw", "Pk", "Pr", "Mt", "Pc")
+                 "Sk", "Lk", "Dk", "Cl", "Kb", "Ys", "Fe", "Ns", "Ms", "Gw", "Pk", "Pr", "Mt", "Pc", "Pp", "Nn")
         for code in codes:
             names.update("Pl" + code + suffix for suffix in (".dat", "Nr.dat", "AJ.dat"))
         sources = [write_blob(root, "files/" + name, melee.read(name)) for name in sorted(names)]
+        env["POKEMELEE_CAST_WORK"] = str(root)
         write_json(root / "job.json", {"files": str(files), "targets": str(targets),
                                       "fighters": ["GameAndWatch" if f["pokemon"] == "UnownX" else
                                                    f["fighter"].replace(" ", "").replace(".", "") for f in fighters]})

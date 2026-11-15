@@ -15,15 +15,17 @@ Once the tools are installed, the build must work offline.
 **Status: repository preparation is underway; the complete two-ISO build is not
 ready yet.** Disc extraction, stock/fallback menu-icon generation, and all six
 stages in both versions, all 29 source models, fighter/announcer cries, menu
-sounds and music work. Twenty regular character costumes now also rebuild
-through the standalone converter and match the accepted exports exactly.
-Plusle, Minun and Jynx match in isolated recipe checks; partner integration and
-the remaining six character recipes are still being completed.
+sounds and music work. All 29 character recipes now rebuild in an empty work
+folder through the standalone offline converter. Twenty-seven final exports are
+byte-identical; Pikachu and Scyther retain the original authored recipes
+with the small conversion/packing differences recorded in `cast-finishing.json`.
+All 54 rendered character-select tiles (27 per profile) also match the accepted
+images pixel for pixel. The three Colosseum menu source images rebuild exactly.
 All 22 stage files rebuilt from the original discs
 match the normal Cast Test 30 and AniMelee Test 23 references byte for byte.
-The old Cast Test 30 assembler still depends on generated portrait/menu caches
-and Nucleus project services. Those remaining steps must become standalone
-recipes before this is an end-user builder.
+The standalone assembler now installs the regenerated cast, paired slots,
+team colors, menus and playlists through pinned MexCLI. Its full integration
+check is underway, including generated costume portraits and stage pictures.
 `build` currently fails with the remaining steps and writes no ISO.
 
 ## Dependencies live in their own repositories
@@ -39,6 +41,8 @@ recipes before this is an end-user builder.
 | Python 3.13.3 + bpy 5.2.2 | Official Python/PyPI distributions, pinned in the lockfile | Isolated character recipe runtime |
 | GameCube model reader | [Blender-Addon-Gamecube-Models](https://github.com/StarsMmd/Blender-Addon-Gamecube-Models) | Read Colosseum models with the original converter |
 | MusyX | [musyx](https://github.com/AxioDL/musyx) | Render disc-supplied songs and sound effects |
+| Slippi Dolphin 3.6.4 | [Ishiiruka](https://github.com/project-slippi/Ishiiruka) | Automatically render stage-select pictures in an isolated offline profile |
+| GNU PowerPC binutils 2.42 | [gc-wii-binutils](https://github.com/encounter/gc-wii-binutils) | Assemble the existing pair behavior and menu compatibility code |
 
 **No fork code is copied into this repo.** `pokemelee/dependencies.lock.json`
 links to exact release tags, filenames and SHA-256 checksums. Setup downloads

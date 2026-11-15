@@ -400,6 +400,7 @@ if '--sole-clearance' in sys.argv:
     sys.exit(0)
 
 S,src,atlas=read_source()
+(H/'source-geometry.json').write_text(json.dumps({'objects':src}),encoding='utf-8')
 RINGS={}
 for bone in (43,44,36,37):
     pts=[p for data in src.values() for p,w in zip(data['co'],data['weights']) if w.get(bone,0)>.99]
@@ -434,7 +435,8 @@ for name,data in src.items():
         for node in mat.node_tree.nodes:
             if node.type=='TEX_IMAGE': node.extension='EXTEND'
 separate_arms()
-lids(src,atlas)
+if '--prepare-eye-surface' not in sys.argv:
+    lids(src,atlas)
 flames()
 (B/'loose.json').write_text(json.dumps({'attribute':'rigswap_loose','chains':[]}),encoding='utf-8')
 for ob in bpy.data.objects:

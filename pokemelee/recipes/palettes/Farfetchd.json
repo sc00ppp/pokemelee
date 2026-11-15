@@ -1,0 +1,194 @@
+{
+ "_about": "Farfetchd: tan body and cream belly (0x31a0), tan wings (0x7e00) with cream tips (0x680), tan head (0x9e40, with eyes and dark brow) and crest (0x2300), yellow beak (0x6ea0, 0x6720) and legs (0x5320), leek 0x4d00 (kept). 0x19c0 and 0x2580 are unseen.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#b49173",
+    "#bb9977",
+    "#aa8866",
+    "#bda58b",
+    "#785828",
+    "#483818"
+   ],
+   "out": [
+    "0x9e40",
+    "0x2300",
+    "blink",
+    "0x4d00",
+    "0x19c0",
+    "0x2580"
+   ]
+  },
+  "head": {
+   "colours": [
+    "#b49173",
+    "#bb9977",
+    "#aa8866",
+    "#9c815a",
+    "#dec2a4"
+   ],
+   "in": [
+    "0x9e40",
+    "0x2300",
+    "blink"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#fff2de",
+    "#eeeedd",
+    "#ffffdd",
+    "#eeddbb"
+   ],
+   "in": [
+    "0x31a0",
+    "stock"
+   ]
+  },
+  "wingtip": {
+   "colours": [
+    "#f6f6de"
+   ],
+   "in": [
+    "0x680"
+   ],
+   "bias": 1
+  },
+  "brow": {
+   "colours": [
+    "#4a4431",
+    "#444422",
+    "#100c00",
+    "#887755"
+   ],
+   "in": [
+    "0x9e40",
+    "blink"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#ffffff",
+    "#eeeeee",
+    "#dddddd"
+   ],
+   "in": [
+    "0x9e40",
+    "blink"
+   ]
+  },
+  "beak": {
+   "colours": [
+    "#debe39",
+    "#bd9541",
+    "#e6d67b"
+   ],
+   "in": [
+    "0x6ea0",
+    "0x6720"
+   ],
+   "bias": 1
+  },
+  "legs": {
+   "colours": [
+    "#debe39",
+    "#a48500"
+   ],
+   "in": [
+    "0x5320"
+   ],
+   "bias": 1
+  },
+  "stockyellow": {
+   "colours": [
+    "#debe39",
+    "#bd9541"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "stockleek": {
+   "colours": [
+    "#688858",
+    "#385848"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "cardinal (cardinal red): cardinal-red body and crest, black brow mask, blush-white belly, deep burgundy wing tips, coral-orange beak and legs",
+  "body": {
+   "base": "#c41e2c",
+   "shadow": "#560a18",
+   "light": "#ff6450"
+  },
+  "head": {
+   "base": "#c41e2c",
+   "shadow": "#560a18",
+   "light": "#ff6450"
+  },
+  "brow": "#0e0a0a",
+  "belly": [
+   "#f8e6e2",
+   0.35
+  ],
+  "wingtip": "#5a1220",
+  "beak": "#ff7a2e",
+  "legs": "#e8603a",
+  "stockyellow": "#ff7a2e"
+ },
+ "blue": {
+  "_note": "blue jay (sky-cobalt blue): sky-cobalt body and crest, black brow, white belly and wing tips, charcoal beak, slate legs",
+  "body": {
+   "base": "#4f86e0",
+   "shadow": "#1c2f80",
+   "light": "#a8d4ff"
+  },
+  "head": {
+   "base": "#4f86e0",
+   "shadow": "#1c2f80",
+   "light": "#a8d4ff"
+  },
+  "brow": "#0c0e14",
+  "belly": [
+   "#f2f5fa",
+   0.35
+  ],
+  "wingtip": "#fbfdff",
+  "beak": "#33343c",
+  "legs": "#5c6474",
+  "stockyellow": "#33343c"
+ },
+ "green": {
+  "_note": "mallard (bottle green head, olive body): iridescent bottle-green head and crest, moss-olive body, pale grey belly, white wing tips, yellow bill kept, orange feet",
+  "head": {
+   "base": "#1c5a36",
+   "shadow": "#0a2418",
+   "light": "#2a9a7a"
+  },
+  "body": {
+   "base": "#6c8a3a",
+   "shadow": "#2e4218",
+   "light": "#b4c86a"
+  },
+  "belly": [
+   "#dcdfd4",
+   0.35
+  ],
+  "wingtip": "#fafaf4",
+  "legs": "#f2862a",
+  "brow": "#0c140e"
+ }
+}

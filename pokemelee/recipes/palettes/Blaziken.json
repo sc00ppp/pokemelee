@@ -1,0 +1,102 @@
+{
+ "_about": "Blaziken: red body, cream hair and chest, yellow leg flares and belly mark, grey claws; eyes in the face texture 0xe0 (yellow sclera, blue iris).",
+ "zones": {
+  "body": [
+   "#e63d3a",
+   "#c02a20",
+   "#8c1e17",
+   "#531c11",
+   "#ef7b7b",
+   "#de7373",
+   "#ce6363",
+   "#e68c8c"
+  ],
+  "flare": {
+   "colours": [
+    "#fed506",
+    "#eba816"
+   ],
+   "out": [
+    "0xe0"
+   ]
+  },
+  "flare_edge": {
+   "colours": [
+    "#df7535"
+   ],
+   "out": [
+    "0xe0"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#fed506",
+    "#eba816",
+    "#1d4785",
+    "#000000",
+    "#120000"
+   ],
+   "in": [
+    "0xe0",
+    "stock"
+   ]
+  },
+  "hair": [
+   "#ede5c3",
+   "#dcd4b2"
+  ],
+  "claws": [
+   "#928a82",
+   "#a29a92"
+  ],
+  "black": [
+   "#000000",
+   "#120000"
+  ]
+ },
+ "blue": {
+  "_note": "blue fire: deep indigo body, silver-white hair, legs burning cyan to white",
+  "body": {
+   "base": "#25307e",
+   "shadow": "#0d1238",
+   "light": "#5c78e0"
+  },
+  "hair": {
+   "base": "#e9eef7",
+   "shadow": "#9aa8c4"
+  },
+  "flare": {
+   "base": "#5ad8ff",
+   "shadow": "#1f74d8",
+   "light": "#f2fdff"
+  },
+  "flare_edge": {
+   "base": "#2a86e0",
+   "shadow": "#123c8a",
+   "light": "#5ad8ff"
+  }
+ },
+ "green": {
+  "_note": "moss and acid flame (moss green): deep moss body, bone hair, legs burning acid-lime to yellow",
+  "body": {
+   "base": "#4f6b1e",
+   "shadow": "#1c2a08",
+   "light": "#94b04a"
+  },
+  "hair": {
+   "base": "#e8e2c8",
+   "shadow": "#9a9478",
+   "light": "#ffffff"
+  },
+  "flare": {
+   "base": "#b8f040",
+   "shadow": "#5a8a12",
+   "light": "#f4ffb0"
+  },
+  "flare_edge": {
+   "base": "#7ab828",
+   "shadow": "#3a6a0e",
+   "light": "#b8f040"
+  }
+ }
+}

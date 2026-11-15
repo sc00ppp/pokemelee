@@ -1,0 +1,136 @@
+{
+ "_about": "Swampert: blue body (0xfd40 with darker blue patches, 0x2520 shins, 0x3d80 feet), slate head fins (0x7a60) and tail (0x13e20), orange cheek gills (0x61e0) and hip spot (0x2f20), pale belly (0x1a20), mouth 0xb40, eyes 0x149a0 + blinks (orange iris, slate lids). (offsets of the v3 joints model, 11-12)",
+ "zones": {
+  "body": [
+   "#00a1e6",
+   "#0099ee",
+   "#0066aa",
+   "#0088cc",
+   "#18beff",
+   "#08597b",
+   "#004c8b",
+   "#004477"
+  ],
+  "fins": [
+   "#446677",
+   "#335566",
+   "#224455",
+   "#6a8da4",
+   "#20384a"
+  ],
+  "gills": {
+   "colours": [
+    "#ff9539",
+    "#f67d29",
+    "#ffba52",
+    "#ffde62",
+    "#de7d29"
+   ],
+   "in": [
+    "0x61e0",
+    "0x2f20",
+    "stock"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#d5e2f6",
+    "#b4becd",
+    "#ddddee"
+   ],
+   "in": [
+    "0x1a20",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#a45a65",
+    "#000000",
+    "#110000",
+    "#331111",
+    "#ddddee"
+   ],
+   "in": [
+    "0xb40"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#ee7711",
+    "#ff9933",
+    "#ffdd66",
+    "#000c18",
+    "#ffffee",
+    "#cdc2ac"
+   ],
+   "in": [
+    "0x149a0",
+    "blink"
+   ]
+  },
+  "stockbelly": {
+   "colours": [
+    "#686878",
+    "#685858",
+    "#787888"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  },
+  "stockgills": {
+   "colours": [
+    "#a8a878",
+    "#583828"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "Groudon (crimson red): crimson body with oxblood shadows, charcoal fins and lids, gold cheek gills and hip spot, ash-cream belly",
+  "body": {
+   "base": "#a41e22",
+   "shadow": "#3e0812",
+   "light": "#f05a40"
+  },
+  "fins": {
+   "base": "#2c2828",
+   "light": "#5a5050"
+  },
+  "gills": "#ffc832",
+  "belly": "#ddd4c6",
+  "stockbelly": "#ddd4c6",
+  "stockgills": "#ffc832"
+ },
+ "green": {
+  "_note": "jade and copper (pale jade green): pale jade body, burnished copper head fins and tail, rose-copper cheek gills and hip spot, celadon belly",
+  "body": {
+   "base": "#72c48c",
+   "shadow": "#24704a",
+   "light": "#d6f6dc"
+  },
+  "fins": {
+   "base": "#8a4426",
+   "shadow": "#3a1a0e",
+   "light": "#d88a52",
+   "contrast": 0.8
+  },
+  "gills": "#d8604a",
+  "belly": "#eef4e0",
+  "stockbelly": "#eef4e0",
+  "stockgills": "#d8604a"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "_about": "Unown X on Game & Watch: the game paints the black limbs with gaw.json's fill and rims him with its outline (#AARRGGBB). Vanilla fill #FF000000, outline #80FFFFFF; the white eye stays.",
+ "red": {
+  "_note": "lava rock (oxblood): oxblood-maroon limbs, a molten orange outline",
+  "fill": "#FF7A1424",
+  "outline": "#C0FF7A2A"
+ },
+ "blue": {
+  "_note": "deep lagoon (teal-cyan): teal-cyan limbs, a pale aqua outline",
+  "fill": "#FF137E9C",
+  "outline": "#C0A8FFF0"
+ },
+ "green": {
+  "_note": "olive drab and brass (olive): olive limbs, a brass outline",
+  "fill": "#FF6E7A22",
+  "outline": "#C0FFD24A"
+ }
+}

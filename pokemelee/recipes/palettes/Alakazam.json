@@ -1,0 +1,191 @@
+{
+ "_about": "Alakazam: gold body, head (0x6140), arms, legs; mauve chest armour (0x3500, 0x8160), shoulders (0x1200) and knee pads (0x2280, 0x1ea0, 0x93a0); long moustache strands (0x3820, 0x41a0, 0x4aa0, 0x5320); gold hands with white claws (0x2f20: the gold follows the body, the claws are zone claws, never named, so they stay white); silver spoons (0x960); eyes 0xd080 + blink (their gold lids follow the body). Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#e6c252",
+    "#edca5b",
+    "#e8c858",
+    "#d8b848",
+    "#ddb541",
+    "#d2a431",
+    "#d8a838",
+    "#e8b848",
+    "#c89838",
+    "#b89838",
+    "#f2d12f",
+    "#a68747",
+    "#e8c868",
+    "#d8b858"
+   ],
+   "out": [
+    "0x3820",
+    "0x41a0",
+    "0x4aa0",
+    "0x5320",
+    "0x960"
+   ]
+  },
+  "moustache": {
+   "colours": [
+    "#e8c858",
+    "#e8b858",
+    "#d8b848",
+    "#e8b848",
+    "#d8a838",
+    "#c89838"
+   ],
+   "in": [
+    "0x3820",
+    "0x41a0",
+    "0x4aa0",
+    "0x5320"
+   ]
+  },
+  "armour": {
+   "colours": [
+    "#826865",
+    "#886868",
+    "#987878",
+    "#685858",
+    "#a88888",
+    "#5d5150",
+    "#785858",
+    "#584848",
+    "#483838",
+    "#928180"
+   ],
+   "out": [
+    "0x1ad00",
+    "0x22d00",
+    "0x28d00",
+    "0x2f20",
+    "0x960",
+    "0xd080"
+   ]
+  },
+  "claws": {
+   "colours": [
+    "#e6e6cc",
+    "#dedeba",
+    "#eaead2",
+    "#d2d2ba",
+    "#dedec6",
+    "#d2deba",
+    "#f8f8f0"
+   ],
+   "in": [
+    "0x2f20"
+   ]
+  },
+  "s_body": {
+   "colours": [
+    "#e6c252",
+    "#a16c10",
+    "#d4a01c",
+    "#886214",
+    "#fefeb0",
+    "#ebd368",
+    "#a38f49",
+    "#6d5507",
+    "#5d471c",
+    "#4e361c",
+    "#2e2120",
+    "#36332d"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_armour": {
+   "colours": [
+    "#826865",
+    "#646056"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "red": {
+  "_note": "ruby and silver (ruby red): ruby hide, silver armour, a white sage's moustache",
+  "body": {
+   "base": "#9a1a2e",
+   "shadow": "#3a0610",
+   "light": "#e05060"
+  },
+  "armour": {
+   "base": "#a8a8b8",
+   "shadow": "#4a4a58",
+   "light": "#e8e8f0"
+  },
+  "moustache": "#f4f0f8",
+  "s_body": {
+   "base": "#9a1a2e",
+   "shadow": "#3a0610",
+   "light": "#e05060"
+  },
+  "s_armour": {
+   "base": "#a8a8b8",
+   "shadow": "#4a4a58",
+   "light": "#e8e8f0"
+  }
+ },
+ "blue": {
+  "_note": "midnight and gold (navy): midnight hide, gold armour and a gold moustache",
+  "body": {
+   "base": "#1e2a64",
+   "shadow": "#0a0e2a",
+   "light": "#4a64c0"
+  },
+  "armour": {
+   "base": "#d8a838",
+   "shadow": "#7a5210",
+   "light": "#fff0a0"
+  },
+  "moustache": "#f0c850",
+  "s_body": {
+   "base": "#1e2a64",
+   "shadow": "#0a0e2a",
+   "light": "#4a64c0"
+  },
+  "s_armour": {
+   "base": "#d8a838",
+   "shadow": "#7a5210",
+   "light": "#fff0a0"
+  }
+ },
+ "green": {
+  "_note": "old sage (olive end of green): olive-moss hide, bronze armour, an ivory moustache",
+  "body": {
+   "base": "#8fae5a",
+   "shadow": "#4a5e22",
+   "light": "#d4e8a8"
+  },
+  "armour": {
+   "base": "#8a5a28",
+   "shadow": "#3a2208",
+   "light": "#e0b060"
+  },
+  "moustache": "#f4f0e4",
+  "s_body": {
+   "base": "#8fae5a",
+   "shadow": "#4a5e22",
+   "light": "#d4e8a8"
+  },
+  "s_armour": {
+   "base": "#8a5a28",
+   "shadow": "#3a2208",
+   "light": "#e0b060"
+  }
+ }
+}

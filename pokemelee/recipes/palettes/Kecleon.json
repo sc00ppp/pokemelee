@@ -1,0 +1,94 @@
+{
+ "_about": "Kecleon: mint body (0xebc0, 0x11a0 belly with the red zigzag, 0x3740 head), cream crest, eye ring, jaw edge and claws (0x3740, 0x11840, 0xa100, 0xa940, 0x8880 lip), mouth 0x180, 0x980, 0x8880; eyes in the blink textures. 0x2eb20 (green disc) is unseen.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#5ad49c",
+    "#55cc99",
+    "#52e6a4",
+    "#29be62",
+    "#88ddbb",
+    "#66ddaa",
+    "#44cc88"
+   ],
+   "out": [
+    "0x2eb20"
+   ]
+  },
+  "crest": {
+   "colours": [
+    "#eeea8b",
+    "#eeee99",
+    "#ffee88",
+    "#ffffdd",
+    "#ccee99",
+    "#dec620"
+   ],
+   "out": [
+    "0x2eb20",
+    "blink"
+   ]
+  },
+  "stripe": {
+   "colours": [
+    "#b41839",
+    "#ac1c39",
+    "#aa3344",
+    "#aa2244"
+   ],
+   "in": [
+    "0x11a0",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#ee9dbd",
+    "#dd99aa",
+    "#cc7788",
+    "#831c18",
+    "#220000",
+    "#bd5d62",
+    "#552222"
+   ],
+   "in": [
+    "0x180",
+    "0x980",
+    "0x8880"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#d0dee6",
+    "#ffffff",
+    "#fffaff",
+    "#000000"
+   ],
+   "in": [
+    "blink",
+    "0x11840",
+    "0x3740"
+   ]
+  }
+ },
+ "red": {
+  "_note": "tropical watermelon (coral red): coral-red watermelon body with deep rose shadows, turquoise crest, eye ring and jaw edge, cream zigzag",
+  "body": {
+   "base": "#f0505a",
+   "shadow": "#8a1a2a",
+   "light": "#ffa48c"
+  },
+  "crest": "#3ed6cc",
+  "stripe": "#fff0c8"
+ },
+ "blue": {
+  "_note": "ultraviolet (indigo-violet blue): indigo-violet body, glowing ice-cyan crest, eye ring and jaw edge, hot magenta zigzag",
+  "body": {
+   "base": "#3a2c9c",
+   "shadow": "#120a40",
+   "light": "#7a6ce8"
+  },
+  "crest": "#a8f2ff",
+  "stripe": "#ff3c8c"
+ }
+}

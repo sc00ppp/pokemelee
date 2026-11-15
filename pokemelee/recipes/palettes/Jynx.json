@@ -1,0 +1,84 @@
+{
+ "_about": "Jynx (Popo; pair with Smoochum on Nana): red dress 0x7080 skirt, 0x1bc0 bust, 0x8980 arms, 0xa00, 0x2180 hem; gold hair 0x2d80, 0x46e0, 0x78a0; gold collar 0x61c0; purple face 0x57a0 and eyelids; lips 0x53a0. Red is the vanilla. Portrait and stock are the Colosseum art, mapped.",
+ "zones": {
+  "dress": {
+   "colours": [
+    "#cc3333",
+    "#aa3333",
+    "#ee4444",
+    "#882222",
+    "#551111"
+   ],
+   "in": [
+    "0x7080",
+    "0x1bc0",
+    "0x8980",
+    "0xa00",
+    "0x2180",
+    "stock"
+   ]
+  },
+  "hair": {
+   "colours": [
+    "#eeaa00",
+    "#eebb00",
+    "#ffdd00",
+    "#cc9900"
+   ],
+   "in": [
+    "0x2d80",
+    "0x46e0",
+    "0x78a0",
+    "stock"
+   ]
+  },
+  "collar": {
+   "colours": [
+    "#ffdd33"
+   ],
+   "in": [
+    "0x61c0"
+   ]
+  },
+  "lips": {
+   "colours": [
+    "#ff8899",
+    "#ee55bb",
+    "#ff66cc",
+    "#dd5599"
+   ],
+   "in": [
+    "0x53a0",
+    "stock"
+   ],
+   "bias": 0.002
+  }
+ },
+ "blue": {
+  "_note": "ice queen: midnight-navy gown, platinum-ice hair, ice-crystal collar",
+  "dress": {
+   "base": "#22307a",
+   "shadow": "#0b1238",
+   "light": "#5068d0"
+  },
+  "hair": {
+   "base": "#e2ecfa",
+   "shadow": "#8ea2c8",
+   "light": "#ffffff"
+  },
+  "collar": "#9fd8ff"
+ },
+ "green": {
+  "_note": "poison ivy: deep emerald gown, acid-lime hair, gold collar kept",
+  "dress": {
+   "base": "#14603a",
+   "shadow": "#06281a",
+   "light": "#3fa86a"
+  },
+  "hair": {
+   "base": "#bfe83a",
+   "shadow": "#5c8a12",
+   "light": "#f2ffb0"
+  }
+ }
+}

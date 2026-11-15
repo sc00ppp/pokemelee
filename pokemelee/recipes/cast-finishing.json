@@ -757,6 +757,249 @@
       ],
       "sha256": "1794947b765f3b04b9fa5102e64d0e3a2e8a5a113122f205a85f0ad5141df1fc",
       "bytes": 246738
+    },
+    "quilava": {
+      "pokemon": "Quilava",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "sha256": "a028dedee4f24ec157148e32386a70794ea034d75beafb7a51fcd9957d4290bf",
+      "steps": [
+        [
+          "quilava_assets.py",
+          "rest"
+        ],
+        [
+          "hand_quilava.py",
+          "--prepare-eye-surface"
+        ],
+        [
+          "stand_feet.py",
+          "{build}",
+          "Fox"
+        ],
+        [
+          "hand_quilava.py",
+          "--sole-clearance"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "quilava_assets.py",
+          "eye"
+        ],
+        [
+          "hand_quilava.py"
+        ],
+        [
+          "stand_feet.py",
+          "{build}",
+          "Fox"
+        ],
+        [
+          "hand_quilava.py",
+          "--sole-clearance"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ],
+        [
+          "anim_fire.py",
+          "{out}",
+          "{out}",
+          "64",
+          "128"
+        ]
+      ]
+    },
+    "jynx": {
+      "pokemon": "Jynx",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "hand_source": true,
+      "sha256": "9895cabe7ee7616a61ae869c84f227f6d9dc169a1dc97a235396e434842b2a36",
+      "steps": [
+        [
+          "hand_ics.py",
+          "jynx"
+        ],
+        [
+          "ics_steps.py",
+          "round_out",
+          "{build}"
+        ],
+        [
+          "ics_runtime.py",
+          "{root}/tools/hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ]
+    },
+    "machoke": {
+      "pokemon": "Machoke",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "sha256": "9eb25a3f8331af2359d7143d05027f03180717b2e380400bb26ae53d10524e20",
+      "steps": [
+        [
+          "hand_machoke.py",
+          "{build}"
+        ],
+        [
+          "stand_feet.py",
+          "{build}",
+          "Ganondorf",
+          "flat"
+        ],
+        [
+          "hand_machoke.py",
+          "{build}",
+          "--round"
+        ],
+        [
+          "hand_machoke_neck.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ]
+    },
+    "smoochum": {
+      "pokemon": "Smoochum",
+      "seed": "v2/3-build",
+      "finish": "v2/3-build",
+      "directories": [],
+      "sha256": "5ba3871e8d59e80e2854b87f5a6df5b39eb5c95e4e83990fe3d52f6cf63f2a7e",
+      "steps": [
+        [
+          "hand_smoochum_v2.py"
+        ],
+        [
+          "ics_runtime.py",
+          "{root}/tools/hand_finish.py",
+          "{finish}",
+          "{out}"
+        ]
+      ],
+      "hand_source": true
+    },
+    "pikachu": {
+      "pokemon": "Pikachu",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "sha256": "74ef63742c91e5b91c60fe5647781dc33e480cd07c79b98c5d49b271f0162bd3",
+      "steps": [
+        [
+          "pikachu_inspect.py"
+        ],
+        [
+          "hand_pikachu.py"
+        ],
+        [
+          "stand_feet.py",
+          "{build}",
+          "Pikachu"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ],
+      "verification": {
+        "method": "geometry-and-material comparison plus export readback",
+        "geometry_max_error": 3e-06,
+        "normal_max_error": 4.1e-05,
+        "material_difference": false,
+        "byte_identical": false
+      }
+    },
+    "scyther": {
+      "pokemon": "Scyther",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "sha256": "99effc9be892387dfafd40c5a5da08dad25783782b98b6922995092766008a5a",
+      "steps": [
+        [
+          "scyther_inspect.py"
+        ],
+        [
+          "hand_scyther.py"
+        ],
+        [
+          "stand_feet.py",
+          "{build}",
+          "Link"
+        ],
+        [
+          "round_out.py",
+          "{build}"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ],
+      "verification": {
+        "method": "geometry-and-material comparison plus export readback",
+        "geometry_max_error": 0.005087,
+        "affected_meshes": [
+          "strike_mesh_01",
+          "strike_mesh_06"
+        ],
+        "material_difference": false,
+        "byte_identical": false,
+        "note": "Small foot placement and weight rounding differences in the replayed fit; original topology, source shape and authored choices retained."
+      }
+    },
+    "deoxys": {
+      "pokemon": "Deoxys",
+      "seed": "3-build",
+      "finish": "3-build",
+      "directories": [],
+      "sha256": "51228b6e434d6cbab945661a43645b3bdd1e8cbabf8951ca981be54cce33e511",
+      "steps": [
+        [
+          "deoxys_tex.py"
+        ],
+        [
+          "hand_deoxys.py",
+          "{build}/base.blend",
+          "{build}/build.blend",
+          "{home}/look"
+        ],
+        [
+          "soft_legs.py",
+          "{build}",
+          "Samus"
+        ],
+        [
+          "hand_finish.py",
+          "{build}",
+          "{out}"
+        ]
+      ]
     }
   }
 }

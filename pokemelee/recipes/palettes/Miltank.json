@@ -1,0 +1,182 @@
+{
+ "_about": "Miltank: pink body and face, dark hood, ears, feet, tail ball and spots, cream udder (0xb6c0, 0xf040, 0xbf20, 0xd4e0), white horns (0x40), pink inner ears (0xdf60) and mouth (0xea40), dark nose (0xe6a0), eyes 0x10100 + blink. The udder spots are not in a texture (they stay grey). Zone eyewhite is never named: it keeps the eyes' lavender-white. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "skin": [
+   "#cca4a4",
+   "#957679",
+   "#a88888",
+   "#c8a8a8",
+   "#786868",
+   "#d8b8b8",
+   "#c89898"
+  ],
+  "hide": {
+   "colours": [
+    "#4a404a",
+    "#484848",
+    "#584858",
+    "#383838",
+    "#2f1b38",
+    "#382838"
+   ],
+   "out": [
+    "0xe6a0",
+    "0x10100",
+    "0x243e0",
+    "0x2d3e0",
+    "0x483e0"
+   ]
+  },
+  "udder": [
+   "#fefbd0",
+   "#ebd9a5",
+   "#f8f8d8",
+   "#f8e8a8",
+   "#bea765",
+   "#e8e8b8",
+   "#d8c888"
+  ],
+  "inner": {
+   "colours": [
+    "#b45b65",
+    "#713440",
+    "#984848",
+    "#b85858",
+    "#683838",
+    "#682858",
+    "#2f1216"
+   ],
+   "in": [
+    "0xdf60",
+    "0xea40"
+   ]
+  },
+  "horns": {
+   "colours": [
+    "#faf8fe",
+    "#f8f8f8",
+    "#c8d8e8",
+    "#788898"
+   ],
+   "in": [
+    "0x40"
+   ]
+  },
+  "eyewhite": {
+   "colours": [
+    "#eaeaf8",
+    "#f8f8f8",
+    "#d2c6f6",
+    "#e8e8f8",
+    "#c8b8e8",
+    "#dcdcf0",
+    "#f6f6ff"
+   ],
+   "in": [
+    "0x10100",
+    "0x243e0",
+    "0x2d3e0",
+    "0x483e0"
+   ]
+  },
+  "s_skin": {
+   "colours": [
+    "#cca4a4",
+    "#a16668",
+    "#885656",
+    "#b7827a",
+    "#613e3f"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_hide": {
+   "colours": [
+    "#4a404a",
+    "#4e3637",
+    "#3b2e34",
+    "#2d2127",
+    "#150d16"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_udder": {
+   "colours": [
+    "#fefbd0",
+    "#ebeabc",
+    "#d4b59a",
+    "#7d815b",
+    "#685647"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "red": {
+  "_note": "red barn (barn red): barn-red body, charcoal hood, cream udder, gold horns",
+  "skin": {
+   "base": "#b0302c",
+   "shadow": "#4a0c10",
+   "light": "#ec6e52"
+  },
+  "hide": "#2a1c1c",
+  "udder": "#fff4e6",
+  "horns": "#f2c454",
+  "s_skin": {
+   "base": "#b0302c",
+   "shadow": "#4a0c10",
+   "light": "#ec6e52"
+  },
+  "s_hide": "#2a1c1c",
+  "s_udder": "#fff4e6"
+ },
+ "blue": {
+  "_note": "denim and brass (cobalt): work-denim body, indigo hood, milk-white udder, brass horns",
+  "skin": {
+   "base": "#4f74b0",
+   "shadow": "#22345e",
+   "light": "#8fb4e8"
+  },
+  "hide": "#1b2440",
+  "udder": "#f4f8ff",
+  "horns": "#d8a040",
+  "s_skin": {
+   "base": "#4f74b0",
+   "shadow": "#22345e",
+   "light": "#8fb4e8"
+  },
+  "s_hide": "#1b2440",
+  "s_udder": "#f4f8ff"
+ },
+ "green": {
+  "_note": "pine and khaki (pine green): dark pine body, a light khaki hood, cream udder, gold horns",
+  "skin": {
+   "base": "#2f5d3a",
+   "shadow": "#10261a",
+   "light": "#6f9c64"
+  },
+  "hide": "#c8b07a",
+  "udder": "#fff6e0",
+  "horns": "#f2c454",
+  "s_skin": {
+   "base": "#2f5d3a",
+   "shadow": "#10261a",
+   "light": "#6f9c64"
+  },
+  "s_hide": "#1c3a24",
+  "s_udder": "#fff6e0"
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "_about": "Breloom: green cap, body and tail (0xc0), cream face, chest and arms (the face sits in the eye texture 0xb380), brown cap gills (0x9ea0), pink seed balls and claw tips (0x1580, 0xafa0), mouth (0x18a0, 0x2300), brown eyes 0xb380 + blink. Only blue is designed (red is its shiny, purple is out of scope). Zone iris is never named: the brown eyes stay. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "body": [
+   "#74b05a",
+   "#68a858",
+   "#68a848",
+   "#78b858",
+   "#88c878",
+   "#637b3a"
+  ],
+  "cream": {
+   "colours": [
+    "#dedabd",
+    "#d8d8b8",
+    "#e8d8b8",
+    "#c0af92",
+    "#c8b898",
+    "#a8a888",
+    "#989868"
+   ],
+   "out": [
+    "0x18a0",
+    "0x2300"
+   ]
+  },
+  "gills": {
+   "colours": [
+    "#a58666",
+    "#826754",
+    "#a88868",
+    "#987858",
+    "#4b3731"
+   ],
+   "in": [
+    "0x9ea0"
+   ]
+  },
+  "pink": {
+   "colours": [
+    "#e4496d",
+    "#ed6b8b",
+    "#bd3459",
+    "#d84868",
+    "#e85878",
+    "#e88898"
+   ],
+   "in": [
+    "0x1580",
+    "0xafa0"
+   ]
+  },
+  "iris": {
+   "colours": [
+    "#8a724e",
+    "#7e664e",
+    "#a58666",
+    "#826754",
+    "#4e1e1e",
+    "#421e1e",
+    "#361212"
+   ],
+   "in": [
+    "0xb380",
+    "0x1c080",
+    "0x20880",
+    "0x2e080"
+   ],
+   "bias": 0.01
+  },
+  "s_body": {
+   "colours": [
+    "#74b05a",
+    "#398a1f",
+    "#1d540d",
+    "#6dd145",
+    "#42532e",
+    "#0f3506",
+    "#204210",
+    "#071d03"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_cream": {
+   "colours": [
+    "#dedabd",
+    "#f8ebd0",
+    "#af8e80",
+    "#8c5c59"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_gills": {
+   "colours": [
+    "#a58666",
+    "#47291f",
+    "#262213"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_pink": {
+   "colours": [
+    "#e4496d",
+    "#cf1940"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "blue": {
+  "_note": "glow-in-the-dark mushroom (indigo): midnight-indigo cap and body, ice-blue face, cyan glowing seeds and claws",
+  "body": {
+   "base": "#26347e",
+   "shadow": "#0e1238",
+   "light": "#4a72d0"
+  },
+  "cream": {
+   "base": "#dce8f8",
+   "shadow": "#8ea4c8",
+   "light": "#f4f9ff"
+  },
+  "gills": {
+   "base": "#4a3c8c",
+   "shadow": "#1c1640",
+   "light": "#7fd8f0"
+  },
+  "pink": {
+   "base": "#36e0f0",
+   "shadow": "#1478b8",
+   "light": "#d8ffff"
+  },
+  "s_body": {
+   "base": "#26347e",
+   "shadow": "#0e1238",
+   "light": "#4a72d0"
+  },
+  "s_cream": {
+   "base": "#dce8f8",
+   "shadow": "#a8b8d8",
+   "light": "#f4f9ff",
+   "contrast": 0.6
+  },
+  "s_gills": {
+   "base": "#4a3c8c",
+   "shadow": "#1c1640",
+   "light": "#7fd8f0"
+  },
+  "s_pink": {
+   "base": "#36e0f0",
+   "shadow": "#1478b8",
+   "light": "#d8ffff"
+  }
+ }
+}

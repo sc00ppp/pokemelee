@@ -1,0 +1,88 @@
+{
+ "_about": "Ralts: green striped hair helmet (0x1c0), pink horns (0x1240), white skin and gown (0x3360, the lower face 0x1300 with the mouth, the eye texture 0xb6a0 + blinks). Skin and sclera share one white, so the skin only takes pale tints.",
+ "zones": {
+  "hair": [
+   "#94e683",
+   "#99ee88",
+   "#6aaa62",
+   "#66aa66",
+   "#1c4618"
+  ],
+  "horns": {
+   "colours": [
+    "#ee81b4",
+    "#ee88bb"
+   ],
+   "in": [
+    "0x1240",
+    "stock"
+   ]
+  },
+  "skin": [
+   "#eef2ee",
+   "#eeeeee",
+   "#ffffff",
+   "#dddddd",
+   "#ddeeee",
+   "#ccdddd",
+   "#a4acac",
+   "#b5aeb0"
+  ],
+  "eyes": {
+   "colours": [
+    "#cd5783",
+    "#ee88bb",
+    "#ee77aa",
+    "#b8406b",
+    "#000000"
+   ],
+   "in": [
+    "0xb6a0",
+    "blink"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#442222",
+    "#aa3333",
+    "#aa4444",
+    "#552222",
+    "#391c20"
+   ],
+   "in": [
+    "0x1300"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "plum and gold (plum red): plum-wine hair whose stripes go near-black, gold horns, blush gown",
+  "hair": {
+   "base": "#8a1e5e",
+   "shadow": "#3a0624",
+   "light": "#e0559a",
+   "contrast": 1.4
+  },
+  "horns": "#f4c23e",
+  "skin": "#fbecf2"
+ },
+ "blue": {
+  "_note": "daybreak (sky blue): sky-blue hair whose stripes turn cobalt, deep navy horns, cool white gown",
+  "hair": {
+   "base": "#5a9cf0",
+   "shadow": "#1e3a9a",
+   "light": "#c4e2ff",
+   "contrast": 1.4
+  },
+  "horns": "#1e2c78",
+  "skin": "#eaf2ff"
+ }
+}

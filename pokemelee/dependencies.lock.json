@@ -421,6 +421,56 @@
           ]
         }
       }
+    },
+    "slippi-menu-map": {
+      "repo": "project-slippi/dolphin",
+      "tag": "0653df8194eac2392dea9fe26276b70f3c87fd89",
+      "purpose": "Pinned Slippi menu relocation map used by the original authored menu recipe; downloaded from upstream, never committed here.",
+      "platforms": {
+        "win-x64": {
+          "asset": "MnMaAll.usd.diff",
+          "format": "raw",
+          "url": "https://raw.githubusercontent.com/project-slippi/dolphin/0653df8194eac2392dea9fe26276b70f3c87fd89/Data/Sys/GameFiles/GALE01/MnMaAll.usd.diff",
+          "sha256": "e0e261203e013f7e51c29f808165ca36dca10296c3e613b1b225e0a6d4978263",
+          "required": [
+            "MnMaAll.usd.diff"
+          ],
+          "entrypoint": "MnMaAll.usd.diff"
+        }
+      }
+    },
+    "powerpc-binutils": {
+      "repo": "encounter/gc-wii-binutils",
+      "tag": "2.42-2",
+      "purpose": "Minimal GNU assembler and object-copy tools for the accepted authored game modifications",
+      "platforms": {
+        "win-x64": {
+          "asset": "windows-x86_64.zip",
+          "sha256": "bd95bd57607efb45c437e97b77ec199073e242869027eb72196b0720611bb1c1",
+          "required": [
+            "powerpc-eabi-as.exe",
+            "powerpc-eabi-objcopy.exe"
+          ]
+        }
+      }
+    },
+    "stage-renderer": {
+      "name": "Slippi Dolphin stage renderer",
+      "license": "GPL-2.0-or-later",
+      "purpose": "Automatic offline stage-select picture rendering; no user profile or account required",
+      "platforms": {
+        "win-x64": {
+          "url": "https://github.com/project-slippi/Ishiiruka/releases/download/v3.6.4/FM-Slippi-3.6.4-Win.zip",
+          "sha256": "873ee4c5752c425b02e73e7f6a09b1478b10dce61258bcdf20e14bd69de89e2f",
+          "required": [
+            "Slippi Dolphin.exe"
+          ],
+          "entrypoint": "Slippi Dolphin.exe",
+          "asset": "FM-Slippi-3.6.4-Win.zip"
+        }
+      },
+      "repo": "project-slippi/Ishiiruka",
+      "tag": "v3.6.4"
     }
   },
   "unresolved": [

@@ -1,0 +1,77 @@
+{
+ "_about": "Minun (pair partner of Plusle, on Pichu): cream body 0x68a0, blue ears 0xc20, tail 0x940, hands 0x13260, blue cheek circles with a cream - in 0x5060, eyes 0x13bc0 + blink, mouth 0x2da0, nose 0x2880. Blue is the vanilla. Portrait and stock are the Colosseum art, mapped.",
+ "zones": {
+  "body": [
+   "#f5e5c4",
+   "#cabea7",
+   "#897867",
+   "#ffffee",
+   "#ffffdd",
+   "#ccccaa",
+   "#bbbb99",
+   "#999977",
+   "#aaaa88",
+   "#998877",
+   "#bbaa99"
+  ],
+  "accent": {
+   "colours": [
+    "#52b9eb",
+    "#41a7da",
+    "#5794bb",
+    "#304853",
+    "#55ccff",
+    "#55ddff",
+    "#44aadd",
+    "#3388aa"
+   ],
+   "out": [
+    "0x13bc0",
+    "0x20a80",
+    "0x22a80",
+    "0x25080",
+    "0x2da0"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#9d3d4a",
+    "#642123",
+    "#1e1d19",
+    "#000000"
+   ],
+   "in": [
+    "0x13bc0",
+    "0x20a80",
+    "0x22a80",
+    "0x25080"
+   ]
+  }
+ },
+ "red": {
+  "_note": "blush: pale rose body, deep crimson ears, tail and cheeks (beside Plusle's vanilla red)",
+  "body": {
+   "base": "#ffd9d4",
+   "shadow": "#d48a8e",
+   "light": "#fff4f2"
+  },
+  "accent": {
+   "base": "#c41e3a",
+   "shadow": "#5a0816",
+   "light": "#ff6070"
+  }
+ },
+ "green": {
+  "_note": "night circuit: deep forest-green body, electric aqua-mint ears, tail and cheeks (Plusle green: same body, lime)",
+  "body": {
+   "base": "#2a6a40",
+   "shadow": "#0e2e1a",
+   "light": "#6fbf7e"
+  },
+  "accent": {
+   "base": "#4fe8c0",
+   "shadow": "#178a70",
+   "light": "#c8fff0"
+  }
+ }
+}

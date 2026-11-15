@@ -1,0 +1,239 @@
+{
+ "_about": "Combusken: cream head (0xd320), chest (0x1760, 0xba60 flame front) and arms over an orange fluffy lower body (0xe860, 0x280); olive-tipped wrist feathers (0x3b60), orange crest (0x58a0), beak (0xb3c0) and mouth (0x50e0), grey legs and feet (0x6800, 0x73c0) with cream claws (0xa020), orange-iris eye 0x194a0. The red 128x128 blink eyes and the legs are left alone. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "upper": {
+   "colours": [
+    "#faec82",
+    "#f6ea7e",
+    "#f8e888",
+    "#f8e878",
+    "#f8f888",
+    "#f8f898",
+    "#faf7d3",
+    "#dcca9b",
+    "#eade72",
+    "#ded266"
+   ],
+   "out": [
+    "0x6800",
+    "0x73c0",
+    "0xa020",
+    "0x1aec0",
+    "0x1d6a0",
+    "0x1f6a0"
+   ]
+  },
+  "wrist": {
+   "colours": [
+    "#c4b132",
+    "#baae1e",
+    "#aea212",
+    "#ae9612",
+    "#baa212",
+    "#c6ba2a"
+   ],
+   "in": [
+    "0x3b60"
+   ]
+  },
+  "lower": {
+   "colours": [
+    "#ed7019",
+    "#ea721e",
+    "#ef7e1c",
+    "#ea7e1e",
+    "#ea661e",
+    "#ef9232",
+    "#ea8a1e",
+    "#b65217",
+    "#7f290d",
+    "#e87818",
+    "#f88818",
+    "#f89858",
+    "#a85818"
+   ],
+   "out": [
+    "0x58a0",
+    "0xb3c0",
+    "0x50e0",
+    "0x194a0",
+    "0x6800",
+    "0x73c0",
+    "0xa020",
+    "0x1aec0",
+    "0x1d6a0",
+    "0x1f6a0"
+   ]
+  },
+  "crest": {
+   "colours": [
+    "#f67e12",
+    "#ea7e1e",
+    "#ea721e",
+    "#f68a12",
+    "#f69612",
+    "#ea661e"
+   ],
+   "in": [
+    "0x58a0"
+   ]
+  },
+  "beak": {
+   "colours": [
+    "#ea721e",
+    "#ea7e2a",
+    "#f68a42",
+    "#f6a266",
+    "#ea964e"
+   ],
+   "in": [
+    "0xb3c0",
+    "0x50e0"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#8a2a06",
+    "#ae3606",
+    "#d24e1e",
+    "#661e06",
+    "#962a06",
+    "#ba3606",
+    "#7e2a06",
+    "#722a12",
+    "#ba421e"
+   ],
+   "in": [
+    "0x50e0"
+   ],
+   "bias": 0.01
+  },
+  "iris": {
+   "colours": [
+    "#ae5a12",
+    "#ba661e",
+    "#eaae72",
+    "#f6c6ae",
+    "#060606"
+   ],
+   "in": [
+    "0x194a0"
+   ],
+   "bias": 0.002
+  },
+  "s_upper": {
+   "colours": [
+    "#faec82",
+    "#fcfc84",
+    "#e0d54f",
+    "#afa13b",
+    "#746f2d",
+    "#574d29"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_lower": {
+   "colours": [
+    "#ed7019",
+    "#e04902",
+    "#ca3400",
+    "#992900",
+    "#762905",
+    "#711400",
+    "#c0701a"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "red": {
+  "_note": "prize rooster (maroon): maroon lower plumage, bone-white head and chest, gold crest, beak and wrist plumes",
+  "lower": {
+   "base": "#801424",
+   "shadow": "#300408",
+   "light": "#c84048"
+  },
+  "upper": {
+   "base": "#f6eee0",
+   "shadow": "#c8b8a8",
+   "light": "#fffdf8"
+  },
+  "crest": "#ffc030",
+  "beak": "#ffc030",
+  "wrist": "#ffc030",
+  "s_upper": {
+   "base": "#f6eee0",
+   "shadow": "#c8b8a8",
+   "light": "#fffdf8"
+  },
+  "s_lower": {
+   "base": "#801424",
+   "shadow": "#300408",
+   "light": "#c84048"
+  }
+ },
+ "blue": {
+  "_note": "kingfisher (teal end of blue): turquoise head, chest and arms over deep cobalt-teal plumage, kingfisher-orange crest and wrist plumes, black beak",
+  "lower": {
+   "base": "#12609a",
+   "shadow": "#062a4a",
+   "light": "#3a98d0"
+  },
+  "upper": {
+   "base": "#58c0dc",
+   "shadow": "#2a7898",
+   "light": "#b0ecf8"
+  },
+  "crest": "#ff8a20",
+  "beak": "#2a2a30",
+  "wrist": "#ff8a20",
+  "s_lower": {
+   "base": "#12609a",
+   "shadow": "#062a4a",
+   "light": "#3a98d0"
+  },
+  "s_upper": {
+   "base": "#58c0dc",
+   "shadow": "#2a7898",
+   "light": "#b0ecf8"
+  }
+ },
+ "green": {
+  "_note": "golden quetzal (yellow-green and moss, off emerald): pale chartreuse head and chest over moss-green plumage, scarlet crest and wrist plumes, gold beak",
+  "lower": {
+   "base": "#4a7a22",
+   "shadow": "#1e3a0a",
+   "light": "#80b040"
+  },
+  "upper": {
+   "base": "#bcd874",
+   "shadow": "#78963a",
+   "light": "#eef8c0"
+  },
+  "crest": "#e8342c",
+  "beak": "#f0b830",
+  "wrist": "#e8342c",
+  "s_upper": {
+   "base": "#bcd874",
+   "shadow": "#78963a",
+   "light": "#eef8c0"
+  },
+  "s_lower": {
+   "base": "#4a7a22",
+   "shadow": "#1e3a0a",
+   "light": "#80b040"
+  }
+ }
+}

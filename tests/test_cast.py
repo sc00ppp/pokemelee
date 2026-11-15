@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from pokemelee.cast import checked_component, selection
 from pokemelee.native.offline_worker import NoAuthoring, no_network
@@ -10,8 +11,14 @@ from pokemelee.workspace import digest
 
 class CastTests(unittest.TestCase):
     def test_incomplete_cast_cannot_silently_skip(self):
-        with self.assertRaisesRegex(ValueError, "awaiting verification"):
-            selection()
+        complete = selection()
+        self.assertEqual(len(complete), 29)
+        from pokemelee.catalog import load
+        recipes = load("cast-finishing.json")
+        recipes["recipes"].pop("pichu")
+        with patch("pokemelee.cast.load", side_effect=lambda name: recipes if name == "cast-finishing.json" else load(name)):
+            with self.assertRaisesRegex(ValueError, "awaiting verification: pichu"):
+                selection()
         with self.assertRaises(ValueError):
             selection(["Pichu", "pichu"])
 

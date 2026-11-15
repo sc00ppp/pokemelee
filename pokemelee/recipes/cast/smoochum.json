@@ -1,0 +1,15 @@
+{
+  "pokemon": "smoochum",
+  "source_model": "238_Smoochum.glb",
+  "source_drop": [
+    "muchul_mesh_11",
+    "muchul_mesh_12",
+    "muchul_mesh_13",
+    "muchul_mesh_14",
+    "muchul_mesh_15",
+    "muchul_mesh_16",
+    "muchul_mesh_17"
+  ],
+  "schema": 1,
+  "fighter": "Nana"
+}

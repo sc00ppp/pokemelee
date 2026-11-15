@@ -1,0 +1,87 @@
+{
+ "_about": "Gardevoir: green hair (0x1500), arms (0x8340) and hem (0xf360), white dress (0xe9c0) and chest (0x5f20), pink-red chest fin (0x620) and eyes (face textures).",
+ "zones": {
+  "hair": [
+   "#8adc7d",
+   "#42933a",
+   "#72c465",
+   "#60b157"
+  ],
+  "dress": {
+   "colours": [
+    "#e9efec",
+    "#f0f7f7",
+    "#c0c4c4"
+   ],
+   "in": [
+    "0xe9c0",
+    "0xf360",
+    "0x5f20",
+    "stock"
+   ]
+  },
+  "fin": {
+   "colours": [
+    "#d85da9",
+    "#de1e10"
+   ],
+   "in": [
+    "0x620"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#d85da9",
+    "#de1e10",
+    "#2209ef",
+    "#5f5562",
+    "#221111"
+   ],
+   "out": [
+    "0x620"
+   ]
+  },
+  "skin": {
+   "colours": [
+    "#e9efec",
+    "#f0f7f7",
+    "#c0c4c4"
+   ],
+   "out": [
+    "0xe9c0",
+    "0xf360",
+    "0x5f20"
+   ]
+  },
+  "misc": [
+   "#f9d62e",
+   "#b38d42"
+  ]
+ },
+ "red": {
+  "_note": "black rose: wine hair lifting to crimson, blush dress with mauve shadows, green stem fin",
+  "hair": {
+   "base": "#7a1430",
+   "shadow": "#2e0410",
+   "light": "#dd3550"
+  },
+  "dress": {
+   "base": "#f6d9df",
+   "shadow": "#b98aa0"
+  },
+  "fin": "#2f9e4c"
+ },
+ "blue": {
+  "_note": "frost: pale ice hair falling to cobalt in its shadows, white dress with cold blue shading, sapphire fin",
+  "hair": {
+   "base": "#78c2fa",
+   "shadow": "#2448b0",
+   "light": "#e4f6ff"
+  },
+  "dress": {
+   "base": "#eef3fb",
+   "shadow": "#8fa3d0"
+  },
+  "fin": "#2340a0"
+ }
+}

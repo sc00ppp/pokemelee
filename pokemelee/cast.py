@@ -30,7 +30,7 @@ def checked_component(path, operation):
     record = json.loads((path / "receipt.json").read_text(encoding="utf-8"))
     if record.get("operation") != operation or record.get("complete") is not True:
         raise ValueError(f"Expected a completed {operation} component")
-    for row in record["outputs"]:
+    for row in record["outputs"] + record.get("supporting_outputs", []):
         file = path / row["path"]
         if not file.resolve().is_relative_to(path) or fingerprint(file)["sha256"] != row["sha256"]:
             raise ValueError(f"Generated component changed: {row['path']}")
@@ -75,6 +75,11 @@ def build_cast(colosseum, models, targets, output, runtime, selected=None, *, hs
                 if finishing.get("procedural"):
                     build.mkdir(parents=True)
                     write_json(build / "target.json", {"name": base["fighter"]})
+                elif finishing.get("hand_source"):
+                    source_dir = root / "mons" / name / "1-load"
+                    run(root / "tools/pair_sources.py", PACKAGE / "recipes/cast" / (name + ".json"),
+                        models / "models", source_dir)
+                    source_blend = str(next((source_dir / "models").glob("*.blend")))
                 else:
                     run(PACKAGE / "native/replay_cast.py", job)
                     shutil.copytree(raw / "3-build", build)
@@ -108,5 +113,8 @@ def build_cast(colosseum, models, targets, output, runtime, selected=None, *, hs
 
         with ThreadPoolExecutor(max_workers=jobs) as pool:
             outputs = list(pool.map(one, recipes))
+        face = root / 'hand/deoxys-Samus/look/face.png'
+        supporting = ([{'path': face.relative_to(root).as_posix(), **fingerprint(face)}]
+                      if face.is_file() else [])
         return receipt(root, "cast", {"colosseum": colosseum.info(), "models": str(models), "targets": str(targets)},
-                       outputs, authoring="disabled", network="disabled")
+                       outputs, supporting_outputs=supporting, authoring="disabled", network="disabled")

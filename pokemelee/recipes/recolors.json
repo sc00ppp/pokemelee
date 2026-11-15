@@ -1,0 +1,732 @@
+{
+  "Magmar": {
+    "idx": "126",
+    "body": [
+      [
+        8,
+        14,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          50,
+          14,
+          345,
+          0.4,
+          1.0
+        ]
+      ],
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Miltank": {
+    "idx": "241",
+    "body": [
+      [
+        5,
+        35,
+        1.3,
+        0.95,
+        0.6
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          345,
+          35,
+          55,
+          0.7,
+          0.75
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Breloom": {
+    "idx": "307",
+    "body": [
+      [
+        100,
+        35,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          100,
+          35,
+          0,
+          1,
+          0.95
+        ]
+      ],
+      "blue": "body",
+      "purple": 280
+    },
+    "teams": {
+      "red": "shiny"
+    }
+  },
+  "Blastoise": {
+    "idx": "009",
+    "rare": "kamex",
+    "body": [
+      [
+        210,
+        40,
+        1.4,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "green": "body"
+    }
+  },
+  "Gardevoir": {
+    "idx": "394",
+    "body": [
+      [
+        125,
+        32,
+        1.45,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          125,
+          32,
+          250,
+          0.8,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body"
+    }
+  },
+  "Blaziken": {
+    "idx": "282",
+    "rare": "bursyamo",
+    "body": [
+      [
+        5,
+        20,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Machoke": {
+    "idx": "067",
+    "body": [
+      [
+        225,
+        40,
+        1.4,
+        1,
+        0.45
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          225,
+          40,
+          75,
+          0.7,
+          0.85,
+          0.3
+        ]
+      ],
+      "red": "body",
+      "green": "body"
+    }
+  },
+  "Quilava": {
+    "idx": "156",
+    "body": [
+      [
+        195,
+        40,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          195,
+          40,
+          345,
+          0.8,
+          0.8
+        ],
+        [
+          45,
+          20,
+          38,
+          0.6,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Combusken": {
+    "idx": "281",
+    "rare": "wakasyamo",
+    "body": [
+      [
+        25,
+        11,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Deoxys": {
+    "idx": "410",
+    "rare": "deoxys",
+    "body": [
+      [
+        20,
+        26,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Alakazam": {
+    "idx": "065",
+    "body": [
+      [
+        50,
+        20,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          50,
+          20,
+          18,
+          1.05,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Sceptile": {
+    "idx": "279",
+    "rare": "jukain",
+    "body": [
+      [
+        115,
+        40,
+        1.15,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "blue": "body",
+      "green": "keep"
+    }
+  },
+  "Scyther": {
+    "idx": "123",
+    "body": [
+      [
+        95,
+        35,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          95,
+          35,
+          62,
+          1.0,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body"
+    }
+  },
+  "Swampert": {
+    "idx": "285",
+    "rare": "laglarge",
+    "body": [
+      [
+        205,
+        40,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "green": "body"
+    }
+  },
+  "Farfetchd": {
+    "idx": "083",
+    "body": [
+      [
+        20,
+        14,
+        1.5,
+        1,
+        0.45
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          20,
+          14,
+          25,
+          1.6,
+          1.05,
+          0.55
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Wigglytuff": {
+    "idx": "040",
+    "body": [
+      [
+        345,
+        32,
+        1.3,
+        1,
+        0.7
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          335,
+          30,
+          280,
+          1.0,
+          1.0,
+          0.4
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Kecleon": {
+    "idx": "317",
+    "body": [
+      [
+        150,
+        38,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          120,
+          40,
+          82,
+          1.0,
+          1.05
+        ],
+        [
+          5,
+          18,
+          215,
+          1.0,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body"
+    }
+  },
+  "Charmeleon": {
+    "idx": "005",
+    "body": [
+      [
+        350,
+        22,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          350,
+          22,
+          22,
+          1.0,
+          1.1
+        ]
+      ],
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Ralts": {
+    "idx": "392",
+    "body": [
+      [
+        125,
+        32,
+        1.5,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          125,
+          32,
+          250,
+          1.1,
+          1.0
+        ],
+        [
+          350,
+          18,
+          30,
+          1.0,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body"
+    }
+  },
+  "Scizor": {
+    "idx": "212",
+    "body": [
+      [
+        3,
+        20,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          3,
+          20,
+          48,
+          1.0,
+          1.1
+        ]
+      ],
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Pikachu": {
+    "idx": "025",
+    "body": [
+      [
+        52,
+        16,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          52,
+          16,
+          42,
+          1.1,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Jigglypuff": {
+    "idx": "039",
+    "body": [
+      [
+        350,
+        34,
+        1.3,
+        1,
+        0.65
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          350,
+          34,
+          285,
+          1.0,
+          1.0,
+          0.4
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Mewtwo": {
+    "idx": "150",
+    "rare": "mewtwo",
+    "grey": [
+      0.02,
+      0.06
+    ],
+    "body": [
+      [
+        275,
+        75,
+        1.6,
+        1,
+        0.3
+      ]
+    ],
+    "colours": {
+      "shiny": "rare",
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Pichu": {
+    "idx": "172",
+    "body": [
+      [
+        52,
+        16,
+        1.4,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          52,
+          16,
+          42,
+          1.1,
+          1.0
+        ]
+      ],
+      "red": "body",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Jynx": {
+    "idx": "124",
+    "art": "map",
+    "body": [
+      [
+        0,
+        20,
+        1,
+        1
+      ],
+      [
+        312,
+        24,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          0,
+          20,
+          320,
+          0.8,
+          1.0
+        ],
+        [
+          45,
+          18,
+          330,
+          0.35,
+          1.0
+        ]
+      ],
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Smoochum": {
+    "idx": "238",
+    "art": "map",
+    "body": [
+      [
+        0,
+        20,
+        1,
+        1
+      ],
+      [
+        312,
+        24,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          0,
+          20,
+          320,
+          0.8,
+          1.0
+        ],
+        [
+          45,
+          18,
+          330,
+          0.35,
+          1.0
+        ]
+      ],
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Plusle": {
+    "idx": "353",
+    "art": "map",
+    "body": [
+      [
+        0,
+        24,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          45,
+          26,
+          55,
+          2.0,
+          1.05,
+          0.55
+        ]
+      ],
+      "red": "keep",
+      "blue": "body",
+      "green": "body"
+    }
+  },
+  "Minun": {
+    "idx": "354",
+    "art": "map",
+    "body": [
+      [
+        200,
+        32,
+        1,
+        1
+      ]
+    ],
+    "colours": {
+      "shiny": [
+        [
+          45,
+          26,
+          55,
+          2.0,
+          1.05,
+          0.55
+        ],
+        [
+          200,
+          32,
+          183,
+          1.0,
+          1.1
+        ]
+      ],
+      "red": "body",
+      "blue": "keep",
+      "green": "body"
+    }
+  },
+  "UnownX": {
+    "idx": "201x",
+    "gw": true,
+    "colours": {
+      "shiny": {
+        "tint": [
+          0.45,
+          0.5,
+          1.0
+        ]
+      },
+      "red": "#FFC81E1E",
+      "blue": "#FF1E3CDC",
+      "green": "#FF1E9E3C"
+    }
+  }
+}

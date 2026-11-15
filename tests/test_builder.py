@@ -206,7 +206,8 @@ class ReadinessTests(LocalTest):
         self.assertEqual(len(art_indices()), 29)
         self.assertEqual(len(load("stages.json")["stages"]), 6)
         self.assertFalse(plan()["iso_build_ready"])
-        self.assertIn("cast-models", plan()["blocking_steps"])
+        self.assertNotIn("cast-models", plan()["blocking_steps"])
+        self.assertIn("iso-assembly", plan()["blocking_steps"])
 
 
 if __name__ == "__main__":

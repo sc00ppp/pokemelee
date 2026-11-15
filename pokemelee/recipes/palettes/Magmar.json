@@ -1,0 +1,181 @@
+{
+ "_about": "Magmar: red-orange head, arms, shoulders (0x7960), feet and chest flames over a yellow belly, thighs (0xdb40), ears and tail (0x11ea0, 0xa8c0); orange beak and lips (0xc280, 0xc760, 0xcd40); tail flame 0x160 plus its flipbook 0x5fb80-0x66c60 (the 128x64 and 64x32 fire frames are the chest and ear flames, so they follow top and belly); white claws (0x8b20), dark legs (0x10380), eyes 0x20e0 + blink. Zone white (eye whites, claws) is never named: it stays. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "top": {
+   "colours": [
+    "#e63d14",
+    "#b92910",
+    "#a22c14",
+    "#7e2014",
+    "#e84818"
+   ],
+   "out": [
+    "0x160",
+    "0x5fb80",
+    "0x60ba0",
+    "0x61bc0",
+    "0x62be0",
+    "0x63c00",
+    "0x64c20",
+    "0x65c40",
+    "0x66c60"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#ffd233",
+    "#fff181",
+    "#f8d848",
+    "#f8e868"
+   ],
+   "out": [
+    "0x160",
+    "0x5fb80",
+    "0x60ba0",
+    "0x61bc0",
+    "0x62be0",
+    "0x63c00",
+    "0x64c20",
+    "0x65c40",
+    "0x66c60"
+   ]
+  },
+  "beak": {
+   "colours": [
+    "#f8b848",
+    "#fc8923",
+    "#e89848"
+   ],
+   "in": [
+    "0xc280",
+    "0xc760",
+    "0xcd40"
+   ]
+  },
+  "fire": {
+   "colours": [
+    "#f88818",
+    "#e84808",
+    "#b81808",
+    "#f8f888",
+    "#f8e888"
+   ],
+   "in": [
+    "0x160",
+    "0x5fb80",
+    "0x60ba0",
+    "0x61bc0",
+    "0x62be0",
+    "0x63c00",
+    "0x64c20",
+    "0x65c40",
+    "0x66c60"
+   ]
+  },
+  "white": {
+   "colours": [
+    "#f2f6f4",
+    "#bbc1bf",
+    "#d8d8d8",
+    "#c8c8c8",
+    "#f8f8f8",
+    "#988898",
+    "#a898a8"
+   ]
+  },
+  "s_top": {
+   "colours": [
+    "#e63d14",
+    "#c80e04",
+    "#8f0600",
+    "#660200",
+    "#d5320f",
+    "#790500",
+    "#491b10",
+    "#330101"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_belly": {
+   "colours": [
+    "#ffd233",
+    "#dfd830",
+    "#fcf3ac",
+    "#8e7115",
+    "#714a13",
+    "#cd841c"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "blue": {
+  "_note": "blue-flame burner (navy and cyan): midnight indigo hide, a gas-flame cyan belly and a blue-white tail fire",
+  "top": {
+   "base": "#22308f",
+   "shadow": "#0c0d3d",
+   "light": "#3f7ae0"
+  },
+  "belly": {
+   "base": "#6fd6ff",
+   "shadow": "#2e8fe0",
+   "light": "#e6fbff"
+  },
+  "fire": {
+   "base": "#3d8bff",
+   "shadow": "#2a1fb0",
+   "light": "#eafcff"
+  },
+  "s_top": {
+   "base": "#22308f",
+   "shadow": "#0c0d3d",
+   "light": "#3f7ae0"
+  },
+  "s_belly": {
+   "base": "#6fd6ff",
+   "shadow": "#2e8fe0",
+   "light": "#e6fbff"
+  }
+ },
+ "green": {
+  "_note": "coal and jade (jade): emerald flames over an obsidian belly, green tail fire, gold beak",
+  "top": {
+   "base": "#2bb070",
+   "shadow": "#0f5a40",
+   "light": "#9cf0b0"
+  },
+  "belly": {
+   "base": "#26332e",
+   "shadow": "#0c1210",
+   "light": "#5c6e64"
+  },
+  "fire": {
+   "base": "#5be04a",
+   "shadow": "#127a3c",
+   "light": "#f4ffb8"
+  },
+  "beak": "#f0c050",
+  "s_top": {
+   "base": "#2bb070",
+   "shadow": "#0f5a40",
+   "light": "#9cf0b0"
+  },
+  "s_belly": {
+   "base": "#26332e",
+   "shadow": "#0c1210",
+   "light": "#5c6e64"
+  }
+ }
+}

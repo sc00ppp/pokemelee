@@ -1,0 +1,102 @@
+{
+ "_about": "Sceptile: mint-green body (0x4680, 0x74e0, ...), dark green tail leaves (0x27a0, 0x3120, 0x2be0), yellow seeds (0xd60), pink jaw (0x4fa0) and waist band (0x3480), mouth inside (0x17e0, 0x58c0), eyes 0xe4e0 + blinks (yellow iris, red lid). 0x40480 is an unseen navy leftover.",
+ "zones": {
+  "body": [
+   "#51d155",
+   "#409036",
+   "#c0f1b2",
+   "#60df63",
+   "#49ca4e"
+  ],
+  "leaves": {
+   "colours": [
+    "#2f7027",
+    "#14580b",
+    "#3c7c34"
+   ],
+   "in": [
+    "0x27a0",
+    "0x3120",
+    "0x2be0"
+   ],
+   "bias": 1
+  },
+  "seeds": {
+   "colours": [
+    "#f1da45",
+    "#edd640",
+    "#ffea6b"
+   ],
+   "in": [
+    "0xd60",
+    "stock"
+   ]
+  },
+  "jaw": {
+   "colours": [
+    "#f05b6f",
+    "#e04d63",
+    "#fc667a"
+   ],
+   "in": [
+    "0x4fa0",
+    "0x3480",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#907174",
+    "#6e3832",
+    "#bfafbd"
+   ],
+   "in": [
+    "0x17e0",
+    "0x58c0"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#f1da45",
+    "#e05030",
+    "#f05b6f",
+    "#000000",
+    "#ffffff"
+   ],
+   "in": [
+    "0xe4e0",
+    "blink"
+   ]
+  }
+ },
+ "red": {
+  "_note": "autumn maple (oxblood red): deep oxblood body, burnt-orange-to-gold tail leaves, gold seeds, cream jaw and band",
+  "body": {
+   "base": "#74121f",
+   "shadow": "#2a0612",
+   "light": "#d8483a"
+  },
+  "leaves": {
+   "base": "#e0701c",
+   "shadow": "#7a1e0a",
+   "light": "#ffc23c"
+  },
+  "seeds": "#ffd84a",
+  "jaw": "#f6e3b4"
+ },
+ "blue": {
+  "_note": "slate and brass (slate blue): slate-blue body, deep navy tail leaves, brass seeds, coral jaw and band",
+  "body": {
+   "base": "#5a6ea0",
+   "shadow": "#232c50",
+   "light": "#a8bce2"
+  },
+  "leaves": {
+   "base": "#16204e",
+   "shadow": "#080c24",
+   "light": "#34508e"
+  },
+  "seeds": "#d8b44a",
+  "jaw": "#ff5a62"
+ }
+}

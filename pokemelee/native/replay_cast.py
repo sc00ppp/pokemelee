@@ -176,6 +176,10 @@ def replay(recipe, model, targets, out):
         pixels = paint._pixels(image)
         pixels[..., 3] = 255
         paint._packed(image, "-opaque", pixels)
+    if recipe.get("opaque"):
+        # A character with no separate eye surface skips the eye writer, so
+        # persist its reviewed material changes before hang reopens the build.
+        bpy.ops.wm.save_as_mainfile(filepath=str(build_dir / "build.blend"))
     eye_record = replay_eyes(build_dir, head_weights(rig, shape), recipe["eyes"], load_dir / "source")
     hanging = hang.settle(build_dir)
     if match.replaced:

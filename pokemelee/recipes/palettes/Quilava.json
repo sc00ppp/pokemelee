@@ -1,0 +1,233 @@
+{
+ "_about": "Quilava: dark teal back over a cream belly (0x4f60 body, 0x2e0 / 0xa460 head, 0xb940 feet), red-iris eyes and lids in 0x17e20, purple inner ears (0x9320), red flame spots (0xf860), mouth bits (0x63a0, 0x88a0); head and back flames are 0x2440 plus its flipbook 0x2bc60-0x32d40. The 128x128 blink eyes are kept as they are. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "zones": {
+  "back": {
+   "colours": [
+    "#025c51",
+    "#085858",
+    "#086858",
+    "#186858",
+    "#00554b",
+    "#0c6055",
+    "#167c70",
+    "#29897d"
+   ],
+   "out": [
+    "0x2440",
+    "0x2bc60",
+    "0x2cc80",
+    "0x2dca0",
+    "0x2ecc0",
+    "0x2fce0",
+    "0x30d00",
+    "0x31d20",
+    "0x32d40",
+    "0x1c9c0",
+    "0x1f340",
+    "0x21340"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#f6d978",
+    "#f8d878",
+    "#e8d878",
+    "#d1be6d",
+    "#f8e888",
+    "#e8c878",
+    "#d8b868",
+    "#f8d888",
+    "#f8e898",
+    "#f8c868",
+    "#ffd43a",
+    "#f8c838"
+   ],
+   "out": [
+    "0x2440",
+    "0x2bc60",
+    "0x2cc80",
+    "0x2dca0",
+    "0x2ecc0",
+    "0x2fce0",
+    "0x30d00",
+    "0x31d20",
+    "0x32d40",
+    "0x1c9c0",
+    "0x1f340",
+    "0x21340"
+   ]
+  },
+  "spots": {
+   "colours": [
+    "#a82808",
+    "#783818",
+    "#b4301b",
+    "#c84020",
+    "#e04818"
+   ],
+   "in": [
+    "0xf860"
+   ]
+  },
+  "ears": {
+   "colours": [
+    "#690f70",
+    "#680868",
+    "#780878"
+   ],
+   "in": [
+    "0x9320"
+   ]
+  },
+  "fire": {
+   "colours": [
+    "#fd9023",
+    "#f65415",
+    "#e84818",
+    "#a81808",
+    "#ffd43a",
+    "#f8e838",
+    "#f8e888",
+    "#b4301b"
+   ],
+   "in": [
+    "0x2440",
+    "0x2bc60",
+    "0x2cc80",
+    "0x2dca0",
+    "0x2ecc0",
+    "0x2fce0",
+    "0x30d00",
+    "0x31d20",
+    "0x32d40"
+   ]
+  },
+  "s_back": {
+   "colours": [
+    "#025c51",
+    "#003f32",
+    "#001814",
+    "#4f6330"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_belly": {
+   "colours": [
+    "#f6d978",
+    "#e2c045",
+    "#b49433",
+    "#947728",
+    "#a4822c",
+    "#fff56b",
+    "#886922",
+    "#6b531a",
+    "#736521",
+    "#86742b",
+    "#35331c"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "red": {
+  "_note": "sacred fire (crimson and coral): crimson back, coral belly, gold flame spots and white-gold flames",
+  "back": {
+   "base": "#b81c2a",
+   "shadow": "#4a0610",
+   "light": "#f0505a"
+  },
+  "belly": {
+   "base": "#f2a08c",
+   "shadow": "#c06058",
+   "light": "#ffe0d4"
+  },
+  "spots": "#ffd860",
+  "fire": {
+   "base": "#ffd860",
+   "shadow": "#e85020",
+   "light": "#fffef0"
+  },
+  "s_back": {
+   "base": "#b81c2a",
+   "shadow": "#4a0610",
+   "light": "#f0505a"
+  },
+  "s_belly": {
+   "base": "#f2a08c",
+   "shadow": "#c06058",
+   "light": "#ffe0d4"
+  }
+ },
+ "blue": {
+  "_note": "ghost fire (indigo-violet): indigo back, periwinkle belly, violet-blue flames with a cyan-white core, cyan ears (belly kept mid periwinkle, not ice-white: the cast has plenty of pale ice-blues)",
+  "back": {
+   "base": "#2a1e78",
+   "shadow": "#0e0a30",
+   "light": "#5a48c0"
+  },
+  "belly": {
+   "base": "#7c7ad0",
+   "shadow": "#36347e",
+   "light": "#bcbcf4"
+  },
+  "spots": "#6a5cff",
+  "ears": "#38c8e8",
+  "fire": {
+   "base": "#6a5cff",
+   "shadow": "#3020b0",
+   "light": "#bff4ff"
+  },
+  "s_back": {
+   "base": "#2a1e78",
+   "shadow": "#0e0a30",
+   "light": "#5a48c0"
+  },
+  "s_belly": {
+   "base": "#7c7ad0",
+   "shadow": "#36347e",
+   "light": "#bcbcf4"
+  }
+ },
+ "green": {
+  "_note": "spring sprout (jade): jade back, pale mint-lime belly, lime-green flames, cherry-blossom ears",
+  "back": {
+   "base": "#2e9a6a",
+   "shadow": "#0e4a34",
+   "light": "#7ee0a8"
+  },
+  "belly": {
+   "base": "#d4f0b0",
+   "shadow": "#90b070",
+   "light": "#f4ffe4"
+  },
+  "spots": "#145a30",
+  "ears": "#f080b0",
+  "fire": {
+   "base": "#9cf040",
+   "shadow": "#2a9a30",
+   "light": "#fbffd0"
+  },
+  "s_back": {
+   "base": "#2e9a6a",
+   "shadow": "#0e4a34",
+   "light": "#7ee0a8"
+  },
+  "s_belly": {
+   "base": "#d4f0b0",
+   "shadow": "#90b070",
+   "light": "#f4ffe4"
+  }
+ }
+}

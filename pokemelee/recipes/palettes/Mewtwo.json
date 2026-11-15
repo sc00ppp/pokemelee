@@ -1,0 +1,106 @@
+{
+ "_about": "Mewtwo: pale lilac body (0x100 + face textures), purple tail 0x1320 and belly 0x54a0, eyes in 0x17f00..0x1b140 + blink frames.",
+ "zones": {
+  "body": [
+   "#e5e1fe",
+   "#e6e2f6",
+   "#bbb8d9",
+   "#d0cdeb",
+   "#9c92b5",
+   "#f9f8fd"
+  ],
+  "tail": {
+   "colours": [
+    "#8c6e9d",
+    "#65464d"
+   ],
+   "in": [
+    "0x1320"
+   ],
+   "bias": 0.01
+  },
+  "belly": {
+   "colours": [
+    "#8c6e9d",
+    "#65464d"
+   ],
+   "in": [
+    "0x54a0"
+   ],
+   "bias": 0.02
+  },
+  "eyes": {
+   "colours": [
+    "#220b30",
+    "#4f2a40",
+    "#65464d",
+    "#927269",
+    "#000000"
+   ],
+   "in": [
+    "0x17f00",
+    "0x18320",
+    "0x18b20",
+    "0x19be0",
+    "0x1b140",
+    "0x55ba0",
+    "blink",
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "ultraviolet (plum-magenta): deep plum body lifting to hot pink in the light, obsidian tail and belly",
+  "body": {
+   "base": "#8a1a6a",
+   "shadow": "#2e0626",
+   "light": "#ff5cb8"
+  },
+  "tail": {
+   "base": "#221a1e",
+   "shadow": "#0a0608",
+   "light": "#5a4a52"
+  },
+  "belly": {
+   "base": "#221a1e",
+   "shadow": "#0a0608",
+   "light": "#5a4a52"
+  }
+ },
+ "blue": {
+  "_note": "glacier: pale ice-blue body, deep navy tail and belly",
+  "body": {
+   "base": "#a8c6ff",
+   "shadow": "#5070c0",
+   "light": "#eef5ff"
+  },
+  "tail": {
+   "base": "#1d2f7a",
+   "shadow": "#0a1236",
+   "light": "#4d6fd0"
+  },
+  "belly": {
+   "base": "#1d2f7a",
+   "shadow": "#0a1236",
+   "light": "#4d6fd0"
+  }
+ },
+ "green": {
+  "_note": "jade idol: carved-jade body, antique-gold tail and belly",
+  "body": {
+   "base": "#3f9a78",
+   "shadow": "#123d32",
+   "light": "#a8ecc6"
+  },
+  "tail": {
+   "base": "#c8a03c",
+   "shadow": "#5a3c12",
+   "light": "#ffe9a0"
+  },
+  "belly": {
+   "base": "#c8a03c",
+   "shadow": "#5a3c12",
+   "light": "#ffe9a0"
+  }
+ }
+}

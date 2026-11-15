@@ -1,0 +1,198 @@
+{
+ "_about": "Wigglytuff: one texture 0x13560 holds the pale pink body, white belly and ear rims, black ear insides and mouth; eyes 0x6a0 + blinks (teal). Kirby's stone forms: mauve statue stones (0x3e900, 0x40e80, 0x431e0), pink block 0x45480; blue Thwomp, 100t and the rest are far from every zone and stay.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#ffcede",
+    "#eeccdd",
+    "#ffccdd",
+    "#eebbcc",
+    "#ffdddd",
+    "#ddaaaa",
+    "#d5a1ac"
+   ],
+   "out": [
+    "0x3e900",
+    "0x40e80",
+    "0x431e0",
+    "0x45480",
+    "0x2ea80",
+    "0x2ebe0",
+    "0x2f400",
+    "0x3a880",
+    "0x3ac80",
+    "0x3b180",
+    "0x3c3a0",
+    "0x3cda0",
+    "0x3ce40",
+    "0x3da20",
+    "stock"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#ffffff",
+    "#fdfdfd",
+    "#ffeeee",
+    "#eeeeee"
+   ],
+   "in": [
+    "0x13560",
+    "stock"
+   ]
+  },
+  "ears": {
+   "colours": [
+    "#000000",
+    "#201e21",
+    "#111111"
+   ],
+   "in": [
+    "0x13560"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#337766",
+    "#225555",
+    "#449988",
+    "#2691b5",
+    "#003029",
+    "#ffffff",
+    "#eeeeee",
+    "#dddddd",
+    "#000000"
+   ],
+   "in": [
+    "0x6a0",
+    "blink"
+   ]
+  },
+  "stone": {
+   "colours": [
+    "#996688",
+    "#997799",
+    "#aa7799",
+    "#83406a",
+    "#d54c83",
+    "#dd4488",
+    "#772244"
+   ],
+   "in": [
+    "0x3e900",
+    "0x40e80",
+    "0x431e0",
+    "0x45480"
+   ],
+   "bias": 1
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#dd8888",
+    "#bb6677",
+    "#aa5555",
+    "#ff9999",
+    "#ee7788",
+    "#cc7777"
+   ],
+   "in": [
+    "0x13560"
+   ]
+  },
+  "stockbelly": {
+   "colours": [
+    "#a8a8a8",
+    "#888888",
+    "#787878",
+    "#586868",
+    "#587878",
+    "#789898",
+    "#c8c8c8"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "stockbody": {
+   "colours": [
+    "#b88898",
+    "#e8a8b8",
+    "#986878",
+    "#685868",
+    "#382838"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "fuchsia and pearl (magenta red): fuchsia body with rosy-pink highlights and plum shadows, pearl belly and ear rims, deep plum ear insides",
+  "body": {
+   "base": "#c8187a",
+   "shadow": "#4a0630",
+   "light": "#ff74bc"
+  },
+  "belly": "#fdeef2",
+  "ears": "#3a0a30",
+  "stone": "#8a2a64",
+  "stockbody": {
+   "base": "#c8187a",
+   "shadow": "#4a0630",
+   "light": "#ff74bc"
+  },
+  "stockbelly": [
+   "#fdeef2",
+   0.7
+  ]
+ },
+ "blue": {
+  "_note": "midnight and gold (navy blue): deep navy body, moon-silver belly and ear rims, gold ear insides",
+  "body": {
+   "base": "#2e3c8c",
+   "shadow": "#10143c",
+   "light": "#6478e0"
+  },
+  "belly": "#dfe4f6",
+  "ears": "#f2c440",
+  "stone": "#4c5888",
+  "stockbelly": [
+   "#dfe4f6",
+   0.7
+  ],
+  "stockbody": {
+   "base": "#2e3c8c",
+   "shadow": "#10143c",
+   "light": "#6478e0"
+  }
+ },
+ "green": {
+  "_note": "matcha latte (yellow-green): soft matcha body, cream belly and ear rims, deep tea-green ear insides",
+  "body": {
+   "base": "#a9d68c",
+   "shadow": "#5e9a50",
+   "light": "#e6f8c8"
+  },
+  "belly": "#fff6e4",
+  "ears": "#2c5426",
+  "stone": "#6f9268",
+  "stockbelly": [
+   "#fff6e4",
+   0.7
+  ],
+  "stockbody": {
+   "base": "#a9d68c",
+   "shadow": "#5e9a50",
+   "light": "#e6f8c8"
+  }
+ }
+}

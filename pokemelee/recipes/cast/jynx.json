@@ -1,0 +1,14 @@
+{
+  "pokemon": "jynx",
+  "source_model": "124_Jynx.glb",
+  "source_drop": [
+    "rougela_mesh_00",
+    "rougela_mesh_01",
+    "rougela_mesh_02",
+    "rougela_mesh_03",
+    "rougela_mesh_04",
+    "rougela_mesh_05"
+  ],
+  "schema": 1,
+  "fighter": "Popo"
+}

@@ -1,0 +1,66 @@
+{
+ "_about": "Smoochum (Nana, with Jynx on Popo): yellow hair 0x1d20, 0x1500, 0x3320, 0xf80; cream body 0x5ce0; skirt 0x7b00 cream and pink; pink face in the eye textures and 0x8f80; lips 0xa60. Red is the vanilla. Same team ideas as Jynx. Portrait and stock are the Colosseum art, mapped.",
+ "zones": {
+  "hair": {
+   "colours": [
+    "#ffff77",
+    "#ffdd55",
+    "#ffee55",
+    "#eecc77"
+   ],
+   "in": [
+    "0x1d20",
+    "0x1500",
+    "0x3320",
+    "0xf80",
+    "stock"
+   ]
+  },
+  "skirt": {
+   "colours": [
+    "#cc44bb"
+   ],
+   "in": [
+    "0x7b00"
+   ]
+  },
+  "body": {
+   "colours": [
+    "#ffffbb"
+   ],
+   "in": [
+    "0x5ce0",
+    "0x7b00",
+    "stock"
+   ]
+  }
+ },
+ "blue": {
+  "_note": "ice princess: icy pale-blue hair, midnight-navy skirt, cool white body (Jynx: ice queen)",
+  "hair": {
+   "base": "#cfe0ff",
+   "shadow": "#7f98cc",
+   "light": "#ffffff"
+  },
+  "skirt": {
+   "base": "#22307a",
+   "shadow": "#0b1238",
+   "light": "#5068d0"
+  },
+  "body": "#eef4ff"
+ },
+ "green": {
+  "_note": "poison ivy sprout: acid-lime hair, emerald skirt, mint-white body (Jynx: poison ivy)",
+  "hair": {
+   "base": "#bfe83a",
+   "shadow": "#5c8a12",
+   "light": "#f2ffb0"
+  },
+  "skirt": {
+   "base": "#1f8a4c",
+   "shadow": "#0a3a20",
+   "light": "#5cc47e"
+  },
+  "body": "#f2fbe8"
+ }
+}

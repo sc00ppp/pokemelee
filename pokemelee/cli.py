@@ -49,6 +49,34 @@ def parser():
     cast.add_argument("--hsd")
     cast.add_argument("--blender")
     cast.add_argument("--jobs", type=int, default=2)
+    icons = sub.add_parser("css-icons", help="Render the accepted character-select tiles from generated components")
+    for name in ("models", "cast", "out"):
+        icons.add_argument("--" + name, required=True)
+    icons.add_argument("--runtime", default="runtime")
+    icons.add_argument("--profile", choices=("normal", "animelee"), action="append")
+    icons.add_argument("--blender")
+    portraits = sub.add_parser("portraits", help="Render the accepted costume portraits from generated components")
+    for name in ("cast", "targets", "out"):
+        portraits.add_argument("--" + name, required=True)
+    portraits.add_argument("--runtime", default="runtime")
+    portraits.add_argument("--pokemon", action="append")
+    color_portraits = sub.add_parser("color-portraits", help="Render the accepted alternate costume portraits")
+    for name in ("colosseum", "colors", "cast", "targets", "portraits", "out"):
+        color_portraits.add_argument("--" + name, required=True)
+    color_portraits.add_argument("--runtime", default="runtime")
+    color_portraits.add_argument("--pokemon", action="append")
+    colors = sub.add_parser("colors", help="Rebuild the accepted shiny and designed team costumes")
+    for name in ("colosseum", "cast", "out"):
+        colors.add_argument("--" + name, required=True)
+    colors.add_argument("--pokemon", action="append")
+    menu_sources = sub.add_parser("menu-sources", help="Decode the accepted menu logo, backdrop and panel from Colosseum")
+    menu_sources.add_argument("--colosseum", required=True)
+    menu_sources.add_argument("--out", required=True)
+    menu_sources.add_argument("--runtime", default="runtime")
+    menus = sub.add_parser("menus", help="Rebuild the accepted menus from original discs and generated menu sources")
+    for name in ("melee", "sources", "out"):
+        menus.add_argument("--" + name, required=True)
+    menus.add_argument("--runtime", default="runtime")
     native = sub.add_parser("compile-stages", help="Compile the authored stage helpers against the pinned HSDRaw runtime")
     native.add_argument("--runtime", default="runtime")
     stages = sub.add_parser("stages", help="Rebuild the approved stages directly from the two source discs")
@@ -102,6 +130,26 @@ def parser():
 
 
 def run(args):
+    if args.command == "color-portraits":
+        from .portraits import build_color_portraits
+        return build_color_portraits(Disc(args.colosseum, "colosseum"), args.colors, args.cast, args.targets,
+                                     args.portraits, args.out, args.runtime, args.pokemon)
+    if args.command == "portraits":
+        from .portraits import build_portraits
+        return build_portraits(args.cast, args.targets, args.out, args.runtime, args.pokemon)
+    if args.command == "colors":
+        from .colors import build_colors
+        return build_colors(Disc(args.colosseum, "colosseum"), args.cast, args.out, args.pokemon)
+    if args.command == "menu-sources":
+        from .menu_sources import generate_menu_sources
+        return generate_menu_sources(Disc(args.colosseum, "colosseum"), args.out, args.runtime)
+    if args.command == "menus":
+        from .menus import build_menus
+        return build_menus(Disc(args.melee, "melee"), args.sources, args.out, args.runtime)
+    if args.command == "css-icons":
+        from .icons import generate_icons
+        return generate_icons(args.models, args.cast, args.out, args.runtime,
+                              args.profile or ("normal", "animelee"), blender=args.blender)
     if args.command == "cast":
         from .cast import build_cast
         return build_cast(Disc(args.colosseum, "colosseum"), args.models, args.targets, args.out, args.runtime,

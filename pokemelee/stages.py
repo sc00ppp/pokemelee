@@ -12,7 +12,7 @@ from .workspace import output_directory, receipt, write_blob, write_json
 
 FLAVORS = {"agate": "agate", "realgam": "agate", "phenac-lobby": "bf",
            "mt-battle-crater": "fd", "mt-battle-garden": "ys", "phenac-city": "stadium"}
-NATIVE_TOOLS = set(FLAVORS.values()) | {"forms", "colodump"}
+NATIVE_TOOLS = set(FLAVORS.values()) | {"forms", "colodump", "menugraft"}
 
 
 def compile_tools(runtime, flavors=None):

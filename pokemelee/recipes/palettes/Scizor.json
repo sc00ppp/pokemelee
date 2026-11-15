@@ -1,0 +1,148 @@
+{
+ "_about": "Scizor: glossy red body (0x1040, dark reds in 0x1e5e0), slate chest and abdomen plates (0x185a0, 0x1a020, 0x15960) and pincer rings (0x1b820, yellow pincer eyes), grey wings (0x16880), white toe claws (0x17a60, kept), eyes 0x22ea0 + blinks (orange iris).",
+ "zones": {
+  "body": {
+   "colours": [
+    "#912820",
+    "#992222",
+    "#aa3322",
+    "#661100",
+    "#5a0c08",
+    "#b43431",
+    "#e6cacd",
+    "#660000",
+    "#771111"
+   ],
+   "out": [
+    "0x22ea0",
+    "blink",
+    "stock"
+   ]
+  },
+  "plates": {
+   "colours": [
+    "#446677",
+    "#335566",
+    "#224455",
+    "#557788",
+    "#113333",
+    "#223344",
+    "#081010"
+   ],
+   "out": [
+    "stock"
+   ]
+  },
+  "pincer": {
+   "colours": [
+    "#f6c500",
+    "#eecc00",
+    "#dd9900",
+    "#c58b08",
+    "#eedd00"
+   ],
+   "in": [
+    "0x1b820",
+    "stock"
+   ]
+  },
+  "wings": {
+   "colours": [
+    "#eeeeee",
+    "#cccccc",
+    "#aaaaaa"
+   ],
+   "in": [
+    "0x16880"
+   ],
+   "bias": 1
+  },
+  "eyes": {
+   "colours": [
+    "#9c4a08",
+    "#e6b439",
+    "#5a2910",
+    "#000000",
+    "#eeeeee",
+    "#ffffff"
+   ],
+   "in": [
+    "0x22ea0",
+    "blink"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "stockbody": {
+   "colours": [
+    "#e21016",
+    "#ff4146",
+    "#ce0c0e",
+    "#fc272b",
+    "#c42527",
+    "#e62425",
+    "#c8777f",
+    "#7b0d0f",
+    "#7b414b",
+    "#4e252b"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "stockwings": {
+   "colours": [
+    "#e3e5e3"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "blue": {
+  "_note": "periwinkle chrome (violet-blue): periwinkle body with a white sheen, deep indigo plates and pincer rings, lilac-frost wings, yellow pincer eyes kept",
+  "body": {
+   "base": "#6c7ae6",
+   "shadow": "#2c3790",
+   "light": "#eef0ff"
+  },
+  "plates": {
+   "base": "#221a5c",
+   "light": "#4a3eb0"
+  },
+  "wings": "#ece8ff",
+  "stockbody": {
+   "base": "#6c7ae6",
+   "shadow": "#2c3790",
+   "light": "#eef0ff"
+  },
+  "stockwings": "#ece8ff"
+ },
+ "green": {
+  "_note": "jewel beetle (emerald): emerald body with deep teal shadows and only a faint yellow-green sheen, burnished bronze plates and pincer rings, smoky wings",
+  "body": {
+   "base": "#1e8a4c",
+   "shadow": "#062c2a",
+   "light": "#b8e86a"
+  },
+  "plates": {
+   "base": "#8a5a28",
+   "shadow": "#3a220e",
+   "light": "#e0a858"
+  },
+  "wings": "#c4d2bc",
+  "stockbody": {
+   "base": "#1e8a4c",
+   "shadow": "#062c2a",
+   "light": "#b8e86a"
+  },
+  "stockwings": "#c4d2bc"
+ }
+}

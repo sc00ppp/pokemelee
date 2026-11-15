@@ -40,11 +40,10 @@
     },
     {
       "id": "cast-models",
-      "state": "partially-verified",
+      "state": "verified",
       "source": "round_cast.sh, hand_finish.py and per-character hand scripts",
-      "remaining": "Finish Quilava, Machoke, Deoxys, Scyther, Pikachu and Smoochum; integrate and verify both partner workflows. All ordinary recipes use disc-derived models and saved decisions only.",
       "implementation": "pokemelee.targets, pokemelee.cast, recipes/cast-finishing.json, native/cast",
-      "result": "20 regular costumes verified through the standalone builder against the accepted exports; Plusle, Minun and Jynx also match in isolated recipe checks."
+      "result": "All 29 costumes rebuilt in an empty directory using the isolated offline runtime and fresh 27-fighter Melee targets. 27 exports, including the accepted Smoochum v2 replacement, match byte for byte; Pikachu and Scyther retain the documented small conversion differences."
     },
     {
       "id": "stages",
@@ -55,21 +54,21 @@
     },
     {
       "id": "portraits-and-menus",
-      "state": "needs-recipe-conversion",
+      "state": "integration-in-progress",
       "source": "css_icons.py, menu_art.py, stage_shots.py, sss_art.py, menugraft",
-      "remaining": "Generate the final rendered CSS portraits, stage images and menu replacements instead of reading cached PNGs/specs. Party-face icons are not the final portrait treatment."
+      "remaining": "The 54 CSS icons and three menu source images match the accepted pixels. Costume portraits and menus have standalone generators; complete the stage picture capture and assembled-project comparison."
     },
     {
       "id": "costume-colors",
-      "state": "needs-recipe-conversion",
+      "state": "integration-in-progress",
       "source": "recolor.py, recolor_specs.json, recolor_install.py",
-      "remaining": "Replay the approved shiny/team-color maps and costume installation from rebuilt models and source-disc textures."
+      "remaining": "All 102 shiny/team costumes regenerate using the authored maps. Verify final portraits and normal/AniMelee packages in the assembled projects."
     },
     {
       "id": "iso-assembly",
-      "state": "needs-standalone-adapter",
+      "state": "integration-in-progress",
       "source": "build_iso.py (Cast Test 30), pair_ics.py, pair_pichu.py",
-      "remaining": "Replace Nucleus vault/project/finish imports with a standalone adapter to pinned MexCLI. Include pair behavior and required game modifications. Fail on missing components; preserve unrelated media."
+      "remaining": "Standalone m-ex adapter, paired costume installation, aliases, menus and playlists are implemented. Complete the cold assembled-project and game checks."
     },
     {
       "id": "fighter-and-announcer-voices",

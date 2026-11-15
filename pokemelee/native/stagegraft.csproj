@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(Flavor)/*.cs" />
-    <Compile Include="Animation.cs" Condition="'$(Flavor)' != 'stadium' And '$(Flavor)' != 'colodump'" />
+    <Compile Include="Animation.cs" Condition="'$(Flavor)' != 'stadium' And '$(Flavor)' != 'colodump' And '$(Flavor)' != 'menugraft'" />
     <Reference Include="HSDRaw"><HintPath>$(HSDRawPath)</HintPath></Reference>
   </ItemGroup>
   <Target Name="RequireInputs" BeforeTargets="ResolveReferences">

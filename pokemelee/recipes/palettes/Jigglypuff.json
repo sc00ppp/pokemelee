@@ -1,0 +1,97 @@
+{
+ "_about": "Jigglypuff: one flat pink body (0xc2e0 plus shading), ear inners in 0x900, mouth 0x14e0, face/eyes 0x5960 + blink frames; teal irises.",
+ "zones": {
+  "body": [
+   "#ffcade",
+   "#f0b3be",
+   "#e09aa2",
+   "#c0767d",
+   "#fb9ea0"
+  ],
+  "ears": {
+   "colours": [
+    "#553e47",
+    "#121012"
+   ],
+   "in": [
+    "0x900"
+   ]
+  },
+  "iris": {
+   "colours": [
+    "#a1bfbd",
+    "#35665e",
+    "#56998f"
+   ],
+   "in": [
+    "0x5960",
+    "blink"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#e9f6f5",
+    "#000000",
+    "#121012"
+   ],
+   "in": [
+    "0x5960",
+    "blink",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#553e47",
+    "#c0767d",
+    "#fb9ea0"
+   ],
+   "in": [
+    "0x14e0"
+   ]
+  },
+  "black": {
+   "colours": [
+    "#000000",
+    "#121012"
+   ],
+   "out": [
+    "0x5960",
+    "blink",
+    "0x900"
+   ]
+  }
+ },
+ "red": {
+  "_note": "ember: dark crimson body that glows coral in the light, molten-gold eyes, near-black ear inners",
+  "body": {
+   "base": "#8e1630",
+   "shadow": "#2c0410",
+   "light": "#ff6b4f"
+  },
+  "ears": "#1a0a0e",
+  "iris": "#e8a21e",
+  "mouth": "#3a0812"
+ },
+ "blue": {
+  "_note": "lullaby night: pale sky-periwinkle body sinking to indigo in shadow, midnight ear inners, teal eyes kept",
+  "body": {
+   "base": "#a4c0ff",
+   "shadow": "#3550b0",
+   "light": "#eef4ff"
+  },
+  "ears": "#1b1f5a",
+  "mouth": "#2a2e78"
+ },
+ "green": {
+  "_note": "sea glass (sea-green): frosted sea-glass body sinking to deep teal, dark teal ear inners, coral eyes",
+  "body": {
+   "base": "#5cc9a0",
+   "shadow": "#1f6e6a",
+   "light": "#dcfff0"
+  },
+  "ears": "#123c3e",
+  "iris": "#ff7a5c",
+  "mouth": "#1f4f4a"
+ }
+}

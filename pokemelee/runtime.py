@@ -70,6 +70,14 @@ def install(name, platform, archive, output):
         actual = hashlib.file_digest(stream, "sha256").hexdigest()
     if actual != spec["sha256"]:
         raise ValueError(f"Runtime checksum mismatch for {name}/{platform}")
+    if spec.get("format") == "raw":
+        filename = safe_name(spec["asset"])
+        if spec["required"] != [filename]:
+            raise ValueError("Raw runtime must name exactly its required asset")
+        with output_directory(output, "runtime-install") as root:
+            outputs = [write_blob(root, filename, archive.read_bytes())]
+            return receipt(root, "runtime-install", {"tool": name, "platform": platform,
+                           "repository": tool["repo"], "tag": tool["tag"], "sha256": actual}, outputs)
     with zipfile.ZipFile(archive) as src:
         members, seen, total = [], set(), 0
         for info in src.infolist():

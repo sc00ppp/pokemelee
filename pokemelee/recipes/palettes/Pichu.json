@@ -1,0 +1,27 @@
+{
+ "_about": "Pichu: yellow body (0xa960 + shading), black ear tips (0x1900) and collar (0x4760), pink cheeks 0x2a20, mouth 0x3500, eyes 0x1b540 + blink.",
+ "zones": {
+  "body": ["#ffee52", "#e0cd51", "#fff394", "#a59732", "#64591c"],
+  "tips": {"colours": ["#000000", "#141915"], "out": ["0x1b540", "0xce20", "blink", "0x3500", "0x2a20", "stock"]},
+  "cheeks": {"colours": ["#fe89c2", "#c35c6b"], "in": ["0x2a20", "stock"]},
+  "mouth": {"colours": ["#c35c6b", "#fe89c2", "#d8ad95"], "in": ["0x3500"]},
+  "eyes": {"colours": ["#4a5f6f", "#f6f6f7", "#000000", "#141915"], "in": ["0x1b540", "0xce20", "blink", "stock"]}
+ },
+ "red": {
+  "_note": "strawberry: berry-red body with pink highlights, leaf-green ear tips and collar, cream cheeks",
+  "body": {"base": "#e23b4e", "shadow": "#7a0f24", "light": "#ffa0a0"},
+  "tips": "#2f7d2e",
+  "cheeks": "#ffe6a0"
+ },
+ "blue": {
+  "_note": "baby blue: pale sky body falling to cornflower in shadow, navy tips and collar, pink cheeks kept",
+  "body": {"base": "#9fd0ff", "shadow": "#4a6fd0", "light": "#f0f8ff"},
+  "tips": "#1c2a6e"
+ },
+ "green": {
+  "_note": "jungle: deep jungle-green body, gold ear tips and collar (the vanilla turned inside out), orange cheeks",
+  "body": {"base": "#2e7a3e", "shadow": "#0f3318", "light": "#7ed36a"},
+  "tips": "#ffd23f",
+  "cheeks": "#ff8a3d"
+ }
+}

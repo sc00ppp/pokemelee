@@ -1,0 +1,154 @@
+{
+ "_about": "Charmeleon (Roy): pink-red body (0x44e0, 0x93a0 snout, 0x9a40 and 0x6b40 with the cream belly, eyelids in 0xb820 + blinks), cream claws 0x7e20 (kept), mouth 0x8460, 0x8dc0; tail flame 0xca60 + the 'fire' flipbook; Roy's sword (0x520e0 to 0x62040) is kept as it is.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#d54c6a",
+    "#cc4466",
+    "#bd405a",
+    "#bb5566",
+    "#8b314a",
+    "#622031",
+    "#c53c5a",
+    "#e81838",
+    "#f82848",
+    "#d80828",
+    "#b81838",
+    "#980828",
+    "#780818"
+   ],
+   "out": [
+    "0x520e0",
+    "0x521e0",
+    "0x5c0e0",
+    "0x5de60",
+    "0x5ea60",
+    "0x5eda0",
+    "0x5f100",
+    "0x62040",
+    "fire",
+    "0xca60"
+   ]
+  },
+  "belly": {
+   "colours": [
+    "#ffe2b4",
+    "#ffddbb",
+    "#f6dab4",
+    "#eeccaa",
+    "#ffeebb"
+   ],
+   "in": [
+    "0x9a40",
+    "0x6b40",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#e66d83",
+    "#331111",
+    "#552222",
+    "#883344",
+    "#221100"
+   ],
+   "in": [
+    "0x8460"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#3d5a94",
+    "#5a6173",
+    "#000000",
+    "#bbbbbb",
+    "#d5cecd",
+    "#ffffff"
+   ],
+   "in": [
+    "0xb820",
+    "blink"
+   ]
+  },
+  "fire": {
+   "colours": [
+    "#f68118",
+    "#ee4010",
+    "#ac1c08",
+    "#ffc229",
+    "#ffee83"
+   ],
+   "in": [
+    "fire",
+    "0xca60"
+   ],
+   "bias": 1
+  },
+  "stockfire": {
+   "colours": [
+    "#e8c858",
+    "#f8a838",
+    "#f8d878"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "stockbelly": {
+   "colours": [
+    "#987848",
+    "#584838",
+    "#c8a868"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "blue": {
+  "_note": "blue flame (cobalt blue): cobalt body with navy shadows, ice-white belly, the tail fire burning blue with a white-hot core",
+  "body": {
+   "base": "#2f56c4",
+   "shadow": "#121a5a",
+   "light": "#6aa8ff"
+  },
+  "belly": "#e2ecfb",
+  "fire": {
+   "base": "#3ca0ff",
+   "shadow": "#1c1e96",
+   "light": "#effcff"
+  },
+  "stockfire": {
+   "base": "#3ca0ff",
+   "shadow": "#1c1e96",
+   "light": "#effcff"
+  },
+  "stockbelly": [
+   "#e2ecfb",
+   0.7
+  ]
+ },
+ "green": {
+  "_note": "toxic (chartreuse green): acid chartreuse body with olive shadows, ivory belly, the tail fire burning poison violet",
+  "body": {
+   "base": "#8cc628",
+   "shadow": "#2e5410",
+   "light": "#e2ff70"
+  },
+  "belly": "#fbfbe6",
+  "fire": {
+   "base": "#a044ff",
+   "shadow": "#36087e",
+   "light": "#f4dcff"
+  },
+  "stockfire": {
+   "base": "#a044ff",
+   "shadow": "#36087e",
+   "light": "#f4dcff"
+  },
+  "stockbelly": [
+   "#fbfbe6",
+   0.7
+  ]
+ }
+}

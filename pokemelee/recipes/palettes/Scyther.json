@@ -1,0 +1,135 @@
+{
+ "_about": "Scyther: green body (0x8e60, 0x42e0 abdomen, 0x20 snout), silver blades and toe claws (0x11a0, 0x1e60), cream wings (0xa40), cream chest plates and neck/leg stripes (0x1660, 0x2dc0), mouth inside 0x37c0, eyes 0xa840 + blinks (blue iris).",
+ "zones": {
+  "body": [
+   "#75b258",
+   "#83c262",
+   "#88bb66",
+   "#6aa54a",
+   "#4a8d29",
+   "#315d18",
+   "#21420c",
+   "#5d9a3d"
+  ],
+  "blades": {
+   "colours": [
+    "#c8dcdc",
+    "#ffffff",
+    "#7b8d94"
+   ],
+   "in": [
+    "0x11a0",
+    "0x1e60"
+   ],
+   "bias": 1
+  },
+  "wings": {
+   "colours": [
+    "#e6c2a4",
+    "#f6f2e6",
+    "#d5a173"
+   ],
+   "in": [
+    "0xa40"
+   ],
+   "bias": 1
+  },
+  "belly": {
+   "colours": [
+    "#e6d1af",
+    "#fff2cd",
+    "#94795a",
+    "#5a4029"
+   ],
+   "in": [
+    "0x1660",
+    "0x2dc0"
+   ],
+   "bias": 1
+  },
+  "mouth": {
+   "colours": [
+    "#832829",
+    "#5a1020",
+    "#945039"
+   ],
+   "in": [
+    "0x37c0"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#4140bd",
+    "#000020",
+    "#ffffff",
+    "#000000",
+    "#bbbbbb"
+   ],
+   "in": [
+    "0xa840",
+    "blink"
+   ]
+  },
+  "stockpale": {
+   "colours": [
+    "#f0ecd0",
+    "#ffffff",
+    "#e2ddca",
+    "#bdb7a9"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "outline": {
+   "colours": [
+    "#080808",
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ]
+  }
+ },
+ "red": {
+  "_note": "lacquered samurai (deep crimson red): crimson lacquer body, black-lacquer blades with gold edges, gold-leaf wings, ivory plates",
+  "body": {
+   "base": "#86141a",
+   "shadow": "#2a040c",
+   "light": "#e8462e"
+  },
+  "blades": {
+   "base": "#241c1e",
+   "shadow": "#080606",
+   "light": "#f2c45a",
+   "contrast": 2.5
+  },
+  "wings": {
+   "base": "#f0c050",
+   "light": "#fff4c8"
+  },
+  "belly": "#f2e6cc",
+  "stockpale": "#f0c050"
+ },
+ "blue": {
+  "_note": "midnight dragonfly (midnight navy blue): navy body lit to indigo, glowing ice-cyan blades, iridescent cyan-to-violet wings, steel-blue plates",
+  "body": {
+   "base": "#18236a",
+   "shadow": "#060818",
+   "light": "#4c66d6"
+  },
+  "blades": {
+   "base": "#9ff0ff",
+   "shadow": "#3a7ad0",
+   "light": "#f4ffff"
+  },
+  "wings": {
+   "base": "#9fe4ff",
+   "shadow": "#a77cff",
+   "light": "#e8fff6",
+   "contrast": 1.4
+  },
+  "belly": "#a9b8d8",
+  "stockpale": "#b8ecff"
+ }
+}

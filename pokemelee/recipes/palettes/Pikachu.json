@@ -1,0 +1,106 @@
+{
+ "_about": "Pikachu: yellow body, black ear tips (own texture 0x1580), red cheeks (0x9220, 0xc460), mouth 0xace0, eyes 0xd700 + blink.",
+ "zones": {
+  "body": [
+   "#feda35",
+   "#dfb730",
+   "#9a7e1e",
+   "#e8b828"
+  ],
+  "stripes": {
+   "colours": [
+    "#3c2e10"
+   ],
+   "out": [
+    "0xd700",
+    "blink",
+    "0xace0"
+   ]
+  },
+  "tips": {
+   "colours": [
+    "#000000",
+    "#202020"
+   ],
+   "in": [
+    "0x1580"
+   ]
+  },
+  "cheeks": {
+   "colours": [
+    "#eb4c33",
+    "#e57930"
+   ],
+   "in": [
+    "0x9220",
+    "0xc460",
+    "stock"
+   ]
+  },
+  "mouth": {
+   "colours": [
+    "#e57930",
+    "#eb4c33",
+    "#3c2e10"
+   ],
+   "in": [
+    "0xace0"
+   ]
+  },
+  "eyes": {
+   "colours": [
+    "#000000",
+    "#fdfdf9",
+    "#b2dcf0",
+    "#3c2e10",
+    "#a2af93"
+   ],
+   "in": [
+    "0xd700",
+    "blink",
+    "stock"
+   ]
+  },
+  "black": {
+   "colours": [
+    "#000000"
+   ],
+   "out": [
+    "0x1580"
+   ]
+  }
+ },
+ "red": {
+  "_note": "bubblegum pop (hot pink): hot pink body lifting to candy pink, black tips and stripes, lemon cheeks",
+  "body": {
+   "base": "#e0408a",
+   "shadow": "#6a0f3a",
+   "light": "#ff9cc8"
+  },
+  "stripes": "#1c0c14",
+  "tips": "#140a10",
+  "cheeks": "#ffe14a"
+ },
+ "blue": {
+  "_note": "midnight storm: navy body lifting to periwinkle, gold ear tips and back stripes, electric cyan cheeks",
+  "body": {
+   "base": "#22357e",
+   "shadow": "#0c1236",
+   "light": "#7d93e8"
+  },
+  "stripes": "#f2be3a",
+  "tips": "#f5c845",
+  "cheeks": "#5fe6ff"
+ },
+ "green": {
+  "_note": "mint chocolate chip: pale mint body, chocolate ear tips and stripes, raspberry cheeks",
+  "body": {
+   "base": "#a3e8b0",
+   "shadow": "#4fa874",
+   "light": "#ecfff0"
+  },
+  "stripes": "#3b2218",
+  "tips": "#3a2016",
+  "cheeks": "#ff4f86"
+ }
+}

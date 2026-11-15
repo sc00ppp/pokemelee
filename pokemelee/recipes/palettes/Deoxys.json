@@ -1,0 +1,205 @@
+{
+ "_about": "Deoxys: salmon body and legs (0xe60, 0xa280, 0x93c0, 0xb9c0, 0x9020, 0xc0 edges), teal arms, face and leg slits, purple face crystal (0x5ba0, 0x1040) and chest gem (0xac0), grey waist (0xa860), pink waist band (0x760), eyes in the face 0x1040; 0x1a340 / 0x2b040 are the orange morph ball, recoloured with the body. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part. Zone waist (0xa860 grey metal) is never named: it stays.",
+ "zones": {
+  "body": {
+   "colours": [
+    "#e26858",
+    "#e86858",
+    "#d85848",
+    "#c85848",
+    "#b84838",
+    "#a83828",
+    "#e87868",
+    "#e88878",
+    "#d87868",
+    "#b85848"
+   ],
+   "out": [
+    "0x1a340",
+    "0x2b040"
+   ]
+  },
+  "arms": {
+   "colours": [
+    "#0da9c7",
+    "#08a8c8",
+    "#088898",
+    "#08b8c8",
+    "#08c8d8",
+    "#0898b8",
+    "#0888a8"
+   ],
+   "out": [
+    "0x1a340",
+    "0x2b040"
+   ]
+  },
+  "crystal": {
+   "colours": [
+    "#7878c8",
+    "#8878d8",
+    "#8272c3"
+   ],
+   "in": [
+    "0x5ba0",
+    "0x1040",
+    "stock"
+   ]
+  },
+  "gem": {
+   "colours": [
+    "#493a81",
+    "#482888",
+    "#483888",
+    "#382878",
+    "#583888"
+   ],
+   "in": [
+    "0xac0",
+    "stock"
+   ]
+  },
+  "ball": {
+   "colours": [
+    "#983808",
+    "#a83808",
+    "#883808",
+    "#a84808",
+    "#e86818"
+   ],
+   "in": [
+    "0x1a340",
+    "0x2b040"
+   ],
+   "bias": 1
+  },
+  "s_body": {
+   "colours": [
+    "#e26858",
+    "#901b09",
+    "#ad200c",
+    "#860d04",
+    "#cd3124",
+    "#c6200d",
+    "#9c1f0a",
+    "#461d1c",
+    "#2a0502"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "s_arms": {
+   "colours": [
+    "#0da9c7",
+    "#006f93",
+    "#13384a"
+   ],
+   "in": [
+    "stock"
+   ]
+  },
+  "waist": {
+   "colours": [
+    "#686878",
+    "#586878",
+    "#586868",
+    "#4d6774",
+    "#2e302e"
+   ],
+   "in": [
+    "0xa860"
+   ],
+   "bias": 0.01
+  },
+  "outline": {
+   "colours": [
+    "#000000"
+   ],
+   "in": [
+    "stock"
+   ],
+   "bias": 0.01
+  }
+ },
+ "red": {
+  "_note": "rose quartz (pink end of red): pale rose body, deep magenta-plum arms and face, gold crystal and core (the stock icon's arms are a lighter plum: its sprite arms are near black, so plum vanished into the outline)",
+  "body": {
+   "base": "#eea0b8",
+   "shadow": "#b45a7a",
+   "light": "#f8c8d6",
+   "contrast": 0.6
+  },
+  "arms": {
+   "base": "#6a1a4a",
+   "shadow": "#2a0820",
+   "light": "#a84080"
+  },
+  "crystal": "#ffd040",
+  "gem": "#ffd040",
+  "ball": "#e07898",
+  "s_body": {
+   "base": "#eea0b8",
+   "shadow": "#b45a7a",
+   "light": "#f8c8d6",
+   "contrast": 0.6
+  },
+  "s_arms": {
+   "base": "#a43480",
+   "shadow": "#521040",
+   "light": "#d868b0"
+  }
+ },
+ "blue": {
+  "_note": "nebula (indigo-violet): indigo-violet body, glowing cyan arms and face, pink crystal and core",
+  "body": {
+   "base": "#3a2c90",
+   "shadow": "#140c40",
+   "light": "#6a58d0"
+  },
+  "arms": {
+   "base": "#30d8f0",
+   "shadow": "#1080b0",
+   "light": "#c8ffff"
+  },
+  "crystal": "#ff70d0",
+  "gem": "#ff70d0",
+  "ball": "#3a2c90",
+  "s_body": {
+   "base": "#3a2c90",
+   "shadow": "#140c40",
+   "light": "#6a58d0"
+  },
+  "s_arms": {
+   "base": "#30d8f0",
+   "shadow": "#1080b0",
+   "light": "#c8ffff"
+  }
+ },
+ "green": {
+  "_note": "Rayquaza's colours (emerald): emerald body, gold arms and face like its ring markings, red crystal and core",
+  "body": {
+   "base": "#1f7a46",
+   "shadow": "#0a3420",
+   "light": "#50c070"
+  },
+  "arms": {
+   "base": "#f0cc30",
+   "shadow": "#a87a10",
+   "light": "#fff4a0"
+  },
+  "crystal": "#e83a2a",
+  "gem": "#d8282a",
+  "ball": "#1f7a46",
+  "s_body": {
+   "base": "#1f7a46",
+   "shadow": "#0a3420",
+   "light": "#50c070"
+  },
+  "s_arms": {
+   "base": "#f0cc30",
+   "shadow": "#a87a10",
+   "light": "#fff4a0"
+  }
+ }
+}
