@@ -196,8 +196,8 @@
           "{out}"
         ]
       ],
-      "sha256": "60bcb454c093f9861b7c400cb9df68bb0d224f0686f52a6616aedffc5bb41ad2",
-      "bytes": 249126
+      "sha256": "aab8d253f77531a12ee73f10a8d2e0f54bb238171cfcfe348ffc2f845a55c4bf",
+      "bytes": 248338
     },
     "farfetchd": {
       "pokemon": "Farfetchd",
@@ -850,7 +850,7 @@
       "seed": "3-build",
       "finish": "3-build",
       "directories": [],
-      "sha256": "9eb25a3f8331af2359d7143d05027f03180717b2e380400bb26ae53d10524e20",
+      "sha256": "e945ff1fb114eb06b74a330a080cb9fc6fb176d3ad9c871baec900e7ec235d96",
       "steps": [
         [
           "hand_machoke.py",
@@ -875,6 +875,11 @@
           "hand_finish.py",
           "{build}",
           "{out}"
+        ],
+        [
+          "hand_machoke_color.py",
+          "{out}",
+          "{model}"
         ]
       ]
     },

@@ -29,10 +29,12 @@ def clear():
             coll.remove(item)
 
 
-def strip(objs):
+def strip(objs, keep=()):
     """Colosseum hit boxes and the rips' unit Icosphere: untextured meshes of 64 vertices or fewer."""
     for o in list(objs):
         if o.type != 'MESH':
+            continue
+        if o.name in keep:
             continue
         textured = any(s.material and s.material.use_nodes and any(n.type == 'TEX_IMAGE' for n in s.material.node_tree.nodes)
                        for s in o.material_slots)
@@ -58,7 +60,7 @@ def load_mon(m):
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=m['glb'])
     objs = [o for o in bpy.data.objects if o not in before]
-    strip(objs)
+    strip(objs, m.get('keep', []))
     objs = [o for o in bpy.data.objects if o not in before]
     for o in objs:
         if o.type == 'MESH' and any(h in o.name for h in m.get('hide', [])):

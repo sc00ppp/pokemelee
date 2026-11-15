@@ -18,8 +18,10 @@ AniMelee Test 23 are comparison references only. A normal build never reads them
 
 The fixed recipes regenerate all 29 characters, 102 alternate costumes, paired
 portraits, character/stage menus, six stages, voices and music. The stage files,
-source models, audio, menu source images and CSS icons match the accepted assets.
-Twenty-seven base character exports match byte for byte. Pikachu and Scyther
+source models, audio and menu source images match the accepted assets.
+Twenty-five base character exports match byte for byte. Combusken's arm roll and
+Machoke's missing crest color are corrected in the fixed recipes; Machoke's CSS
+icon also preserves the crest. Pikachu and Scyther
 retain the small documented conversion differences in `cast-finishing.json`.
 The original Melee bonus movie is preserved.
 

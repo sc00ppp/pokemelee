@@ -1,5 +1,5 @@
 {
- "_about": "Machoke: grey-blue skin over most textures, white crest (an untextured \"flat\" material, Machoke's only flats), red-brown muscle lines (0x3ac0, 0x5ce0), black belt and trunks (0x11160, 0xa280, 0x44680) with gold buckle and studs (0x39ae0, 0x49f60 ornaments), mouth (0x94e0, 0xb2a0), red eyes 0x11ee0. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "_about": "Machoke: grey-blue skin over most textures, source-yellow crest (two untextured materials; other flat surfaces retain their original team mappings), red-brown muscle lines (0x3ac0, 0x5ce0), black belt and trunks (0x11160, 0xa280, 0x44680) with gold buckle and studs (0x39ae0, 0x49f60 ornaments), mouth (0x94e0, 0xb2a0), red eyes 0x11ee0. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
  "zones": {
   "skin": {
    "colours": [
@@ -22,10 +22,24 @@
   },
   "crest": {
    "colours": [
+    "#999973"
+   ],
+   "in": [
+    "material:0x2645c",
+    "material:0x26528"
+   ],
+   "bias": 1
+  },
+  "other_flats": {
+   "colours": [
     "#ffffff"
    ],
    "in": [
     "flat"
+   ],
+   "out": [
+    "material:0x2645c",
+    "material:0x26528"
    ],
    "bias": 1
   },
@@ -129,6 +143,7 @@
    "contrast": 0.7
   },
   "crest": "#f0c040",
+  "other_flats": "#f0c040",
   "stripes": "#e8b040",
   "s_skin": {
    "base": "#6e1626",
@@ -147,6 +162,7 @@
    "contrast": 0.7
   },
   "crest": "#1a2a1a",
+  "other_flats": "#1a2a1a",
   "stripes": "#2e5a26",
   "trunks": "#5a2a8a",
   "s_skin": {

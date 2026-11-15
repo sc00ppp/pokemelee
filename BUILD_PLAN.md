@@ -21,8 +21,8 @@ Implemented build pipeline:
 - All fighter and announcer voices, six menu sounds and seven looping music
   tracks rebuilt from the discs, matching the accepted audio files.
 - All 29 fixed character recipes, with their original mappings and corrections;
-  27 match the accepted exports exactly and two retain documented small
-  conversion differences.
+  25 match the accepted exports exactly, Combusken's arm roll and Machoke's crest
+  color are corrected, and two retain documented small conversion differences.
 - All 102 alternate costumes, 131 packages per variant, rendered character
   icons and portraits, pair composition, menu assets and stage pictures.
 - A fresh m-ex project per variant, including paired fighters, team colors,

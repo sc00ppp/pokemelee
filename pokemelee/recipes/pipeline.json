@@ -43,7 +43,7 @@
       "state": "verified",
       "source": "round_cast.sh, hand_finish.py and per-character hand scripts",
       "implementation": "pokemelee.targets, pokemelee.cast, recipes/cast-finishing.json, native/cast",
-      "result": "All 29 costumes rebuilt in an empty directory using the isolated offline runtime and fresh 27-fighter Melee targets. 27 exports, including the accepted Smoochum v2 replacement, match byte for byte; Pikachu and Scyther retain the documented small conversion differences."
+      "result": "All 29 costumes rebuilt in an empty directory using the isolated offline runtime and fresh 27-fighter Melee targets. 25 exports, including Smoochum v2, match the historical reference byte for byte; Combusken's arm roll and Machoke's crest color have reviewed recipe corrections. Pikachu and Scyther retain documented small conversion differences."
     },
     {
       "id": "stages",

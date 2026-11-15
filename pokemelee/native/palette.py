@@ -111,7 +111,8 @@ def target_of(spec):
 class Palette:
     """zones: {name: [colours]} or {name: {"colours": [...], "in": [texture ids], "out": [texture ids], "bias": 0}}.
     A texture id is an image's data offset in hex ("0x17d20"), "blink" for an eye's blink frame, "fire" for a frame
-    of a looping flipbook (anim_fire), "flat" for an untextured material, "stock" for the stock icon and the mapped
+    of a looping flipbook (anim_fire), "flat" for an untextured material, "material:0x..." for its material offset,
+    "stock" for the stock icon and the mapped
     portraits. A zone with "in" only works there; "out" keeps it off those. "bias" is taken off the zone's distances,
     so it wins a tie with a zone of the same colour (.01) or takes every texel of its textures (1)."""
 
@@ -250,5 +251,6 @@ def recolored_by_texture(path, fn):
     for mat in flat:
         at = recolor.HEADER + mat + 0x04
         c = np.array(list(buf[at:at + 3]), float)[None] / 255
-        buf[at:at + 3] = bytes(np.rint(np.clip(fn(c, frozenset({'flat'})), 0, 1) * 255).astype('u1')[0].tolist())
+        ids = frozenset({'flat', 'material:' + hex(mat)})
+        buf[at:at + 3] = bytes(np.rint(np.clip(fn(c, ids), 0, 1) * 255).astype('u1')[0].tolist())
     return bytes(buf)

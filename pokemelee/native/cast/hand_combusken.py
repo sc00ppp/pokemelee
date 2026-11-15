@@ -66,10 +66,16 @@ for side,ss,ee,hh,tip,across,jj in [
     normal=np.cross(along,acrossv)
     source_basis=np.column_stack([along,acrossv,normal])
     dest_basis=np.column_stack([[side,0,0],[0,-1,0],[0,0,-side]])
-    ARMS[side]=(src,dst,jj,dest_basis@source_basis.T)
+    handrot=dest_basis@source_basis.T
+    # Keep the forearm's roll continuous with the hand. Independent shortest-arc
+    # rotations align the limb axes but leave an arbitrary twist between them;
+    # blending those positions pinches the wrist into a candy-wrapper shape.
+    forearmrot=rot(handrot@unit(src[2]-src[1]),unit(dst[2]-dst[1]))@handrot
+    upperrot=rot(forearmrot@unit(src[1]-src[0]),unit(dst[1]-dst[0]))@forearmrot
+    ARMS[side]=(src,dst,jj,handrot,(upperrot,forearmrot))
 
 def arm(p,side,is_hand=False):
-    src,dst,jj,handrot=ARMS[side]
+    src,dst,jj,handrot,segmentrots=ARMS[side]
     armvec=src[2]-src[1]
     t=float((p-src[1])@armvec/(armvec@armvec))
     if is_hand or t>.65:
@@ -81,9 +87,9 @@ def arm(p,side,is_hand=False):
         v=src[i+1]-src[i];u=float(np.clip((p-src[i])@v/(v@v),0,1))
         options.append((np.linalg.norm(p-(src[i]+u*v)),i,u))
     _,i,u=min(options)
-    v=src[i+1]-src[i];axis=unit(v)
+    v=src[i+1]-src[i]
     off=p-src[i]-u*v
-    q=mix(dst[i],dst[i+1],u)+11.5*(rot(axis,unit(dst[i+1]-dst[i]))@off)
+    q=mix(dst[i],dst[i+1],u)+11.5*(segmentrots[i]@off)
     if i==0:
         w=blendw(wt(jj[0]),wt(jj[1]),smooth(.75,1.,u)*.5)
         tr,tw=trunk(p);b=smooth(0,.38,u)

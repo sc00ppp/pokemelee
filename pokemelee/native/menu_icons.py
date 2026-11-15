@@ -54,6 +54,7 @@ PAIRS = {
 MODEL = {'deoxys': {'hide': ['deoxys_mesh_21', 'deoxys_mesh_22'],    # tentacle strips stretched to twice its height
                     'face': {'deoxys_mesh_10': {'image': '{deoxys_face}',
                                                 'margin': 0.019}}},
+         'machoke': {'keep': ['goriky_mesh_12']},  # the untextured crest is a real visible surface
          'gardevoir': {'wrap': {'sirnight_mesh_25': 'MIRROR'}, 'rows': {'sirnight_mesh_25': [0, 288, 96]}}}
 
 
