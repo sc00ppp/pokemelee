@@ -1,0 +1,3913 @@
+{
+  "schema": 1,
+  "description": "Accepted voice slots, cry species and tape-speed choices. Sound data comes from user discs.",
+  "banks": {
+    "captain.ssm": [
+      {
+        "slot": 2,
+        "internal": 282,
+        "dex": 257,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 3,
+        "internal": 282,
+        "dex": 257,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 4,
+        "internal": 282,
+        "dex": 257,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 5,
+        "internal": 282,
+        "dex": 257,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 6,
+        "internal": 282,
+        "dex": 257,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 7,
+        "internal": 282,
+        "dex": 257,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 8,
+        "internal": 282,
+        "dex": 257,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 9,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 10,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 11,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 282,
+        "dex": 257,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 13,
+        "internal": 282,
+        "dex": 257,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 14,
+        "internal": 282,
+        "dex": 257,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 15,
+        "internal": 282,
+        "dex": 257,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 16,
+        "internal": 282,
+        "dex": 257,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 17,
+        "internal": 282,
+        "dex": 257,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 18,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 19,
+        "internal": 282,
+        "dex": 257,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 20,
+        "internal": 282,
+        "dex": 257,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 21,
+        "internal": 282,
+        "dex": 257,
+        "role": "asleep",
+        "semitones": -4
+      },
+      {
+        "slot": 22,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 23,
+        "internal": 282,
+        "dex": 257,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 24,
+        "internal": 282,
+        "dex": 257,
+        "role": "special",
+        "semitones": 0
+      }
+    ],
+    "clink.ssm": [
+      {
+        "slot": 5,
+        "internal": 83,
+        "dex": 83,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 6,
+        "internal": 83,
+        "dex": 83,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 7,
+        "internal": 83,
+        "dex": 83,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 8,
+        "internal": 83,
+        "dex": 83,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 9,
+        "internal": 83,
+        "dex": 83,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 10,
+        "internal": 83,
+        "dex": 83,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 11,
+        "internal": 83,
+        "dex": 83,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 12,
+        "internal": 83,
+        "dex": 83,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 13,
+        "internal": 83,
+        "dex": 83,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 14,
+        "internal": 83,
+        "dex": 83,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 15,
+        "internal": 83,
+        "dex": 83,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 16,
+        "internal": 83,
+        "dex": 83,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 17,
+        "internal": 83,
+        "dex": 83,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 18,
+        "internal": 83,
+        "dex": 83,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 19,
+        "internal": 83,
+        "dex": 83,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 20,
+        "internal": 83,
+        "dex": 83,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 21,
+        "internal": 83,
+        "dex": 83,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 22,
+        "internal": 83,
+        "dex": 83,
+        "role": "tech",
+        "semitones": 5
+      }
+    ],
+    "dk.ssm": [
+      {
+        "slot": 4,
+        "internal": 285,
+        "dex": 260,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 5,
+        "internal": 285,
+        "dex": 260,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 6,
+        "internal": 285,
+        "dex": 260,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 13,
+        "internal": 285,
+        "dex": 260,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 14,
+        "internal": 285,
+        "dex": 260,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 15,
+        "internal": 285,
+        "dex": 260,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 16,
+        "internal": 285,
+        "dex": 260,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 17,
+        "internal": 285,
+        "dex": 260,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 18,
+        "internal": 285,
+        "dex": 260,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 19,
+        "internal": 285,
+        "dex": 260,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 20,
+        "internal": 285,
+        "dex": 260,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 21,
+        "internal": 285,
+        "dex": 260,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 22,
+        "internal": 285,
+        "dex": 260,
+        "role": "ko",
+        "semitones": 2
+      }
+    ],
+    "drmario.ssm": [
+      {
+        "slot": 3,
+        "internal": 241,
+        "dex": 241,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 4,
+        "internal": 241,
+        "dex": 241,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 5,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 15,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 16,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 17,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 18,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 19,
+        "internal": 241,
+        "dex": 241,
+        "role": "smash",
+        "semitones": -2
+      },
+      {
+        "slot": 20,
+        "internal": 241,
+        "dex": 241,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 241,
+        "dex": 241,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 22,
+        "internal": 241,
+        "dex": 241,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 23,
+        "internal": 241,
+        "dex": 241,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 24,
+        "internal": 241,
+        "dex": 241,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 25,
+        "internal": 241,
+        "dex": 241,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 26,
+        "internal": 241,
+        "dex": 241,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 27,
+        "internal": 241,
+        "dex": 241,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 28,
+        "internal": 241,
+        "dex": 241,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 29,
+        "internal": 241,
+        "dex": 241,
+        "role": "asleep",
+        "semitones": -4
+      },
+      {
+        "slot": 30,
+        "internal": 241,
+        "dex": 241,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 31,
+        "internal": 241,
+        "dex": 241,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 32,
+        "internal": 241,
+        "dex": 241,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 33,
+        "internal": 241,
+        "dex": 241,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 34,
+        "internal": 241,
+        "dex": 241,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 35,
+        "internal": 241,
+        "dex": 241,
+        "role": "heavy",
+        "semitones": 1
+      }
+    ],
+    "emblem.ssm": [
+      {
+        "slot": 6,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 7,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 8,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 9,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 10,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 11,
+        "internal": 5,
+        "dex": 5,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 12,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": -2
+      },
+      {
+        "slot": 13,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 4
+      },
+      {
+        "slot": 14,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 5,
+        "dex": 5,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 16,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 17,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 18,
+        "internal": 5,
+        "dex": 5,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 19,
+        "internal": 5,
+        "dex": 5,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 20,
+        "internal": 5,
+        "dex": 5,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 21,
+        "internal": 5,
+        "dex": 5,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 22,
+        "internal": 5,
+        "dex": 5,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 23,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 24,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 25,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 26,
+        "internal": 5,
+        "dex": 5,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 27,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 28,
+        "internal": 5,
+        "dex": 5,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 29,
+        "internal": 5,
+        "dex": 5,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 30,
+        "internal": 5,
+        "dex": 5,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 31,
+        "internal": 5,
+        "dex": 5,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 32,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 33,
+        "internal": 5,
+        "dex": 5,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 34,
+        "internal": 5,
+        "dex": 5,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 35,
+        "internal": 5,
+        "dex": 5,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "falco.ssm": [
+      {
+        "slot": 5,
+        "internal": 281,
+        "dex": 256,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 6,
+        "internal": 281,
+        "dex": 256,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 281,
+        "dex": 256,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 8,
+        "internal": 281,
+        "dex": 256,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 9,
+        "internal": 281,
+        "dex": 256,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 10,
+        "internal": 281,
+        "dex": 256,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 11,
+        "internal": 281,
+        "dex": 256,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 12,
+        "internal": 281,
+        "dex": 256,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 281,
+        "dex": 256,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 14,
+        "internal": 281,
+        "dex": 256,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 15,
+        "internal": 281,
+        "dex": 256,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 16,
+        "internal": 281,
+        "dex": 256,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 17,
+        "internal": 281,
+        "dex": 256,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 18,
+        "internal": 281,
+        "dex": 256,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 19,
+        "internal": 281,
+        "dex": 256,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 20,
+        "internal": 281,
+        "dex": 256,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 21,
+        "internal": 281,
+        "dex": 256,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 22,
+        "internal": 281,
+        "dex": 256,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 23,
+        "internal": 281,
+        "dex": 256,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 24,
+        "internal": 281,
+        "dex": 256,
+        "role": "tech",
+        "semitones": 5
+      },
+      {
+        "slot": 25,
+        "internal": 281,
+        "dex": 256,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "fox.ssm": [
+      {
+        "slot": 4,
+        "internal": 156,
+        "dex": 156,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 5,
+        "internal": 156,
+        "dex": 156,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 6,
+        "internal": 156,
+        "dex": 156,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 7,
+        "internal": 156,
+        "dex": 156,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 8,
+        "internal": 156,
+        "dex": 156,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 9,
+        "internal": 156,
+        "dex": 156,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 10,
+        "internal": 156,
+        "dex": 156,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 11,
+        "internal": 156,
+        "dex": 156,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 12,
+        "internal": 156,
+        "dex": 156,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 13,
+        "internal": 156,
+        "dex": 156,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 14,
+        "internal": 156,
+        "dex": 156,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 15,
+        "internal": 156,
+        "dex": 156,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 16,
+        "internal": 156,
+        "dex": 156,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 17,
+        "internal": 156,
+        "dex": 156,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 18,
+        "internal": 156,
+        "dex": 156,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 19,
+        "internal": 156,
+        "dex": 156,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 20,
+        "internal": 156,
+        "dex": 156,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 21,
+        "internal": 156,
+        "dex": 156,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 22,
+        "internal": 156,
+        "dex": 156,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 23,
+        "internal": 156,
+        "dex": 156,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 24,
+        "internal": 156,
+        "dex": 156,
+        "role": "light",
+        "semitones": 6
+      }
+    ],
+    "ganon.ssm": [
+      {
+        "slot": 3,
+        "internal": 67,
+        "dex": 67,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 4,
+        "internal": 67,
+        "dex": 67,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 5,
+        "internal": 67,
+        "dex": 67,
+        "role": "win",
+        "semitones": -1
+      },
+      {
+        "slot": 6,
+        "internal": 67,
+        "dex": 67,
+        "role": "win",
+        "semitones": 1
+      },
+      {
+        "slot": 7,
+        "internal": 67,
+        "dex": 67,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 8,
+        "internal": 67,
+        "dex": 67,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 9,
+        "internal": 67,
+        "dex": 67,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 10,
+        "internal": 67,
+        "dex": 67,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 11,
+        "internal": 67,
+        "dex": 67,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 67,
+        "dex": 67,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 13,
+        "internal": 67,
+        "dex": 67,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 14,
+        "internal": 67,
+        "dex": 67,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 15,
+        "internal": 67,
+        "dex": 67,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 16,
+        "internal": 67,
+        "dex": 67,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 17,
+        "internal": 67,
+        "dex": 67,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 18,
+        "internal": 67,
+        "dex": 67,
+        "role": "asleep",
+        "semitones": -4
+      },
+      {
+        "slot": 19,
+        "internal": 67,
+        "dex": 67,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 20,
+        "internal": 67,
+        "dex": 67,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 21,
+        "internal": 67,
+        "dex": 67,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 22,
+        "internal": 67,
+        "dex": 67,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 23,
+        "internal": 67,
+        "dex": 67,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 24,
+        "internal": 67,
+        "dex": 67,
+        "role": "special",
+        "semitones": 3
+      }
+    ],
+    "gw.ssm": [
+      {
+        "slot": 1,
+        "internal": 201,
+        "dex": 201,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 4,
+        "internal": 201,
+        "dex": 201,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 5,
+        "internal": 201,
+        "dex": 201,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 6,
+        "internal": 201,
+        "dex": 201,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 7,
+        "internal": 201,
+        "dex": 201,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 8,
+        "internal": 201,
+        "dex": 201,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 9,
+        "internal": 201,
+        "dex": 201,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 10,
+        "internal": 201,
+        "dex": 201,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 201,
+        "dex": 201,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 201,
+        "dex": 201,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 201,
+        "dex": 201,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 14,
+        "internal": 201,
+        "dex": 201,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 15,
+        "internal": 201,
+        "dex": 201,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "ice.ssm": [
+      {
+        "slot": 3,
+        "internal": 238,
+        "dex": 238,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 4,
+        "internal": 124,
+        "dex": 124,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 12,
+        "internal": 238,
+        "dex": 238,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 13,
+        "internal": 238,
+        "dex": 238,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 14,
+        "internal": 238,
+        "dex": 238,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 15,
+        "internal": 238,
+        "dex": 238,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 16,
+        "internal": 238,
+        "dex": 238,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 17,
+        "internal": 238,
+        "dex": 238,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 18,
+        "internal": 238,
+        "dex": 238,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 19,
+        "internal": 238,
+        "dex": 238,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 20,
+        "internal": 238,
+        "dex": 238,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 238,
+        "dex": 238,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 22,
+        "internal": 238,
+        "dex": 238,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 23,
+        "internal": 238,
+        "dex": 238,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 24,
+        "internal": 238,
+        "dex": 238,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 25,
+        "internal": 238,
+        "dex": 238,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 26,
+        "internal": 238,
+        "dex": 238,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 27,
+        "internal": 238,
+        "dex": 238,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 28,
+        "internal": 124,
+        "dex": 124,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 29,
+        "internal": 124,
+        "dex": 124,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 30,
+        "internal": 124,
+        "dex": 124,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 31,
+        "internal": 124,
+        "dex": 124,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 32,
+        "internal": 124,
+        "dex": 124,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 33,
+        "internal": 124,
+        "dex": 124,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 34,
+        "internal": 124,
+        "dex": 124,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 35,
+        "internal": 124,
+        "dex": 124,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 36,
+        "internal": 124,
+        "dex": 124,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 37,
+        "internal": 124,
+        "dex": 124,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 38,
+        "internal": 124,
+        "dex": 124,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 39,
+        "internal": 124,
+        "dex": 124,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 40,
+        "internal": 124,
+        "dex": 124,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 41,
+        "internal": 124,
+        "dex": 124,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 42,
+        "internal": 124,
+        "dex": 124,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 43,
+        "internal": 124,
+        "dex": 124,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "kirby.ssm": [
+      {
+        "slot": 20,
+        "internal": 40,
+        "dex": 40,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 21,
+        "internal": 40,
+        "dex": 40,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 22,
+        "internal": 40,
+        "dex": 40,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 23,
+        "internal": 40,
+        "dex": 40,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 24,
+        "internal": 40,
+        "dex": 40,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 25,
+        "internal": 40,
+        "dex": 40,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 26,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 27,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 28,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 29,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 30,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 31,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 32,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 33,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 34,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 35,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 36,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 37,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 38,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 39,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 40,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 41,
+        "internal": 40,
+        "dex": 40,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 42,
+        "internal": 40,
+        "dex": 40,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 43,
+        "internal": 40,
+        "dex": 40,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 44,
+        "internal": 40,
+        "dex": 40,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 45,
+        "internal": 40,
+        "dex": 40,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 46,
+        "internal": 40,
+        "dex": 40,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 47,
+        "internal": 40,
+        "dex": 40,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 48,
+        "internal": 40,
+        "dex": 40,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 49,
+        "internal": 40,
+        "dex": 40,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 50,
+        "internal": 40,
+        "dex": 40,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 51,
+        "internal": 40,
+        "dex": 40,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "koopa.ssm": [
+      {
+        "slot": 4,
+        "internal": 9,
+        "dex": 9,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 5,
+        "internal": 9,
+        "dex": 9,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 6,
+        "internal": 9,
+        "dex": 9,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 7,
+        "internal": 9,
+        "dex": 9,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 8,
+        "internal": 9,
+        "dex": 9,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 9,
+        "internal": 9,
+        "dex": 9,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 10,
+        "internal": 9,
+        "dex": 9,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 9,
+        "dex": 9,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 9,
+        "dex": 9,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 9,
+        "dex": 9,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 14,
+        "internal": 9,
+        "dex": 9,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 15,
+        "internal": 9,
+        "dex": 9,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 16,
+        "internal": 9,
+        "dex": 9,
+        "role": "ko",
+        "semitones": 2
+      }
+    ],
+    "link.ssm": [
+      {
+        "slot": 5,
+        "internal": 123,
+        "dex": 123,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 6,
+        "internal": 123,
+        "dex": 123,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 7,
+        "internal": 123,
+        "dex": 123,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 8,
+        "internal": 123,
+        "dex": 123,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 9,
+        "internal": 123,
+        "dex": 123,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 10,
+        "internal": 123,
+        "dex": 123,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 11,
+        "internal": 123,
+        "dex": 123,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 123,
+        "dex": 123,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 13,
+        "internal": 123,
+        "dex": 123,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 14,
+        "internal": 123,
+        "dex": 123,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 15,
+        "internal": 123,
+        "dex": 123,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 16,
+        "internal": 123,
+        "dex": 123,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 17,
+        "internal": 123,
+        "dex": 123,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 18,
+        "internal": 123,
+        "dex": 123,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 19,
+        "internal": 123,
+        "dex": 123,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 20,
+        "internal": 123,
+        "dex": 123,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 21,
+        "internal": 123,
+        "dex": 123,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 22,
+        "internal": 123,
+        "dex": 123,
+        "role": "tech",
+        "semitones": 5
+      }
+    ],
+    "luigi.ssm": [
+      {
+        "slot": 15,
+        "internal": 307,
+        "dex": 286,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 16,
+        "internal": 307,
+        "dex": 286,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 17,
+        "internal": 307,
+        "dex": 286,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 18,
+        "internal": 307,
+        "dex": 286,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 19,
+        "internal": 307,
+        "dex": 286,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 20,
+        "internal": 307,
+        "dex": 286,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 307,
+        "dex": 286,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 22,
+        "internal": 307,
+        "dex": 286,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 23,
+        "internal": 307,
+        "dex": 286,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 24,
+        "internal": 307,
+        "dex": 286,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 25,
+        "internal": 307,
+        "dex": 286,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 26,
+        "internal": 307,
+        "dex": 286,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 27,
+        "internal": 307,
+        "dex": 286,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 28,
+        "internal": 307,
+        "dex": 286,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 29,
+        "internal": 307,
+        "dex": 286,
+        "role": "asleep",
+        "semitones": -4
+      },
+      {
+        "slot": 30,
+        "internal": 307,
+        "dex": 286,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 31,
+        "internal": 307,
+        "dex": 286,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 32,
+        "internal": 307,
+        "dex": 286,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 33,
+        "internal": 307,
+        "dex": 286,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 34,
+        "internal": 307,
+        "dex": 286,
+        "role": "heavy",
+        "semitones": 1
+      }
+    ],
+    "mario.ssm": [
+      {
+        "slot": 1,
+        "internal": 126,
+        "dex": 126,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 126,
+        "dex": 126,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 126,
+        "dex": 126,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 12,
+        "internal": 126,
+        "dex": 126,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 13,
+        "internal": 126,
+        "dex": 126,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 14,
+        "internal": 126,
+        "dex": 126,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 15,
+        "internal": 126,
+        "dex": 126,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 16,
+        "internal": 126,
+        "dex": 126,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 17,
+        "internal": 126,
+        "dex": 126,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 18,
+        "internal": 126,
+        "dex": 126,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 19,
+        "internal": 126,
+        "dex": 126,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 20,
+        "internal": 126,
+        "dex": 126,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 21,
+        "internal": 126,
+        "dex": 126,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 22,
+        "internal": 126,
+        "dex": 126,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 23,
+        "internal": 126,
+        "dex": 126,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 24,
+        "internal": 126,
+        "dex": 126,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 25,
+        "internal": 126,
+        "dex": 126,
+        "role": "asleep",
+        "semitones": -4
+      },
+      {
+        "slot": 26,
+        "internal": 126,
+        "dex": 126,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 27,
+        "internal": 126,
+        "dex": 126,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 28,
+        "internal": 126,
+        "dex": 126,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 29,
+        "internal": 126,
+        "dex": 126,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 30,
+        "internal": 126,
+        "dex": 126,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 31,
+        "internal": 126,
+        "dex": 126,
+        "role": "heavy",
+        "semitones": 1
+      }
+    ],
+    "mars.ssm": [
+      {
+        "slot": 7,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 8,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 9,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 10,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 11,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 12,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": -2
+      },
+      {
+        "slot": 13,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 4
+      },
+      {
+        "slot": 14,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 212,
+        "dex": 212,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 16,
+        "internal": 212,
+        "dex": 212,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 17,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 18,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 19,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 20,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 21,
+        "internal": 212,
+        "dex": 212,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 22,
+        "internal": 212,
+        "dex": 212,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 23,
+        "internal": 212,
+        "dex": 212,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 24,
+        "internal": 212,
+        "dex": 212,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 25,
+        "internal": 212,
+        "dex": 212,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 26,
+        "internal": 212,
+        "dex": 212,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 27,
+        "internal": 212,
+        "dex": 212,
+        "role": "win",
+        "semitones": -1
+      },
+      {
+        "slot": 28,
+        "internal": 212,
+        "dex": 212,
+        "role": "win",
+        "semitones": 1
+      },
+      {
+        "slot": 29,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 30,
+        "internal": 212,
+        "dex": 212,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 31,
+        "internal": 212,
+        "dex": 212,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 32,
+        "internal": 212,
+        "dex": 212,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 33,
+        "internal": 212,
+        "dex": 212,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 34,
+        "internal": 212,
+        "dex": 212,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 35,
+        "internal": 212,
+        "dex": 212,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 36,
+        "internal": 212,
+        "dex": 212,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "mewtwo.ssm": [
+      {
+        "slot": 1,
+        "internal": 150,
+        "dex": 150,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": -2
+      },
+      {
+        "slot": 8,
+        "internal": 150,
+        "dex": 150,
+        "role": "smash",
+        "semitones": 4
+      },
+      {
+        "slot": 9,
+        "internal": 150,
+        "dex": 150,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 10,
+        "internal": 150,
+        "dex": 150,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 150,
+        "dex": 150,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 150,
+        "dex": 150,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 150,
+        "dex": 150,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 14,
+        "internal": 150,
+        "dex": 150,
+        "role": "win",
+        "semitones": -1
+      },
+      {
+        "slot": 15,
+        "internal": 150,
+        "dex": 150,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 16,
+        "internal": 150,
+        "dex": 150,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 17,
+        "internal": 150,
+        "dex": 150,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 18,
+        "internal": 150,
+        "dex": 150,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 19,
+        "internal": 150,
+        "dex": 150,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 20,
+        "internal": 150,
+        "dex": 150,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "ness.ssm": [
+      {
+        "slot": 4,
+        "internal": 392,
+        "dex": 280,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 5,
+        "internal": 392,
+        "dex": 280,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 6,
+        "internal": 392,
+        "dex": 280,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 7,
+        "internal": 392,
+        "dex": 280,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 8,
+        "internal": 392,
+        "dex": 280,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 9,
+        "internal": 392,
+        "dex": 280,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 10,
+        "internal": 392,
+        "dex": 280,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 11,
+        "internal": 392,
+        "dex": 280,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 12,
+        "internal": 392,
+        "dex": 280,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 13,
+        "internal": 392,
+        "dex": 280,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 14,
+        "internal": 392,
+        "dex": 280,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 392,
+        "dex": 280,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 16,
+        "internal": 392,
+        "dex": 280,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 17,
+        "internal": 392,
+        "dex": 280,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 18,
+        "internal": 392,
+        "dex": 280,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 19,
+        "internal": 392,
+        "dex": 280,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 20,
+        "internal": 392,
+        "dex": 280,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 392,
+        "dex": 280,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 22,
+        "internal": 392,
+        "dex": 280,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 23,
+        "internal": 392,
+        "dex": 280,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "peach.ssm": [
+      {
+        "slot": 1,
+        "internal": 394,
+        "dex": 282,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 394,
+        "dex": 282,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 394,
+        "dex": 282,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 394,
+        "dex": 282,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 394,
+        "dex": 282,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 394,
+        "dex": 282,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 394,
+        "dex": 282,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 8,
+        "internal": 394,
+        "dex": 282,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 9,
+        "internal": 394,
+        "dex": 282,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 10,
+        "internal": 394,
+        "dex": 282,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 394,
+        "dex": 282,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 394,
+        "dex": 282,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 394,
+        "dex": 282,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 14,
+        "internal": 394,
+        "dex": 282,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 15,
+        "internal": 394,
+        "dex": 282,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 16,
+        "internal": 394,
+        "dex": 282,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 17,
+        "internal": 394,
+        "dex": 282,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 18,
+        "internal": 394,
+        "dex": 282,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 19,
+        "internal": 394,
+        "dex": 282,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 20,
+        "internal": 394,
+        "dex": 282,
+        "role": "win",
+        "semitones": -1
+      },
+      {
+        "slot": 21,
+        "internal": 394,
+        "dex": 282,
+        "role": "special",
+        "semitones": -1
+      }
+    ],
+    "pichu.ssm": [
+      {
+        "slot": 1,
+        "internal": 172,
+        "dex": 172,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 172,
+        "dex": 172,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 172,
+        "dex": 172,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 172,
+        "dex": 172,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 172,
+        "dex": 172,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 172,
+        "dex": 172,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 8,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 9,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 10,
+        "internal": 172,
+        "dex": 172,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 11,
+        "internal": 172,
+        "dex": 172,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 12,
+        "internal": 172,
+        "dex": 172,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 13,
+        "internal": 172,
+        "dex": 172,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 14,
+        "internal": 172,
+        "dex": 172,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 16,
+        "internal": 172,
+        "dex": 172,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 17,
+        "internal": 172,
+        "dex": 172,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 18,
+        "internal": 172,
+        "dex": 172,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 19,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 20,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 21,
+        "internal": 172,
+        "dex": 172,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 22,
+        "internal": 172,
+        "dex": 172,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 31,
+        "internal": 172,
+        "dex": 172,
+        "role": "dodge",
+        "semitones": 5
+      }
+    ],
+    "pikachu.ssm": [
+      {
+        "slot": 4,
+        "internal": 25,
+        "dex": 25,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 6,
+        "internal": 25,
+        "dex": 25,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 7,
+        "internal": 25,
+        "dex": 25,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 8,
+        "internal": 25,
+        "dex": 25,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 9,
+        "internal": 25,
+        "dex": 25,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 10,
+        "internal": 25,
+        "dex": 25,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 11,
+        "internal": 25,
+        "dex": 25,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 12,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 14,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 15,
+        "internal": 25,
+        "dex": 25,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 16,
+        "internal": 25,
+        "dex": 25,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 17,
+        "internal": 25,
+        "dex": 25,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 18,
+        "internal": 25,
+        "dex": 25,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 19,
+        "internal": 25,
+        "dex": 25,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 20,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 21,
+        "internal": 25,
+        "dex": 25,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 22,
+        "internal": 25,
+        "dex": 25,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 23,
+        "internal": 25,
+        "dex": 25,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 24,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 25,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 26,
+        "internal": 25,
+        "dex": 25,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 27,
+        "internal": 25,
+        "dex": 25,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "purin.ssm": [
+      {
+        "slot": 1,
+        "internal": 39,
+        "dex": 39,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 39,
+        "dex": 39,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 39,
+        "dex": 39,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 39,
+        "dex": 39,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 39,
+        "dex": 39,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 39,
+        "dex": 39,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 39,
+        "dex": 39,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 8,
+        "internal": 39,
+        "dex": 39,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 9,
+        "internal": 39,
+        "dex": 39,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 10,
+        "internal": 39,
+        "dex": 39,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 11,
+        "internal": 39,
+        "dex": 39,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 14,
+        "internal": 39,
+        "dex": 39,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 39,
+        "dex": 39,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 16,
+        "internal": 39,
+        "dex": 39,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 17,
+        "internal": 39,
+        "dex": 39,
+        "role": "special",
+        "semitones": 3
+      }
+    ],
+    "samus.ssm": [
+      {
+        "slot": 2,
+        "internal": 410,
+        "dex": 386,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 410,
+        "dex": 386,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 5,
+        "internal": 410,
+        "dex": 386,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 19,
+        "internal": 410,
+        "dex": 386,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 20,
+        "internal": 410,
+        "dex": 386,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 410,
+        "dex": 386,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 22,
+        "internal": 410,
+        "dex": 386,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 23,
+        "internal": 410,
+        "dex": 386,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 24,
+        "internal": 410,
+        "dex": 386,
+        "role": "ko",
+        "semitones": 2
+      }
+    ],
+    "yoshi.ssm": [
+      {
+        "slot": 1,
+        "internal": 317,
+        "dex": 352,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 2,
+        "internal": 317,
+        "dex": 352,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 317,
+        "dex": 352,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 317,
+        "dex": 352,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 317,
+        "dex": 352,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 317,
+        "dex": 352,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 317,
+        "dex": 352,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 8,
+        "internal": 317,
+        "dex": 352,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 9,
+        "internal": 317,
+        "dex": 352,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 10,
+        "internal": 317,
+        "dex": 352,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 11,
+        "internal": 317,
+        "dex": 352,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 12,
+        "internal": 317,
+        "dex": 352,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 13,
+        "internal": 317,
+        "dex": 352,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 14,
+        "internal": 317,
+        "dex": 352,
+        "role": "jump",
+        "semitones": 6
+      },
+      {
+        "slot": 15,
+        "internal": 317,
+        "dex": 352,
+        "role": "unused",
+        "semitones": 0
+      },
+      {
+        "slot": 16,
+        "internal": 317,
+        "dex": 352,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 17,
+        "internal": 317,
+        "dex": 352,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 18,
+        "internal": 317,
+        "dex": 352,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 19,
+        "internal": 317,
+        "dex": 352,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 20,
+        "internal": 317,
+        "dex": 352,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 21,
+        "internal": 317,
+        "dex": 352,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 22,
+        "internal": 317,
+        "dex": 352,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 23,
+        "internal": 317,
+        "dex": 352,
+        "role": "light",
+        "semitones": 4
+      }
+    ],
+    "zs.ssm": [
+      {
+        "slot": 2,
+        "internal": 65,
+        "dex": 65,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 3,
+        "internal": 65,
+        "dex": 65,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 4,
+        "internal": 65,
+        "dex": 65,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 5,
+        "internal": 65,
+        "dex": 65,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 6,
+        "internal": 65,
+        "dex": 65,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 7,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 8,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 9,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 10,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": -2
+      },
+      {
+        "slot": 11,
+        "internal": 65,
+        "dex": 65,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 12,
+        "internal": 65,
+        "dex": 65,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 13,
+        "internal": 65,
+        "dex": 65,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 14,
+        "internal": 65,
+        "dex": 65,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 15,
+        "internal": 65,
+        "dex": 65,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 16,
+        "internal": 65,
+        "dex": 65,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 17,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": 2
+      },
+      {
+        "slot": 18,
+        "internal": 65,
+        "dex": 65,
+        "role": "special",
+        "semitones": 0
+      },
+      {
+        "slot": 19,
+        "internal": 65,
+        "dex": 65,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 20,
+        "internal": 65,
+        "dex": 65,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 21,
+        "internal": 65,
+        "dex": 65,
+        "role": "light",
+        "semitones": 4
+      },
+      {
+        "slot": 22,
+        "internal": 279,
+        "dex": 254,
+        "role": "taunt",
+        "semitones": 0
+      },
+      {
+        "slot": 23,
+        "internal": 279,
+        "dex": 254,
+        "role": "smash",
+        "semitones": 5
+      },
+      {
+        "slot": 24,
+        "internal": 279,
+        "dex": 254,
+        "role": "smash",
+        "semitones": 2
+      },
+      {
+        "slot": 25,
+        "internal": 279,
+        "dex": 254,
+        "role": "smash",
+        "semitones": -1
+      },
+      {
+        "slot": 26,
+        "internal": 279,
+        "dex": 254,
+        "role": "smash",
+        "semitones": 3
+      },
+      {
+        "slot": 27,
+        "internal": 279,
+        "dex": 254,
+        "role": "smash",
+        "semitones": 0
+      },
+      {
+        "slot": 28,
+        "internal": 279,
+        "dex": 254,
+        "role": "special",
+        "semitones": 1
+      },
+      {
+        "slot": 29,
+        "internal": 279,
+        "dex": 254,
+        "role": "ledge",
+        "semitones": 3
+      },
+      {
+        "slot": 30,
+        "internal": 279,
+        "dex": 254,
+        "role": "win",
+        "semitones": 0
+      },
+      {
+        "slot": 31,
+        "internal": 279,
+        "dex": 254,
+        "role": "star",
+        "semitones": -2
+      },
+      {
+        "slot": 32,
+        "internal": 279,
+        "dex": 254,
+        "role": "dizzy",
+        "semitones": -3
+      },
+      {
+        "slot": 33,
+        "internal": 279,
+        "dex": 254,
+        "role": "heavy",
+        "semitones": 3
+      },
+      {
+        "slot": 34,
+        "internal": 279,
+        "dex": 254,
+        "role": "heavy",
+        "semitones": 1
+      },
+      {
+        "slot": 35,
+        "internal": 279,
+        "dex": 254,
+        "role": "jump",
+        "semitones": 4
+      },
+      {
+        "slot": 36,
+        "internal": 279,
+        "dex": 254,
+        "role": "lift",
+        "semitones": -2
+      },
+      {
+        "slot": 37,
+        "internal": 279,
+        "dex": 254,
+        "role": "win",
+        "semitones": -1
+      },
+      {
+        "slot": 38,
+        "internal": 279,
+        "dex": 254,
+        "role": "asleep",
+        "semitones": -5
+      },
+      {
+        "slot": 39,
+        "internal": 279,
+        "dex": 254,
+        "role": "dodge",
+        "semitones": 5
+      },
+      {
+        "slot": 40,
+        "internal": 279,
+        "dex": 254,
+        "role": "ko",
+        "semitones": 2
+      },
+      {
+        "slot": 41,
+        "internal": 279,
+        "dex": 254,
+        "role": "special",
+        "semitones": -1
+      },
+      {
+        "slot": 42,
+        "internal": 279,
+        "dex": 254,
+        "role": "special",
+        "semitones": 3
+      },
+      {
+        "slot": 43,
+        "internal": 279,
+        "dex": 254,
+        "role": "light",
+        "semitones": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "menu": [
+    "worldmap_song"
+  ],
+  "stages": {
+    "Agate Village": "country_song",
+    "Realgam Colosseum": "tool_battle1_song",
+    "Phenac Stadium": "tool_battle2_song",
+    "Mt. Battle Crater": "tool_battle3_song",
+    "Mt. Battle Garden": "battle8_song",
+    "Phenac City": "battle7_song"
+  },
+  "songs": [
+    {
+      "id": "worldmap_song",
+      "title": "Orre Map"
+    },
+    {
+      "id": "country_song",
+      "title": "Agate Village"
+    },
+    {
+      "id": "tool_battle1_song",
+      "title": "Colosseum Battle 1"
+    },
+    {
+      "id": "tool_battle2_song",
+      "title": "Colosseum Battle 2"
+    },
+    {
+      "id": "tool_battle3_song",
+      "title": "Colosseum Battle 3"
+    },
+    {
+      "id": "battle8_song",
+      "title": "Colosseum Battle (142)"
+    },
+    {
+      "id": "battle7_song",
+      "title": "Colosseum Battle (146, long)"
+    }
+  ]
+}

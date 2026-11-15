@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "models": [
+    {
+      "pokemon": "Magmar",
+      "source_archive": "pkx_boober.fsys",
+      "label": "126_Magmar",
+      "sha256": "5244677209eb28fd89a934c44cf2d0342883197713c1508a7765b4d616f80071"
+    },
+    {
+      "pokemon": "Miltank",
+      "source_archive": "pkx_miltank.fsys",
+      "label": "241_Miltank",
+      "sha256": "c0f53649e63598fe354a766b6bd52ebfaf5bc6d94ef9801bf34f6d9f6ecd0a47"
+    },
+    {
+      "pokemon": "Breloom",
+      "source_archive": "pkx_kinogassa.fsys",
+      "label": "g3_kinogassa",
+      "sha256": "11720f09150b86974516915948deb4739974998b00cbdf33658c3704a5aae565"
+    },
+    {
+      "pokemon": "Blastoise",
+      "source_archive": "pkx_kamex.fsys",
+      "label": "009_Blastoise",
+      "sha256": "319b26df1589fc5fc0cc368d08813df8467a0f39f10c2648262522adf31d9790"
+    },
+    {
+      "pokemon": "Gardevoir",
+      "source_archive": "pkx_sirnight.fsys",
+      "label": "g3_sirnight",
+      "sha256": "8c1c7c90b245a3e5f4a7661121c5f7bb185dffb294db5416d4bd0bf7dc2e9a64"
+    },
+    {
+      "pokemon": "Blaziken",
+      "source_archive": "pkx_bursyamo.fsys",
+      "label": "g3_bursyamo",
+      "sha256": "3761dd2100a181f129f2e5aa7ecf22c2af09a1bddca606097d39f77b4821a1f6"
+    },
+    {
+      "pokemon": "Machoke",
+      "source_archive": "pkx_goriky.fsys",
+      "label": "067_Machoke",
+      "sha256": "9827be5c1948aa51f3f5cebb1121d02b9ac23835bf5e5708eeefa242776c4a3e"
+    },
+    {
+      "pokemon": "Quilava",
+      "source_archive": "pkx_magmarashi.fsys",
+      "label": "156_Quilava",
+      "sha256": "54a3fde7a1452a589912beb31fbe942f0b6874e7ce642d68e6be7e0545cec36d"
+    },
+    {
+      "pokemon": "Combusken",
+      "source_archive": "pkx_wakasyamo.fsys",
+      "label": "g3_wakasyamo",
+      "sha256": "f2106613e155e05c2faf3cf95a4c25753793b9d22225dcfe25a5a03bc5fa6a9d"
+    },
+    {
+      "pokemon": "Deoxys",
+      "source_archive": "pkx_deoxys.fsys",
+      "label": "g3_deoxys",
+      "sha256": "40ed297c88ca16655ebf604a7a6b62945f5489d12dbb535017e15a6c20f51a1e"
+    },
+    {
+      "pokemon": "Alakazam",
+      "source_archive": "pkx_foodin.fsys",
+      "label": "065_Alakazam",
+      "sha256": "f1f8c4ef5fb967bb392db11e7f564e95fd38ea29fe76522b3177fddecb00d5e1"
+    },
+    {
+      "pokemon": "Sceptile",
+      "source_archive": "pkx_jukain.fsys",
+      "label": "g3_jukain",
+      "sha256": "497f2143c02e998c96c8cb182af2df946a050907f0373db89a671ee1224df7b1"
+    },
+    {
+      "pokemon": "Scyther",
+      "source_archive": "pkx_strike.fsys",
+      "label": "123_Scyther",
+      "sha256": "67b60d23680636e295b495d7d5b31803af19af20c1d8b326b665b65614d98d04"
+    },
+    {
+      "pokemon": "Swampert",
+      "source_archive": "pkx_laglarge.fsys",
+      "label": "g3_laglarge",
+      "sha256": "2f3c75b6d91a0711d8988a1d9dc9a790ee1b3095d05df0798008c214b3d075e1"
+    },
+    {
+      "pokemon": "Farfetchd",
+      "source_archive": "pkx_kamonegi.fsys",
+      "label": "083_Farfetchd",
+      "sha256": "0dec157bc9b241de3f39e866619639a83d828778d76b30a77903148535c53264"
+    },
+    {
+      "pokemon": "Wigglytuff",
+      "source_archive": "pkx_pukurin.fsys",
+      "label": "040_Wigglytuff",
+      "sha256": "4cb945e2685bd90040a60612e44a992caab282a6f716c6988ed1d06d1b875116"
+    },
+    {
+      "pokemon": "Kecleon",
+      "source_archive": "pkx_kakureon.fsys",
+      "label": "g3_kakureon",
+      "sha256": "a4b7feccbdd5817b87a635e3b7806ae50f4f85478738aa569bb5ff1f6228866f"
+    },
+    {
+      "pokemon": "Charmeleon",
+      "source_archive": "pkx_lizardo.fsys",
+      "label": "005_Charmeleon",
+      "sha256": "d5d3cb219e494e0ff8a1a481df2adc6a916323e779d7b0c38e42abf5307adf0c"
+    },
+    {
+      "pokemon": "Ralts",
+      "source_archive": "pkx_ralts.fsys",
+      "label": "g3_ralts",
+      "sha256": "f2826e0471d275e414e9896d3062a410d4559b0fdf01d4f9b706a4a6f6516d47"
+    },
+    {
+      "pokemon": "Scizor",
+      "source_archive": "pkx_hassam.fsys",
+      "label": "212_Scizor",
+      "sha256": "caf5067c2aed9b51d57242f71ce9347610c474235a3c4adfe94f81d6f7b36459"
+    },
+    {
+      "pokemon": "UnownX",
+      "source_archive": "pkx_unknown_x.fsys",
+      "label": "g3_unknown_x",
+      "sha256": "bca22070bf1426f41843259d9f9036c32e49abff68f4fa43e41f00e6873e6f05"
+    },
+    {
+      "pokemon": "Pikachu",
+      "source_archive": "pkx_pikachu.fsys",
+      "label": "025_Pikachu",
+      "sha256": "5129c542f6bfa0dc8bf142a88a19b663983b4a20a859810ee417226105c0229a"
+    },
+    {
+      "pokemon": "Jigglypuff",
+      "source_archive": "pkx_purin.fsys",
+      "label": "039_Jigglypuff",
+      "sha256": "76b6c0a8b5ade4bc12aceb9cb93b56117dc0077b5fcd1203b1d09003b1dd4613"
+    },
+    {
+      "pokemon": "Mewtwo",
+      "source_archive": "pkx_mewtwo.fsys",
+      "label": "150_Mewtwo",
+      "sha256": "f9b4813de52768446cecc76589344bafdff04f223ffe883f583049b328899053"
+    },
+    {
+      "pokemon": "Pichu",
+      "source_archive": "pkx_pichu.fsys",
+      "label": "172_Pichu",
+      "sha256": "248b3d6cf5ff17a966122001d88b12a880e118fdaa16a3020f84ba5189c91a72"
+    },
+    {
+      "pokemon": "Jynx",
+      "source_archive": "pkx_rougela.fsys",
+      "label": "124_Jynx",
+      "sha256": "ca522863321da71f073494e8630d6362b5a4602b53b1b7003ae3927b041719d9"
+    },
+    {
+      "pokemon": "Smoochum",
+      "source_archive": "pkx_muchul.fsys",
+      "label": "238_Smoochum",
+      "sha256": "2dd11864d773beaab3727e9a2f95fd8fb183c5d9951f21ca680fd0dc4799cf4e"
+    },
+    {
+      "pokemon": "Plusle",
+      "source_archive": "pkx_prasle.fsys",
+      "label": "g3_prasle",
+      "sha256": "d25ab6357caa02cd19575b7d4330787ee7fb11780746147305f524d3badd2c22"
+    },
+    {
+      "pokemon": "Minun",
+      "source_archive": "pkx_minun.fsys",
+      "label": "g3_minun",
+      "sha256": "cb45c502afbfedb7f53d842013a32e3d88393c9584c9d21a671392b81f487364"
+    }
+  ]
+}

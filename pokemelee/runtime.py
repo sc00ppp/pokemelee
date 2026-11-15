@@ -20,6 +20,8 @@ def lock():
 
 def release_url(name, platform):
     tool = lock()["tools"][name]
+    if url := tool["platforms"][platform].get("url"):
+        return url
     return f"https://github.com/{tool['repo']}/releases/download/{tool['tag']}/{tool['platforms'][platform]['asset']}"
 
 
@@ -30,9 +32,10 @@ def fetch(name, platform, output, *, github_auth=False):
         raise ValueError(f"Output already exists; choose a new directory: {target}")
     tool = lock()["tools"][name]
     spec = tool["platforms"][platform]
-    with tempfile.TemporaryDirectory(prefix="pokemelee-runtime-") as folder:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".pokemelee-download-", dir=target.parent) as folder:
         archive = Path(folder) / spec["asset"]
-        if github_auth:
+        if github_auth and "url" not in spec:
             result = subprocess.run(["gh", "release", "download", tool["tag"], "--repo", tool["repo"],
                                      "--pattern", spec["asset"], "--dir", folder],
                                     capture_output=True, text=True, timeout=600)

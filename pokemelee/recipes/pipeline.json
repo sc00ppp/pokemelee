@@ -17,7 +17,7 @@
     "interactive_authoring": false,
     "offline_after_tool_setup": true,
     "rigswap_application_required": false,
-    "blender": "not_an_assumed_dependency; bundle a pinned offline converter only for an identified required operation"
+    "blender": "pinned automatic headless 4.5.7 converter for the original Colosseum model reader; no interactive authoring"
   },
   "steps": [
     {
@@ -31,6 +31,12 @@
       "state": "verified",
       "implementation": "pokemelee.art",
       "result": "Generate stock icons and party-face CSS fallback icons directly from Colosseum."
+    },
+    {
+      "id": "source-models",
+      "state": "verified",
+      "implementation": "pokemelee.models, native/import_models.py",
+      "result": "All 29 source models rebuilt directly from Colosseum with the pinned original reader; each complete GLB matches the original authoring input."
     },
     {
       "id": "cast-models",
@@ -52,16 +58,34 @@
       "remaining": "Generate the final rendered CSS portraits, stage images and menu replacements instead of reading cached PNGs/specs. Party-face icons are not the final portrait treatment."
     },
     {
-      "id": "audio-and-colors",
+      "id": "costume-colors",
       "state": "needs-recipe-conversion",
-      "source": "cry_make.py, cry_banks.py, recolor_install.py, colo_menu_sfx.py",
-      "remaining": "Extract cries/music and create voice banks and approved shiny/team colors from local disc inputs. Recover the authored survey/selection recipes without shipping extracted audio."
+      "source": "recolor.py, recolor_specs.json, recolor_install.py",
+      "remaining": "Replay the approved shiny/team-color maps and costume installation from rebuilt models and source-disc textures."
     },
     {
       "id": "iso-assembly",
       "state": "needs-standalone-adapter",
       "source": "build_iso.py (Cast Test 30), pair_ics.py, pair_pichu.py",
       "remaining": "Replace Nucleus vault/project/finish imports with a standalone adapter to pinned MexCLI. Include pair behavior and required game modifications. Fail on missing components; preserve unrelated media."
+    },
+    {
+      "id": "fighter-and-announcer-voices",
+      "state": "verified",
+      "implementation": "pokemelee.cries, pokemelee.voices",
+      "result": "All 25 fighter banks and the announcer bank match the desktop build; 27 fighter cry sources and both pair cries decoded directly from Colosseum."
+    },
+    {
+      "id": "menu-sounds",
+      "state": "verified",
+      "implementation": "pokemelee.menu_sounds, pokemelee.audio_tools",
+      "result": "All six menu replacements rebuild into the exact accepted main.ssm."
+    },
+    {
+      "id": "music",
+      "state": "verified",
+      "implementation": "pokemelee.music, pokemelee.audio_tools",
+      "result": "All seven tracks rendered from Colosseum sequences/instruments and rebuilt as looping HPS files; all fingerprints match the desktop build."
     },
     {
       "id": "iso-and-xdelta-export",

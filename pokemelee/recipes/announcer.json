@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "bank": "nr_name.ssm",
+  "pair_announcer_id": 510009,
+  "slots": [
+    {
+      "slot": 0,
+      "cries": [
+        {
+          "internal": 282,
+          "dex": 257
+        }
+      ]
+    },
+    {
+      "slot": 1,
+      "cries": [
+        {
+          "internal": 285,
+          "dex": 260
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "cries": [
+        {
+          "internal": 241,
+          "dex": 241
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "cries": [
+        {
+          "internal": 281,
+          "dex": 256
+        }
+      ]
+    },
+    {
+      "slot": 5,
+      "cries": [
+        {
+          "internal": 156,
+          "dex": 156
+        }
+      ]
+    },
+    {
+      "slot": 6,
+      "cries": [
+        {
+          "internal": 67,
+          "dex": 67
+        }
+      ]
+    },
+    {
+      "slot": 9,
+      "cries": [
+        {
+          "internal": 353,
+          "dex": 311
+        },
+        {
+          "internal": 354,
+          "dex": 312
+        }
+      ]
+    },
+    {
+      "slot": 10,
+      "cries": [
+        {
+          "internal": 201,
+          "dex": 201
+        }
+      ]
+    },
+    {
+      "slot": 11,
+      "cries": [
+        {
+          "internal": 124,
+          "dex": 124
+        },
+        {
+          "internal": 238,
+          "dex": 238
+        }
+      ]
+    },
+    {
+      "slot": 12,
+      "cries": [
+        {
+          "internal": 5,
+          "dex": 5
+        }
+      ]
+    },
+    {
+      "slot": 13,
+      "cries": [
+        {
+          "internal": 39,
+          "dex": 39
+        }
+      ]
+    },
+    {
+      "slot": 14,
+      "cries": [
+        {
+          "internal": 39,
+          "dex": 39
+        }
+      ]
+    },
+    {
+      "slot": 15,
+      "cries": [
+        {
+          "internal": 40,
+          "dex": 40
+        }
+      ]
+    },
+    {
+      "slot": 16,
+      "cries": [
+        {
+          "internal": 9,
+          "dex": 9
+        }
+      ]
+    },
+    {
+      "slot": 17,
+      "cries": [
+        {
+          "internal": 9,
+          "dex": 9
+        }
+      ]
+    },
+    {
+      "slot": 18,
+      "cries": [
+        {
+          "internal": 123,
+          "dex": 123
+        }
+      ]
+    },
+    {
+      "slot": 19,
+      "cries": [
+        {
+          "internal": 83,
+          "dex": 83
+        }
+      ]
+    },
+    {
+      "slot": 20,
+      "cries": [
+        {
+          "internal": 307,
+          "dex": 286
+        }
+      ]
+    },
+    {
+      "slot": 21,
+      "cries": [
+        {
+          "internal": 126,
+          "dex": 126
+        }
+      ]
+    },
+    {
+      "slot": 22,
+      "cries": [
+        {
+          "internal": 212,
+          "dex": 212
+        }
+      ]
+    },
+    {
+      "slot": 24,
+      "cries": [
+        {
+          "internal": 150,
+          "dex": 150
+        }
+      ]
+    },
+    {
+      "slot": 26,
+      "cries": [
+        {
+          "internal": 392,
+          "dex": 280
+        }
+      ]
+    },
+    {
+      "slot": 27,
+      "cries": [
+        {
+          "internal": 394,
+          "dex": 282
+        }
+      ]
+    },
+    {
+      "slot": 28,
+      "cries": [
+        {
+          "internal": 172,
+          "dex": 172
+        }
+      ]
+    },
+    {
+      "slot": 29,
+      "cries": [
+        {
+          "internal": 25,
+          "dex": 25
+        }
+      ]
+    },
+    {
+      "slot": 30,
+      "cries": [
+        {
+          "internal": 410,
+          "dex": 386
+        }
+      ]
+    },
+    {
+      "slot": 31,
+      "cries": [
+        {
+          "internal": 317,
+          "dex": 352
+        }
+      ]
+    },
+    {
+      "slot": 32,
+      "cries": [
+        {
+          "internal": 279,
+          "dex": 254
+        }
+      ]
+    },
+    {
+      "slot": 33,
+      "cries": [
+        {
+          "internal": 65,
+          "dex": 65
+        }
+      ]
+    }
+  ]
+}

@@ -20,4 +20,4 @@ pokemelee = "pokemelee.cli:main"
 packages = ["pokemelee"]
 
 [tool.setuptools.package-data]
-pokemelee = ["recipes/*.json", "recipes/stages/*.json", "recipes/references/*.json", "dependencies.lock.json", "native/*.csproj", "native/*.cs", "native/*/*.cs"]
+pokemelee = ["recipes/*.json", "recipes/stages/*.json", "recipes/references/*.json", "dependencies.lock.json", "native/*.csproj", "native/*.cs", "native/*.py", "native/*/*.cs", "native/*/*.c"]

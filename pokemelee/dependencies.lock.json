@@ -103,16 +103,75 @@
           ]
         }
       }
+    },
+    "blender-converter": {
+      "repo": "https://projects.blender.org/blender/blender",
+      "tag": "v4.5.7",
+      "license": {
+        "spdx": "GPL-3.0-or-later"
+      },
+      "purpose": "Automatic offline FSYS-to-GLB conversion using the original reader; no interactive authoring.",
+      "platforms": {
+        "win-x64": {
+          "asset": "blender-4.5.7-windows-x64.zip",
+          "url": "https://download.blender.org/release/Blender4.5/blender-4.5.7-windows-x64.zip",
+          "sha256": "2311800b9761de4ee1af9ad0c5924b9d5e0fb2dba6c975649e4852612d8a6a40",
+          "entrypoint": "blender-4.5.7-windows-x64/blender.exe",
+          "required": [
+            "blender-4.5.7-windows-x64/blender.exe"
+          ]
+        }
+      }
+    },
+    "colo-model-reader": {
+      "repo": "StarsMmd/Blender-Addon-Gamecube-Models",
+      "tag": "dc71de837978a6a2fe8c5082f2840cfafb135235",
+      "license": {
+        "spdx": "GPL-3.0-or-later"
+      },
+      "purpose": "Original authored-build importer, run by the automatic headless converter.",
+      "platforms": {
+        "win-x64": {
+          "asset": "colo-model-reader-dc71de837978a6a2fe8c5082f2840cfafb135235.zip",
+          "url": "https://github.com/StarsMmd/Blender-Addon-Gamecube-Models/archive/dc71de837978a6a2fe8c5082f2840cfafb135235.zip",
+          "sha256": "580de26bfc50f29f9f5a905da1f574c5da30571c9e36e3a6fb1d69551b3251ec",
+          "entrypoint": "Blender-Addon-Gamecube-Models-dc71de837978a6a2fe8c5082f2840cfafb135235/importer/importer.py",
+          "required": [
+            "Blender-Addon-Gamecube-Models-dc71de837978a6a2fe8c5082f2840cfafb135235/importer/importer.py",
+            "Blender-Addon-Gamecube-Models-dc71de837978a6a2fe8c5082f2840cfafb135235/blender_manifest.toml"
+          ]
+        }
+      }
+    },
+    "musyx": {
+      "repo": "AxioDL/musyx",
+      "tag": "717404d77c17a95dd101bbe737d0f9549ab600e6",
+      "license": {
+        "spdx": "CC0-1.0"
+      },
+      "purpose": "Reproduce Colosseum sequence and sound-effect rendering from disc-supplied instrument data.",
+      "platforms": {
+        "win-x64": {
+          "asset": "musyx-717404d77c17a95dd101bbe737d0f9549ab600e6.zip",
+          "url": "https://github.com/AxioDL/musyx/archive/717404d77c17a95dd101bbe737d0f9549ab600e6.zip",
+          "sha256": "378a43b85da94a64549019956dc1cfac8134ce1ffbe6d9e31f9358659906e29d",
+          "entrypoint": "musyx-717404d77c17a95dd101bbe737d0f9549ab600e6/include/musyx/pc.h",
+          "required": [
+            "musyx-717404d77c17a95dd101bbe737d0f9549ab600e6/include/musyx/pc.h",
+            "musyx-717404d77c17a95dd101bbe737d0f9549ab600e6/src/musyx/runtime/hw_pc.c"
+          ]
+        }
+      }
     }
   },
   "unresolved": [
     {
-      "tool": "deterministic model conversion",
-      "reason": "Recover fixed approved mappings and edit recipes from authoring outputs. Reuse only offline conversion helpers where needed; no Rigswap agent pipeline, LLM calls, model downloads or API keys. Blender is not an assumed dependency; any required headless converter must be explicitly justified, pinned and bundled."
+      "tool": "cast recipe replay",
+      "reason": "The original FSYS model converter is pinned; fixed character edits and export integration still need to be converted and checked."
     },
     {
-      "tool": "stagegraft + menugraft",
-      "reason": "Build small native command-line helpers against the pinned HSDRaw library; confirm all six recipes against approved outputs."
+      "tool": "menugraft",
+      "reason": "Build the authored menu helper against the pinned HSDRaw library and wire generated art inputs."
     }
   ],
   "distribution": "Maintainers assemble runtimes; end users should not need GitHub credentials or clones. No tool/game binaries are stored in this repository."

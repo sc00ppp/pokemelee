@@ -10,6 +10,8 @@ from .disc import Disc
 
 
 def parser():
+    from .runtime import lock
+    tool_names = tuple(lock()["tools"])
     root = argparse.ArgumentParser(prog="pokemelee", description="PokéMelee build tooling for your own two game discs")
     sub = root.add_subparsers(dest="command", required=True)
     check = sub.add_parser("check", help="Check supported disc versions and filesystem structure")
@@ -39,13 +41,34 @@ def parser():
     stages.add_argument("--runtime", default="runtime")
     stages.add_argument("--profile", choices=("normal", "animelee"), default="normal")
     stages.add_argument("--stage", action="append", dest="selected")
+    voices = sub.add_parser("voices", help="Rebuild approved fighter voices or announcer calls from the source discs")
+    voices.add_argument("--melee", required=True)
+    voices.add_argument("--colosseum", required=True)
+    voices.add_argument("--out", required=True)
+    voices.add_argument("--runtime", default="runtime")
+    voices.add_argument("--announcer", action="store_true")
+    voices.add_argument("--bank", action="append")
+    audio_tools = sub.add_parser("compile-audio", help="Compile the authored music/effect drivers against pinned MusyX")
+    audio_tools.add_argument("--runtime", default="runtime")
+    music = sub.add_parser("music", help="Rebuild the seven approved tracks from Colosseum")
+    menu_sounds = sub.add_parser("menu-sounds", help="Rebuild the accepted menu sound bank")
+    models = sub.add_parser("source-models", help="Convert the original cast models without changing their rigs")
+    for command in (music, menu_sounds, models):
+        command.add_argument("--colosseum", required=True)
+        command.add_argument("--out", required=True)
+        command.add_argument("--runtime", default="runtime")
+    menu_sounds.add_argument("--melee", required=True)
+    music.add_argument("--song", action="append")
+    models.add_argument("--pokemon", action="append")
+    models.add_argument("--blender", help="Explicit pinned converter executable")
+    models.add_argument("--reader", help="Explicit pinned model-reader directory")
     fetch = sub.add_parser("fetch-tools", help="Download pinned releases directly from the fork repositories")
-    fetch.add_argument("--tool", choices=("hsdlib", "mex", "xdelta", "all"), default="all")
+    fetch.add_argument("--tool", choices=(*tool_names, "all"), default="all")
     fetch.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), default="win-x64")
     fetch.add_argument("--out", default="runtime")
     fetch.add_argument("--github-auth", action="store_true", help="Maintainer access to private releases through gh")
     runtime = sub.add_parser("runtime-install", help="Verify and install a maintainer-supplied runtime ZIP")
-    runtime.add_argument("name", choices=("hsdlib", "mex", "xdelta"))
+    runtime.add_argument("name", choices=tool_names)
     runtime.add_argument("archive")
     runtime.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), required=True)
     runtime.add_argument("--out", required=True)
@@ -62,6 +85,28 @@ def parser():
 
 
 def run(args):
+    if args.command == "compile-audio":
+        from .audio_tools import compile_audio
+        compile_audio(args.runtime)
+        return {"compiled": True}
+    if args.command == "source-models":
+        from .models import convert_models
+        return convert_models(Disc(args.colosseum, "colosseum"), args.out, args.runtime, args.pokemon,
+                               blender=args.blender, reader=args.reader)
+    if args.command == "music":
+        from .music import build_music
+        return build_music(Disc(args.colosseum, "colosseum"), args.out, args.runtime, args.song)
+    if args.command == "menu-sounds":
+        from .menu_sounds import build_menu_sounds
+        return build_menu_sounds(Disc(args.melee, "melee"), Disc(args.colosseum, "colosseum"), args.out, args.runtime)
+    if args.command == "voices":
+        from .voices import build_voices, build_announcer
+        if args.announcer and args.bank:
+            raise ValueError("--bank cannot be combined with --announcer")
+        discs = [Disc(args.melee, "melee"), Disc(args.colosseum, "colosseum")]
+        if args.announcer:
+            return build_announcer(*discs, args.out, args.runtime)
+        return build_voices(*discs, args.out, args.runtime, args.bank)
     if args.command == "compile-stages":
         from .stages import compile_tools
         compile_tools(args.runtime)

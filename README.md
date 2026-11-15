@@ -14,10 +14,12 @@ Once the tools are installed, the build must work offline.
 
 **Status: repository preparation is underway; the complete two-ISO build is not
 ready yet.** Disc extraction, stock/fallback menu-icon generation, and all six
-stages in both versions work. All 22 stage files rebuilt from the original discs
+stages in both versions, all 29 source models, fighter/announcer cries, menu
+sounds and music work.
+All 22 stage files rebuilt from the original discs
 match the normal Cast Test 30 and AniMelee Test 23 references byte for byte.
 The accepted cast is recorded. The old Cast Test 30
-assembler still depends on edited Blender files and generated DAT/PNG/audio
+assembler still depends on edited Blender files and generated DAT/PNG
 caches; those must become recipes before this is an end-user builder.
 `build` currently fails with the remaining steps and writes no ISO.
 
@@ -28,6 +30,9 @@ caches; those must become recipes before this is an end-user builder.
 | HSDRaw / HSDRawViewer | [ssbmNucleus-hsdlib](https://github.com/sc00ppp/ssbmNucleus-hsdlib) | DAT library, conversion and rendering |
 | m-ex / MexCLI | [ssbmNucleus-mex](https://github.com/sc00ppp/ssbmNucleus-mex) | Project creation, imports and ISO export |
 | xdelta3 | [xdelta-gpl](https://github.com/jmacd/xdelta-gpl) | Create and verify local patches |
+| Blender 4.5.7 | [Blender](https://projects.blender.org/blender/blender) | Fixed headless source-model conversion |
+| GameCube model reader | [Blender-Addon-Gamecube-Models](https://github.com/StarsMmd/Blender-Addon-Gamecube-Models) | Read Colosseum models with the original converter |
+| MusyX | [musyx](https://github.com/AxioDL/musyx) | Render disc-supplied songs and sound effects |
 
 **No fork code is copied into this repo.** `pokemelee/dependencies.lock.json`
 links to exact release tags, filenames and SHA-256 checksums. Setup downloads
@@ -39,13 +44,11 @@ Nucleus tool manifests. MexCLI is already the console build; the MexManager GUI
 is unnecessary here. Keep the current runtime intact until trimming is tested.
 Stage/menu helpers can link HSDRaw.dll without carrying the viewer GUI source.
 
-Rigswap and Blender were used to author the existing character swaps. Neither
-is installed by this builder or declared a required runtime. The migration work
-is to preserve the already-approved bone mappings, mesh transforms, material
-settings and corrections as fixed recipes. Some old export functions use
-Blender's geometry/conversion APIs; retain a bundled headless converter only if
-a concrete operation needs it. Reusing deterministic helper code does not mean
-running Rigswap's authoring/agent pipeline.
+The fixed model reader needs Blender 4.5.7's geometry and glTF conversion APIs.
+That converter runs headlessly with saved options; users do not operate Blender.
+The package pins the exact official runtime and reader source archive.
+The character migration preserves the accepted mappings, transforms, material
+settings and corrections. Rigswap's authoring/agent pipeline is not a build step.
 
 Once the forks are public, setup needs no GitHub login. Until then, maintainers
 can use `--github-auth` with an authenticated GitHub CLI. We do not change the
@@ -95,6 +98,31 @@ outputs against the reference fingerprints. It does not read either finished
 PokéMelee ISO, old stage caches, or any Nucleus installation. The AniMelee recipes
 include the accepted garden silhouette treatment and Phenac crest preservation.
 
+The original source-model conversion is also verified for all 29 cast members.
+Each generated GLB matches the original authoring input byte for byte.
+
+```powershell
+python -m pokemelee source-models --colosseum "path/to/colosseum.iso" --out work/source-models
+```
+
+Audio generation also reads the two source discs directly. The verified outputs
+are 25 fighter voice banks (551 replacements), the announcer bank (29 calls),
+the six menu sound replacements, and all seven looping music tracks. Every
+result matches the accepted desktop build. Source cries, sound banks, instrument
+samples and rendered music remain local.
+
+```powershell
+python -m pokemelee compile-audio
+python -m pokemelee voices --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso" --out work/voices
+python -m pokemelee voices --announcer --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso" --out work/announcer
+python -m pokemelee menu-sounds --melee "path/to/melee.iso" --colosseum "path/to/colosseum.iso" --out work/menu-sounds
+python -m pokemelee music --colosseum "path/to/colosseum.iso" --out work/music
+```
+
+Compiling audio helpers currently requires Visual C++ build tools. The final
+end-user package will carry the compiled helpers. Keep large work/output folders
+on a drive with several GB free; runtime downloads use the destination drive.
+
 ## ISO and xdelta output
 
 The local export step already works independently of the unfinished assembler.
@@ -123,7 +151,7 @@ compression or local filename headers for broad decoder compatibility. See the
 [upstream command reference](https://github.com/jmacd/xdelta/blob/main/site/docs/commandline.md).
 
 The final two-disc `build` must call this exporter automatically; it is still
-blocked on the character/stage/assembly work listed by `plan`.
+blocked on the character/presentation/assembly work listed by `plan`.
 
 Output directories must be new. Each successful extraction/generation records
 input and output hashes in a local receipt. Failures leave a failed receipt and
