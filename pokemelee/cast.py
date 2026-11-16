@@ -25,11 +25,16 @@ def selection(selected=None):
     return [(name, available[name]) for name in names]
 
 
+# the Melee disc files later steps read: the plain extraction, or the older Blender targets step that also carried them
+MELEE_FILES = ("melee-files", "melee-targets")
+
+
 def checked_component(path, operation):
     path = Path(path).resolve()
     record = json.loads((path / "receipt.json").read_text(encoding="utf-8"))
-    if record.get("operation") != operation or record.get("complete") is not True:
-        raise ValueError(f"Expected a completed {operation} component")
+    operations = (operation,) if isinstance(operation, str) else tuple(operation)
+    if record.get("operation") not in operations or record.get("complete") is not True:
+        raise ValueError(f"Expected a completed {' or '.join(operations)} component")
     for row in record["outputs"] + record.get("supporting_outputs", []):
         file = path / row["path"]
         if not file.resolve().is_relative_to(path) or fingerprint(file)["sha256"] != row["sha256"]:

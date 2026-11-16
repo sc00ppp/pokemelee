@@ -41,7 +41,22 @@ def parser():
     targets.add_argument("--runtime", default="runtime")
     targets.add_argument("--hsd")
     targets.add_argument("--blender")
-    cast = sub.add_parser("cast", help="Replay the verified character recipes from regenerated disc components")
+    files = sub.add_parser("melee-files", help="Copy the Melee fighter files later steps read off the original disc")
+    files.add_argument("--melee", required=True)
+    files.add_argument("--out", required=True)
+    cast = sub.add_parser("cast", help="Rebuild the accepted base costumes from both discs and the model patches")
+    for name in ("melee", "colosseum", "out"):
+        cast.add_argument("--" + name, required=True)
+    cast.add_argument("--runtime", default="runtime")
+    cast.add_argument("--pokemon", action="append")
+    cast.add_argument("--jobs", type=int, default=None, help="How many costumes rebuild at once (default: one per core)")
+    patches = sub.add_parser("model-patches", help="Maintainer: write the model patches from an accepted replayed cast")
+    for name in ("melee", "colosseum", "cast"):
+        patches.add_argument("--" + name, required=True)
+    patches.add_argument("--out", help="Default: the package's recipes/model-patches")
+    patches.add_argument("--runtime", default="runtime")
+    patches.add_argument("--pokemon", action="append")
+    cast = sub.add_parser("replay-cast", help="Maintainer: replay the character recipes in Blender (needs fetch-tools maintainer)")
     for name in ("colosseum", "models", "targets", "out"):
         cast.add_argument("--" + name, required=True)
     cast.add_argument("--runtime", default="runtime")
@@ -49,12 +64,11 @@ def parser():
     cast.add_argument("--hsd")
     cast.add_argument("--blender")
     cast.add_argument("--jobs", type=int, default=2)
-    icons = sub.add_parser("css-icons", help="Render the accepted character-select tiles from generated components")
-    for name in ("models", "cast", "out"):
+    icons = sub.add_parser("css-icons", help="Cut the character-select tiles from the costumes' portrait scenes")
+    for name in ("cast", "targets", "out"):
         icons.add_argument("--" + name, required=True)
     icons.add_argument("--runtime", default="runtime")
     icons.add_argument("--profile", choices=("normal", "animelee"), action="append")
-    icons.add_argument("--blender")
     portraits = sub.add_parser("portraits", help="Render the accepted costume portraits from generated components")
     for name in ("cast", "targets", "out"):
         portraits.add_argument("--" + name, required=True)
@@ -108,7 +122,7 @@ def parser():
     models.add_argument("--blender", help="Explicit pinned converter executable")
     models.add_argument("--reader", help="Explicit pinned model-reader directory")
     fetch = sub.add_parser("fetch-tools", help="Download pinned releases directly from the fork repositories")
-    fetch.add_argument("--tool", choices=(*tool_names, "all"), default="all")
+    fetch.add_argument("--tool", choices=(*tool_names, "all", "maintainer"), default="all")
     fetch.add_argument("--platform", choices=("win-x64", "linux-x64", "osx-arm64"), default="win-x64")
     fetch.add_argument("--out", default="runtime")
     fetch.add_argument("--github-auth", action="store_true", help="Maintainer access to private releases through gh")
@@ -127,7 +141,7 @@ def parser():
     build.add_argument("--colosseum", required=True)
     build.add_argument("--out", required=True)
     build.add_argument("--runtime", default="runtime")
-    build.add_argument("--jobs", type=int, default=2)
+    build.add_argument("--jobs", type=int, default=None, help="How many costumes rebuild at once (default: one per core)")
     build.add_argument("--profile", choices=("normal", "animelee"), action="append")
     return root
 
@@ -151,9 +165,19 @@ def run(args):
         return build_menus(Disc(args.melee, "melee"), args.sources, args.out, args.runtime)
     if args.command == "css-icons":
         from .icons import generate_icons
-        return generate_icons(args.models, args.cast, args.out, args.runtime,
-                              args.profile or ("normal", "animelee"), blender=args.blender)
+        return generate_icons(args.cast, args.targets, args.out, args.runtime, args.profile or ("normal", "animelee"))
+    if args.command == "melee-files":
+        from .targets import melee_files
+        return melee_files(Disc(args.melee, "melee"), args.out)
     if args.command == "cast":
+        from .model_patch import build_cast
+        return build_cast(Disc(args.melee, "melee"), Disc(args.colosseum, "colosseum"), args.out, args.runtime,
+                          args.pokemon, jobs=args.jobs)
+    if args.command == "model-patches":
+        from .model_patch_make import make_patches
+        return make_patches(Disc(args.melee, "melee"), Disc(args.colosseum, "colosseum"), args.cast, args.runtime,
+                            args.out, args.pokemon)
+    if args.command == "replay-cast":
         from .cast import build_cast
         return build_cast(Disc(args.colosseum, "colosseum"), args.models, args.targets, args.out, args.runtime,
                           args.pokemon, hsd=args.hsd, blender=args.blender, jobs=args.jobs)
@@ -205,13 +229,15 @@ def run(args):
     if args.command == "fetch-tools":
         from pathlib import Path
         from .runtime import ensure, lock
-        names = tuple(name for name, tool in lock()["tools"].items() if args.platform in tool["platforms"]) if args.tool == "all" else (args.tool,)
+        # "all" is what a build needs; "maintainer" adds the Blender/rigswap tools that only regenerate recipes and patches
+        names = tuple(name for name, tool in lock()["tools"].items() if args.platform in tool["platforms"]
+                      and (args.tool == "maintainer" or not tool.get("maintainer")))             if args.tool in ("all", "maintainer") else (args.tool,)
         results = {}
         for name in names:
             target = Path(args.out) / name / args.platform
             result = ensure(name, args.platform, target, github_auth=args.github_auth)
             results[name] = {"path": str(target.resolve()), "files": len(result["outputs"]), "sha256": result["inputs"]["sha256"]}
-        if args.tool == "all" and args.platform == "win-x64":
+        if args.tool == "maintainer" and args.platform == "win-x64":
             from .geometry import configure_geometry
             configure_geometry(args.out)
         return results

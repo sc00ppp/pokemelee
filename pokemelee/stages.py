@@ -1,18 +1,24 @@
 """Rebuild approved stage recipes directly from the two source discs."""
+from concurrent.futures import ProcessPoolExecutor
 import json
 import copy
 from pathlib import Path
 import struct
 import subprocess
+import threading
 
 from .catalog import PACKAGE, load
 from .export import fingerprint
 from .fsys import entries
+from .parallel import run_all, workers
 from .workspace import output_directory, receipt, write_blob, write_json
 
 FLAVORS = {"agate": "agate", "realgam": "agate", "phenac-lobby": "bf",
            "mt-battle-crater": "fd", "mt-battle-garden": "ys", "phenac-city": "stadium"}
-NATIVE_TOOLS = set(FLAVORS.values()) | {"forms", "colodump", "menugraft"}
+NATIVE_TOOLS = set(FLAVORS.values()) | {"forms", "colodump", "menugraft", "texenc"}
+# phenac.generate keeps its work in module globals, and the normal and AniMelee stage steps run at once (11-15: the
+# normal GrPs.dat once came out with the other step's state): one generate at a time
+PHENAC = threading.Lock()
 
 
 def compile_tools(runtime, flavors=None):
@@ -110,7 +116,7 @@ def stadium_meshes(inputs, runtime, root, anime=False):
     run_helper(runtime, "colodump", [source, dump], root / "phenac-textures.log")
     geometry = root / "phenac-geometry"
     geometry.mkdir()
-    with Image.open(dump / "tex/T0000_CMP.png") as atlas:
+    with Image.open(dump / "tex/T0000_CMP.png") as atlas, PHENAC:
         return generate(atlas, geometry, anime=anime)
 
 
@@ -134,6 +140,30 @@ def anime_stage(source, target, row, spec):
     return lines.outline(flat_path, target, edge_visible=edge_visible)
 
 
+def files_in(value):
+    """The existing files a spec names."""
+    if isinstance(value, dict):
+        return set().union(*map(files_in, value.values())) if value else set()
+    if isinstance(value, list):
+        return set().union(*map(files_in, value)) if value else set()
+    if isinstance(value, str) and len(value) < 1024 and Path(value).is_absolute() and Path(value).is_file():
+        return {Path(value).resolve()}
+    return set()
+
+
+def sharing(jobs):
+    """The stage jobs in groups that share no input file. A helper opens its inputs for itself (HSDRaw), so two at
+    once on one file fail: each group runs in turn, the groups side by side."""
+    groups = []
+    for job in jobs:
+        files = files_in(job[3])
+        joined = [g for g in groups if g[0] & files]
+        for g in joined:
+            groups.remove(g)
+        groups.append((files.union(*(g[0] for g in joined)), [j for g in joined for j in g[1]] + [job]))
+    return [jobs_ for _, jobs_ in groups]
+
+
 def build_stages(melee, colosseum, output, runtime, selected=None, profile="normal"):
     if profile not in ("normal", "animelee"):
         raise ValueError("Unknown stage profile")
@@ -142,9 +172,9 @@ def build_stages(melee, colosseum, output, runtime, selected=None, profile="norm
     names = set(selected or [r["id"] for r in rows])
     if names - {r["id"] for r in rows}:
         raise ValueError("Unknown stage recipe")
-    outputs = []
     with output_directory(output, "stages") as root:
         inputs = Inputs(melee, colosseum, root / "inputs")
+        jobs = []       # (row, name, flavor, spec, built file): every input is resolved here, before any job runs
         for row in rows:
             if row["id"] not in names:
                 continue
@@ -165,19 +195,29 @@ def build_stages(melee, colosseum, output, runtime, selected=None, profile="norm
                 target = root / ("unstyled" if profile == "animelee" else "files") / name
                 target.parent.mkdir(exist_ok=True)
                 current["out"] = str(target)
-                spec_path = root / (name + ".json")
-                write_json(spec_path, current)
-                run_helper(runtime, flavor, ["build", spec_path], root / (name + ".log"))
+                write_json(root / (name + ".json"), current)
+                jobs.append((row, name, flavor, current, target))
+
+        def build(group):
+            for row, name, flavor, current, target in group:
+                run_helper(runtime, flavor, ["build", root / (name + ".json")], root / (name + ".log"))
                 if not target.is_file():
                     raise ValueError(f"Stage {name} was not generated; see its local log")
-                if profile == "animelee":
-                    styled = root / "files" / name
-                    styled.parent.mkdir(exist_ok=True)
-                    log = anime_stage(target, styled, row, current)
-                    (root / (name + ".anime.log")).write_text(log, encoding="utf-8")
-                    target = styled
-                actual = fingerprint(target)
-                if actual["sha256"] != reference[name]["sha256"]:
-                    raise ValueError(f"Stage {name} differs from the approved output; inspect before accepting")
-                outputs.append({"path": f"files/{name}", "stage": row["id"], **actual})
+
+        run_all(build, sharing(jobs))
+        if profile == "animelee":
+            # the outlines are Python through and through: one process per stage, all cores
+            (root / "files").mkdir(exist_ok=True)
+            with ProcessPoolExecutor(workers(len(jobs))) as pool:
+                logs = list(pool.map(anime_stage, *zip(*[(target, root / "files" / name, row, current)
+                                                         for row, name, _, current, target in jobs])))
+            for (_, name, *_), log in zip(jobs, logs):
+                (root / (name + ".anime.log")).write_text(log, encoding="utf-8")
+        outputs = []
+        for row, name, *_ in jobs:
+            target = root / "files" / name
+            actual = fingerprint(target)
+            if actual["sha256"] != reference[name]["sha256"]:
+                raise ValueError(f"Stage {name} differs from the approved output; inspect before accepting")
+            outputs.append({"path": f"files/{name}", "stage": row["id"], **actual})
         return receipt(root, "stages", {"profile": profile, "melee": melee.info(), "colosseum": colosseum.info(), "files": inputs.sources}, outputs)

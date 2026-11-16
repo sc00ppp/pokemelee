@@ -36,3 +36,7 @@ __pycache__/
 *.7z
 *.log
 .env*
+# Model patches carry game-derived data: kept locally and packaged into the builder zip, never committed.
+*.mpatch
+/launcher/bin/
+/launcher/obj/

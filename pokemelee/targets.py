@@ -26,19 +26,26 @@ def conversion_environment(runtime, files, targets, *, hsd=None, blender=None, t
             "RIGSWAP_HSDRAW": str(hsd), "RIGSWAP_BLENDER4": str(blender)}
 
 
+CODES = ("Mr", "Dr", "Lg", "Kp", "Pe", "Ca", "Gn", "Fx", "Fc", "Ss", "Zd",
+         "Sk", "Lk", "Dk", "Cl", "Kb", "Ys", "Fe", "Ns", "Ms", "Gw", "Pk", "Pr", "Mt", "Pc", "Pp", "Nn")
+# Neutral costumes, move tables and animation archives of every fighter, plus PlCo.dat
+NAMES = sorted({"PlCo.dat"} | {"Pl" + code + suffix for code in CODES for suffix in (".dat", "Nr.dat", "AJ.dat")})
+
+
+def melee_files(melee, output):
+    """The Melee fighter files later steps read (portrait scenes, AniMelee conversion), straight off the disc."""
+    with output_directory(output, "melee-files") as root:
+        outputs = [write_blob(root, "files/" + name, melee.read(name)) for name in NAMES]
+        return receipt(root, "melee-files", {"melee": melee.info()}, outputs)
+
+
 def prepare_targets(melee, output, runtime, *, hsd=None, blender=None):
+    """Maintainer only: the Melee files plus Blender targets the old cast replay converts against."""
     fighters = load("cast.json")["fighters"]
     with output_directory(output, "melee-targets") as root:
         files, targets = root / "files", root / "targets"
         env = conversion_environment(runtime, files, targets, hsd=hsd, blender=blender, target_reader=True)
-        # The full set is fixed; the converter uses filenames to identify each
-        # fighter. Keep neutral costumes, move tables and animation archives.
-        names = {"PlCo.dat"}
-        codes = ("Mr", "Dr", "Lg", "Kp", "Pe", "Ca", "Gn", "Fx", "Fc", "Ss", "Zd",
-                 "Sk", "Lk", "Dk", "Cl", "Kb", "Ys", "Fe", "Ns", "Ms", "Gw", "Pk", "Pr", "Mt", "Pc", "Pp", "Nn")
-        for code in codes:
-            names.update("Pl" + code + suffix for suffix in (".dat", "Nr.dat", "AJ.dat"))
-        sources = [write_blob(root, "files/" + name, melee.read(name)) for name in sorted(names)]
+        sources = [write_blob(root, "files/" + name, melee.read(name)) for name in NAMES]
         env["POKEMELEE_CAST_WORK"] = str(root)
         write_json(root / "job.json", {"files": str(files), "targets": str(targets),
                                       "fighters": ["GameAndWatch" if f["pokemon"] == "UnownX" else

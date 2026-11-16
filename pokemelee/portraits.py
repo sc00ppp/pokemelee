@@ -2,6 +2,7 @@
 import copy
 import json
 from pathlib import Path
+import shutil
 import struct
 import subprocess
 
@@ -9,10 +10,11 @@ import numpy as np
 from PIL import Image, ImageFilter
 import yaml
 
-from .cast import checked_component
+from .cast import MELEE_FILES, checked_component
 from .catalog import PACKAGE, load
 from .export import fingerprint
 from .datprobe import DatFile
+from .parallel import run_all
 from .workspace import output_directory, receipt
 
 CODES = dict(zip(
@@ -21,13 +23,16 @@ CODES = dict(zip(
     'Mr Dr Lg Kp Pe Ca Gn Dk Fx Fc Ns Kb Ss Zd Sk Lk Cl Pc Pk Mt Pr Ms Fe Ys Gw Pp Nn'.split()))
 
 
-def scene_files(fighter, folder, pokemon):
+def scene_files(fighter, folder, pokemon, camera_back=1.0):
+    """The saved portrait scene (and pose) files; camera_back > 1 pulls the camera straight back (icon renders)."""
     spec = load('portraits/' + fighter + '.json')
     scene = copy.deepcopy(spec['scene'])
     if pokemon == 'unownx':
         scene['camera'].update(x=4.5, y=7.5, z=-105)
     if pokemon in ('jynx', 'smoochum'):
         scene['camera'].update(y=9, z=-180)
+    if camera_back != 1.0:
+        scene['camera']['z'] *= camera_back
     scene['animation'] = {**spec['animation_settings'], 'nodes': []}
     for row in spec['pose']:
         scene['animation']['nodes'].append({'tracks': [
@@ -108,7 +113,9 @@ def render(pokemon, fighter, source, folder, runtime, files, *, fill=(0, 0, 0)):
     if fighter == 'GameAndWatch':
         command += ['--override-diffuse', ','.join(map(str, (*fill, 255)))]
     if fighter == 'Fox':
-        command += ['--gun', str(files / 'PlFx.dat'), '--gun-bone', '68', '--gun-view', '47,-47,-114',
+        gun = folder / 'PlFx.dat'       # its own copy: HSDRaw opens a file for itself, and renders run side by side
+        shutil.copyfile(files / gun.name, gun)
+        command += ['--gun', str(gun), '--gun-bone', '68', '--gun-view', '47,-47,-114',
                     '--gun-offset', '-0.15,-0.8,0.05', '--gun-scale', '0.85']
     with (folder / 'render.log').open('w', encoding='utf-8') as log:
         subprocess.run(command + arguments, cwd=folder, stdout=log, stderr=subprocess.STDOUT,
@@ -132,20 +139,18 @@ def render(pokemon, fighter, source, folder, runtime, files, *, fill=(0, 0, 0)):
 
 
 def build_portraits(cast, targets, output, runtime, selected=None):
-    cast, targets = checked_component(cast, 'cast'), checked_component(targets, 'melee-targets')
+    cast, targets = checked_component(cast, 'cast'), checked_component(targets, MELEE_FILES)
     rows = json.loads((cast / 'receipt.json').read_text())['outputs']
     wanted = {n.lower() for n in selected} if selected else {r['pokemon'].lower() for r in rows}
     if not wanted or wanted - {r['pokemon'].lower() for r in rows}:
         raise ValueError('Unknown or missing portrait costume')
     runtime = Path(runtime).resolve()
     with output_directory(output, 'portraits') as root:
-        outputs = []
-        for row in rows:
-            mon = row['pokemon'].lower()
-            if mon not in wanted:
-                continue
-            path = render(mon, row['fighter'], cast / row['path'], root / mon, runtime, targets / 'files')
-            outputs.append({'pokemon': row['pokemon'], 'path': path.relative_to(root).as_posix(), **fingerprint(path)})
+        rows = [row for row in rows if row['pokemon'].lower() in wanted]
+        paths = run_all(lambda row: render(row['pokemon'].lower(), row['fighter'], cast / row['path'],
+                                           root / row['pokemon'].lower(), runtime, targets / 'files'), rows, tries=3)
+        outputs = [{'pokemon': row['pokemon'], 'path': path.relative_to(root).as_posix(), **fingerprint(path)}
+                   for row, path in zip(rows, paths)]
         if {'jynx', 'smoochum'} <= wanted:
             pair = Image.new('RGBA', (136, 188))
             for mon, width, at in (('jynx', 124, (12, 5)), ('smoochum', 88, (0, 83))):
@@ -164,7 +169,7 @@ def build_color_portraits(colosseum, colors, cast, targets, portraits, output, r
     from .native import palette, recolor
     colors = checked_component(colors, 'costume-colors')
     cast = checked_component(cast, 'cast')
-    targets = checked_component(targets, 'melee-targets')
+    targets = checked_component(targets, MELEE_FILES)
     portraits = checked_component(portraits, 'portraits')
     costumes = json.loads((colors / 'receipt.json').read_text())['costumes']
     fighters = {r['pokemon']: r['fighter'] for r in json.loads((cast / 'receipt.json').read_text())['outputs']}
@@ -175,27 +180,26 @@ def build_color_portraits(colosseum, colors, cast, targets, portraits, output, r
     if not wanted or wanted - {n.lower() for n in costumes}:
         raise ValueError('Unknown or missing portrait color')
     with output_directory(output, 'color-portraits') as root:
-        outputs = []
-        for mon, rows in costumes.items():
-            if mon.lower() not in wanted:
-                continue
-            spec, pal = specs[mon], load('palettes/' + mon + '.json')
-            for row in rows:
-                key = row['color']
-                folder = root / mon.lower() / key
-                folder.mkdir(parents=True)
-                if spec.get('art') == 'map':
-                    fn = (palette.Palette(pal['zones']).map(pal[key])
-                          if key in ('red', 'blue', 'green') and key in pal else
-                          recolor.colour_map(key, spec['colours'][key], spec, colosseum))
-                    base = pictures['Jynx & Smoochum' if mon == 'Jynx' else mon]
-                    path = folder / 'csp.png'
-                    recolor.mapped_image(Image.open(base), fn).save(path)
-                else:
-                    fill = tuple(bytes.fromhex(row['gaw']['fill'][3:])) if row.get('gaw') else (0, 0, 0)
-                    path = render(mon.lower(), fighters[mon], colors / row['dat'], folder,
-                                  Path(runtime).resolve(), targets / 'files', fill=fill)
-                outputs.append({'pokemon': mon, 'color': key,
-                                'path': path.relative_to(root).as_posix(), **fingerprint(path)})
+        jobs = [(mon, row) for mon, rows in costumes.items() if mon.lower() in wanted for row in rows]
+
+        def one(job):
+            mon, row = job
+            spec, pal, key = specs[mon], load('palettes/' + mon + '.json'), row['color']
+            folder = root / mon.lower() / key
+            folder.mkdir(parents=True, exist_ok=True)
+            if spec.get('art') == 'map':
+                fn = (palette.Palette(pal['zones']).map(pal[key])
+                      if key in ('red', 'blue', 'green') and key in pal else
+                      recolor.colour_map(key, spec['colours'][key], spec, colosseum))
+                base = pictures['Jynx & Smoochum' if mon == 'Jynx' else mon]
+                path = folder / 'csp.png'
+                recolor.mapped_image(Image.open(base), fn).save(path)
+                return path
+            fill = tuple(bytes.fromhex(row['gaw']['fill'][3:])) if row.get('gaw') else (0, 0, 0)
+            return render(mon.lower(), fighters[mon], colors / row['dat'], folder,
+                          Path(runtime).resolve(), targets / 'files', fill=fill)
+
+        outputs = [{'pokemon': mon, 'color': row['color'], 'path': path.relative_to(root).as_posix(), **fingerprint(path)}
+                   for (mon, row), path in zip(jobs, run_all(one, jobs, tries=3))]
         return receipt(root, 'color-portraits', {'colors': str(colors), 'portraits': str(portraits),
                        'targets': str(targets), 'cast': str(cast)}, outputs)

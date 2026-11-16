@@ -4,13 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <ImplicitUsings Condition="'$(Flavor)' == 'colodump'">enable</ImplicitUsings>
+    <ImplicitUsings Condition="'$(Flavor)' == 'colodump' Or '$(Flavor)' == 'texenc'">enable</ImplicitUsings>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AssemblyName>stagegraft-$(Flavor)</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(Flavor)/*.cs" />
-    <Compile Include="Animation.cs" Condition="'$(Flavor)' != 'stadium' And '$(Flavor)' != 'colodump' And '$(Flavor)' != 'menugraft'" />
+    <Compile Include="Animation.cs" Condition="'$(Flavor)' != 'stadium' And '$(Flavor)' != 'colodump' And '$(Flavor)' != 'menugraft' And '$(Flavor)' != 'texenc'" />
     <Reference Include="HSDRaw"><HintPath>$(HSDRawPath)</HintPath></Reference>
   </ItemGroup>
   <Target Name="RequireInputs" BeforeTargets="ResolveReferences">

@@ -107,13 +107,11 @@ def build_project(melee, components, output, runtime, profile='normal'):
         mex = Mex(runtime, project, root / 'logs')
         mex.command('create', melee.path, project.parent, 'Pokemelee', project=False, timeout=1800)
         assigned, gone = install_costumes(mex, package)
-        # Set icon assets in a batch by writing their source files, then let Save
-        # compile them through m-ex. Their .tex is generated using set-css-icon.
-        for mon, index in assigned.items():
-            if mon in ('Smoochum', 'Minun'):
-                continue
-            name = {'Jynx': 'jynx-smoochum', 'Plusle': 'plusle-minun'}.get(mon, mon.lower())
-            mex.command('set-css-icon', index, icons / profile / ('css-' + name + '.png'))
+        # Every icon in one MexCLI run: one workspace open and one Save, the PNGs decoded side by side. The
+        # icons are set in this order, so the project is what one set-css-icon call per mon left.
+        names = {'Jynx': 'jynx-smoochum', 'Plusle': 'plusle-minun'}
+        mex.batch('set-css-icons', {str(index): str(icons / profile / ('css-' + names.get(mon, mon.lower()) + '.png'))
+                                    for mon, index in assigned.items() if mon not in ('Smoochum', 'Minun')})
         layout = mex.get_css_layout()
         selected = [ic for ic in layout['icons'] if ic.get('fighterName') != PARTNER]
         if len(selected) != 26:

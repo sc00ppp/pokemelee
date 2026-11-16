@@ -5,7 +5,9 @@ import shutil
 import subprocess
 import sys
 
-import menu_art
+# an embedded (._pth) Python does not put the script's folder on the path; the menu passes live beside it
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import menu_art  # noqa: E402
 import map_art
 import main_art
 import colo_menus

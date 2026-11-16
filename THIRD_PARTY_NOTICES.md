@@ -23,16 +23,28 @@ existing Colosseum/PokéMelee tooling. Stage specs are the owner's authored graf
 recipes. Numeric file indices, transformation settings and output fingerprints
 identify recipes without including the referenced game data.
 
-The deterministic costume, menu and capture helpers are adapted from the
-owner's existing PokéMelee and Nucleus source. Capture creates its own profile
-and never reads the user's account, saves or Dolphin configuration.
+The deterministic costume and menu helpers are adapted from the owner's
+existing PokéMelee and Nucleus source.
 
-Slippi Dolphin 3.6.4 is fetched from project-slippi/Ishiiruka, separately from
-this repository. Preserve its GPL notices and corresponding-source access when
-redistributing a runtime bundle. GNU PowerPC binutils 2.42-2 is fetched from
+GNU PowerPC binutils 2.42-2 is fetched from
 encounter/gc-wii-binutils; its upstream source and GPL notices remain external.
 The compatibility hook retains attribution to KELLZ. Its machine code is
 assembled locally from the source recipe.
+
+## What the builder zip carries
+
+`tools/package_builder.py` bundles, unchanged, with their licence files copied into `LICENSES/`:
+
+- Python 3.13 (embeddable distribution, PSF licence) with NumPy, SciPy (BSD), Pillow (MIT-CMU) and PyYAML (MIT).
+- The .NET 8 runtime (MIT) for the stage helpers, and the launcher's own self-contained .NET 8 runtime.
+- The pinned user-build tools from the lockfile: HSDRawViewer/HSDRaw (MIT), MexCLI (no upstream licence, see above),
+  xdelta3 (GPL-2.0+), GNU PowerPC binutils 2.42-2 (GPL-3.0+), MusyX headers (CC0)
+  and the Slippi menu map. The GPL tools are unmodified upstream releases; their corresponding source is at the
+  pinned tags: jmacd/xdelta-gpl v3.1.0, encounter/gc-wii-binutils 2.42-2.
+- The model patches (`recipes/model-patches/*.mpatch`), which are not in Git.
+
+Blender, rigswap and the GameCube model reader are not in the zip; only maintainers use them to regenerate the
+model patches.
 
 No license for the new project's authored code has been selected yet. This
 private preparation repository is not an announcement of a public release.

@@ -1,139 +1,91 @@
-"""Reproduce stage-select pictures using a pinned, isolated offline renderer."""
-import io
+"""Stage-select pictures: each built stage file rendered by the pinned HSDRawViewer from the select screen's camera.
+
+The pictures show at thumbnail size on the stage select screen, so the renderer's take is enough (owner, 11-15): no
+game run, no Dolphin. What the game spawns while it runs (Ho-Oh, the stands' people, the big screen's picture) is not
+in them, and the light is the renderer's."""
+import collections
 import json
 from pathlib import Path
+import shutil
 import subprocess
-import time
 
 from PIL import Image
 
-from .assembly import copy_outputs
+from .cast import checked_component
 from .export import fingerprint
-from .mex import Mex
+from .parallel import run_all
+from .runtime import lock
 from .workspace import output_directory, receipt
 
+# stage: (its file, camera eye, camera target), in world units
 FRAMING = {
-    'battlefield': (31, (0, 35.7, 189.5), (0, 29.7, 0)),
-    'finaldestination': (32, (0, 14, 237.1), (0, 8, 0)),
-    'dreamland': (28, (0, 34.2, 214.1), (0, 28.2, 0)),
-    'yoshisstory': (8, (0, 29.5, 201.7), (0, 23.5, 0)),
-    'fountainofdreams': (2, (0, 29.9, 175.3), (0, 23.9, 0)),
-    'pokemonstadium': (3, (0, 65, 310), (0, 8, 0)),
+    'battlefield': ('GrNBa.dat', (0, 35.7, 189.5), (0, 29.7, 0)),
+    'finaldestination': ('GrNLa.dat', (0, 14, 237.1), (0, 8, 0)),
+    'dreamland': ('GrOp.dat', (0, 34.2, 214.1), (0, 28.2, 0)),
+    'yoshisstory': ('GrSt.dat', (0, 29.5, 201.7), (0, 23.5, 0)),
+    'fountainofdreams': ('GrIz.dat', (0, 29.9, 175.3), (0, 23.9, 0)),
+    'pokemonstadium': ('GrPs.dat', (0, 65, 310), (0, 8, 0)),
 }
-CLEAN_PATCHES = ((0x80030384, 0x60000000), (0x800872F8, 0x38600000),
-                 (0x800304C4, 0x60000000), (0x8005A634, 0x48000094),
-                 (0x802275F8, 0x480000F0), (0x80030E44, 0x4E800020))
+FOV = 49            # the game's 40 degree camera as HSDRawViewer counts it: fitted to the old in-game captures (11-15)
+SIZE = (1280, 960)
 
 
-def wait_for(predicate, seconds, message):
-    deadline = time.monotonic() + seconds
-    while time.monotonic() < deadline:
-        result = predicate()
-        if result:
-            return result
-        time.sleep(.08)
-    raise ValueError(message)
+def render_copy(source, target):
+    """A copy HSDRaw can read. HSDRaw sizes each struct up to the next pointer target, and reads no further. An AniMelee
+    shell's position table keeps its pointer where entry 0 would sit, which can land inside older data: HSDRaw then
+    cuts that struct short (an animation's keys: it throws) and reads the table as the few bytes up to the next struct
+    (black spikes). The copy gives every vertex table its meshes read past that point a block of its own; the game file
+    stays as built."""
+    import bisect
+    from .anime_stage import places, world_matrices
+    from .display_list import Dat, attrs, strips
+    d = Dat.read(source)
+    starts = sorted({d.u32(r) for r in d.relocations} | {o for _, o in d.roots} | {len(d.data)})
+    users = collections.defaultdict(list)       # table: (field, bytes the mesh reads from it)
+    for _, o in places(d, world_matrices(d)):
+        for p in d.chain(d.ptr(o + 12), 4):
+            table = attrs(d, p)
+            for a in table:
+                if a['data'] is not None:
+                    last = max(index[a['name']] for _, rows in strips(d, p, table) for _, index in rows)
+                    users[a['data']].append((a['at'] + 20, (last + 1) * a['stride']))
+    moved = 0
+    for at, fields in users.items():
+        size = max(n for _, n in fields)
+        if at + size > starts[bisect.bisect_right(starts, at)]:
+            block = d.add(bytes(d.data[at:at + size]), 32)
+            for field, _ in fields:
+                d.point(field, block)
+            moved += 1
+    d.save(target)
+    return moved
 
 
-def capture(iso, renderer, output, stage):
-    from .native.capture import boot, match_setup, memory_input, nav, observe, screenshot_win
-    from .native.capture.melee_mem import Dolphin
-    internal, eye, interest = FRAMING[stage]
-    output.mkdir(parents=True)
-    user = output / 'User'
-    user.mkdir()
-    boot._patch_dolphin_ini(str(user), 'unused', render_size=(1280, 960))
-    boot._patch_logger_ini(str(user))
-    boot._patch_hotkeys(str(user))
-    boot._patch_clean_osd(str(user))
-    def graphics(upsert, _):
-        for name, value in {'AspectRatio': 0, 'ShowFPS': 'False', 'ShowNetPlayPing': 'False',
-                            'ShowNetPlayMessages': 'False', 'EFBScale': 7, 'MSAA': 8, 'SSAA': 'True'}.items():
-            upsert('Settings', name, value)
-        upsert('Enhancements', 'MaxAnisotropy', '4')
-    boot._write_ini(str(user / 'Config/GFX.ini'), graphics)
-    def config(upsert, _):
-        upsert('Core', 'GFXBackend', 'D3D')
-        upsert('Core', 'SlippiJukeboxEnabled', 'False')
-        upsert('Core', 'SlippiSaveReplays', 'False')
-        upsert('Core', 'SlippiEnableSpectator', 'False')
-        upsert('Core', 'SlippiReplayDir', str(output / 'replays'))
-        upsert('Core', 'EmulationSpeed', '1')
-        upsert('DSP', 'Backend', 'No audio output')
-        upsert('DSP', 'Volume', '0')
-        upsert('Core', 'SlotA', '0')
-        upsert('Core', 'SlotB', '0')
-        upsert('Display', 'RenderWindowXPos', '0')
-        upsert('Display', 'RenderWindowYPos', '0')
-    boot._write_ini(str(user / 'Config/Dolphin.ini'), config)
-    memory_input.prepare(user, iso)
-    startup = subprocess.STARTUPINFO()
-    startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-    startup.wShowWindow = 4  # show without activating; input is process-local memory
-    with (output / 'renderer.log').open('w', encoding='utf-8') as log:
-        process = subprocess.Popen([str(renderer), '-b', '-e', str(iso), '-u', str(user)],
-                                   cwd=renderer.parent, stdout=log, stderr=subprocess.STDOUT,
-                                   startupinfo=startup)
-        d = pad = None
-        try:
-            d = Dolphin(process.pid)
-            wait_for(lambda: d.locate() if process.poll() is None else False, 45, 'Renderer did not boot Melee')
-            address = wait_for(lambda: memory_input.mailbox_address(d), 30, 'Renderer input did not initialize')
-            heartbeat = d.u32(address + memory_input.HEARTBEAT)
-            wait_for(lambda: d.u32(address + memory_input.HEARTBEAT) != heartbeat,
-                     30, 'Renderer did not start polling input')
-            pad = memory_input.MemoryInput(d, address)
-            # Patch before the first match compiles these functions into JIT code.
-            for at, value in CLEAN_PATCHES:
-                d.write_u32(at, value)
-            if not nav.nav_to_css(d, pad, timeout=60, log=lambda s: print(stage, s, flush=True)):
-                raise ValueError('Renderer could not reach the offline character select')
-            wait_for(lambda: screenshot_win.ensure_render_size(process.pid, 1280, 960),
-                     10, 'Renderer could not set its required picture dimensions')
-            observe.wait_game_frames(d, 120)
-            if not match_setup.patch_one_player(d):
-                raise ValueError('Renderer solo-stage setup failed')
-            match_setup.force_time_infinite(d)
-            match_setup.write_solo_player(d, 2)
-            match_setup.warp_to_stage_select(d)
-            wait_for(lambda: d.u8(0x80479D30) == 2 and d.u8(0x80479D33) == 1,
-                     15, 'Renderer did not reach stage select')
-            match_setup.write_solo_player(d, 2)
-            table = wait_for(lambda: d.u32(0x804D6C90), 10, 'Stage select table missing')
-            if not 0x80000000 <= table < 0x81800000:
-                raise ValueError('Invalid stage select table')
-            d.write_s8(table + 3, internal)
-            if not observe.wait_in_game(d, timeout=40) or not observe.wait_game_frames(d, 240):
-                raise ValueError('Generated stage did not finish loading')
-            # Accepted clean-shot modifications are confined to this renderer's RAM.
-            for _ in range(25):
-                for at, value in CLEAN_PATCHES:
-                    d.write_u32(at, value)
-                d.write_u8(0x804D6D58, 1)
-                d.write_u32(0x80452C6C, 8)
-                for at, vector in ((0x80453040, interest), (0x8045304C, eye)):
-                    for axis, value in enumerate(vector):
-                        d.write_f32(at + axis * 4, value)
-                d.write_f32(0x80453058, 40)
-                d.write_f32(0x80452C78, 16384)
-                time.sleep(.02)
-            picture = screenshot_win.capture_via_printwindow(process.pid, max_width=1280)
-            if not picture:
-                raise ValueError('Renderer returned no stage picture')
-            im = Image.open(io.BytesIO(picture))
-            if im.size != (1280, 960):
-                raise ValueError(f'Unexpected stage render size: {im.size}')
-            return picture
-        finally:
-            if process.poll() is None:
-                process.terminate()
-                try:
-                    process.wait(timeout=8)
-                except subprocess.TimeoutExpired:
-                    process.kill()
-                    process.wait(timeout=8)
-            if d is not None:
-                d.close()
+def stage_files(stages):
+    """Each built stage file by name; a later component wins, as in the project."""
+    out = {}
+    for component in stages:
+        component = checked_component(component, 'stages')
+        for row in json.loads((component / 'receipt.json').read_text())['outputs']:
+            out[Path(row['path']).name] = component / row['path']
+    return out
+
+
+def render(viewer, source, folder, stage):
+    name, eye, interest = FRAMING[stage]
+    folder.mkdir(parents=True, exist_ok=True)
+    dat = folder / name                 # its own copy: HSDRaw opens a file for itself, and renders run side by side
+    moved = render_copy(source, dat)
+    (folder / 'render-copy.txt').write_text(f'{moved} vertex tables moved', encoding='utf-8')
+    out = folder / 'render.png'
+    command = [str(viewer), '--stage-render', str(dat), str(out), '--eye', ','.join(map(str, eye)),
+               '--interest', ','.join(map(str, interest)), '--fov', str(FOV), '--size', '%dx%d' % SIZE]
+    with (folder / 'render.log').open('w', encoding='utf-8') as log:
+        subprocess.run(command, cwd=folder, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=300)
+    with Image.open(out) as im:
+        if im.size != SIZE:
+            raise ValueError(f'Unexpected stage render size: {im.size}')
+    return out
 
 
 def build_stage_pictures(melee, stages, output, runtime, profile='normal', selected=None):
@@ -141,23 +93,22 @@ def build_stage_pictures(melee, stages, output, runtime, profile='normal', selec
     if not names or len(set(names)) != len(names) or set(names) - FRAMING.keys():
         raise ValueError('Unknown or duplicate stage picture selection')
     runtime = Path(runtime).resolve()
-    renderer = runtime / 'stage-renderer/win-x64/Slippi Dolphin.exe'
-    if not renderer.is_file():
-        raise ValueError('Install the pinned stage renderer')
+    viewer = runtime / 'hsdlib/win-x64' / lock()['tools']['hsdlib']['platforms']['win-x64']['entrypoint']
+    if not viewer.is_file():
+        raise ValueError('Install the pinned HSDRawViewer runtime')
+    built = stage_files(stages)
+    missing = [FRAMING[stage][0] for stage in names if FRAMING[stage][0] not in built]
+    if missing:
+        raise ValueError('The stages are missing ' + ', '.join(missing))
     with output_directory(output, 'stage-pictures') as root:
-        project = root / 'render-project/project.mexproj'
-        mex = Mex(runtime, project, root / 'logs')
-        mex.command('create', melee.path, project.parent, 'Pokemelee stage pictures', project=False, timeout=1800)
-        for component in stages:
-            copy_outputs(component, 'stages', project.parent / 'files', '.dat')
-            copy_outputs(component, 'stages', project.parent / 'files', '.usd')
-        iso = root / 'render.iso'
-        mex.command('export', iso, timeout=1800)
+        renders = run_all(lambda stage: render(viewer, built[FRAMING[stage][0]], root / 'renders' / stage, stage),
+                          names, tries=3)
         outputs = []
-        for stage in names:
-            picture = capture(iso, renderer, root / 'capture' / stage, stage)
+        for stage, path in zip(names, renders):
             target = root / (stage + '.png')
-            target.write_bytes(picture)
+            with Image.open(path) as im:        # where no model drew, black, as the game clears its screen
+                Image.alpha_composite(Image.new('RGBA', SIZE, (0, 0, 0, 255)), im.convert('RGBA')).convert('RGB').save(target)
             outputs.append({'stage': stage, 'path': target.name, **fingerprint(target)})
-        return receipt(root, 'stage-pictures', {'melee': melee.info(), 'stages': [str(p) for p in stages]},
+        return receipt(root, 'stage-pictures', {'melee': melee.info(), 'stages': [str(p) for p in stages],
+                                                'renderer': 'hsdrawviewer stage render', 'fov': FOV},
                        outputs, profile=profile)

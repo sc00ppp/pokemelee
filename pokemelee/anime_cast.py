@@ -48,6 +48,52 @@ def world_scales(d, symbol):
     return out
 
 
+CULL_BACK = 0x8000      # a shell over an inside-out mesh: its inside faces are the ones GX counts as front
+INSIDE_OUT = .75        # share of a mesh's triangles wound the wrong way round its normals that makes it inside out
+QUADS, TRIANGLES, STRIP, FAN = 0x80, 0x90, 0x98, 0xA0
+
+
+def mirrored(d, symbol):
+    """Joints whose world matrix mirrors: an odd count of negative scale components down the chain."""
+    out = set()
+
+    def walk(j, flip):
+        while j is not None:
+            here = flip ^ bool(np.prod(struct.unpack_from('>3f', d.data, j + 0x20)) < 0)
+            if here:
+                out.add(j)
+            if not d.u32(j + 4) & (1 << 12):
+                walk(d.ptr(j + 8), here)
+            j = d.ptr(j + 0xc)
+
+    walk(d.root(symbol), False)
+    return out
+
+
+def wrong_way(d, p, table, mirror):
+    """(wound the wrong way, all) triangles of a mesh. GX fronts run clockwise, so a front's cross product points against
+    its normals; a costume baked through a mirror keeps its normals but turns every triangle round."""
+    pos = next(x for x in table if x['name'] == POS)
+    nrm = next((x for x in table if x['name'] == NRM), None)
+    wrong = total = 0
+    if nrm is None:
+        return 0, 0
+    for op, rows in strips(d, p, table):
+        n, kind = len(rows), op & 0xF8
+        tris = ([(i + i % 2, i + 1 - i % 2, i + 2) for i in range(n - 2)] if kind == STRIP else
+                [(i, i + 1, i + 2) for i in range(0, n - 2, 3)] if kind == TRIANGLES else
+                [(0, i + 1, i + 2) for i in range(n - 2)] if kind == FAN else
+                [t for i in range(0, n - 3, 4) for t in ((i, i + 1, i + 2), (i, i + 2, i + 3))] if kind == QUADS else [])
+        for a, b, c in tris:
+            pa, pb, pc = (np.array(read_vector(d, pos, rows[x][1][POS])) for x in (a, b, c))
+            normal = sum(np.array(read_vector(d, nrm, rows[x][1][NRM])) for x in (a, b, c))
+            side = np.cross(pb - pa, pc - pa) @ normal
+            if side:
+                total += 1
+                wrong += (side > 0) != mirror
+    return wrong, total
+
+
 def convert(source, target, fighter, line=0.14):
     d = Dat.read(source)
     symbol = next(n for n, _ in d.roots if n.endswith('_Share_joint'))
@@ -55,7 +101,7 @@ def convert(source, target, fighter, line=0.14):
     f = Dat.read(fighter)
     scale = struct.unpack_from('>f', f.data, f.ptr(next(o for n, o in f.roots if n.startswith('ftData'))) + 0x8c)[0]
     thick = line / scale
-    low, scales = set(tables.low), world_scales(d, symbol)
+    low, scales, mirror = set(tables.low), world_scales(d, symbol), mirrored(d, symbol)
     places = [(j, o) for j in joints(d, symbol) for o in joint_dobjs(d, j)]
 
     shaped = {d.ptr(o + 8) for _, o in places if d.ptr(o + 12) is not None
@@ -91,6 +137,10 @@ def convert(source, target, fighter, line=0.14):
             raise SystemExit('a mesh with vertex colours')
         mesh['rows'] = rows = [row for _, batch in strips(d, p, table) for row in batch]
         mesh['space'] = 'env' if mesh['env'] else mesh['j']
+        # a mesh wound inside out (Blastoise's tucked-in body on Bowser) would show its shell's outside: black all over
+        wrong, total = wrong_way(d, p, table, not mesh['env'] and mesh['j'] in mirror) if mesh['shell'] else (0, 0)
+        mesh['inside_out'] = bool(wrong >= 4 and wrong >= INSIDE_OUT * total)
+        stats['inside out'] += int(mesh['inside_out'])
         if mesh['shell']:
             pos, nrm = (next(x for x in table if x['name'] == n) for n in (POS, NRM))
             for _, index in rows:
@@ -168,7 +218,8 @@ def convert(source, target, fighter, line=0.14):
         d.point(row + 20, shells[pos['data'], mesh['space']])
         shell = d.add(bytes(0x18), 4)
         d.point(shell + 8, shell_table)
-        struct.pack_into('>HH', d.data, shell + 12, (flags & ~CULLS) | OUTSIDE_IN, units)
+        struct.pack_into('>HH', d.data, shell + 12, (flags & ~CULLS) | (CULL_BACK if mesh['inside_out'] else OUTSIDE_IN),
+                         units)
         d.point(shell + 16, at)
         d.point(shell + 20, old_env)
         head = d.ptr(mesh['o'] + 12)

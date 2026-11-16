@@ -42,7 +42,7 @@
     },
     "mex": {
       "repo": "sc00ppp/ssbmNucleus-mex",
-      "tag": "v2026.11.09.1",
+      "tag": "v2026.11.15",
       "license": {
         "spdx": null,
         "note": "Upstream m-ex / MexManager / MexCLI publish no license; see THIRD_PARTY_NOTICES.md. Source lives in the fork repo."
@@ -50,7 +50,7 @@
       "platforms": {
         "win-x64": {
           "asset": "mexcli-win-x64.zip",
-          "sha256": "b35a6cad3b25f14b6d7ca5eeea83b37d86a0ea8e21a919b39562102e4300355a",
+          "sha256": "74a443ca9ee6a437909d6951247a430d236cec6c573b133f8dbbd25422ce1f03",
           "entrypoint": "mexcli.exe",
           "required": [
             "mexcli.exe",
@@ -62,7 +62,7 @@
         },
         "linux-x64": {
           "asset": "mexcli-linux-x64.zip",
-          "sha256": "7b73d169f7838847fc91ab1977f6f2f84f956968ca64d227f8a312827ae51c93",
+          "sha256": "743d252ac7f0d417b46749355084d78bc08e4a08654501c9e301aaa1c72fc8c6",
           "entrypoint": "mexcli",
           "required": [
             "mexcli",
@@ -74,7 +74,7 @@
         },
         "osx-arm64": {
           "asset": "mexcli-osx-arm64.zip",
-          "sha256": "92b5f58e0fa0b3f9559b5d05fbd9c1d80d330a3aa020a331ab2db3c83de8717b",
+          "sha256": "71d48f26bb43131eaed96ebcf45706da85bb48686b7f23beeccb1e109b5d52c3",
           "entrypoint": "mexcli",
           "required": [
             "mexcli",
@@ -121,7 +121,8 @@
             "blender-4.5.7-windows-x64/blender.exe"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "colo-model-reader": {
       "repo": "StarsMmd/Blender-Addon-Gamecube-Models",
@@ -141,7 +142,8 @@
             "Blender-Addon-Gamecube-Models-dc71de837978a6a2fe8c5082f2840cfafb135235/blender_manifest.toml"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "musyx": {
       "repo": "AxioDL/musyx",
@@ -177,7 +179,8 @@
             "python.exe"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-bpy": {
       "repo": "https://pypi.org/project/bpy",
@@ -193,7 +196,8 @@
             "bpy/__init__.pyd"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-numpy": {
       "repo": "https://pypi.org/project/numpy",
@@ -209,7 +213,8 @@
             "numpy/conftest.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-pillow": {
       "repo": "https://pypi.org/project/pillow",
@@ -225,7 +230,8 @@
             "PIL/AvifImagePlugin.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-cattrs": {
       "repo": "https://pypi.org/project/cattrs",
@@ -241,7 +247,8 @@
             "cattr/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-attrs": {
       "repo": "https://pypi.org/project/attrs",
@@ -257,7 +264,8 @@
             "attr/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-cython": {
       "repo": "https://pypi.org/project/cython",
@@ -273,7 +281,8 @@
             "cython.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-requests": {
       "repo": "https://pypi.org/project/requests",
@@ -289,7 +298,8 @@
             "requests/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-zstandard": {
       "repo": "https://pypi.org/project/zstandard",
@@ -305,7 +315,8 @@
             "zstandard/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-typing-extensions": {
       "repo": "https://pypi.org/project/typing-extensions",
@@ -321,7 +332,8 @@
             "typing_extensions.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-charset-normalizer": {
       "repo": "https://pypi.org/project/charset-normalizer",
@@ -337,7 +349,8 @@
             "charset_normalizer/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-idna": {
       "repo": "https://pypi.org/project/idna",
@@ -353,7 +366,8 @@
             "idna/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-urllib3": {
       "repo": "https://pypi.org/project/urllib3",
@@ -369,7 +383,8 @@
             "urllib3/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "geometry-certifi": {
       "repo": "https://pypi.org/project/certifi",
@@ -385,7 +400,8 @@
             "certifi/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "cast-helpers": {
       "repo": "sc00ppp/rigswap",
@@ -403,7 +419,8 @@
             "sc00ppp-rigswap-ade3152b413c2ba96ce13ac356df662c3f899124/rigswap/plugins/melee/__init__.py"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "blender-target-reader": {
       "repo": "https://www.blender.org/",
@@ -420,7 +437,8 @@
             "blender-4.3.2-windows-x64/blender.exe"
           ]
         }
-      }
+      },
+      "maintainer": true
     },
     "slippi-menu-map": {
       "repo": "project-slippi/dolphin",
@@ -453,24 +471,6 @@
           ]
         }
       }
-    },
-    "stage-renderer": {
-      "name": "Slippi Dolphin stage renderer",
-      "license": "GPL-2.0-or-later",
-      "purpose": "Automatic offline stage-select picture rendering; no user profile or account required",
-      "platforms": {
-        "win-x64": {
-          "url": "https://github.com/project-slippi/Ishiiruka/releases/download/v3.6.4/FM-Slippi-3.6.4-Win.zip",
-          "sha256": "873ee4c5752c425b02e73e7f6a09b1478b10dce61258bcdf20e14bd69de89e2f",
-          "required": [
-            "Slippi Dolphin.exe"
-          ],
-          "entrypoint": "Slippi Dolphin.exe",
-          "asset": "FM-Slippi-3.6.4-Win.zip"
-        }
-      },
-      "repo": "project-slippi/Ishiiruka",
-      "tag": "v3.6.4"
     }
   },
   "unresolved": [
