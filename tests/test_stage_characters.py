@@ -1,0 +1,129 @@
+"""A stage's background characters, on a synthetic stage: one skinned triangle and one rigid one."""
+from pathlib import Path
+import struct
+import tempfile
+import unittest
+
+import numpy as np
+
+from pokemelee import stage_characters
+from pokemelee.dat import Dat
+from pokemelee.display_list import CLR0, END, ENVELOPE, NRM, POS, attrs, strips
+
+TRIANGLES, DIRECT, INDEX8, FLOAT = 0x90, 1, 2, 4
+LIT, UNLIT = 0x2015, 0x2011        # constant colour and a texture, with and without the lights
+
+
+def stage():
+    """map_head -> one group -> root -> a skinned branch (lit, facing the camera) and a rigid one (unlit)."""
+    names = b"map_head\0"
+    head = bytes(0x10)
+    raw = struct.pack(">5I", 0x20 + len(head) + 8 + len(names), len(head), 0, 1, 0) + bytes(12) + head + struct.pack(">2I", 0, 0) + names
+    d = Dat(raw)
+
+    def joint(child=None, sibling=None, dobj=None, move=(0, 0, 0)):
+        at = d.add(struct.pack(">2I", 0, 0x80) + bytes(12) + struct.pack(">9f", 0, 0, 0, 1, 1, 1, *move) + bytes(8))
+        for field, target in ((8, child), (0xc, sibling), (0x10, dobj)):
+            if target is not None:
+                d.point(at + field, target)
+        return at
+
+    def mesh(mode, skin_to=None, x=0.):
+        points = d.add(struct.pack(">9f", x, 0, 0, x + 1, 0, 0, x, 1, 0), 32)
+        normals = d.add(struct.pack(">6f", 0, 0, 1, 0, 1, 0), 32)       # towards the camera, and straight up
+        rows = [(0, DIRECT, 0, 0, 0, None)] if skin_to is not None else []
+        rows += [(POS, INDEX8, 1, FLOAT, 12, points), (NRM, INDEX8, 0, FLOAT, 12, normals)]
+        table = d.add(b"".join(struct.pack(">4IBBHI", name, kind, count, comp, 0, 0, stride, 0)
+                               for name, kind, count, comp, stride, _ in rows) + struct.pack(">I", END) + bytes(20), 32)
+        for i, row in enumerate(rows):
+            if row[5] is not None:
+                d.point(table + i * 24 + 20, row[5])
+        vertex = (lambda i, n: bytes((0, i, n))) if skin_to is not None else (lambda i, n: bytes((i, n)))
+        listing = struct.pack(">BH", TRIANGLES, 3) + vertex(0, 0) + vertex(1, 0) + vertex(2, 1)
+        pobj = d.add(struct.pack(">3I2H2I", 0, 0, 0, ENVELOPE if skin_to is not None else 0, 1, 0, 0))
+        d.point(pobj + 8, table)
+        d.point(pobj + 16, d.add(listing + bytes(32 - len(listing)), 32))
+        if skin_to is not None:
+            envelope = d.add(struct.pack(">If2I", 0, 1., 0, 0))
+            d.point(envelope, skin_to)
+            array = d.add(bytes(8))
+            d.point(array, envelope)
+            d.point(pobj + 20, array)
+        material = d.add(struct.pack(">12B2f", *(128, 128, 128, 255), *(255, 255, 255, 255), *(0, 0, 0, 255), 1., 1.))
+        mobj = d.add(struct.pack(">6I", 0, mode, 0, 0, 0, 0))
+        d.point(mobj + 12, material)
+        dobj = d.add(bytes(16))
+        d.point(dobj + 8, mobj)
+        d.point(dobj + 12, pobj)
+        return dobj, pobj, mobj
+
+    bone = joint()
+    skinned = mesh(LIT, skin_to=bone)
+    rigid = mesh(UNLIT, x=50.)
+    scenery = joint(dobj=rigid[0])
+    person = joint(child=bone, sibling=scenery)
+    d.point(person + 0x10, skinned[0])
+    root = joint(child=person)
+    group = d.add(bytes(0x34))
+    d.point(group, root)
+    d.point(8, group)
+    struct.pack_into(">I", d.data, 12, 1)
+    return d, person, skinned, rigid
+
+
+class StageCharacterTests(unittest.TestCase):
+    def setUp(self):
+        self.folder = tempfile.TemporaryDirectory()
+        self.addCleanup(self.folder.cleanup)
+        self.source = Path(self.folder.name) / "in.dat"
+        d, self.person, self.skinned, self.rigid = stage()
+        d.save(self.source)
+
+    def test_a_character_is_the_branch_with_a_skinned_mesh(self):
+        cast = stage_characters.characters(Dat.read(self.source))
+        self.assertEqual([joints[0] for joints in cast], [self.person])
+
+    def test_light_bakes_shading_into_the_character_only(self):
+        target = Path(self.folder.name) / "out.dat"
+        done = stage_characters.light(self.source, target)
+        self.assertEqual((done["characters"], done["meshes"], done["materials"]), (1, 1, 1))
+        before, d = Dat.read(self.source), Dat.read(target)
+        _, pobj, mobj = self.skinned
+        self.assertEqual(d.u32(mobj + 4), UNLIT & ~0b11 | 0b10)                      # unlit, coloured by its points
+        table = attrs(d, pobj)
+        self.assertEqual([a["name"] for a in table], [0, POS, NRM, CLR0])
+        (_, rows), = strips(d, pobj, table)
+        self.assertEqual([index[POS] for _, index in rows], [0, 1, 2])
+        colour = next(a for a in table if a["name"] == CLR0)
+        levels = [d.data[colour["data"] + 3 * index[CLR0]] for _, index in rows]
+        front, up = (round(255 * stage_characters.shade(np.array(n, float))) for n in ((0, 0, 1), (0, 1, 0)))
+        self.assertEqual(levels, [front, front, up])
+        self.assertLess(stage_characters.shade(np.array((0., -1., 0.))), stage_characters.shade(np.array((0., 1., 0.))))
+        _, rigid, rigid_mobj = self.rigid
+        self.assertEqual(d.u32(rigid_mobj + 4), UNLIT)
+        self.assertEqual([a["name"] for a in attrs(d, rigid)], [POS, NRM])
+        self.assertEqual(d.ptr(rigid + 16), before.ptr(rigid + 16))
+        self.assertEqual(d.ptr(pobj + 16), before.ptr(pobj + 16))       # the new list took the old one's block
+
+    def test_a_stage_without_characters_is_left_alone(self):
+        d = Dat.read(self.source)
+        struct.pack_into(">H", d.data, self.skinned[1] + 12, 0)
+        d.point(self.skinned[1] + 20, None)
+        plain = Path(self.folder.name) / "plain.dat"
+        d.save(plain)
+        target = Path(self.folder.name) / "untouched.dat"
+        self.assertIsNone(stage_characters.light(plain, target))
+        self.assertFalse(target.exists())
+
+    def test_no_line_inside_a_character(self):
+        visible = stage_characters.edge_filter(self.source)
+        towards = [np.array((0., 0., 1.))]
+        own = np.array((0., 0., 0.)), np.array((1., 0., 0.))
+        scenery = np.array((50., 0., 0.)), np.array((51., 0., 0.))
+        self.assertFalse(visible(*own, towards))
+        self.assertTrue(visible(*scenery, towards))
+        self.assertTrue(visible(own[0], scenery[0], towards))
+
+
+if __name__ == "__main__":
+    unittest.main()

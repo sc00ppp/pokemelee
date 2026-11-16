@@ -5,13 +5,13 @@
       "id": "agate",
       "melee_stage": "Dream Land",
       "scene": "Agate Village",
-      "revision": "v32",
+      "revision": "v33",
       "spec": "stages/agate.json",
       "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrOp.dat",
-          "sha256": "fa62d0eb6266f35694ef2d261e3e9627d594df564f78a326d569ecdaa51c80c7"
+          "sha256": "7a68f92446eff53f279ddd6a734a09fdb053d45ad61b955a484c30c237d04e16"
         }
       ]
     },
@@ -25,7 +25,7 @@
       "approved_outputs": [
         {
           "name": "GrIz.dat",
-          "sha256": "85dd13749d574d9edae5fa4daf700669a000d769a6a6b87b5100f745ee39efb0"
+          "sha256": "9c9535cec5365f1711b533dbaac1449e99dabb22167a4aee956ac7675ab09226"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "approved_outputs": [
         {
           "name": "GrNBa.dat",
-          "sha256": "cba86c7b591d170bc9dd983c6f948d2c7ed56adcd5eb035599309c5be425b0c7"
+          "sha256": "bbdce5d9ee0ffac06bb5e0aaaa1415e2309a23a305b96b1b0d606ca941e9e268"
         }
       ]
     },
@@ -53,7 +53,7 @@
       "approved_outputs": [
         {
           "name": "GrNLa.dat",
-          "sha256": "3a62dc72edb6339d14d67d08621d369022188373010498429f796a67e89ba078"
+          "sha256": "de0b17d08e4ecfa1d915fb0ebc33bfbc5da8a3b7d59477159ae5db807df41323"
         }
       ]
     },
@@ -67,7 +67,7 @@
       "approved_outputs": [
         {
           "name": "GrSt.dat",
-          "sha256": "2be9d4510b2a221232836c9228fed3e8c3b5c19120407607da63f28740c1dd1d"
+          "sha256": "6329bf8979cb01331d95ae9494bdebf4dcdf8f585e4174cec9336545b59c5753"
         }
       ]
     },
@@ -110,7 +110,8 @@
     "SHA-256 fingerprints identify approved local outputs; those files are not distributed.",
     "Specs contain authored graft settings, not source meshes, textures or copied stage collision.",
     "Stadium transformations retain the first-round treatment; the main stage uses the approved second-round v7.",
-    "Both profiles reproduce their approved stage fingerprints; AniMelee includes its garden and Phenac exceptions."
+    "Background characters (the models with a skeleton) carry baked shading in the normal profile; in AniMelee they keep flat colours and an outline with no lines inside it.",
+    "Both profiles reproduce their approved stage fingerprints; AniMelee includes its Phenac exception."
   ],
   "profiles": [
     "normal",

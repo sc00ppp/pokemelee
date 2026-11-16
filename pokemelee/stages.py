@@ -120,7 +120,7 @@ def stadium_meshes(inputs, runtime, root, anime=False):
         return generate(atlas, geometry, anime=anime)
 
 
-def anime_stage(source, target, row, spec):
+def anime_stage(source, target):
     from . import anime_flat, anime_stage as lines
     flat = bytearray(anime_flat.stage(source))
     if source.name in ("GrPs.dat", "GrPs.usd"):
@@ -133,11 +133,8 @@ def anime_stage(source, target, row, spec):
     flat_path = source.parent.parent / "flat" / source.name
     flat_path.parent.mkdir(exist_ok=True)
     flat_path.write_bytes(flat)
-    edge_visible = None
-    if row["id"] == "mt-battle-garden":
-        from .anime_garden import edge_filter
-        edge_visible = edge_filter(flat_path, spec)
-    return lines.outline(flat_path, target, edge_visible=edge_visible)
+    from .stage_characters import edge_filter
+    return lines.outline(flat_path, target, edge_visible=edge_filter(flat_path))
 
 
 def files_in(value):
@@ -199,18 +196,20 @@ def build_stages(melee, colosseum, output, runtime, selected=None, profile="norm
                 jobs.append((row, name, flavor, current, target))
 
         def build(group):
+            from .stage_characters import light
             for row, name, flavor, current, target in group:
                 run_helper(runtime, flavor, ["build", root / (name + ".json")], root / (name + ".log"))
                 if not target.is_file():
                     raise ValueError(f"Stage {name} was not generated; see its local log")
+                if profile == "normal":     # AniMelee's characters stay flat: lights off and plain colours are its style
+                    (root / (name + ".light.log")).write_text(str(light(target, target)), encoding="utf-8")
 
         run_all(build, sharing(jobs))
         if profile == "animelee":
             # the outlines are Python through and through: one process per stage, all cores
             (root / "files").mkdir(exist_ok=True)
             with ProcessPoolExecutor(workers(len(jobs))) as pool:
-                logs = list(pool.map(anime_stage, *zip(*[(target, root / "files" / name, row, current)
-                                                         for row, name, _, current, target in jobs])))
+                logs = list(pool.map(anime_stage, *zip(*[(target, root / "files" / name) for _, name, _, _, target in jobs])))
             for (_, name, *_), log in zip(jobs, logs):
                 (root / (name + ".anime.log")).write_text(log, encoding="utf-8")
         outputs = []
