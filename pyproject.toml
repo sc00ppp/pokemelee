@@ -10,7 +10,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-art = ["Pillow==11.2.1", "numpy==2.2.6"]
+art = ["Pillow==11.2.1", "numpy==2.2.6", "PyYAML==6.0.2"]
 stages = ["Pillow==11.2.1", "numpy==2.2.6", "scipy==1.16.0"]
 presentation = ["Pillow==11.2.1", "numpy==2.2.6", "PyYAML==6.0.2"]
 
