@@ -5,5 +5,18 @@
     "MnSlMap.usd": "f5ab9b13a07dd11e5b4eb7e309baa0d576e85c20e5387c06ff102ee86a30e259",
     "MnMaAll.usd": "6f0e758044170a5110d0602a1a6ff1d1f6599606e02d36fb7732c78800dcdb26",
     "GmPause.usd": "3e8490299edf670af0aebb7f27117e0c61297d6b9e2af7ab5c443091e554907f"
+  },
+  "select_screen_memory": {
+    "file": "MnSlChr.usd",
+    "online_css_free_plus_file_bytes": 3905994,
+    "min_free_bytes": 153600,
+    "reason": [
+      "Slippi's online character select holds MnSlChr.usd, its own MnExtAll.usd (1.3 MB) and SdSlChr.usd in one 5,748 KB heap.",
+      "Measured 2026-11-17 (review/work/css-memory/oncheck.py, Slippi Dolphin, both discs): free bytes there = 3,905,994 - the size of MnSlChr.usd, exactly.",
+      "Release-13 (3,904,394 B) left 1,600 B: locking a character worked, Direct's connect-code screen (START) asserted 'adr' in memory.c line 52 and froze.",
+      "3,751,594 B left 154,400 B: the code screen opened and left 85,824 B, so it takes 68,576 B.",
+      "The floor is 150 KB (153,600 B) free: the code screen plus about 83 KB for whatever Slippi loads next (the opponent, its own updates).",
+      "Budget = 3,905,994 - 153,600 = 3,752,394 B. A Slippi update that grows MnExtAll.usd or the heap moves the first number: measure again with oncheck.py."
+    ]
   }
 }

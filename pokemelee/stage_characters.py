@@ -4,15 +4,21 @@ A character is a model with a skeleton: a branch straight under a model group's 
 scenery around it never has one (a map's own skinned props are baked rigid when the stage is built). A stage item's
 model counts too where a recipe hangs a Colosseum model in one (the garden's Castform, in the Shy Guy's place).
 
-Three things follow from being one:
+Four things follow from being one:
 
 light   A Colosseum character's materials ask for a constant colour AND the lights. Melee reads that as constant
         (HSD_SetupChannelMode lights a material only when it asks for nothing else), so the character is drawn with
         no shading at all: its plain colour swatches at full brightness, a flat glowing cut-out. Melee's own stage
         props carry their shading in their vertex colours, and so does the character from here on: worked out once,
         from the sky and a sun high on the left, and stored per point. Not in AniMelee, whose style is the flat colour.
+colour  AniMelee cuts a stage's textures down to one palette. A character's few plain colours are not the scenery's,
+        and the nearest of those is a different colour (Celebi's pale face came out khaki): each character's textures
+        get a palette of their own.
 edges   AniMelee's stage lines draw every fold of a mesh, which on a small far character is a black scribble over its
-        face and clothes: it keeps its outline and loses the lines inside it (anime_stage's edge_visible).
+        face and clothes: it keeps its outline and loses the lines inside it (anime_stage's edge_visible). Its
+        two-sided parts have no outline to keep, since a sheet has no inside to hide a shell in: the border of the
+        sheet is their outline, wherever it does not lie on the body (Lombre's lily pad, Ho-Oh's wings). Only a
+        sheet wide enough to carry one, though: on strips of hair no wider than the line it is all there would be.
 depth   AniMelee's outline is as wide as its distance asks. A character on a flight path rests at the path's origin,
         in the middle of the stage, and flies far behind it: its outline goes by where the path is.
 """
@@ -23,7 +29,7 @@ import struct
 import numpy as np
 
 from . import anime_stage
-from .display_list import ATTR_SIZE, CLR0, END, ENVELOPE, NRM, POS, attrs, read_vector, strips
+from .display_list import ATTR_SIZE, CLR0, CULLS, END, ENVELOPE, NRM, POS, attrs, read_vector, strips
 from .dat import Dat
 
 DIFFUSE, SPECULAR, COLOUR_SOURCE, FROM_VERTEX = 1 << 2, 1 << 3, 0b11, 0b10     # render mode
@@ -34,6 +40,9 @@ AMBIENT, SKY = .5, .22                          # everywhere, and more the furth
 SUNS = ((np.array((-.45, .75, .5)), .33),       # high on the left, in front
         (np.array((.6, -.1, .8)), .1))          # a weak fill from the right
 UP = np.array((0., 1., 0.))
+MESH_TOLERANCE = 1.                             # world units a recipe's bounds may be off a mesh it names
+ON_BODY = .02                                   # of a character's size: how near its body a sheet's border lies on it
+WIDE = 2                                        # line widths a sheet has to be wide for its border to get one: under that it is mostly line
 ITEM_MODEL = (0, 4, 0x10, 0)                    # from itemdata: its table, the Shy Guy's article, its model, the root joint
 
 
@@ -134,22 +143,124 @@ def rest_matrices(d, j, p, worlds, up):
     return out
 
 
-def edge_filter(path, roots=()):
-    """anime_stage's edge_visible for a flattened stage: no line between two points of one character."""
+def materials(path, roots=()):
+    """Each character's materials."""
     d = Dat.read(path)
+    return [{d.ptr(o + 8) for _, o, _ in meshes(d, joints)} for joints in characters(d, roots)]
+
+
+def distance(points, triangles):
+    """How far each point is from the nearest of the triangles."""
+    a, ab, ac = triangles[:, 0], triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0]
+    n = np.cross(ab, ac)
+    flat = (n * n).sum(-1) <= 1e-12                 # a strip's empty triangles: only their edges count
+    area = np.maximum((n * n).sum(-1), 1e-12)
+    p = points[:, None, :]
+    ap = p - a
+    along = (ap * n).sum(-1) / area                 # the foot of the perpendicular, in units of n
+    foot = ap - along[..., None] * n
+    u = (np.cross(foot, ac) * n).sum(-1) / area
+    v = (np.cross(ab, foot) * n).sum(-1) / area
+    best = np.where((u >= 0) & (v >= 0) & (u + v <= 1) & ~flat, np.abs(along) * np.sqrt(area), np.inf)
+    for corner, edge in ((a, ab), (a, ac), (triangles[:, 1], triangles[:, 2] - triangles[:, 1])):
+        rel = p - corner
+        t = np.clip((rel * edge).sum(-1) / np.maximum((edge * edge).sum(-1), 1e-12), 0, 1)
+        best = np.minimum(best, np.linalg.norm(rel - t[..., None] * edge, axis=-1))
+    return best.min(1)
+
+
+def edge_filter(path, roots=(), depths=None):
+    """anime_stage's edge_visible for a flattened stage: no line between two points of one character, but along the
+    borders of its wide two-sided parts where they do not lie on its one-sided body. ``depths`` as the outline takes them."""
+    d, up, depths = Dat.read(path), {}, depths or {}
     worlds = anime_stage.world_matrices(d, roots)
-    own = set()
-    for joints in characters(d, roots):
-        for j, _, p in meshes(d, joints):
+    own, borders = set(), set()
+    for joints in characters(d, roots, up):
+        body, sheets = [], []           # the one-sided meshes' triangles; each two-sided mesh's open edges
+        for j, o, p in meshes(d, joints):
             table = attrs(d, p)
             pos = next((a for a in table if a['name'] == POS), None)
             if pos is None or pos['data'] is None:
                 continue
-            m = space(d, j, p, worlds)
-            for _, rows in strips(d, p, table):
-                for _, index in rows:
-                    own.add(tuple(np.round(m[:3, :3] @ np.array(read_vector(d, pos, index[POS])) + m[:3, 3], 2)))
-    return lambda a, b, sides: not (tuple(np.round(a, 2)) in own and tuple(np.round(b, 2)) in own) and anime_stage.seen(a, b, sides)
+            guess, rest = space(d, j, p, worlds), rest_matrices(d, j, p, worlds, up)      # as the outline keys an edge; where it is
+            triangles, uses, keys, area = [], collections.Counter(), {}, 0.
+            for op, rows in strips(d, p, table):
+                local = [np.array(read_vector(d, pos, index[POS])) for _, index in rows]
+                keyed = [tuple(np.round(guess[:3, :3] @ x + guess[:3, 3], 2)) for x in local]
+                real = [rest[index.get(0, 0) // 3] for _, index in rows]
+                real = [m[:3, :3] @ x + m[:3, 3] for m, x in zip(real, local)]
+                own.update(keyed)
+                for a, b, c in anime_stage.faces(op, len(rows)):
+                    triangles.append((real[a], real[b], real[c]))
+                    area += np.linalg.norm(np.cross(real[b] - real[a], real[c] - real[a])) / 2
+                    for x, y in ((a, b), (b, c), (c, a)):
+                        ends = tuple(sorted((tuple(np.round(real[x], 3)), tuple(np.round(real[y], 3)))))
+                        if ends[0] != ends[1]:
+                            uses[ends] += 1
+                            keys[ends] = tuple(sorted((keyed[x], keyed[y]))), (real[x] + real[y]) / 2, np.linalg.norm(real[x] - real[y])
+            if d.u16(p + 12) & CULLS:
+                body += triangles
+            elif anime_stage.why_not(d, d.ptr(o + 8), p, table) is None:
+                border = [keys[ends] for ends, n in uses.items() if n == 1]
+                depth = depths.get(p, np.mean([t[0][2] for t in triangles]) if triangles else 0.)
+                line = 2 * anime_stage.STAGE_LINE * anime_stage.distance(depth)
+                if border and 2 * area / sum(length for _, _, length in border) >= WIDE * line:      # a strip's area over half its border is its width
+                    sheets += [(key, mid) for key, mid, _ in border]
+        if not sheets:
+            continue
+        mids = np.array([mid for _, mid in sheets])
+        free = np.ones(len(sheets), bool)
+        if body:
+            body = np.array(body)
+            reach = ON_BODY * np.ptp(body.reshape(-1, 3), 0).max()
+            free = np.concatenate([distance(mids[at:at + 64], body) for at in range(0, len(mids), 64)]) > reach
+        borders.update(key for (key, _), is_free in zip(sheets, free) if is_free)
+
+    def visible(a, b, sides):
+        a, b = tuple(np.round(a, 2)), tuple(np.round(b, 2))
+        if a in own and b in own:
+            return tuple(sorted((a, b))) in borders
+        return anime_stage.seen(np.array(a), np.array(b), sides)
+
+    return visible
+
+
+def quiet_filter(path, spec, roots=()):
+    """anime_stage's quiet for a flattened stage: the scenery its recipe wants outlined but not lined. Everything under
+    the wrappers it names (a recipe hangs a whole map on one), what stands wholly inside the boxes it names, and the
+    meshes it names by their bounds."""
+    wanted = spec.get('quiet')
+    if not wanted:
+        return None
+    d = Dat.read(path)
+    cast = {p for joints in characters(d, roots) for _, _, p in meshes(d, joints)}
+    hung = set()
+    for index in wanted.get('wrappers', ()):
+        wrapper = spec['wrappers'][index]
+        found = [top for top in tops(d) if np.allclose(struct.unpack_from('>3f', d.data, top + 0x2c), wrapper['t'], atol=1e-3)
+                 and np.allclose(struct.unpack_from('>3f', d.data, top + 0x20), wrapper['s'], atol=1e-4)]
+        if len(found) != 1:
+            raise ValueError(f'The stage has {len(found)} joints placed as its recipe\'s wrapper {index}')
+        hung.update(p for _, _, p in meshes(d, branch(d, found[0])))
+    test = named(wanted.get('boxes', ()), wanted.get('meshes', ()))
+    return lambda p, points: p in hung or (p not in cast and test(points))
+
+
+def scenery_filter(path, spec, key, roots=()):
+    """anime_stage's solid or sideways for a flattened stage: the scenery its recipe names under ``key`` ('solid' or
+    'sides'), standing wholly inside the boxes it gives or having the bounds of the meshes it gives. Never a character."""
+    wanted = spec.get(key)
+    if not wanted:
+        return None
+    d = Dat.read(path)
+    cast = {p for joints in characters(d, roots) for _, _, p in meshes(d, joints)}
+    test = named(wanted.get('boxes', ()), wanted.get('meshes', ()))
+    return lambda p, points: p not in cast and test(points)
+
+
+def water(spec):
+    """anime_stage's water: the boxes a recipe names, each from the floor up to the surface of a water."""
+    return [(box[:3], box[3:]) for box in spec.get('water', ())]
 
 
 def flight_depths(path, spec):
@@ -167,14 +278,29 @@ def flight_depths(path, spec):
     return out
 
 
+def named(boxes, exact):
+    """Is a mesh (its world points) one a recipe names: wholly inside one of the ``boxes``, or having the bounds of one
+    of ``exact`` (a single mesh named by its own bounds, low corner then high, to within MESH_TOLERANCE)."""
+    boxes, exact = ([np.array(box, float) for box in rows] for rows in (boxes, exact))
+
+    def test(points):
+        low, high = points.min(0), points.max(0)
+        return (any((low >= box[:3]).all() and (high <= box[3:]).all() for box in boxes)
+                or any(np.abs(low - box[:3]).max() <= MESH_TOLERANCE and np.abs(high - box[3:]).max() <= MESH_TOLERANCE for box in exact))
+
+    return test
+
+
 def plain_filter(path, spec, roots=()):
-    """anime_stage's plain for a flattened stage: the scenery standing wholly inside a box its recipe calls foliage."""
-    boxes = [np.array(box, float) for box in spec.get('foliage', ())]
-    if not boxes:
+    """anime_stage's plain for a flattened stage: the scenery standing wholly inside a box its recipe calls foliage, and
+    the meshes it names under plain."""
+    boxes, exact = spec.get('foliage', ()), spec.get('plain', {}).get('meshes', ())
+    if not boxes and not exact:
         return None
     d = Dat.read(path)
     cast = {p for joints in characters(d, roots) for _, _, p in meshes(d, joints)}
-    return lambda p, points: p not in cast and any((points >= box[:3]).all() and (points <= box[3:]).all() for box in boxes)
+    test = named(boxes, exact)
+    return lambda p, points: p not in cast and test(points)
 
 
 def shade(normal):

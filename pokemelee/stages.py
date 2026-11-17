@@ -3,7 +3,6 @@ from concurrent.futures import ProcessPoolExecutor
 import json
 import copy
 from pathlib import Path
-import struct
 import subprocess
 import threading
 
@@ -19,6 +18,7 @@ NATIVE_TOOLS = set(FLAVORS.values()) | {"forms", "colodump", "menugraft", "texen
 # phenac.generate keeps its work in module globals, and the normal and AniMelee stage steps run at once (11-15: the
 # normal GrPs.dat once came out with the other step's state): one generate at a time
 PHENAC = threading.Lock()
+STADIUM_SCREEN = 1      # GrPs's map_head group 1 is the big screen (decomp gr/grpstadium.c: PsType_Display)
 
 
 def compile_tools(runtime, flavors=None):
@@ -77,19 +77,9 @@ class Inputs:
             source = {"game": role, "file": relative}
         elif role == "colosseum":
             archive, entry = relative.split("/", 1)
-            if relative == "celebi/celebi.dat":
-                archive, entry = "wzx_relive_celebi_appear.fsys", "00_relive_celebi_appear.t20"
-                blob = self.archive(archive)[entry]
-                offset = 0x520  # HSD archive inside the Colosseum cutscene resource
-                length = struct.unpack_from(">I", blob, offset)[0]
-                if length < 0x20 or offset + length > len(blob):
-                    raise ValueError("Invalid Celebi HSD archive extent")
-                data = blob[offset:offset + length]
-                source = {"game": role, "file": archive, "entry": entry, "offset": offset, "bytes": length}
-            else:
-                archive += ".fsys"
-                data = self.archive(archive)[entry]
-                source = {"game": role, "file": archive, "entry": entry}
+            archive += ".fsys"
+            data = self.archive(archive)[entry]
+            source = {"game": role, "file": archive, "entry": entry}
         else:
             raise ValueError(f"Unknown recipe input role: {role}")
         record = write_blob(self.root, f"{role}/{relative}", data)
@@ -120,22 +110,29 @@ def stadium_meshes(inputs, runtime, root, anime=False):
         return generate(atlas, geometry, anime=anime)
 
 
+def stadium_pictures(source):
+    """(image offsets, palette offsets) of Stadium's pictures that AniMelee leaves as they are: the 768x168 one (flattening
+    ruined it) and everything the big screen shows, whose type announcements came out as blobs of the stage's colours."""
+    from . import anime_flat
+    dat, images = anime_flat.stage_parts(source)[:2]
+    screen_images, screen_tables = anime_flat.group_textures(dat, STADIUM_SCREEN)
+    big = {off for off, image in images.items() if (image.width, image.height) == (768, 168)}
+    return sorted(screen_images | big), sorted(screen_tables)
+
+
 def anime_stage(source, target, spec):
     from . import anime_flat, anime_stage as lines, stage_characters as cast
     roots = cast.item_roots(lines.Dat.read(source), spec)
-    flat = bytearray(anime_flat.stage(source, roots=roots))
-    if source.name in ("GrPs.dat", "GrPs.usd"):
-        raw = source.read_bytes()
-        for off, image in anime_flat.stage_parts(source)[1].items():
-            if (image.width, image.height) == (768, 168):
-                size = anime_flat.datprobe.gx_image_size(image.format, image.width, image.height)
-                at = anime_flat.HEADER + off
-                flat[at:at + size] = raw[at:at + size]
+    keep = stadium_pictures(source) if source.name in ("GrPs.dat", "GrPs.usd") else ((), ())
+    flat = bytearray(anime_flat.stage(source, roots=roots, characters=cast.materials(source, roots), keep=keep))
     flat_path = source.parent.parent / "flat" / source.name
     flat_path.parent.mkdir(exist_ok=True)
     flat_path.write_bytes(flat)
-    return lines.outline(flat_path, target, edge_visible=cast.edge_filter(flat_path, roots), roots=roots,
-                         depths=cast.flight_depths(flat_path, spec), plain=cast.plain_filter(flat_path, spec, roots))
+    depths = cast.flight_depths(flat_path, spec)
+    return lines.outline(flat_path, target, edge_visible=cast.edge_filter(flat_path, roots, depths), roots=roots, depths=depths,
+                         plain=cast.plain_filter(flat_path, spec, roots), quiet=cast.quiet_filter(flat_path, spec, roots),
+                         solid=cast.scenery_filter(flat_path, spec, 'solid', roots),
+                         sideways=cast.scenery_filter(flat_path, spec, 'sides', roots), water=cast.water(spec))
 
 
 def files_in(value):

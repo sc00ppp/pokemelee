@@ -172,7 +172,9 @@ def build_color_portraits(colosseum, colors, cast, targets, portraits, output, r
     targets = checked_component(targets, MELEE_FILES)
     portraits = checked_component(portraits, 'portraits')
     costumes = json.loads((colors / 'receipt.json').read_text())['costumes']
-    fighters = {r['pokemon']: r['fighter'] for r in json.loads((cast / 'receipt.json').read_text())['outputs']}
+    cast_rows = json.loads((cast / 'receipt.json').read_text())['outputs']
+    fighters = {r['pokemon']: r['fighter'] for r in cast_rows}
+    defaults = {r['pokemon']: cast / r['path'] for r in cast_rows}
     pictures = {r['pokemon']: portraits / r['path']
                 for r in json.loads((portraits / 'receipt.json').read_text())['outputs']}
     specs = load('recolors.json')
@@ -196,6 +198,13 @@ def build_color_portraits(colosseum, colors, cast, targets, portraits, output, r
                 recolor.mapped_image(Image.open(base), fn).save(path)
                 return path
             fill = tuple(bytes.fromhex(row['gaw']['fill'][3:])) if row.get('gaw') else (0, 0, 0)
+            if fill == (0, 0, 0) and (colors / row['dat']).read_bytes() == defaults[mon].read_bytes():
+                # The very costume file of the default (Sceptile green, Minun blue, Plusle red): its default portrait,
+                # not a second render. Two renders can differ by GPU noise, and m-ex stores a CSP once only when two
+                # are identical, so MnSlChr's size (and the online character select's free memory) went by chance.
+                path = folder / 'csp.png'
+                shutil.copyfile(pictures[mon], path)
+                return path
             return render(mon.lower(), fighters[mon], colors / row['dat'], folder,
                           Path(runtime).resolve(), targets / 'files', fill=fill)
 

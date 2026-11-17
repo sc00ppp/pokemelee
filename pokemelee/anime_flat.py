@@ -170,59 +170,71 @@ def flatten(path, colours=COLOURS):
     return bytes(flattened(dat, images, tables, colours))
 
 
-def flattened(dat, images, tables, colours, passes=lambda picture: 1):
+def flattened(dat, images, tables, colours, passes=lambda picture: 1, apart=(), keep=((), ())):
+    """``apart``: [(image offsets, palette offsets)], each flattened to a palette of its own instead of the shared one: a
+    stage's characters, whose few plain colours the scenery's palette pulled off (Celebi's pale face came out khaki).
+    They still count towards the shared palette, which leaves the scenery exactly what it was.
+    ``keep``: (image offsets, palette offsets) left exactly as they are: pictures, not scenery (Stadium's big screen).
+    They count towards the shared palette all the same, as the characters do."""
     buf = bytearray(dat.raw)
     size = lambda img: datprobe.gx_image_size(img.format, img.width, img.height)
-    samples, areas = [], []
+    samples, areas = {}, {}
     pictures = {}
     for at, img in images.items():
         where = HEADER + at
         if img.format == CMPR:
             pictures[at] = cmpr_read(bytes(buf[where:where + size(img)]), img.width, img.height)
-            solid = pictures[at][pictures[at][..., 3] > SOLID][:, :3]
-            samples.append(solid)
-            areas.append(np.ones(len(solid)))
+            samples[at] = pictures[at][pictures[at][..., 3] > SOLID][:, :3]
         elif img.format == RGB5A3:
-            c = rgb5a3_rgb(np.frombuffer(bytes(buf[where:where + size(img)]), '>u2'))
-            samples.append(c)
-            areas.append(np.ones(len(c)))
+            samples[at] = rgb5a3_rgb(np.frombuffer(bytes(buf[where:where + size(img)]), '>u2'))
         elif img.format == RGB565:
-            c = rgb565(np.frombuffer(bytes(buf[where:where + size(img)]), '>u2').astype(np.uint32))
-            samples.append(c)
-            areas.append(np.ones(len(c)))
+            samples[at] = rgb565(np.frombuffer(bytes(buf[where:where + size(img)]), '>u2').astype(np.uint32))
         elif img.format == RGBA8:
             tiles = np.frombuffer(bytes(buf[where:where + size(img)]), 'u1').reshape(-1, 64)
-            c = np.stack([tiles[:, 1:32:2], tiles[:, 32::2], tiles[:, 33::2]], -1).reshape(-1, 3) / 255
-            samples.append(c)
-            areas.append(np.ones(len(c)))
+            samples[at] = np.stack([tiles[:, 1:32:2], tiles[:, 32::2], tiles[:, 33::2]], -1).reshape(-1, 3) / 255
+        if at in samples:
+            areas[at] = np.ones(len(samples[at]))
     for at, table in tables.items():
         words = np.frombuffer(bytes(buf[HEADER + at:HEADER + at + table.count * 2]), '>u2')
-        samples.append(rgb565(words.astype(np.uint32)) if table.format == TLUT_565 else rgb5a3_rgb(words))
-        areas.append(np.full(table.count, ENTRY_AREA))
+        samples['table', at] = rgb565(words.astype(np.uint32)) if table.format == TLUT_565 else rgb5a3_rgb(words)
+        areas['table', at] = np.full(table.count, ENTRY_AREA)
     if not samples:
         return buf
-    palette = choose(np.concatenate(samples), np.concatenate(areas), colours)
-    moved = lambda c: palette[nearest(c, palette)]
-    for at, picture in pictures.items():
-        labels = nearest(soft(picture, passes(picture)).reshape(-1, 3), palette).reshape(picture.shape[:2])
-        labels[picture[..., 3] <= SOLID] = -1
-        cmpr_write(buf, HEADER + at, calm(labels), palette)
-    for at, img in images.items():
-        where = HEADER + at
-        if img.format == RGB5A3:
-            rgb5a3(buf, where, size(img) // 2, moved)
-        elif img.format == RGB565:
-            words = np.frombuffer(bytes(buf[where:where + size(img)]), '>u2').astype(np.uint32)
-            buf[where:where + size(img)] = to565(moved(rgb565(words))).astype('>u2').tobytes()
-        elif img.format == RGBA8:
-            rgba8(buf, where, size(img), moved)
-    for at, table in tables.items():
-        where, count = HEADER + at, table.count * 2
-        if table.format == TLUT_565:
-            buf[where:where + count] = to565(moved(rgb565(np.frombuffer(bytes(buf[where:where + count]), '>u2').astype(np.uint32)))) \
-                .astype('>u2').tobytes()
-        elif table.format == TLUT_5A3:
-            rgb5a3(buf, where, table.count, moved)
+
+    def write(image_ats, table_ats, palette):
+        moved = lambda c: palette[nearest(c, palette)]
+        for at in image_ats:
+            img, where = images[at], HEADER + at
+            if at in pictures:
+                picture = pictures[at]
+                labels = nearest(soft(picture, passes(picture)).reshape(-1, 3), palette).reshape(picture.shape[:2])
+                labels[picture[..., 3] <= SOLID] = -1
+                cmpr_write(buf, where, calm(labels), palette)
+            elif img.format == RGB5A3:
+                rgb5a3(buf, where, size(img) // 2, moved)
+            elif img.format == RGB565:
+                words = np.frombuffer(bytes(buf[where:where + size(img)]), '>u2').astype(np.uint32)
+                buf[where:where + size(img)] = to565(moved(rgb565(words))).astype('>u2').tobytes()
+            elif img.format == RGBA8:
+                rgba8(buf, where, size(img), moved)
+        for at in table_ats:
+            table, where, count = tables[at], HEADER + at, tables[at].count * 2
+            if table.format == TLUT_565:
+                buf[where:where + count] = to565(moved(rgb565(np.frombuffer(bytes(buf[where:where + count]), '>u2').astype(np.uint32)))) \
+                    .astype('>u2').tobytes()
+            elif table.format == TLUT_5A3:
+                rgb5a3(buf, where, table.count, moved)
+
+    own_images, own_tables = set(keep[0]), set(keep[1])
+    for image_ats, table_ats in apart:
+        image_ats, table_ats = [at for at in image_ats if at in images and at not in own_images], [at for at in table_ats if at in tables and at not in own_tables]
+        own_images.update(image_ats)
+        own_tables.update(table_ats)
+        keys = [at for at in image_ats if at in samples] + [('table', at) for at in table_ats]
+        if keys:
+            write(image_ats, table_ats, choose(np.concatenate([samples[k] for k in keys]), np.concatenate([areas[k] for k in keys]), COLOURS))
+    shared = choose(np.concatenate(list(samples.values())), np.concatenate(list(areas.values())), colours)
+    write([at for at in images if at not in own_images], [at for at in tables if at not in own_tables], shared)
     return buf
 
 
@@ -255,6 +267,15 @@ def stage_parts(path, roots=()):
                 tables.update({t.data_offset: t for t in anim.tluts if t.data_offset is not None})
             frames += 4
         materials(root)
+    found = material_textures(dat, mobjs)
+    images.update(found[0])
+    tables.update(found[1])
+    return dat, images, tables, mobjs
+
+
+def material_textures(dat, mobjs):
+    """({offset: image}, {offset: palette}) of what these materials draw."""
+    images, tables = {}, {}
     for mobj in mobjs:
         tobj = dat.ptr(mobj + 0x08)
         while tobj is not None:
@@ -266,13 +287,34 @@ def stage_parts(path, roots=()):
                     table = dat.tlut_at(dat.ptr(tobj + 0x50))
                     tables[table.data_offset] = table
             tobj = dat.ptr(tobj + 0x04)
-    return dat, images, tables, mobjs
+    return images, tables
 
 
-def stage(path, colours=STAGE_COLOURS, roots=()):
-    """A stage to match, in place: flat colours, and the lights off. Baked vertex shading stays, as on AniMelee's own."""
+def group_textures(dat, index):
+    """({image offsets}, {palette offsets}) of what one map_head group draws, its texture animations' frames too."""
+    group = dat.ptr(dict(dat.roots)['map_head'] + 8) + GROUP_SIZE * index
+    images, tables = set(), set()
+    for shown in dat.jobj_textures(dat.ptr(group)) if dat.ptr(group) is not None else ():
+        images.add(shown.image.data_offset)
+        tables.add(shown.tlut.data_offset if shown.tlut is not None else None)
+    frames = dat.ptr(group + 8)
+    while frames is not None and dat.ptr(frames) is not None:       # a null-ended list of material animation trees
+        for anim in dat.matanim_texanims(dat.ptr(frames)):
+            images.update(i.data_offset for i in anim.images)
+            tables.update(t.data_offset for t in anim.tluts)
+        frames += 4
+    return images - {None}, tables - {None}
+
+
+def stage(path, colours=STAGE_COLOURS, roots=(), characters=(), keep=((), ())):
+    """A stage to match, in place: flat colours, and the lights off. Baked vertex shading stays, as on AniMelee's own.
+    ``characters``: each one's materials. A character's textures get a palette of their own, where no scenery uses them too.
+    ``keep``: (image offsets, palette offsets) left as they are."""
     dat, images, tables, mobjs = stage_parts(path, roots)
-    buf = flattened(dat, images, tables, colours, lambda picture: max(picture.shape[:2]) // STAGE_BLUR + 1)
+    cast = [material_textures(dat, group) for group in characters]
+    scenery = material_textures(dat, mobjs - set().union(*map(set, characters))) if characters else ({}, {})
+    apart = [([at for at in found[0] if at not in scenery[0]], [at for at in found[1] if at not in scenery[1]]) for found in cast]
+    buf = flattened(dat, images, tables, colours, lambda picture: max(picture.shape[:2]) // STAGE_BLUR + 1, apart, keep)
     for mobj in mobjs:
         mode = dat.u32(mobj + 4) & ~LIT
         struct.pack_into('>I', buf, HEADER + mobj + 4, mode if mode & 3 else mode | 1)

@@ -1,5 +1,5 @@
 {
- "_about": "Breloom: green cap, body and tail (0xc0), cream face, chest and arms (the face sits in the eye texture 0xb380), brown cap gills (0x9ea0), pink seed balls and claw tips (0x1580, 0xafa0), mouth (0x18a0, 0x2300), brown eyes 0xb380 + blink. Only blue is designed (red is its shiny, purple is out of scope). Zone iris is never named: the brown eyes stay. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "_about": "Breloom: green cap, body and tail (0xc0), cream face, chest and arms (the face sits in the eye texture 0xc660), brown cap gills (0xb180), pink seed balls and claw tips (0x1580, 0xc280), mouth (0x18a0, 0x2300), brown eyes 0xc660 + blink. Only blue is designed (red is its shiny, purple is out of scope). Zone iris is never named: the brown eyes stay. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
  "zones": {
   "body": [
    "#74b05a",
@@ -33,7 +33,7 @@
     "#4b3731"
    ],
    "in": [
-    "0x9ea0"
+    "0xb180"
    ]
   },
   "pink": {
@@ -47,7 +47,7 @@
    ],
    "in": [
     "0x1580",
-    "0xafa0"
+    "0xc280"
    ]
   },
   "iris": {
@@ -61,10 +61,10 @@
     "#361212"
    ],
    "in": [
-    "0xb380",
-    "0x1c080",
-    "0x20880",
-    "0x2e080"
+    "0xc660",
+    "0x1e160",
+    "0x2b960",
+    "0x30160"
    ],
    "bias": 0.01
   },

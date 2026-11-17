@@ -30,8 +30,11 @@ class ExportReadbackTests(unittest.TestCase):
         entry = SimpleNamespace(offset=0, size=len(self.movie))
         self.files = {'stage.dat': self.stage, 'audio/song.hps': self.song,
                       'PlMrNrMod.dat': self.body}
+        # the character select's size is all the budget check reads (synthetic: the release fix's 3,751,594 bytes)
+        self.select = SimpleNamespace(offset=0, size=3751594)
         self.disc = SimpleNamespace(path=self.built_path, read=self.files.__getitem__,
-                                    entries={**dict.fromkeys(self.files), 'MvOmake15.mth': entry})
+                                    entries={**dict.fromkeys(self.files), 'MvOmake15.mth': entry,
+                                             'MnSlChr.usd': self.select})
         self.base = SimpleNamespace(path=self.base_path, entries={'MvOmake15.mth': entry})
         self.write('assembled/installed-components.json', [self.record('stage.dat', self.stage)])
         self.write('music/receipt.json', {'outputs': [self.record('files/audio/song.hps', self.song)]})
@@ -82,3 +85,46 @@ class ExportReadbackTests(unittest.TestCase):
         self.built_path.write_bytes(b'X' * len(self.movie))
         with self.assertRaisesRegex(ValueError, 'bonus movie'):
             self.check()
+
+    def test_select_screen_within_budget_is_recorded(self):
+        result = self.check()['select_screen_memory']
+        self.assertEqual(result['file'], 'MnSlChr.usd')
+        self.assertEqual(result['bytes'], 3751594)
+        self.assertGreaterEqual(result['online_css_free_estimate'], 150 * 1024)
+
+    def test_select_screen_over_budget_is_rejected(self):
+        # release-13's file: 1,600 bytes free in Slippi's online character select, the code screen asserted
+        self.select.size = 3904394
+        with self.assertRaisesRegex(ValueError, r'MnSlChr\.usd is 3,904,394 bytes, over its budget of 3,752,394'):
+            self.check()
+
+    def test_select_screen_budget_edge(self):
+        self.select.size = 3752394
+        self.assertEqual(self.check()['select_screen_memory']['online_css_free_estimate'], 153600)
+        self.select.size = 3752395
+        with self.assertRaisesRegex(ValueError, r'over its budget of 3,752,394 by 1\.'):
+            self.check()
+
+    def test_missing_select_screen_is_rejected(self):
+        del self.disc.entries['MnSlChr.usd']
+        with self.assertRaisesRegex(ValueError, 'omitted the character select'):
+            self.check()
+
+
+class SelectScreenBudgetTests(unittest.TestCase):
+    def test_budget_comes_from_the_recipe_with_its_reason(self):
+        from pokemelee.builder import select_screen_budget
+        name, budget, spec = select_screen_budget()
+        self.assertEqual(name, 'MnSlChr.usd')
+        self.assertEqual(budget, spec['online_css_free_plus_file_bytes'] - spec['min_free_bytes'])
+        self.assertGreaterEqual(spec['min_free_bytes'], 150 * 1024)
+        self.assertTrue(spec['reason'])
+
+    def test_message_names_the_overrun_and_the_cause(self):
+        from pokemelee.builder import check_select_screen
+        with self.assertRaises(ValueError) as caught:
+            check_select_screen(3_800_000)
+        text = str(caught.exception)
+        self.assertIn('over its budget of 3,752,394 by 47,606', text)
+        self.assertIn('online character select', text)
+        self.assertIn('recipes/menus.json', text)

@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 
+from . import fighter_metal
 from .cast import checked_component
 from .catalog import PACKAGE, load
 from .export import fingerprint
@@ -121,7 +122,11 @@ def build_project(melee, components, output, runtime, profile='normal'):
                 icon.update(x=28.25, y=2.3, z=0)
         mex.set_css_layout(json.dumps({'template': layout['template'], 'icons': selected}))
         files = project.parent / 'files'
-        installed = []
+        # Metal Box and Cloaking Device: the cast's fighter files (pair partners and clones included) draw the
+        # costume, not the vanilla metal model; the export check below proves the patched files reach the disc.
+        fighters = mex.fighters()
+        installed = fighter_metal.patch_fighter_files(
+            files, [fighters[index][1]['files']['fighterDataPath'] for index in set(assigned.values())])
         for stages in components['stages']:
             installed.extend(copy_outputs(stages, 'stages', files, '.dat'))
             installed.extend(copy_outputs(stages, 'stages', files, '.usd'))

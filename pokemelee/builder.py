@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 
+from . import fighter_metal
 from .catalog import art_indices
 from .disc import Disc
 from .export import export_artifacts, fingerprint
@@ -37,10 +38,36 @@ def preflight(runtime):
     return runtime
 
 
-def verify_export(project, built_iso, melee):
-    """Check installed models/media, not just whether MexCLI exited successfully."""
+def select_screen_budget():
+    """(file, largest allowed size, the reason) for the character-select file, from recipes/menus.json."""
+    from .catalog import load
+    spec = load('menus.json')['select_screen_memory']
+    return spec['file'], spec['online_css_free_plus_file_bytes'] - spec['min_free_bytes'], spec
+
+
+def check_select_screen(size):
+    """Fail when the exported MnSlChr.usd would leave Slippi's online character select under its memory floor."""
+    name, budget, spec = select_screen_budget()
+    if size > budget:
+        free = spec['online_css_free_plus_file_bytes'] - size
+        raise ValueError(
+            f'{name} is {size:,} bytes, over its budget of {budget:,} by {size - budget:,}. Slippi\'s online character '
+            f'select would keep about {max(free, 0):,} bytes free, under the {spec["min_free_bytes"]:,} it needs: Direct\'s '
+            'connect-code screen alone takes 68,576 and the game freezes (assert "adr", memory.c line 52) when it cannot '
+            'get them. Make the select-screen pictures smaller or share them (recipes/menus.json, select_screen_memory, '
+            'says how the budget was measured).')
+    return {'file': name, 'bytes': size, 'budget': budget, 'online_css_free_estimate': spec['online_css_free_plus_file_bytes'] - size}
+
+
+def verify_export(project, built_iso, melee, patched=()):
+    """Check installed models/media, not just whether MexCLI exited successfully. ``patched``: the rows of files edited
+    on the exported disc itself (fighter_metal.patch_exported_common), each checked against what was written."""
     import hashlib
     disc = Disc(built_iso, 'melee')
+    select_name = select_screen_budget()[0]
+    if select_name not in disc.entries:
+        raise ValueError('Export omitted the character select: ' + select_name)
+    select_screen = check_select_screen(disc.entries[select_name].size)
     project = Path(project)
     root = project.parent
     expected = json.loads((root.parent / 'installed-components.json').read_text())
@@ -49,6 +76,12 @@ def verify_export(project, built_iso, melee):
         name = row['path']
         if hashlib.sha256(disc.read(name)).hexdigest() != row['sha256']:
             raise ValueError('Export changed an installed component: ' + name)
+        checks.append(name)
+    for row in patched:
+        name = row['path']
+        data = disc.read(name)
+        if len(data) != row['bytes'] or hashlib.sha256(data).hexdigest() != row['sha256']:
+            raise ValueError('A file patched after the export is not on the disc as written: ' + name)
         checks.append(name)
     assembled = json.loads((root.parent / 'receipt.json').read_text())
     music = Path(assembled['inputs']['components']['music'])
@@ -84,7 +117,8 @@ def verify_export(project, built_iso, melee):
         return h.hexdigest()
     if digest_entry(disc, 'MvOmake15.mth') != digest_entry(melee, 'MvOmake15.mth'):
         raise ValueError('Export changed unrelated bonus movie media')
-    return {'installed_components': checks, 'all_costumes_present': True, 'bonus_movie_preserved': True}
+    return {'installed_components': checks, 'all_costumes_present': True, 'bonus_movie_preserved': True,
+            'select_screen_memory': select_screen}
 
 
 def write_disc(assembled, melee, runtime, profile, output):
@@ -92,7 +126,10 @@ def write_disc(assembled, melee, runtime, profile, output):
     project = Path(assembled) / 'project/project.mexproj'
     built = Path(assembled) / 'built.iso'
     Mex(runtime, project, Path(assembled) / 'export-logs').command('export', built, timeout=1800)
-    checks = verify_export(project, built, melee)
+    # MexCLI writes PlCo.dat anew on export, so AniMelee's steel metal goes onto the exported disc, then is checked.
+    patched = fighter_metal.patch_exported_common(built, profile)
+    checks = verify_export(project, built, melee, patched)
+    checks['patched_after_export'] = patched
     write_json(Path(assembled) / 'export-checks.json', checks)
     return export_artifacts(melee.path, built, output,
                             xdelta=runtime / 'xdelta/win-x64' / lock()['tools']['xdelta']['platforms']['win-x64']['entrypoint'])

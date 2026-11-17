@@ -1,5 +1,5 @@
 {
- "_about": "Quilava: dark teal back over a cream belly (0x4f60 body, 0x2e0 / 0xa460 head, 0xb940 feet), red-iris eyes and lids in 0x17e20, purple inner ears (0x9320), red flame spots (0xf860), mouth bits (0x63a0, 0x88a0); head and back flames are 0x2440 plus its flipbook 0x2bc60-0x32d40. The 128x128 blink eyes are kept as they are. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
+ "_about": "Quilava: dark teal back over a cream belly (0x29c0 body, 0x2e0 / 0xdde0 head, 0xf2a0 feet), red-iris eyes and lids in 0x1cda0, purple inner ears (0xcca0), red flame spots (0x12a60), mouth bits (0x9ba0, 0xc1e0); head and back flames are 0x6640 plus its flipbook 0x2ff00-0x36fe0. The 128x128 blink eyes are kept as they are. Zone outline (stock only) is never named: the stock icon keeps its black outline. Zones s_<part> hold the stock icon's own colours for that part (its sprite palette is darker than the model's) and every team names them like the part.",
  "zones": {
   "back": {
    "colours": [
@@ -13,18 +13,18 @@
     "#29897d"
    ],
    "out": [
-    "0x2440",
-    "0x2bc60",
-    "0x2cc80",
-    "0x2dca0",
-    "0x2ecc0",
-    "0x2fce0",
-    "0x30d00",
-    "0x31d20",
-    "0x32d40",
-    "0x1c9c0",
-    "0x1f340",
-    "0x21340"
+    "0x6640",
+    "0x2ff00",
+    "0x30f20",
+    "0x31f40",
+    "0x32f60",
+    "0x33f80",
+    "0x34fa0",
+    "0x35fc0",
+    "0x36fe0",
+    "0x21880",
+    "0x24200",
+    "0x26200"
    ]
   },
   "belly": {
@@ -43,18 +43,18 @@
     "#f8c838"
    ],
    "out": [
-    "0x2440",
-    "0x2bc60",
-    "0x2cc80",
-    "0x2dca0",
-    "0x2ecc0",
-    "0x2fce0",
-    "0x30d00",
-    "0x31d20",
-    "0x32d40",
-    "0x1c9c0",
-    "0x1f340",
-    "0x21340"
+    "0x6640",
+    "0x2ff00",
+    "0x30f20",
+    "0x31f40",
+    "0x32f60",
+    "0x33f80",
+    "0x34fa0",
+    "0x35fc0",
+    "0x36fe0",
+    "0x21880",
+    "0x24200",
+    "0x26200"
    ]
   },
   "spots": {
@@ -66,7 +66,7 @@
     "#e04818"
    ],
    "in": [
-    "0xf860"
+    "0x12a60"
    ]
   },
   "ears": {
@@ -76,7 +76,7 @@
     "#780878"
    ],
    "in": [
-    "0x9320"
+    "0xcca0"
    ]
   },
   "fire": {
@@ -91,15 +91,15 @@
     "#b4301b"
    ],
    "in": [
-    "0x2440",
-    "0x2bc60",
-    "0x2cc80",
-    "0x2dca0",
-    "0x2ecc0",
-    "0x2fce0",
-    "0x30d00",
-    "0x31d20",
-    "0x32d40"
+    "0x6640",
+    "0x2ff00",
+    "0x30f20",
+    "0x31f40",
+    "0x32f60",
+    "0x33f80",
+    "0x34fa0",
+    "0x35fc0",
+    "0x36fe0"
    ]
   },
   "s_back": {

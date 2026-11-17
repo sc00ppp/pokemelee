@@ -5,13 +5,13 @@
       "id": "agate",
       "melee_stage": "Dream Land",
       "scene": "Agate Village",
-      "revision": "v33",
+      "revision": "v34",
       "spec": "stages/agate.json",
       "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrOp.dat",
-          "sha256": "2ca1668ab7151d7d3ff7d38b91547acf49c9e6e1946b23e8c127919e19c19681"
+          "sha256": "9f8d632da08ecdd28c3026b100366d074e35dd0876efbd32a0da1d10bf2df63b"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "approved_outputs": [
         {
           "name": "GrNBa.dat",
-          "sha256": "c69900cc89ed9327b144ba29d427ba35c09d1d264d6e4c4d82019b42eeb9dad1"
+          "sha256": "192a8175b48acd8ca285c875a44f2fc0b695013dd3dcb50372782de291ddeb6a"
         }
       ]
     },
@@ -67,7 +67,7 @@
       "approved_outputs": [
         {
           "name": "GrSt.dat",
-          "sha256": "0cd06bd3d618db2ab7f8dd11b19a859a09019acab583d03852ce834567cb27ad"
+          "sha256": "cc8978d5abee4472f6625a211a9f7142b8a40cd9845ade7b329a85e92d81d973"
         }
       ]
     },
@@ -81,11 +81,11 @@
       "approved_outputs": [
         {
           "name": "GrPs.dat",
-          "sha256": "8db3c1e3b06a8211609abee8ecaa2d706bb5063ad44f8c2e7812fe3188780a0f"
+          "sha256": "141737ae3551cfddd8dff4344d15e5f54f82d34774494e12f4e538d55dd846c0"
         },
         {
           "name": "GrPs.usd",
-          "sha256": "b4cf62051278110695b600f97eff2ba0a7ed35b2221801af571cbeb0155199b9"
+          "sha256": "9b9b3345a23a5d65aeedc7abdd401136ce5207a98b620e896f90dba66864e05a"
         },
         {
           "name": "GrPs1.dat",
@@ -110,8 +110,8 @@
     "SHA-256 fingerprints identify approved local outputs; those files are not distributed.",
     "Specs contain authored graft settings, not source meshes, textures or copied stage collision.",
     "Stadium transformations retain the first-round treatment; the main stage uses the approved second-round v7.",
-    "Background characters (the models with a skeleton, and the garden's Castform in the Shy Guy item) carry baked shading in the normal profile; in AniMelee they keep flat colours and an outline with no lines inside it, as wide as the distance they are really drawn at.",
-    "AniMelee's stage lines leave out folds a model's own normals shade smoothly, seams between meshes of one surface, and the scenery a recipe calls foliage.",
+    "Background characters (the models with a skeleton, and the garden's Castform in the Shy Guy item) carry baked shading in the normal profile; in AniMelee they keep flat colours and an outline with no lines inside it, as wide as the distance they are really drawn at; each has a palette of its own, and its two-sided parts are outlined along their borders.",
+    "AniMelee's stage lines leave out folds a model's own normals shade smoothly, seams between meshes of one surface, and the scenery a recipe calls foliage; what a recipe calls quiet (rock, cliffs, ground, tree trunks: named per stage) keeps its outline and gets no lines, and what it calls plain or foliage gets neither.",
     "Both profiles reproduce their approved stage fingerprints; AniMelee includes its Phenac exception."
   ],
   "profiles": [

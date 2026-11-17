@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using HSDRaw;
 using HSDRaw.Common;
+using HSDRaw.Common.Animation;
 using HSDRaw.GX;
 using HSDRaw.Melee.Gr;
 using HSDRaw.Tools;
@@ -71,19 +72,52 @@ static partial class Program
     }
 
     // spec "shrink_tex": [ [group, joint, mesh, side] ]: Stadium's panels were painted for a screen five times the size
+    // A picture is shrunk once per pixel buffer, and every description of that buffer is told: one buffer has several.
+    // Six of the display's meshes draw one backing panel, each through a description of its own, and the display's texture
+    // animation (each type picture blinking against that backing) keeps a description per frame. Until 11-17 the texture
+    // was shrunk instead: a second texture on the backing decoded the 2 KB of CMPR already written as its old 64 KB of
+    // indices (the backing came out empty), and the animation frames still said 256x256 CI8, so the game read the type
+    // pictures from bytes that were no longer theirs (the owner, 11-16: "just some, like, corrupted image").
     static void ShrinkTex(System.Text.Json.JsonElement l, SBM_Map_GOBJ[] groups)
     {
-        var done = new HashSet<HSDStruct>();
+        var sides = new Dictionary<HSDStruct, int>();      // pixel buffer -> its new side
         foreach (var e in l.EnumerateArray())
         {
             var t = groups[e[0].GetInt32()].RootNode.TreeList[e[1].GetInt32()].Dobj.List[e[2].GetInt32()].Mobj.Textures;
+            var buffer = t.ImageData._s.References[0x00];
+            if (sides.ContainsKey(buffer)) continue;
             int side = e[3].GetInt32(), w = t.ImageData.Width, h = t.ImageData.Height;
-            if (!done.Add(t._s)) continue;
-            var small = CropResize(t.GetDecodedImageData(), w, 0, 0, w, h, side, side);
-            t.TlutData = null;
-            t.ImageData.Width = (short)side; t.ImageData.Height = (short)side; t.ImageData.Format = GXTexFmt.CMP;
-            SingleLevel(t, small, side, side);
+            var small = CropResize(t.GetDecodedImageData(), w, 0, 0, w, h, side, side);  // no description is rewritten yet: this one is still true
+            t.ImageData.ImageData = GXImageConverter.ToCMP(small, side, side);           // the shared buffer, in place
+            sides[buffer] = side;
         }
+        var images = new HashSet<HSDStruct>();
+        void Describe(HSD_Image img)
+        {
+            if (img == null || !img._s.References.TryGetValue(0x00, out var buffer) || !sides.TryGetValue(buffer, out var side) || !images.Add(img._s)) return;
+            img.Width = (short)side; img.Height = (short)side; img.Format = GXTexFmt.CMP;
+            img.MipMap = 0; img.MinLOD = 0; img.MaxLOD = 0;
+        }
+        foreach (var g in groups)
+        {
+            foreach (var jo in g.RootNode?.TreeList ?? new List<HSD_JOBJ>())
+                foreach (var d in jo.Dobj?.List ?? new List<HSD_DOBJ>())
+                    foreach (var t in d.Mobj?.Textures?.List ?? new List<HSD_TOBJ>())
+                        if (t.ImageData != null && t.ImageData._s.References.TryGetValue(0x00, out var b) && sides.ContainsKey(b))
+                        {
+                            Describe(t.ImageData);
+                            t.TlutData = null;
+                            t.LOD = null;
+                        }
+            foreach (var ma in g.MaterialAnimations?.Array ?? Array.Empty<HSD_MatAnimJoint>())
+                if (ma != null)
+                    foreach (var n in DfsM(ma))
+                        foreach (var m in n.MaterialAnimation?.List ?? new List<HSD_MatAnim>())
+                            foreach (var ta in m.TextureAnimation?.List ?? new List<HSD_TexAnim>())
+                                foreach (var tb in ta.ImageBuffers?.Array ?? Array.Empty<HSD_TexBuffer>())
+                                    Describe(tb?.Data);
+        }
+        Console.WriteLine($"shrink_tex: {sides.Count} pictures, {images.Count} descriptions of them (textures and animation frames)");
     }
 
     // spec "clear_dobjs": [ [group, joint, [mesh, ...]] ]: some of a joint's meshes go, the rest stay

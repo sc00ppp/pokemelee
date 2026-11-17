@@ -66,7 +66,7 @@ The stage revisions were resolved against the accepted local outputs:
 
 | Melee stage | Colosseum scene | Accepted recipe |
 | --- | --- | --- |
-| Dream Land | Agate Village | v33; house/tree lowered 2 units, Taillow set on its branch |
+| Dream Land | Agate Village | v34; house/tree lowered 2 units, Taillow set on its branch, Celebi still and half hidden behind the tree |
 | Fountain of Dreams | Realgam Colosseum | v11; the crowd's flip-book plays, at a quarter of Colosseum's rate |
 | Battlefield | Phenac Stadium lobby | v10 |
 | Final Destination | Mt. Battle crater | v6 |

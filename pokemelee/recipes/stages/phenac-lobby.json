@@ -314,48 +314,6 @@
       "vtx_scale": 1.7
     },
     {
-      "file": "${colosseum}/M1_stadium_1F/06_traner_f_b1.dat",
-      "desc": 0,
-      "place": {
-        "t": [
-          -300,
-          -150,
-          -225
-        ],
-        "ry": 35,
-        "s": 4.0
-      },
-      "anim": true,
-      "loop": true,
-      "anim_index": 1,
-      "strip_cubes": true,
-      "mat_anim": false,
-      "tex_modulate": true,
-      "decode_ci4": true,
-      "ambient": 0.45
-    },
-    {
-      "file": "${colosseum}/M1_stadium_1F/07_traner_m_b1.dat",
-      "desc": 0,
-      "place": {
-        "t": [
-          300,
-          -150,
-          -225
-        ],
-        "ry": -35,
-        "s": 4.0
-      },
-      "anim": true,
-      "loop": true,
-      "anim_index": 1,
-      "strip_cubes": true,
-      "mat_anim": false,
-      "tex_modulate": true,
-      "decode_ci4": true,
-      "ambient": 0.45
-    },
-    {
       "file": "${colosseum}/M1_out/06_maril.dat",
       "desc": 0,
       "place": {
@@ -465,5 +423,31 @@
     ]
   ],
   "cut_min_diag": 150,
-  "keep_if_larger": 950
+  "keep_if_larger": 950,
+  "water": [
+    [
+      -571.0,
+      -360.0,
+      -359.4,
+      2.4,
+      -170.0,
+      465.7
+    ],
+    [
+      -23.6,
+      -360.0,
+      -376.3,
+      585.9,
+      -170.0,
+      482.2
+    ],
+    [
+      -320.4,
+      -360.0,
+      -404.0,
+      319.6,
+      -170.0,
+      76.0
+    ]
+  ]
 }

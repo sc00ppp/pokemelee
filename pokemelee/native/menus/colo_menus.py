@@ -398,6 +398,21 @@ def mode_label(text, quad, size, strip=MODE_STRIP, cap=11):
     return grey((small, small))
 
 
+# The portrait joints' own picture: Melee's first portrait (136x188 CI8, 25 KB). m-ex clears these joints' texture
+# animations and shows every portrait through its own one (mexSelectChr's CSP animation), so this picture is never on
+# screen; 8x8 clear in its place (2026-11-17, online character select memory).
+PORTRAIT_USES = {'MenuModel j51 d0 t0', 'MenuModel j52 d0 t0', 'MenuModel j53 d0 t0', 'MenuModel j54 d0 t0',
+                 'SingleMenuModel j45 d0 t0', 'PortraitModel j6 d0 t0'}
+
+
+def csp_placeholder(dump):
+    md5 = by_use(dump, 'MenuModel j51 d0 t0')
+    e = next(x for x in json.loads((Path(dump) / 'manifest.json').read_text()) if x['md5'] == md5)
+    if set(e['uses']) != PORTRAIT_USES or (e['width'], e['height'], e['format']) != (136, 188, 'CI8'):
+        raise SystemExit(f'MnSlChr: the portrait placeholder {md5[:8]} is not the one expected: {e}')
+    return md5
+
+
 def plate_md5(dump, use):
     """md5 of a mode-plate picture, refused if anything outside j36 draws it too (shared blanks stay as they are)."""
     md5 = by_use(dump, use)
@@ -462,6 +477,7 @@ def css_spec(dump, out):
     images.append({**clear, 'md5': by_use(dump, 'TokenModel j3 d0 t0')})
     images.append({**emit(out, 'debugcam-clear', Image.new('RGBA', (8, 8), (0, 0, 0, 255)), 'I4'),
                    'md5': by_use(dump, 'DebugCameraModel j0 d0 t0')})
+    images.append({**emit(out, 'portrait-clear', Image.new('RGBA', (8, 8), (0, 0, 0, 0)), 'CI8'), 'md5': csp_placeholder(dump)})
     # the doors: a chrome frame around each (j41-j44 get 8 quads, drawn before the door and its portrait), rivets in
     # the closed door, the flat grey outline (j41-j44 d1) clear
     e = 0.55

@@ -1,8 +1,9 @@
 """Quilava on Fox, rebuilt from the source anatomy, then stand_feet/round_out.
 
 The raw fit mistook the rump effect rig for the skull. Retain the source pear,
-thick neck, broad low head, paws and long feet. A single scale covers head and
-body; Fox supplies the limb joints and native eyelid drive, not the anatomy.
+thick neck, broad low head and paws. A single scale covers head and body; Fox
+supplies the limb joints and native eyelid drive, not the anatomy. The pear's
+haunches stay on the hips; legs() adds short closed hind legs on Fox's chain.
 No normal edits or subdivision: round_out owns that step.
 """
 
@@ -69,11 +70,11 @@ def map_point(p,b):
             return T[jw]+turn@(p-w)*SCALE,{jw:1}
     for hip,upper,heel,toe,jh,jk,ja in [(8,9,11,14,6,7,9),(18,19,21,24,12,13,15)]:
         if b==upper:
-            # These points are the pear's haunch, not a long separate thigh.
-            # Their upper edge stays on the pelvis, lower edge meets the heel.
-            u=float(np.clip((p[2]-.045)/.14,0,1)); u=u*u*(3-2*u)
-            foot=T[ja]+(p-S[heel])*SCALE
-            return body(p)*u+foot*(1-u),{4:u,ja:1-u}
+            # These points are the pear's haunch: its lower corner, not a leg.
+            # Stretched from the hips to Fox's ankle they became kneeless tubes
+            # in run and kicks and folded the belly open in crouch, so they stay
+            # on the pear; legs() gives Quilava a leg on Fox's chain instead.
+            return body(p),trunk(p)
         if b in (heel,toe):
             return T[ja]+(p-S[heel])*SCALE,{ja:1}
     if 66<=b<=73: return body(p),{4:1}
@@ -284,106 +285,122 @@ def flames():
         mesh('quilava_flame_'+name,points,faces,uv,mat,[{joint:1}]*len(points))
 
 
-def polish():
-    """Local surface repairs, after feet placement; round_out owns normals.
+# The legs share the pear's skin material, so the export cuts them into PObjs
+# with it. At 8, 10 and 14 sides that cut left a small neck PObj which
+# anime_cast's inside-out vote (winding judged in mixed stored spaces) turned
+# inside out: black patches on the AniMelee neck. At 12 no PObj is turned.
+LEG_SIDES=12
+# Ring radii along the leg, in Fox units: Quilava's short, thick hind leg. The
+# pear is about 6.9 wide; Fox's chain only says where the hip, knee and ankle are.
+THIGH,KNEE,SHIN,ANKLE=1.45,1.15,1.0,.85
+TOP=1.0     # the thigh's capped top, at Fox's hip joint, stays inside the pear as the thigh swings
+BACK=.9     # the tube runs this far behind Fox's knee
+# Fox stands side-on: at idle his back (right) foot points about 69 degrees
+# outward, so the paw on it was seen end-on beside a full-length front paw.
+# Quilava stands with both paws forward, so the right paw is turned by that
+# angle about its heel in Fox's idle frame; other poses keep the same turn.
+PAW_TURN={'right':1.0}
 
-    The source haunch is a closed patch, not an ankle tube. The first hand
-    mapping gave just its two bottom points full foot weight, and stand_feet
-    gave its front points toe weight. Open its two lower faces and sew a four-point ring to
-    the six existing top-of-foot points. The rest of the lower
-    belly retains its original shape and weights.
+def loft(rings,sides=LEG_SIDES):
+    """A closed tube through (centre, radius, weights) rings, capped at both ends."""
+    pts=[];rows=[];faces=[];u=None
+    centres=[np.array(c,float) for c,_,_ in rings]
+    for i,(c,r,row) in enumerate(rings):
+        axis=unit(centres[min(i+1,len(rings)-1)]-centres[max(i-1,0)])
+        u=np.array([1.,0,0]) if u is None else u
+        u=unit(u-(u@axis)*axis); v=np.cross(axis,u)
+        for k in range(sides):
+            a=2*np.pi*k/sides
+            pts.append(centres[i]+(u*np.cos(a)+v*np.sin(a))*r); rows.append(row)
+    for r in range(len(rings)-1):
+        for k in range(sides):
+            a=r*sides+k; b=r*sides+(k+1)%sides
+            faces.extend([(a,b,b+sides),(a,b+sides,a+sides)])
+    for r,flip in ((0,True),(len(rings)-1,False)):
+        centre=len(pts); pts.append(centres[r]); rows.append(rings[r][2])
+        for k in range(sides):
+            f=(r*sides+k,r*sides+(k+1)%sides,centre)
+            faces.append(f[::-1] if flip else f)
+    return pts,rows,faces
+
+def legs():
+    """Quilava's hind legs: closed tubes on Fox's leg chain, run after stand_feet.
+
+    The source has no leg to stretch: each haunch is the pear's lower corner
+    and the paw sits under it. So the pear stays whole on the hips, the paw stays
+    the source paw on the ankle where stand_feet placed it, and a short tapered
+    leg rides Fox's thigh, knee and ankle with blended knee weights. Its top is
+    inside the pear and its foot end inside the paw's heel, so standing shows
+    the source silhouette with a stub of leg, and motion shows a thick leg that
+    bends at a knee. Rest space: Fox's rest legs hang straight down.
     """
-    if bpy.context.scene.get('quilava_polish_2'): return
+    if bpy.context.scene.get('quilava_legs'): return
     ns={}; exec(compile((R/'tools/hand_view.py').read_text(encoding='utf-8').rsplit('\nmain()',1)[0],'hand_view.py','exec'),ns)
     rest=ns['rests']('Fox'); cg=ns['C']
+    def at(j): return (cg@rest[j])[:3,3]
     idle={j:cg@m@np.linalg.inv(rest[j])@np.linalg.inv(cg) for j,m in ns['frame']('Fox','Wait1-1').items() if j in rest}
-    source=json.loads((H/'source-geometry.json').read_text(encoding='utf-8'))['objects']
-    def rows(ob):
-        names={g.index:int(g.name[5:]) for g in ob.vertex_groups}
-        return [{names[g.group]:g.weight for g in v.groups if g.weight>1e-6} for v in ob.data.vertices]
-    def mat(w): return sum(idle[j]*v for j,v in w.items())/sum(w.values())
-    ob=bpy.data.objects['magmarashi_mesh_02']
-    # Preserve the pear and its idle outline. The source haunch has a two-face
-    # lower-side patch; open only that patch, widen its four vertices into a
-    # foot-sized ankle ring, and sew it to the six existing top-of-foot points.
-    bm=bmesh.new(); bm.from_mesh(ob.data); bm.verts.ensure_lookup_table(); bm.faces.ensure_lookup_table()
-    src_id=bm.verts.layers.int['quilava_source_index']
-    source_vertices={v[src_id]:v for v in bm.verts}
-    uv=bm.loops.layers.uv.active; deform=bm.verts.layers.deform.verify()
-    def set_held(v,w):
-        v[deform].clear()
-        for j,s in w.items():
-            group=ob.vertex_groups.get(f'JOBJ_{j}') or ob.vertex_groups.new(name=f'JOBJ_{j}')
-            v[deform][group.index]=s
-    def held(v):
-        return {int(ob.vertex_groups[g].name[5:]):w for g,w in v[deform].items() if w>1e-6}
-    foot=bpy.data.objects['magmarashi_mesh_06']; footrows=rows(foot)
-    fb=bmesh.new(); fb.from_mesh(foot.data); fb.faces.ensure_lookup_table()
-    foot_top_faces={i:fb.faces[i] for i in (5,6,7,8,30,31,32,33)}
-    sf=source[ob.name]['faces']; footfaces=source[foot.name]['faces']
-    def boundary(faces):
-        counts=defaultdict(int)
-        for face in faces:
-            for a,b in zip(face,face[1:]+face[:1]): counts[tuple(sorted((a,b)))]+=1
-        edges=[(a,b) for face in faces for a,b in zip(face,face[1:]+face[:1]) if counts[tuple(sorted((a,b)))]==1]
-        nxt=dict(edges); first=next(iter(nxt)); loop=[first]
-        while nxt[loop[-1]]!=first: loop.append(nxt[loop[-1]])
-        assert len(loop)==len(edges)
-        return loop
-    def pose(v): return (mat(held(v))@np.r_[v.co,1])[:3]
-    stats=[]
-    for bone,jk,ja,body_ids,top_ids in [
-            ('Bone_09',7,9,[86,192],[5,6,7,8]),
-            ('Bone_19',13,15,[58,59],[30,31,32,33])]:
-        patch=[sf[i] for i in body_ids]; root_ids=boundary(patch)
-        root=[source_vertices[i] for i in root_ids]
-        root_positions=np.array([pose(v) for v in root])
-        gone=[f for f in bm.faces if {v[src_id] for v in f.verts} in [set(p) for p in patch]]
-        assert len(gone)==2
-        bmesh.ops.delete(bm,geom=gone,context='FACES_ONLY')
-        end_ids=boundary([footfaces[i] for i in top_ids])[::-1]
-        end=[]
-        for i in end_ids:
-            v=bm.verts.new(foot.data.vertices[i].co); set_held(v,footrows[i]); end.append(v)
-        bmesh.ops.delete(fb,geom=[foot_top_faces[i] for i in top_ids],context='FACES_ONLY')
-        # Use the four real corners of the foot top, with exactly the same
-        # ankle/toe weights as their mates. An ankle-only upper cuff separates
-        # from the toe-driven front half of the foot during Run-6.
-        corners={10,11,14,15} if ja==9 else {31,32,35,36}
-        choices=[i for i,v in enumerate(end_ids) if v in corners]
-        assert len(choices)==4
-        ep=np.array([pose(v) for v in end]); ec=ep.mean(0); rc=root_positions.mean(0)
-        shift=min(range(4),key=lambda k:sum(np.linalg.norm((root_positions[i]-rc)-(ep[choices[(i+k)%4]]-ec)) for i in range(4)))
-        choices=choices[shift:]+choices[:shift]
-        for v,k in zip(root,choices):
-            v.co=end[k].co+Vector((0,0,.22));set_held(v,held(end[k]))
-        texture=np.mean([list(l[uv].uv) for v in root for l in v.link_loops],axis=0)
-        def face(vs):
-            f=bm.faces.new(vs);f.smooth=True
-            for l in f.loops:l[uv].uv=texture
-        for i in range(4):
-            a,b=root[i],root[(i+1)%4]; start,stop=choices[i],choices[(i+1)%4]
-            path=[start];k=start
-            while k!=stop:k=(k+1)%6;path.append(k)
-            if len(path)==2:
-                face((a,b,end[stop]));face((a,end[stop],end[start]))
-            else:
-                assert len(path)==3
-                mid=end[path[1]]
-                face((a,b,mid));face((a,mid,end[start]));face((b,end[stop],mid))
-        stats.append(dict(side=bone,ankle_ring=4,foot_ring=6,body_faces_replaced=2,foot_top_removed=4))
-    bm.to_mesh(ob.data);bm.free();ob.data.update()
-    fb.to_mesh(foot.data);fb.free();foot.data.update()
-    # The attempted chest/socket smoothing retained the ridge and pulled a
-    # shoulder clear in down-air. Leave that region at hand-1's coordinates
-    # and weights; it needs a separate solution, not a silhouette compromise.
-    bpy.context.scene['quilava_polish_2']=True
-    (H/'polish-topology.json').write_text(json.dumps(stats,indent=2),encoding='utf-8')
-    print('Polish: four-point ankle rings sewn to existing six-point foot tops; chest and remaining belly restored.')
+    pear=bpy.data.objects['magmarashi_mesh_02']; skin=pear.data.materials[0]
+    # One cream texel of the pear's own texture: the haunch's corner nearest
+    # the belly colour, so the leg reads as the haunch carried down.
+    im=next(n.image for n in skin.node_tree.nodes if n.type=='TEX_IMAGE')
+    px=np.array(im.pixels[:]).reshape(im.size[1],im.size[0],4)
+    def texel(uv):
+        x=int(np.clip(uv[0],0,1)*(im.size[0]-1)); y=int(np.clip(uv[1],0,1)*(im.size[1]-1))
+        return px[max(y-1,0):y+2,max(x-1,0):x+2,:3].reshape(-1,3)
+    cream=np.array([246,217,120])/255.
+    source=json.loads((H/'source-geometry.json').read_text(encoding='utf-8'))['objects'][pear.name]
+    src_id=np.empty(len(pear.data.vertices),int); pear.data.attributes['quilava_source_index'].data.foreach_get('value',src_id)
+    haunch={i for i,w in enumerate(source['weights']) if {int(b) for b in w}&{9,19}}
+    choices=[tuple(l.uv) for poly in pear.data.polygons for li in poly.loop_indices
+             for l in [pear.data.uv_layers.active.data[li]] if src_id[pear.data.loops[li].vertex_index] in haunch]
+    skin_uv=min(choices,key=lambda uv:float(np.abs(texel(uv)-cream).sum(1).max()))
+    made=[]
+    for side,(jh,jk,ja,toe) in (('left',(6,7,9,10)),('right',(12,13,15,16))):
+        paw=[]
+        for ob in bpy.data.objects:
+            if ob.type!='MESH': continue
+            names={g.index:g.name for g in ob.vertex_groups}
+            for v in ob.data.vertices:
+                held={int(names[g.group][5:]):g.weight for g in v.groups if g.weight>1e-6}
+                if sum(w for j,w in held.items() if j in (ja,toe))>=.5*sum(held.values()): paw.append(np.array(v.co))
+        paw=np.array(paw)
+        ahead=at(toe)-at(ja); ahead[2]=0; ahead=unit(ahead)
+        along=paw@ahead; heel=paw[along<=along.min()+.4*np.ptp(along)]
+        top=heel[:,2].max(); width=np.ptp(heel@np.cross([0,0,1.],ahead))
+        foot=np.r_[heel[:,:2].mean(0),top-.35]
+        if PAW_TURN.get(side):
+            m=idle[ja][:3,:3]; d=m@(at(toe)-at(ja))
+            turn=-np.arctan2(d[0],-d[1])*PAW_TURN[side]
+            rz=np.array([[np.cos(turn),-np.sin(turn),0],[np.sin(turn),np.cos(turn),0],[0,0,1]])
+            rb=np.linalg.inv(m)@rz@m
+            for ob in bpy.data.objects:
+                if ob.type!='MESH' or ob.name.startswith('quilava_leg'): continue
+                names={g.index:g.name for g in ob.vertex_groups}
+                for v in ob.data.vertices:
+                    held={int(names[g.group][5:]):g.weight for g in v.groups if g.weight>1e-6}
+                    if sum(w for j,w in held.items() if j in (ja,toe))>=.5*sum(held.values()):
+                        v.co=Vector(foot+rb@(np.array(v.co)-foot))
+                ob.data.update()
+            print('Paw',side,'turned',round(float(np.degrees(turn)),1))
+        # The tube runs behind Fox's knee, as a leg's flesh lies behind its
+        # kneecap, so Fox's idle knee bend stays inside the belly.
+        hip,knee=at(jh),at(jk)+[0,BACK,0]
+        line=[(hip,TOP,{jh:1}),(hip*.55+knee*.45,THIGH,{jh:1}),(hip*.18+knee*.82,(THIGH+KNEE)/2,{jh:.8,jk:.2}),
+              (knee,KNEE,{jh:.5,jk:.5}),(knee*.75+foot*.25,(KNEE+SHIN)/2,{jh:.15,jk:.85}),
+              (knee*.4+foot*.6,SHIN,{jk:1}),(knee*.15+foot*.85,(SHIN+ANKLE)/2,{jk:.5,ja:.5}),
+              (foot,min(ANKLE,width*.45),{ja:1})]
+        pts,rows,faces=loft(line)
+        ob=mesh(f'quilava_leg_{side}',pts,faces,[skin_uv]*len(pts),skin,rows)
+        ob.data.polygons.foreach_set('use_smooth',[True]*len(ob.data.polygons)); ob.data.update()
+        made.append(dict(side=side,joints=[jh,jk,ja],rings=len(line),paw_points=len(paw),
+                         paw_top=round(float(top),3),paw_heel_width=round(float(width),3)))
+    bpy.context.scene['quilava_legs']=True
+    (H/'legs.json').write_text(json.dumps(dict(skin_uv=skin_uv,legs=made),indent=2),encoding='utf-8')
+    print('Legs:',json.dumps(made))
 
 
 # Run after stand_feet, before round_out. Existing sole clearance is retained;
-# repairing the attachments afterwards leaves the feet's placement unchanged.
+# the legs are built after it, so the paws' placement is unchanged.
 if '--sole-clearance' in sys.argv:
     bpy.ops.wm.open_mainfile(filepath=str(B/'edited.blend'))
     if not bpy.context.scene.get('quilava_sole_clearance'):
@@ -395,7 +412,7 @@ if '--sole-clearance' in sys.argv:
                 v.co.z+=.15*share
             ob.data.update()
         bpy.context.scene['quilava_sole_clearance']=.15
-    polish()
+    legs()
     bpy.ops.wm.save_as_mainfile(filepath=str(B/'edited.blend'))
     sys.exit(0)
 

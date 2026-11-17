@@ -14,11 +14,23 @@ lines but no shell: its winding means nothing, and the far side of a sheet would
 --behind leaves alone every mesh standing wholly behind that world z: a background that stays as it was rendered.
 
 What a line is not. Where a mesh has normals, they are the model's own word on its edges: a fold they shade smoothly
-across is a bump in a rock face, not an edge, unless it is sharp enough to be one whatever the shading says; and they,
+across is a bump in a rock face, not an edge, unless it is sharp enough to be one whatever the shading says (an edge
+is one the model splits its normals along, at both ends: one split end is only where a smooth fold runs into a corner); and they,
 not the camera, say which way a two-sided face looks. A seam is no border: where two open edges lie along each other
 and their faces look the same way, the surface simply carries on in another mesh (a wall built in strips whose points
-do not meet). And a stage can name meshes that get no lines at all (plain=):
+do not meet). Nor is a sliver a face: a triangle whose corners lie on one line (a model's patch over a T-junction) has
+no direction of its own, only what rounding gave it, and the edge it shares with the flat face beside it is no fold.
+A stage can name meshes that keep their outline and get no lines on them (quiet=): land far behind the
+fight, whose every facet would otherwise draw one. And it can name meshes that get nothing at all (plain=):
 the body of a bush under its translucent sheets of leaves, whose lines showed through the gaps like a basket.
+It can name two-sided meshes that are the skin of a solid all the same (solid=): they get a shell, turned by their own
+normals (a stage's bowl, drawn two-sided by habit, whose round side had no outline at all). It can name meshes the
+camera sees from their sides too, as it follows a fighter out to a ledge (sideways=): their lines are judged from eyes level
+with either end of them as well, where the one eye in the middle stops them partway round a stage's rim. And it can
+name its water (water=): boxes whose
+top is a water surface, inside which no line is drawn, since a line seen through water reads as a crack on top of it.
+A line lying on a box's face is not inside it: a box reaches past a pool's walls, whose feet under the water would
+double the line at their tops, and stops exactly at the edge the water spills over, whose line is the pool's edge.
 """
 import argparse
 import collections
@@ -31,6 +43,7 @@ from .display_list import ATTR_SIZE, CULLS, END, ENVELOPE, NRM, OUTSIDE_IN, POS,
 
 GROUP_SIZE = 0x34
 PARTICLE_JOINTS = (1 << 14) | (1 << 5)
+CULL_BACK = 0x8000                                     # PObj flag: a body's own; the shell of a solid wound inside out
 ALWAYS_ON_TOP, NO_DEPTH_WRITE = 1 << 27, 1 << 29       # render mode
 DEPTH_ON = 0x30                                        # PE flags: compare and update
 ALPHA_ALWAYS = 7
@@ -40,6 +53,8 @@ EYE = np.array((0., 15., CAMERA))
 HARD, STRAIGHT = np.cos(np.radians(40)), np.cos(np.radians(3))
 SHARP, SMOOTH = np.cos(np.radians(75)), np.cos(np.radians(15))     # an edge whatever its normals say; one normal across an edge
 SEAM, SEAM_OFF = .9, .05      # the share of an open edge others have to lie along, and how far off its line they may be
+SLIVER = 1e-5        # a triangle no taller than this share of its longest side is a line: rounding alone gave it a direction
+DRY = 1e-3           # world units: a line this near a box of water's face lies on it; what is left of one shorter is dropped
 STAGE_LINE = .11     # a tube's radius, in world units before distance
 TUBE_SIDES = 3
 S16 = 3              # GX component type
@@ -158,7 +173,7 @@ def crease(rows):
         return True
     first = rows[0]
     return (any(a @ b < SHARP for i, a in enumerate(sides) for b in sides[i + 1:])
-            or any(first[6] @ row[6] < SMOOTH or first[7] @ row[7] < SMOOTH for row in rows[1:]))
+            or any(first[6] @ row[6] < SMOOTH and first[7] @ row[7] < SMOOTH for row in rows[1:]))
 
 
 def seams(edges):
@@ -192,9 +207,42 @@ def normal(d, a, index):
     return np.array(struct.unpack_from('>3' + 'BbHhf'[a['comp']], d.data, a['data'] + index * a['stride']), float)
 
 
-def seen(a, b, sides):
+def seen(a, b, sides, eyes=(EYE,)):
     """Can the camera see a face on this edge?"""
-    return any(n @ (EYE - (a + b) / 2) > 0 for n in sides)
+    return any(n @ (eye - (a + b) / 2) > 0 for eye in eyes for n in sides)
+
+
+def split(edges, middle):
+    """Each edge lying along a sliver's long side, cut in two where the sliver's short sides meet: there the faces on
+    the far side of the sliver meet each other, so the face on this side folds against each of them on its own."""
+    for key, (mid, at, _) in middle.items():
+        for n, k, a, ma, b, mb, na, nb in edges.pop(key, ()):
+            t = np.linalg.norm(at - a) / max(np.linalg.norm(b - a), 1e-9)
+            here = (unit(na * (1 - t) + nb * t) if na is not None else None, ma if t < .5 else mb)
+            for end in ((key[0], a, ma, na), (key[1], b, mb, nb)):
+                one, two = sorted((end, (mid, at, here[1], here[0])), key=lambda e: e[0])
+                edges[one[0], two[0]].append((n, k, one[1], one[2], two[1], two[2], one[3], two[3]))
+
+
+def dry(a, b, water):
+    """The stretches (from, to: shares of the way from a to b) of a line that lie outside every box of water, or on
+    a box's face."""
+    out = [(0., 1.)]
+    along = b - a
+    for low, high in water:
+        low, high, start, end = low + DRY, high - DRY, 0., 1.
+        for k in range(3):
+            if abs(along[k]) < 1e-12:
+                if not low[k] <= a[k] <= high[k]:
+                    start, end = 1., 0.
+                continue
+            t = sorted(((low[k] - a[k]) / along[k], (high[k] - a[k]) / along[k]))
+            start, end = max(start, t[0]), min(end, t[1])
+        if start < end:
+            out = [part for s, e in out
+                   for part in (((s, e),) if end <= s or start >= e else ((s, start), (end, e))) if part[1] > part[0]]
+    length = np.linalg.norm(along)
+    return [(s, e) for s, e in out if (e - s) * length >= DRY]
 
 
 def packed(points):
@@ -210,6 +258,23 @@ def set_positions(d, row, at, fraction):
     d.data[row + 16] = fraction
     struct.pack_into('>H', d.data, row + 18, 6)
     d.point(row + 20, at)
+
+
+def shell_list(d, p, table, index):
+    """A shell's own display list: its matrix indices and its points, renumbered by ``index``, and nothing else (its
+    material is one constant black, so it reads no normal, colour or texture)."""
+    wide = max(index.values()) > 0xff
+    out = bytearray()
+    for op, rows in strips(d, p, table):
+        out += struct.pack('>BH', op, len(rows))
+        for raw, at in rows:
+            out += b''.join(r for r, a in zip(raw, table) if a['name'] == 0)
+            out += struct.pack('>H' if wide else '>B', index[at[POS]])
+    return bytes(out + bytes(-len(out) % BLOCK))
+
+
+def blocks(n):
+    return -(-n // BLOCK) * BLOCK
 
 
 def straighten(segments):
@@ -252,7 +317,7 @@ def add_tubes(d, mesh, segments, line):
         towards = unit(EYE - a)
         across = unit(np.cross(along, towards))
         up = np.cross(across, along)
-        r = line * distance(min(a[2], b[2]))
+        r = line * distance(min(a[2], b[2]) if mesh['depth'] is None else mesh['depth'])
         start = len(points)
         for end in (a - along * r / 2, b + along * r / 2):
             points += [inverse @ (end + (up * x + across * y) * r - move) for x, y in turns]
@@ -279,14 +344,20 @@ def add_tubes(d, mesh, segments, line):
     return tube
 
 
-def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visible=None, roots=(), depths=None, plain=None):
+def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visible=None, roots=(), depths=None, plain=None,
+            quiet=None, solid=None, sideways=None, water=()):
     """``roots``: joint trees outside the model groups to line too (a stage item's model). ``depths``: {mesh: world z}
     for meshes that are not drawn where they rest (a character on a flight path), for the line's width. ``plain``:
-    which meshes get no lines, asked with the mesh and its world points."""
+    which meshes get neither outline nor lines; ``quiet``: which keep their outline and get no lines; ``solid``: which
+    two-sided meshes get a shell; ``sideways``: whose lines are judged from either end of them too. All four are
+    asked with the mesh and its world points. ``water``: (low corner, high corner) boxes no line is drawn in."""
     d = Dat.read(source)
     worlds, stats = world_matrices(d, roots), collections.Counter()
     meshes, normals = [], collections.defaultdict(lambda: np.zeros(3))
     edges, depths = collections.defaultdict(list), depths or {}
+    water = [(np.array(low, float), np.array(high, float)) for low, high in water]
+    middle = {}         # a sliver's long side: the point on it its two short ones meet at
+    named = [f for f in (plain, quiet, solid, sideways) if f is not None]
     for j, o in places(d, worlds):
         for p in d.chain(d.ptr(o + 12), 4):
             table = attrs(d, p)
@@ -297,19 +368,30 @@ def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visibl
             flags = d.u16(p + 12)
             space = skinned_matrix(d, p, worlds) if flags & ENVELOPE else worlds[d.ptr(p + 20) or j]
             pos = next(a for a in table if a['name'] == POS)
-            if plain is not None and plain(p, np.array([space[:3, :3] @ np.array(read_vector(d, pos, index[POS])) + space[:3, 3]
-                                                        for _, rows in strips(d, p, table) for _, index in rows])):
+            where = np.array([space[:3, :3] @ np.array(read_vector(d, pos, index[POS])) + space[:3, 3]
+                              for _, rows in strips(d, p, table) for _, index in rows]) if named else None
+            if plain is not None and plain(p, where):
                 stats['plain'] += 1
                 continue
+            hushed = quiet is not None and quiet(p, where)
+            stats['quiet'] += hushed
             if behind is not None and max(space[2, :3] @ np.array(read_vector(d, pos, index[POS])) + space[2, 3] for _, rows in strips(d, p, table) for _, index in rows) < behind:
                 stats['behind'] += 1
                 continue
-            mesh = dict(o=o, p=p, table=table, pos=pos, space=space, used=set(), depth=depths.get(p))
-            meshes.append(mesh)
-            mesh['shell'] = bool(flags & CULLS)
-            flip = -1 if flags & OUTSIDE_IN else 1      # GX fronts are clockwise, so a front's cross product points inward
             said = next((a for a in table if a['name'] == NRM and a['data'] is not None and a['kind'] != 1), None)
+            whole = not flags & CULLS and solid is not None and solid(p, where)
+            if whole and said is None:
+                raise ValueError('A mesh named solid has no normals to say which way is out')
+            mesh = dict(o=o, p=p, table=table, pos=pos, space=space, used=set(), depth=depths.get(p), cull=OUTSIDE_IN,
+                        eyes=[EYE * (0, 1, 1) + (x, 0, 0) for x in (where[:, 0].min(), where[:, 0].max())]
+                        if sideways is not None and sideways(p, where) else ())
+            meshes.append(mesh)
+            mesh['shell'] = bool(flags & CULLS) or whole
+            stats['solid'] += whole
+            stats['sideways'] += bool(mesh['eyes'])
+            flip = -1 if flags & OUTSIDE_IN else 1      # GX fronts are clockwise, so a front's cross product points inward
             turn = np.linalg.inv(space[:3, :3]).T
+            wound = collections.Counter()               # a solid's faces: wound out, or in
             for op, rows in strips(d, p, table):
                 indices = [index[POS] for _, index in rows]
                 mesh['used'] |= set(indices)
@@ -319,17 +401,32 @@ def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visibl
                     n = -flip * np.cross(points[b] - points[a], points[c] - points[a])
                     if np.linalg.norm(n) < 1e-6:
                         continue
-                    if not mesh['shell'] and (n @ (own[a] + own[b] + own[c]) < 0 if own is not None else n @ (EYE - points[a]) < 0):
+                    if not flags & CULLS and (n @ (own[a] + own[b] + own[c]) < 0 if own is not None else n @ (EYE - points[a]) < 0):
                         n = -n
+                        wound['in'] += 1
+                    else:
+                        wound['out'] += 1
                     for x in (a, b, c):
                         if mesh['shell']:
                             normals[tuple(np.round(points[x], 2))] += n
-                    for x, y in ((a, b), (b, c), (c, a)):
+                    span, x, y, z = max((((points[x] - points[y]) ** 2).sum(), x, y, z) for x, y, z in ((a, b, c), (b, c, a), (c, a, b)))
+                    thin = np.linalg.norm(n) < SLIVER * span
+                    stats['slivers'] += bool(thin)
+                    if thin and not hushed:     # its long side is its two short ones: so for the face across it too
+                        keys = [tuple(np.round(points[w], 2)) for w in (x, y, z)]
+                        if keys[2] not in keys[:2]:
+                            middle[tuple(sorted(keys[:2]))] = keys[2], points[z], rows[z][1].get(0, 0)
+                    for x, y in ((a, b), (b, c), (c, a)) if not hushed and not thin else ():
                         ends = sorted(((tuple(np.round(points[z], 2)), z) for z in (x, y)), key=lambda e: e[0])
                         if ends[0][0] != ends[1][0]:
                             m, l = (rows[z][1].get(0, 0) for z in (ends[0][1], ends[1][1]))
                             edges[ends[0][0], ends[1][0]].append((unit(n), len(meshes) - 1, points[ends[0][1]], m, points[ends[1][1]], l,
                                                                   *((own[ends[0][1]], own[ends[1][1]]) if own is not None else (None, None))))
+            if whole:
+                if wound['in'] and wound['out']:
+                    raise ValueError('A mesh named solid is wound both ways: one shell cannot show only its far side')
+                mesh['cull'] = CULL_BACK if wound['in'] else OUTSIDE_IN
+    split(edges, middle)
 
     # the shells' positions, per source table and space. Meshes share big tables and use a slice each, so a table only
     # holds its slice, and its pointer stays where entry 0 would be: the display lists keep their indices
@@ -350,8 +447,24 @@ def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visibl
             n = normals[tuple(np.round(world, 2))]
             thick = line * distance(world[2] if depth is None else depth)
             out[i - first] = x + inverse @ (unit(n) * thick)
+        # a big source table spreads a slice's points far apart: then the shells get lists of their own, and a table of
+        # only the points they use, wherever that is smaller (the same points, bit for bit)
+        users = [mesh for mesh in meshes if mesh.get('key') == key]
+        order = sorted(used)
+        index = {i: n for n, i in enumerate(order)}
+        lists = [shell_list(d, mesh['p'], mesh['table'], index) for mesh in users]
+        rows = [sum(a['name'] == 0 for a in mesh['table']) + 1 for mesh in users]
+        whole = blocks(len(out) * 6) + sum(blocks((len(mesh['table']) + 1) * ATTR_SIZE) for mesh in users)
+        small = blocks(len(order) * 6) + sum(map(len, lists)) + sum(blocks((n + 1) * ATTR_SIZE) for n in rows)
+        if small < whole:
+            stats['compact shell tables'] += 1
+            raw, fraction = packed(out[[i - first for i in order]])
+            tables[key] = d.add(raw, BLOCK), fraction, len(order) > 0x100
+            for mesh, listing in zip(users, lists):
+                mesh['list'] = listing
+            continue
         raw, fraction = packed(out)
-        tables[key] = d.add(raw, BLOCK) - first * 6, fraction
+        tables[key] = d.add(raw, BLOCK) - first * 6, fraction, None
 
     black = d.add(struct.pack('>12B2f', *(0, 0, 0, 255) * 3, 1., 1.), 4)
     mobj = d.add(bytes(0x18), 4)
@@ -364,16 +477,22 @@ def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visibl
             continue
         p, table, pos = mesh['p'], mesh['table'], mesh['pos']
         flags = d.u16(p + 12)
+        positions, fraction, wide = tables[mesh['key']]
+        if 'list' in mesh:          # its own list: the matrix rows and the points, nothing else
+            table = [a for a in table if a['name'] == 0] + [pos]
         rows = [bytes(d.data[a['at']:a['at'] + ATTR_SIZE]) for a in table]
         at = d.add(b''.join(rows) + struct.pack('>I', END) + bytes(ATTR_SIZE - 4), BLOCK)
         for i, a in enumerate(table):
             if a['data'] is not None:
                 d.point(at + i * ATTR_SIZE + 20, a['data'])
-        set_positions(d, at + table.index(pos) * ATTR_SIZE, *tables[mesh['key']])
+        set_positions(d, at + table.index(pos) * ATTR_SIZE, positions, fraction)
+        if 'list' in mesh:
+            struct.pack_into('>I', d.data, at + table.index(pos) * ATTR_SIZE + 4, 3 if wide else 2)
         shell = d.add(bytes(0x18), 4)
         d.point(shell + 8, at)
-        struct.pack_into('>HH', d.data, shell + 12, (flags & ~CULLS) | OUTSIDE_IN, d.u16(p + 14))
-        d.point(shell + 16, d.ptr(p + 16))
+        listing = mesh.get('list')
+        struct.pack_into('>HH', d.data, shell + 12, (flags & ~CULLS) | mesh['cull'], len(listing) // BLOCK if listing else d.u16(p + 14))
+        d.point(shell + 16, d.add(listing, BLOCK) if listing else d.ptr(p + 16))
         d.point(shell + 20, d.ptr(p + 20))
         struct.pack_into('>H', d.data, p + 12, flags & ~CULLS)      # both faces: a one-sided panel's back must hide the shell
         shells[mesh['o']].append(shell)
@@ -384,8 +503,16 @@ def outline(source, target, line=0.14, tube=STAGE_LINE, behind=None, edge_visibl
             continue
         sides = [row[0] for row in rows]
         _, at, a, ma, b, mb = rows[0][:6]
-        if crease(rows) and (edge_visible or seen)(a, b, sides):
+        if not crease(rows) or not ((edge_visible or seen)(a, b, sides) or seen(a, b, sides, meshes[at]['eyes'])):
+            continue
+        if not water:
             segments[at].append((a, ma, b, mb))
+            continue
+        parts = dry(a, b, water)
+        stats['under water'] += parts != [(0., 1.)]
+        for start, end in parts:
+            segments[at].append((a if start == 0 else a + (b - a) * start, ma if start < .5 else mb,
+                                 b if end == 1 else a + (b - a) * end, mb if end > .5 else ma))
     for at, batch in segments.items():
         mesh = meshes[at]
         batch = straighten(batch)

@@ -195,5 +195,17 @@
       ]
     }
   ],
-  "drop_image_roots": true
+  "drop_image_roots": true,
+  "quiet": {
+    "boxes": [
+      [
+        -100000,
+        -100000,
+        -100000,
+        100000,
+        100000,
+        100000
+      ]
+    ]
+  }
 }

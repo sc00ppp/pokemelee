@@ -96,18 +96,33 @@ def card(size=(128, 192)):
     return cm.reduce(cm.grey((inten, alpha)), size)
 
 
+# Melee's own CSS icon pictures in m-ex's pristine MnSlChr: 25 portraits (CI8), their grey backing (I4) and the
+# locked-icon frame (CI8). Counted so a base or rule change can never quietly leave them in again (2026-11-17: the
+# builder kept all of them, 100 KB, and Slippi's online character select froze).
+DEAD_ICON_PICTURES = 27
+
+
 def dead_pictures(dump, out):
-    """Melee's original icon pictures (and their grey backing), which nothing draws: 8x8 clear, same format."""
+    """Melee's original icon pictures (and their grey backing), which nothing draws: 8x8 clear, same format.
+
+    They are MenuModel / SingleMenuModel j4-j34 (and those joints' texture animations): m-ex draws its own IconModel.
+    The builder patches m-ex's PRISTINE file, where that IconModel still shows Melee's pictures (the same images), so
+    IconModel uses count as dead too: MexCLI regenerates the whole IconModel from the project's own icons on export
+    (mexLib GenerateMexSelectChr writes a new mexSelectChr symbol), so nothing of the old one reaches the disc. Until
+    2026-11-17 the rule refused any picture IconModel also used, so in the builder it blanked only one."""
     import json
     images = []
     for e in json.loads((Path(dump) / 'manifest.json').read_text()):
-        uses = e['uses']
-        icon = (e['width'], e['height']) == (64, 56) and uses and all(
+        menu = [u for u in e['uses'] if u.split()[0] != 'IconModel']
+        icon = (e['width'], e['height']) == (64, 56) and menu and all(
             u.split()[0] in ('MenuModel', 'SingleMenuModel', 'MenuMaterialAnimation', 'SingleMenuMaterialAnimation')
-            and (' d1 ' in u or ' m1 ' in u or ' d0 ' in u) and 4 <= int(u.split()[1][1:]) <= 34 for u in uses)
+            and (' d1 ' in u or ' m1 ' in u or ' d0 ' in u) and 4 <= int(u.split()[1][1:]) <= 34 for u in menu)
         if icon:
             images.append({**cm.emit(out, 'dead-' + e['md5'][:8], Image.new('RGBA', (8, 8), (0, 0, 0, 0)), e['format']),
                            'md5': e['md5']})
+    if len(images) != DEAD_ICON_PICTURES:
+        raise SystemExit(f'MnSlChr: expected {DEAD_ICON_PICTURES} unused Melee icon pictures to blank, found {len(images)}; '
+                         'kept, they run Slippi\'s online character select out of memory')
     return images
 
 

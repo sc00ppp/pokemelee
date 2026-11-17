@@ -3,33 +3,113 @@ import collections
 import struct
 import numpy as np
 from .display_list import *
+from .anime_stage import S16, packed
 from .fighter_tables import fighter_tables, joints, joint_dobjs
 
-def with_colour(d, p, table):
-    """A new display list with a colour index after the normal: every vertex takes entry 0 of the colour table."""
-    slot = sum(a['name'] <= NRM for a in table)
+def with_colour(d, p, table, normals=True):
+    """A new display list with a colour index after the normal: every vertex takes entry 0 of the colour table.
+    Without ``normals`` the normal's index is left out too."""
+    keep = [normals or a['name'] != NRM for a in table]
+    slot = sum(a['name'] <= NRM for a, k in zip(table, keep) if k)
     out = bytearray()
     for op, rows in strips(d, p, table):
         out += struct.pack('>BH', op, len(rows))
         for raw, _ in rows:
+            raw = [r for r, k in zip(raw, keep) if k]
             out += b''.join(raw[:slot]) + b'\0' + b''.join(raw[slot:])
     out += bytes(-len(out) % 32)
     return bytes(out), slot
 
 
-def attr_table(d, p, table, slot, colour):
-    """A copy of the PObj's attribute table with a colour row in GX order; its offset."""
-    rows = [bytes(d.data[a['at']:a['at'] + ATTR_SIZE]) for a in table]
-    row = struct.pack('>5I', CLR0, 2, 1, 5, 0) + bytes(4)
-    rows.insert(slot, row)
+def attr_table(d, table, slot, colour, positions=None):
+    """A copy of these attribute rows with a colour row in GX order, as (bytes, pointers) for Store.put.
+    ``positions``: (table, first entry, fraction) of a 16-bit slice the rows read their positions from instead."""
+    rows, pointers = [], []
+    for a in table:
+        row = bytearray(d.data[a['at']:a['at'] + ATTR_SIZE])
+        row[20:24] = bytes(4)
+        if positions is not None and a['name'] == POS:
+            struct.pack_into('>I', row, 12, S16)
+            row[16] = positions[2]
+            struct.pack_into('>H', row, 18, 6)
+            pointers.append((len(rows) * ATTR_SIZE + 20, positions[0], positions[1] * 6))
+        elif a['data'] is not None:
+            pointers.append((len(rows) * ATTR_SIZE + 20, a['data'], 0))
+        rows.append(bytes(row))
+    pointers = [(at + (at >= slot * ATTR_SIZE) * ATTR_SIZE, target, back) for at, target, back in pointers]
+    rows.insert(slot, struct.pack('>5I', CLR0, 2, 1, 5, 0) + bytes(4))
+    pointers.append((slot * ATTR_SIZE + 20, colour, 0))
     end = bytearray(ATTR_SIZE)
     end[:4] = struct.pack('>I', END)
-    at = d.add(b''.join(rows) + bytes(end), 32)
-    for i, a in enumerate(table):
-        if a['data'] is not None:
-            d.point(at + (i + (i >= slot)) * ATTR_SIZE + 20, a['data'])
-    d.point(at + slot * ATTR_SIZE + 20, colour)
-    return at
+    return b''.join(rows) + bytes(end), pointers
+
+
+class Store:
+    """Each piece the outline adds, once. A high- and a low-detail PObj share one display list, and meshes share
+    materials and tables: a copy each was memory a four-player match did not have."""
+
+    def __init__(self, d):
+        self.d, self.copies, self.virtual = d, {}, {}
+
+    def put(self, payload, pointers=(), align=32):
+        """``payload`` with (field, target, back) pointers in it: a pointer ``back`` bytes before its target is where
+        entry 0 of a slice would be, so the file's drop can move it with the slice."""
+        key = bytes(payload), tuple(pointers)
+        if key not in self.copies:
+            at = self.copies[key] = self.d.add(payload, align)
+            for field, target, back in pointers:
+                struct.pack_into('>I', self.d.data, at + field, (target - back) & 0xFFFFFFFF)
+                self.d.relocations.add(at + field)
+                if back:
+                    self.virtual[at + field] = target
+        return self.copies[key]
+
+
+SIXTEEN_BIT_BODIES = {'PlyKoopa5K_Share_joint'}   # Blastoise on Bowser: its body came in as floats, the only one; the
+                                                 # owner's call (2026-11-16) to store it as every other costume's is
+STEP = .0005        # the most a point stored as 16-bit fixed point may move
+NORMAL_COORDS = {1, 2, 4, 6}    # TObj coordinates placed by normals: reflection, highlight, toon, back light
+NORMAL_SOURCES = {1, 2, 3}      # GX texgen sources: normal, binormal, tangent
+LIT, BUMP = 0b1100, 1 << 24     # render mode: diffuse and specular lights; TObj flag: a bump map
+
+
+def reads_normals(d, m):
+    """Does a material still read normals once it is off the lights: a light left on, or a texture they place."""
+    if d.u32(m + 4) & LIT:
+        return True
+    t = d.ptr(m + 8)
+    while t is not None:
+        flags = d.u32(t + 0x40)
+        if (flags & 0xF) in NORMAL_COORDS or d.u32(t + 0xC) in NORMAL_SOURCES or flags & BUMP:
+            return True
+        t = d.ptr(t + 4)
+    return False
+
+
+def span(d, p, table, name, whole=False):
+    """The bytes of an attribute's array a PObj indexes: from its first entry used, or ``whole`` from the array's own
+    start, which is what must stay put while anything still reads it (an index reaches across what lies between)."""
+    a = next((a for a in table if a['name'] == name and a['data'] is not None), None)
+    if a is None:
+        return None
+    used = [index[name] for _, rows in strips(d, p, table) for _, index in rows]
+    if not used:
+        return None
+    return a['data'] + (0 if whole else min(used) * a['stride']), a['data'] + (max(used) + 1) * a['stride']
+
+
+def without(ranges, keep):
+    """``ranges`` less every range in ``keep``."""
+    out, keep = [], sorted(keep)
+    for a, b in ranges:
+        for x, y in keep:
+            if x < b and a < y:
+                if x > a:
+                    out.append((a, x))
+                a = max(a, y)
+        if b > a:
+            out.append((a, b))
+    return out
 
 
 def world_scales(d, symbol):
@@ -106,14 +186,15 @@ def convert(source, target, fighter, line=0.14):
 
     shaped = {d.ptr(o + 8) for _, o in places if d.ptr(o + 12) is not None
               and any(d.u16(p + 12) & SHAPE_ANIM for p in d.chain(d.ptr(o + 12), 4))}
-    colours, black = {}, d.add(struct.pack('>4B', 0, 0, 0, 255), 32)
+    store = Store(d)
+    colours, black = {}, store.put(struct.pack('>4B', 0, 0, 0, 255))
 
     def colour_of(m):
         if m not in colours:
             mat = d.ptr(m + 12)
             r, g, b = (d.data[mat + 4 + i] for i in range(3)) if mat is not None else (255, 255, 255)
             alpha = struct.unpack_from('>f', d.data, mat + 12)[0] if mat is not None else 1
-            colours[m] = d.add(struct.pack('>4B', r, g, b, round(min(alpha, 1) * 255)), 32)
+            colours[m] = store.put(struct.pack('>4B', r, g, b, round(min(alpha, 1) * 255)))
         return colours[m]
 
     # one normal per point in space, so a shell stays closed across hard edges and between meshes. Each point keeps two
@@ -175,7 +256,8 @@ def convert(source, target, fighter, line=0.14):
             colour_of(m)
             struct.pack_into('>I', d.data, m + 4, (d.u32(m + 4) & ~COLOUR_BITS) | FROM_VERTEX)
 
-    # the shell's positions, one table per source table and space
+    # the shell's positions, one table per source table and space. Only the slice its shells use, as 16-bit fixed point
+    # (as a stage's shells): its pointer stays where entry 0 would be, so the display lists keep their indices
     wanted = collections.defaultdict(set)
     for mesh in meshes.values():
         if mesh['shell']:
@@ -184,23 +266,76 @@ def convert(source, target, fighter, line=0.14):
                 {index[POS] for _, index in mesh['rows']}
     shells = {}
     for (data, stride, comp, sc, space, j), indices in wanted.items():
-        out = bytearray((max(indices) + 1) * 12)
+        first = min(indices) & ~15
+        out = np.zeros((max(indices) + 1 - first, 3))
         here = 1.0 if j is None else scales.get(j, 1.0)
         for i in indices:
             x = read_vector(d, dict(data=data, stride=stride, comp=comp, scale=sc), i)
             key = space, tuple(np.round(x, 3))
             both = layers(key)
             n = normals[key].sum(0) if both is None else both[0]
-            struct.pack_into('>3f', out, i * 12, *(np.array(x) + n / (np.linalg.norm(n) + 1e-9) * thick / here))
-        shells[data, space] = d.add(bytes(out), 32)
+            out[i - first] = np.array(x) + n / (np.linalg.norm(n) + 1e-9) * thick / here
+        raw, fraction = packed(out)
+        shells[data, space] = store.put(raw), first, fraction
 
-    last = {}
+    # meshes on one display list are rewritten as one: they keep their normals if any of them still reads them
+    lists = collections.defaultdict(list)
     for mesh in meshes.values():
-        p, m, table, rows = mesh['p'], mesh['m'], mesh['table'], mesh['rows']
-        listing, slot = with_colour(d, p, table)
-        units = len(listing) // 32
-        at = d.add(listing, 32)
-        body_table = attr_table(d, p, table, slot, colour_of(m))
+        lists[d.ptr(mesh['p'] + 16)].append(mesh)
+    for users in lists.values():
+        keep = any(reads_normals(d, mesh['m']) for mesh in users)
+        stats['normals kept' if keep else 'normals dropped'] += len(users)
+        for mesh in users:
+            mesh['normals'] = keep
+
+    # a body that came in as floats, as 16-bit fixed point like every other costume's: a slice per array, its pointer
+    # where entry 0 would be, wherever 16 bits hold every point within STEP
+    bodies = {}
+    if symbol in SIXTEEN_BIT_BODIES:
+        arrays = collections.defaultdict(set)
+        for mesh in meshes.values():
+            pos = next(x for x in mesh['table'] if x['name'] == POS)
+            if pos['comp'] == 4 and pos['data'] is not None:
+                arrays[pos['data'], pos['stride']] |= {index[POS] for _, index in mesh['rows']}
+        for (data, stride), indices in arrays.items():
+            first = min(indices) & ~15
+            out = np.zeros((max(indices) + 1 - first, 3))
+            for i in indices:
+                out[i - first] = read_vector(d, dict(data=data, stride=stride, comp=4, scale=0), i)
+            raw, fraction = packed(out)
+            if .5 / (1 << fraction) <= STEP:
+                bodies[data] = store.put(raw), first, fraction
+                stats['16-bit body arrays'] += 1
+
+    # what the rewrite leaves unread: the old lists and tables, the normals no mesh reads any more and the float
+    # positions the 16-bit ones replace. What any row left still indexes stays, from its array's own start
+    dead, read = [], []
+    for p, mesh in meshes.items():
+        table = mesh['table']
+        dead += [(d.ptr(p + 16), d.ptr(p + 16) + d.u16(p + 14) * 32), (d.ptr(p + 8), d.ptr(p + 8) + (len(table) + 1) * ATTR_SIZE)]
+        for a in table:
+            gone = (a['name'] == NRM and not mesh['normals']) or (a['name'] == POS and a['data'] in bodies)
+            if a['data'] is not None:
+                (dead if gone else read).append(span(d, p, table, a['name'], not gone))
+    for _, o in places:         # meshes the rewrite leaves alone (a shape animation) still read all of theirs
+        for p in d.chain(d.ptr(o + 12), 4) if d.ptr(o + 12) is not None else ():
+            if p not in meshes:
+                table = attrs(d, p)
+                read += [(d.ptr(p + 16), d.ptr(p + 16) + d.u16(p + 14) * 32), (d.ptr(p + 8), d.ptr(p + 8) + (len(table) + 1) * ATTR_SIZE)]
+                read += [span(d, p, table, a['name'], True) for a in table if a['data'] is not None]
+    dead = without([x for x in dead if x], [x for x in read if x])
+
+    last, rewritten = {}, {}
+    for mesh in meshes.values():
+        p, m, table = mesh['p'], mesh['m'], mesh['table']
+        kept = [a for a in table if mesh['normals'] or a['name'] != NRM]
+        key = d.ptr(p + 16), mesh['normals']
+        if key not in rewritten:
+            listing, slot = with_colour(d, p, table, mesh['normals'])
+            rewritten[key] = store.put(listing), len(listing) // 32, slot
+        at, units, slot = rewritten[key]
+        pos = next(x for x in table if x['name'] == POS)
+        body_table = store.put(*attr_table(d, kept, slot, colour_of(m), bodies.get(pos['data'])))
         flags = d.u16(p + 12)
         old_env = d.ptr(p + 20)
         d.point(p + 8, body_table)
@@ -209,13 +344,7 @@ def convert(source, target, fighter, line=0.14):
         if not mesh['shell']:
             continue
         struct.pack_into('>H', d.data, p + 12, flags & ~CULLS)      # both faces: a one-sided panel's back must hide the shell
-        pos = next(x for x in table if x['name'] == POS)
-        shell_table = attr_table(d, p, table, slot, black)
-        row = shell_table + table.index(pos) * ATTR_SIZE + (table.index(pos) >= slot) * ATTR_SIZE
-        struct.pack_into('>I', d.data, row + 12, 4)
-        d.data[row + 16] = 0
-        struct.pack_into('>H', d.data, row + 18, 12)
-        d.point(row + 20, shells[pos['data'], mesh['space']])
+        shell_table = store.put(*attr_table(d, kept, slot, black, shells[pos['data'], mesh['space']]))
         shell = d.add(bytes(0x18), 4)
         d.point(shell + 8, shell_table)
         struct.pack_into('>HH', d.data, shell + 12, (flags & ~CULLS) | (CULL_BACK if mesh['inside_out'] else OUTSIDE_IN),
@@ -226,5 +355,8 @@ def convert(source, target, fighter, line=0.14):
         tail = last.get(head, d.chain(head, 4)[-1])
         d.point(tail + 4, shell)
         last[head] = shell
+    grown = len(d.data)
+    freed = d.drop(dead, store.virtual)
     d.save(target)
-    return f'{symbol}: {len(places)} places, {len(done)} materials off the lights, scale {scale:.3f}, shell {thick:.3f} units, {dict(stats)}, {len(d.data)} bytes'
+    return (f'{symbol}: {len(places)} places, {len(done)} materials off the lights, scale {scale:.3f}, shell {thick:.3f} units, '
+            f'{dict(stats)}, {grown} bytes, {freed} unread dropped, {len(d.data)} bytes')

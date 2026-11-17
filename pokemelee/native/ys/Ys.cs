@@ -549,27 +549,150 @@ static partial class Program
         float ps = pl.TryGetProperty("s", out var psv) ? psv.GetSingle() : 1f;
         float ry = (pl.TryGetProperty("ry", out var ryv) ? ryv.GetSingle() : 0f) * MathF.PI / 180f;
         var holder = new HSD_JOBJ { Flags = JOBJ_FLAG.ROOT_OPA | JOBJ_FLAG.ROOT_XLU | JOBJ_FLAG.ROOT_TEXEDGE, SX = ps, SY = ps, SZ = ps, RY = ry, TX = pt[0], TY = pt[1], TZ = pt[2], Child = clone };
-        if (!(hh.TryGetProperty("keep_card", out var kc) && kc.GetBoolean())) j1.Dobj = null;
+        // The card goes, but j1 keeps its DObj -> MObj -> TObj chain: itHeiho's state 4 sets the rate of
+        // j1->u.dobj->mobj->tobj->aobj every frame with no NULL checks. The chain keeps no polygons and no image (the
+        // card's picture would join AniMelee's shared scenery palette), and j1 loses OPA/XLU/TEXEDGE so
+        // HSD_JObjDispAll never displays its own DObj (an imageless TObj must never reach HSD_TObjSetup); the ROOT_*
+        // flags still carry the display down to the model.
+        bool card = hh.TryGetProperty("keep_card", out var kc) && kc.GetBoolean();
+        if (j1.Dobj?.Mobj?.Textures == null) throw new Exception("heiho: j1 has no DObj -> MObj -> TObj for itHeiho state 4");
+        if (!card)
+            for (var d = j1.Dobj; d != null; d = d.Next)
+            {
+                d.Pobj = null;
+                for (var t = d.Mobj?.Textures; t != null; t = t.Next) { t.ImageData = null; t.TlutData = null; }
+            }
         if (j1.Child != null) throw new Exception("heiho: j1 already has children");
         j1.Child = holder;
         root.Flags |= JOBJ_FLAG.ROOT_OPA | JOBJ_FLAG.ROOT_XLU | JOBJ_FLAG.ROOT_TEXEDGE;
-        j1.Flags |= JOBJ_FLAG.OPA | JOBJ_FLAG.ROOT_OPA | JOBJ_FLAG.ROOT_XLU | JOBJ_FLAG.ROOT_TEXEDGE;
+        j1.Flags &= ~(JOBJ_FLAG.OPA | JOBJ_FLAG.XLU | JOBJ_FLAG.TEXEDGE);
+        if (card) j1.Flags |= JOBJ_FLAG.OPA;
+        j1.Flags |= JOBJ_FLAG.ROOT_OPA | JOBJ_FLAG.ROOT_XLU | JOBJ_FLAG.ROOT_TEXEDGE;
 
-        HSD_AnimJoint animClone = null;
+        // The Shy Guy's flight IS j1's bob (it_802D98C4 turns j1's animated translation into velocity), and its flying
+        // states restart the bob only when NO joint of the item's tree is still animating (it_80272C6C -> lb_8000B09C,
+        // which counts JObj AObjs only). So the model's idle must not loop and must be over by the frame j1's own AObj
+        // ends, in every state: each state gets it unrolled into one non-looping track per joint, whole idle cycles
+        // ending exactly then. itHeiho state 4 (itemStateDesc[2]) runs j1 at rate 2 (HSD_AObjSetRate every frame
+        // while x2C <= 960), everything else runs at the item's 1.0, so there the idle ends at half j1's end frame.
+        // A state whose j1 has no AObj gets no idle. Every restart re-requests all joints, so the idle replays with
+        // each bob.
+        HSD_AnimJoint idle = null;
         int ai = hh.TryGetProperty("anim_index", out var aiv) ? aiv.GetInt32() : 0;
-        if (jd.JointAnimations != null && jd.JointAnimations.Length > ai) { animClone = Copy(jd.JointAnimations[ai], memo); SetLoop(animClone); }
+        if (jd.JointAnimations != null && jd.JointAnimations.Length > ai) idle = Copy(jd.JointAnimations[ai], memo);
+        // HSDRaw splits the state table where desc 0's third word (shape anim) starts the chain of the extern
+        // GrdStoryHeiho_TopN_shapeanim_joint (the game links it to NULL): desc n >= 1 lives in that extern's struct at
+        // +0x10 n - 8.
         var st = art.References[0xC];
-        int states = 0;
-        for (int s = 0; s * 0x10 < st.Length; s++)
+        var tail = file.References.FirstOrDefault(r => r.Name.EndsWith("shapeanim_joint"))?.Data._s;
+        var slots = new List<(int s, HSDStruct tbl, int off)>();
+        for (int s = 0; s < 8; s++)
         {
-            if (animClone == null) break;
-            if (!st.References.TryGetValue(s * 0x10, out var ajs)) continue;
-            var aroot = new HSD_AnimJoint { _s = ajs };
-            var a1 = aroot.Child;
-            if (a1 == null) { a1 = new HSD_AnimJoint(); aroot.Child = a1; }
-            a1.Child = new HSD_AnimJoint { Child = animClone };   // holder (no track) -> the model's own tree
-            states++;
+            if (s * 0x10 + 4 <= st.Length) slots.Add((s, st, s * 0x10));
+            else if (tail != null && s * 0x10 - 8 >= 0 && s * 0x10 - 4 <= tail.Length) slots.Add((s, tail, s * 0x10 - 8));
         }
-        Console.WriteLine($"  heiho: {clone.TreeList.Count} joints under the Shy Guy's j1 ({total} total), anim {ai} on {states} states");
+        var spans = new List<(int s, HSDStruct tbl, int off, float span)>();
+        foreach (var (s, tbl, off) in slots)
+        {
+            if (idle == null) break;
+            if (!tbl.References.TryGetValue(off, out var ajs)) continue;
+            var a1 = new HSD_AnimJoint { _s = ajs }.Child;
+            if (a1?.AOBJ == null) continue;
+            spans.Add((s, tbl, off, MathF.Floor(a1.AOBJ.EndFrame / (s == 2 ? 2f : 1f))));
+        }
+        var tracks = new Dictionary<(int, float), (HSD_FOBJDesc head, float upTo)>();
+        var carries = new Dictionary<HSDStruct, float>();   // anim tree root -> the idle span hung in it
+        var said = new List<string>();
+        foreach (var (s, tbl, off, span) in spans.OrderByDescending(x => x.span))
+        {
+            if (span < 1) continue;
+            var ajs = tbl.References[off];
+            var rs = ajs;
+            if (carries.TryGetValue(ajs, out var had))
+            {
+                if (had == span) { said.Add($"state desc {s}: {span} frames (shared)"); continue; }
+                // vanilla shares one anim tree between states; this one needs another span, so it gets its own root
+                // and j1 nodes (j1's AObj stays the very same data)
+                rs = Shallow(ajs);
+                rs.References[0] = Shallow(ajs.References[0]);
+                tbl.References[off] = rs;
+            }
+            carries[rs] = span;
+            new HSD_AnimJoint { _s = rs }.Child.Child = new HSD_AnimJoint { Child = UnrollIdle(idle, span, tracks) };   // holder (no track) -> the model's tree
+            said.Add($"state desc {s}: {span} frames");
+        }
+        Console.WriteLine($"  heiho: {clone.TreeList.Count} joints under the Shy Guy's j1 ({total} total), anim {ai} unrolled, " +
+                          (said.Count > 0 ? string.Join(", ", said) : "on no state"));
+    }
+
+    static HSDStruct Shallow(HSDStruct s)
+    {
+        var c = new HSDStruct((byte[])s.GetData().Clone())
+        {
+            Align = s.Align, CanBeBuffer = s.CanBeBuffer,
+            CanBeDuplicate = s.CanBeDuplicate, IsBufferAligned = s.IsBufferAligned
+        };
+        foreach (var r in s.References) c.References[r.Key] = r.Value;
+        return c;
+    }
+
+    // The idle as one non-looping track per joint lasting `span` frames: whole cycles, each the source's cycle stretched
+    // to span / floor(span / cycle) frames (UnrollKeys). Key data is shared with an earlier, longer unroll of the same
+    // joint and cycle length (it has a cycle boundary key at this span too); the AObjs are this span's own.
+    static HSD_AnimJoint UnrollIdle(HSD_AnimJoint idle, float span, Dictionary<(int, float), (HSD_FOBJDesc head, float upTo)> made)
+    {
+        var res = Copy(idle, new Dictionary<HSDStruct, HSDStruct>());
+        var src = idle.TreeList; var dst = res.TreeList;
+        for (int i = 0; i < src.Count; i++)
+        {
+            var ao = src[i].AOBJ;
+            if (ao == null) continue;
+            float cyc = ao.EndFrame;
+            int n = Math.Max(1, (int)MathF.Floor(span / cyc));
+            float len = span / n;
+            var na = new HSD_AOBJ { Flags = ao.Flags & ~AOBJ_Flags.ANIM_LOOP, EndFrame = span };
+            if (made.TryGetValue((i, len), out var m) && m.upTo >= span) na.FObjDesc = m.head;
+            else
+            {
+                foreach (var fd in ao.FObjDesc.List)
+                    na.AddTrack(fd.TrackType, UnrollKeys(fd, cyc, len, n, i));
+                made[(i, len)] = (na.FObjDesc, span);
+            }
+            dst[i].AOBJ = na;
+        }
+        return res;
+    }
+
+    // One looping track's keys written out `n` times, each cycle `len` frames. The keys inside a cycle keep their type,
+    // value and (rescaled) slope; the keys at or past the loop point (in Colosseum's idles a slope op and a closing
+    // value) become one key at every cycle boundary and at the very end: the cycle's first value, arriving with the
+    // closing slope, so the cycles join without the source's snap at the wrap and the last one ends on the pose the
+    // next bob starts from. Only plain keys (no slope op inside a cycle, first key at frame 0) are accepted: HSDRaw
+    // does not read slope ops the way the game does.
+    static List<FOBJKey> UnrollKeys(HSD_FOBJDesc fd, float cyc, float len, int n, int joint)
+    {
+        var keys0 = fd.GetDecodedKeys();
+        var body = keys0.Where(k => k.Frame < cyc).ToList();
+        if (fd.StartFrame != 0 || body.Count == 0 || body[0].Frame != 0 || body.Any(k => k.InterpolationType == GXInterpolationType.HSD_A_OP_SLP))
+            throw new Exception($"heiho idle joint {joint}: track {fd.TrackType} is not a plain loop starting at frame 0");
+        var close = keys0.Where(k => k.Frame >= cyc && k.InterpolationType == GXInterpolationType.HSD_A_OP_SLP).Select(k => (float?)k.Tan).FirstOrDefault();
+        var first = body[0];
+        bool spline = first.InterpolationType == GXInterpolationType.HSD_A_OP_SPL0 || first.InterpolationType == GXInterpolationType.HSD_A_OP_SPL;
+        FOBJKey Boundary(float frame) => new FOBJKey
+        {
+            Frame = frame, Value = first.Value, Tan = (close ?? first.Tan) * cyc / len,
+            InterpolationType = spline ? GXInterpolationType.HSD_A_OP_SPL : first.InterpolationType,
+        };
+        var keys = new List<FOBJKey>();
+        for (int c = 0; c < n; c++)
+            foreach (var k in body)
+            {
+                float f = MathF.Round(c * len + k.Frame * len / cyc);
+                if (keys.Count > 0 && keys[^1].Frame >= f) throw new Exception($"heiho idle joint {joint}: keys collide at frame {f}");
+                keys.Add(c > 0 && k == first ? Boundary(f)
+                         : new FOBJKey { Frame = f, Value = k.Value, Tan = k.Tan * cyc / len, InterpolationType = k.InterpolationType });
+            }
+        keys.Add(Boundary(MathF.Round(n * len)));
+        return keys;
     }
 }

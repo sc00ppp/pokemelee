@@ -91,6 +91,12 @@
           "Luigi"
         ],
         [
+          "hand_breloom.py",
+          "{finish}",
+          "{source}",
+          "{replay}"
+        ],
+        [
           "round_out.py",
           "{finish}"
         ],
@@ -100,8 +106,8 @@
           "{out}"
         ]
       ],
-      "sha256": "148c40446a510afa4e36a885458926e8cc718917aee9d7831760eb244417a016",
-      "bytes": 260410
+      "sha256": "1f56d66f25b008316707de1930f4bf61a1d73223328b376804cebbb0eac227c2",
+      "bytes": 263678
     },
     "blastoise": {
       "pokemon": "Blastoise",
@@ -763,7 +769,7 @@
       "seed": "3-build",
       "finish": "3-build",
       "directories": [],
-      "sha256": "a028dedee4f24ec157148e32386a70794ea034d75beafb7a51fcd9957d4290bf",
+      "sha256": "246da9f159870fdabef23c951ca310afd4eca81a546c2787719c6fafdc8c895c",
       "steps": [
         [
           "quilava_assets.py",

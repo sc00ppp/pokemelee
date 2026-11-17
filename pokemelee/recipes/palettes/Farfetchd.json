@@ -1,5 +1,5 @@
 {
- "_about": "Farfetchd: tan body and cream belly (0x31a0), tan wings (0x7e00) with cream tips (0x680), tan head (0x9e40, with eyes and dark brow) and crest (0x2300), yellow beak (0x6ea0, 0x6720) and legs (0x5320), leek 0x4d00 (kept). 0x19c0 and 0x2580 are unseen.",
+ "_about": "Farfetchd: tan body and cream belly (0x31a0), tan wings (0x7e00) with cream tips (0x680), tan head (0x9e40, with eyes and dark brow) and crest (0x2300), yellow beak (0x6ea0, 0x6720) and legs (0x5320), leek 0x4d00 (kept). 0x19c0 and 0x2580 are unseen. 0x7e00 is one flat tan swatch that draws the back half of the head as well as the wings (the face, eyes and brow are the front half: 0x9e40 and its blink frames). It is its own zone, nape, with the body's samples, and each team colours it as the head: in the body zone green's head was an olive back behind a bottle-green face. The wings ride along, as they share the swatch.",
  "zones": {
   "body": {
    "colours": [
@@ -13,6 +13,7 @@
    "out": [
     "0x9e40",
     "0x2300",
+    "0x7e00",
     "blink",
     "0x4d00",
     "0x19c0",
@@ -31,6 +32,19 @@
     "0x9e40",
     "0x2300",
     "blink"
+   ]
+  },
+  "nape": {
+   "colours": [
+    "#b49173",
+    "#bb9977",
+    "#aa8866",
+    "#bda58b",
+    "#785828",
+    "#483818"
+   ],
+   "in": [
+    "0x7e00"
    ]
   },
   "belly": {
@@ -139,6 +153,11 @@
    "shadow": "#560a18",
    "light": "#ff6450"
   },
+  "nape": {
+   "base": "#c41e2c",
+   "shadow": "#560a18",
+   "light": "#ff6450"
+  },
   "brow": "#0e0a0a",
   "belly": [
    "#f8e6e2",
@@ -161,6 +180,11 @@
    "shadow": "#1c2f80",
    "light": "#a8d4ff"
   },
+  "nape": {
+   "base": "#4f86e0",
+   "shadow": "#1c2f80",
+   "light": "#a8d4ff"
+  },
   "brow": "#0c0e14",
   "belly": [
    "#f2f5fa",
@@ -174,6 +198,11 @@
  "green": {
   "_note": "mallard (bottle green head, olive body): iridescent bottle-green head and crest, moss-olive body, pale grey belly, white wing tips, yellow bill kept, orange feet",
   "head": {
+   "base": "#1c5a36",
+   "shadow": "#0a2418",
+   "light": "#2a9a7a"
+  },
+  "nape": {
    "base": "#1c5a36",
    "shadow": "#0a2418",
    "light": "#2a9a7a"

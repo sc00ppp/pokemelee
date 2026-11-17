@@ -1062,5 +1062,17 @@
   "drop_image_roots": true,
   "drop_roots": [
     "GrdIzumiStar_TopN_joint"
-  ]
+  ],
+  "quiet": {
+    "meshes": [
+      [
+        -11000.0,
+        -3666.2,
+        -11000.0,
+        11000.0,
+        13304.1,
+        11000.0
+      ]
+    ]
+  }
 }
