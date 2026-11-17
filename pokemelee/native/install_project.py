@@ -25,7 +25,7 @@ def main():
     mex.command('add-code', required_code.NAME, required_code.source())
     lines = follower_code.build().splitlines()
     name = lines.pop(0).removeprefix('$!')
-    lines.extend(follower_code.alias_ini_lines({27: 23, 28: 23}, {28}))
+    lines.extend(follower_code.alias_ini_lines({27: 23, 28: 23}))
     text = '\n'.join(line.split('#', 1)[0].strip() for line in lines if line.strip())
     mex.command('add-code', name, text)
     mex.command('add-code', main_colo.CODE_NAME, main_colo.code())
@@ -49,6 +49,7 @@ def main():
             raise ValueError('Music did not import: ' + song)
     stock_tex.project(project.parent)
     mex.command('save')
+    follower_code.check_no_swap(css_doors.gct_hooks((project.parent / 'files/codes.gct').read_bytes()))
 
 
 if __name__ == '__main__':

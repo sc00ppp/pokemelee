@@ -886,12 +886,12 @@
       "sha256": "8e2b0330e886c0a2cf808f1fd747b64aae2bd04e3ee8e07acf59d3f1bfe2cf75"
     },
     "codes.gct": {
-      "bytes": 69120,
-      "sha256": "6362987a81acdde6fd2836d9a5edbfa911de348bdf071bf3e46b79305ab0b2b5"
+      "bytes": 68384,
+      "sha256": "0130320ee2d047545b1b13792d7a7c616fce0b374e45eb5706234914d0504214"
     },
     "codes.ini": {
-      "bytes": 13050,
-      "sha256": "5a5018f1112bf862e8efdcba39cf32ca6d50b26c3724aba170bc835dc3c4dde6"
+      "bytes": 10598,
+      "sha256": "69c52fc19d3039cbf658b97db2383bd3ce333e550567f4f0c58af2f4c7aed0cd"
     },
     "DbCo.dat": {
       "bytes": 15345,
