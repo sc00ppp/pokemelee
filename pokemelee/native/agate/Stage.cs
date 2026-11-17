@@ -271,18 +271,26 @@ static partial class Program
 
         // ---- cliff walls: grassy shoulder rolling over the rim, bulging rock, taper toward the bottom ----
         const int R = 8;
+        // The wall's top ring is at the grass top's own height, on the same rim points: the two meet edge to edge. A gap
+        // between them (the top a hair above the ring) is a slot about one pixel tall at a grazing camera, through which
+        // the island's dark inside shows as a broken line along the rim that changes every frame.
+        const float TOPY = 0.01f;
         var wall = new List<GX_Vertex>();
         var wp = new Vector3[N, R + 1];
         var wf = new float[N, R + 1];
         for (int i = 0; i < N; i++)
         {
-            float hb = -Bot(rim[i].X);
+            // The collision's ledge is a short wall, from (77.27, 0) down to (76.34, -11.04); Bot is 0 on the ledge point
+            // itself. A column there had no height, and its taper laid it flat just under the grass: a sheet the depth test
+            // cannot tell from the top (dark flecks over the grass at both ledges), the underside rising to meet it at a
+            // grazing angle. Rim points past 76.34 take the ledge wall's own depth.
+            float hb = -Bot(MathF.Min(MathF.Abs(rim[i].X), 76.34f));
             if (hb > 20) hb -= 2.4f * (0.5f + 0.5f * MathF.Sin(arc[i] * 0.33f + p5n));      // uneven bottom edge (only ever higher)
             bool side = MathF.Abs(nrm[i].X) > 0.8f;                                          // under the ledges: never stick out
             for (int k = 0; k <= R; k++)
             {
                 float f = k / (float)R;
-                float y = -hb * f;
+                float y = k == 0 ? TOPY : -hb * f;
                 float off = 1.5f * MathF.Sin(MathF.PI * Math.Min(f / 0.28f, 1f))             // shoulder
                           - 5.5f * MathF.Pow(f, 1.5f)                                         // taper
                           + 1.4f * Nz(arc[i], y) * Math.Clamp(f * 4f, 0f, 1f);                // rock
@@ -312,7 +320,7 @@ static partial class Program
         // ---- grass top: flat on the collision, even shading (no rings), meets the wall's grassy shoulder at the rim ----
         const int RT = 3;
         var top = new List<GX_Vertex>();
-        GX_Vertex T(Vector2 p) => Vx(new Vector3(p.X, 0.01f, p.Y), Vector3.UnitY, 1.0f + 0.05f * Nz(p.X * 0.7f, p.Y * 0.7f), p.X / 64f, p.Y / 48f);
+        GX_Vertex T(Vector2 p) => Vx(new Vector3(p.X, TOPY, p.Y), Vector3.UnitY, 1.0f + 0.05f * Nz(p.X * 0.7f, p.Y * 0.7f), p.X / 64f, p.Y / 48f);
         for (int i = 0; i < N; i++)
         {
             int j = (i + 1) % N;
@@ -320,7 +328,8 @@ static partial class Program
             {
                 float a = r / (float)RT, b = (r + 1) / (float)RT;
                 var pa = c0 + (rim[i] - c0) * a; var pb = c0 + (rim[j] - c0) * a;
-                var qa = c0 + (rim[i] - c0) * b; var qb = c0 + (rim[j] - c0) * b;
+                var qa = r == RT - 1 ? rim[i] : c0 + (rim[i] - c0) * b;                      // the outer ring is the rim itself, bit for bit
+                var qb = r == RT - 1 ? rim[j] : c0 + (rim[j] - c0) * b;
                 if (r == 0) { top.Add(T(c0)); top.Add(T(qa)); top.Add(T(qb)); }
                 else Quad(top, T(pa), T(pb), T(qb), T(qa));
             }
