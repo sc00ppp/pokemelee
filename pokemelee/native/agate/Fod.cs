@@ -227,6 +227,12 @@ static partial class Program
         reflD.Pobj = rp; reflD.Next = null;
         t3[rj].Dobj = reflD;
         t3[rj].Flags = (t3[rj].Flags & ~(JOBJ_FLAG.OPA | JOBJ_FLAG.TEXEDGE)) | JOBJ_FLAG.XLU;
+        // "reflection": false hides this mirror disc, so the floor is the opaque top alone and nothing shows mirrored. The
+        // disc and its mirror TObj stay in group 3: grIzumi_801CBE64 looks the TObj up (hidden joints are searched too)
+        // and the render callback writes its texture matrix every frame, which needs it. No animation track touches
+        // this joint's visibility. The mirror pass itself is the stage code's and still runs, into a texture nothing draws.
+        if (fod.TryGetProperty("reflection", out var rfl) && !rfl.GetBoolean())
+            t3[rj].Flags |= JOBJ_FLAG.HIDDEN;
         // the rest of the goblet on the same new joint as the opaque top
         meshes[0].Next = meshes.Count > 1 ? meshes[1] : null;
 

@@ -989,6 +989,7 @@
     "tiles": 6,
     "mirror": 0.35,
     "mirror_alpha": 0.7,
+    "reflection": false,
     "rim_tint": {
       "r0": 66,
       "r1": 81,

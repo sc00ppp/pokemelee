@@ -25,7 +25,7 @@
       "approved_outputs": [
         {
           "name": "GrIz.dat",
-          "sha256": "066367b50d4a532e7971c12d54f5f89c8301ab5da3ec2a16edc861300c75d0ac"
+          "sha256": "d4151e4c16031212b26867eb23d5a8dbb8abd410b6701aa5cb1fb2d37eed9ab6"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "approved_outputs": [
         {
           "name": "GrNBa.dat",
-          "sha256": "192a8175b48acd8ca285c875a44f2fc0b695013dd3dcb50372782de291ddeb6a"
+          "sha256": "86b29dc2ee6afd7499f379d05a341251e38f266d52862276ce6faf8bc0ce2440"
         }
       ]
     },

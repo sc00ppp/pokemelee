@@ -730,6 +730,54 @@ static partial class Program
             Console.WriteLine($"group {recv} lights: {n} from {lf}");
         }
 
+        if (spec.TryGetProperty("fighter_lights", out var fl))
+        {
+            // Another Melee stage's FIGHTER lights in place of ours. Fighters are lit by the stage file's map_plit list
+            // (ftCo_8009F4A4 via Ground_801C49B4), not by a map_head group's lights, which light only the stage's own
+            // lit meshes. The list goes through the map_head light override table (+0x18: {desc*, byte}, count +0x1C;
+            // Ground_801C20E0): once a listed light has a nonzero byte, each non-ambient light takes diffuse (0x40),
+            // specular (0x80) and the drop-shadow mark 0x400 (0x20, lbshadow) from its byte, and one without an entry
+            // is dropped. So each source light is written INTO our map_plit light with the same byte (its role: the
+            // ambient, the key light, the shadow light); our table keeps pointing at the same structs with the same
+            // bytes. Positions are multiplied by grGroundParam +0 in game (Ground_801C2374), so they are rescaled by
+            // source / our scale (infinite lights only use the direction, which does not change).
+            var lf = fl.GetString();
+            if (!donorFiles.TryGetValue(lf, out var lfile)) { lfile = new HSDRawFile(lf); donorFiles[lf] = lfile; memos[lf] = new Dictionary<HSDStruct, HSDStruct>(); }
+            static List<HSDStruct> Plit(HSDRawFile f)
+            {
+                var r = f.Roots.FirstOrDefault(x => x.Name == "map_plit")?.Data._s ?? throw new Exception("fighter_lights: a stage file without map_plit");
+                var o = new List<HSDStruct>();
+                for (int i = 0; r.References.TryGetValue(4 * i, out var e); i++) o.Add(e.References[0]);
+                return o;
+            }
+            static byte Role(HSDRawFile f, HSDStruct desc)
+            {
+                var h = f.Roots.Select(r => r.Data).OfType<SBM_Map_Head>().First()._s;
+                if (h.References.TryGetValue(0x18, out var t))
+                    for (int e = 0; e < h.GetInt32(0x1C); e++)
+                        if (t.References.TryGetValue(8 * e, out var d) && d == desc) return t.GetByte(8 * e + 4);
+                throw new Exception("fighter_lights: a map_plit light without a light override entry");
+            }
+            static float PosScale(HSDRawFile f) => f.Roots.FirstOrDefault(r => r.Name == "grGroundParam")?.Data._s.GetFloat(0)
+                ?? throw new Exception("fighter_lights: a stage file without grGroundParam");
+            float k = PosScale(lfile) / PosScale(file);
+            var ours = Plit(file).ToDictionary(d => Role(file, d));
+            var theirs = Plit(lfile).ToDictionary(d => Role(lfile, d));
+            if (!ours.Keys.OrderBy(b => b).SequenceEqual(theirs.Keys.OrderBy(b => b)))
+                throw new Exception($"fighter_lights: light roles differ ({string.Join(",", ours.Keys)} vs {string.Join(",", theirs.Keys)})");
+            var scaled = new HashSet<HSDStruct>();     // a position shared by two lights moves once
+            foreach (var (role, src) in theirs)
+            {
+                var c = new HSD_Light { _s = new HSDStruct(8) };
+                c._s.SetReferenceStruct(0, Clone(src, memos[lf]));
+                var o = c.LightObject;
+                foreach (var w in new[] { o.Position, o.Interest })
+                    if (w != null && scaled.Add(w._s)) { w.V1 *= k; w.V2 *= k; w.V3 *= k; }
+                ours[role].SetFromStruct(o._s);
+            }
+            Console.WriteLine($"fighter lights: {theirs.Count} from {Path.GetFileName(lf)}, positions x{k}");
+        }
+
         if (spec.TryGetProperty("drop_image_roots", out var dir) && dir.GetBoolean())
         {
             // Dream Land exports its texture images as public symbols; the game only looks up map_head, coll_data,

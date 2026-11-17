@@ -358,13 +358,6 @@
       320,
       384
     ],
-    "medallion": [
-      556,
-      724,
-      724,
-      876
-    ],
-    "medallion_px": 96,
     "frieze": [
       0,
       430,
@@ -411,6 +404,7 @@
     ],
     "group": 6
   },
+  "fighter_lights": "${melee}/GrOp.dat",
   "drop_image_roots": true,
   "cut_regions": [
     [

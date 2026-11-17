@@ -284,24 +284,29 @@ static partial class Program
         int[] I4(string k) => R(k).EnumerateArray().Select(e => e.GetInt32()).ToArray();
 
         // ---- textures (pixel boxes in the lobby atlas / wall sheet come from the spec) ----
-        var tile = I4("top_tile"); var med = I4("medallion"); var fr = I4("frieze"); var wb = I4("wall_box"); var pt = I4("plat_tile");
-        // top: tiles with the walkway's blue-diamond medallion in the middle (512 x 256 over x +-85.5, z +-Z)
+        var tile = I4("top_tile"); var fr = I4("frieze"); var wb = I4("wall_box"); var pt = I4("plat_tile");
+        var med = bf.TryGetProperty("medallion", out _) ? I4("medallion") : null;
+        // top: tiles (512 x 256 over x +-85.5, z +-Z), with the walkway's blue-diamond medallion in the middle when the spec
+        // names one; without it the floor is the tile grid all the way across
         var top = new byte[512 * 256 * 4];
         var tpx = A(tile[0], tile[1], tile[2], tile[3], 128, 128);
         for (int y = 0; y < 256; y++) for (int x = 0; x < 512; x++) for (int c = 0; c < 4; c++) top[(y * 512 + x) * 4 + c] = tpx[((y % 128) * 128 + (x % 128)) * 4 + c];
-        int mw = R("medallion_px").GetInt32(), mh = mw * (med[3] - med[1]) / (med[2] - med[0]);
-        var mpx = A(med[0], med[1], med[2], med[3], mw, mh);
-        for (int y = 0; y < mh; y++) for (int x = 0; x < mw; x++)
+        if (med != null)
         {
-            int dx = 256 - mw / 2 + x, dy = 128 - mh / 2 + y;
-            if (dx < 0 || dy < 0 || dx >= 512 || dy >= 256) continue;
-            for (int c = 0; c < 4; c++) top[(dy * 512 + dx) * 4 + c] = mpx[(y * mw + x) * 4 + c];
+            int mw = R("medallion_px").GetInt32(), mh = mw * (med[3] - med[1]) / (med[2] - med[0]);
+            var mpx = A(med[0], med[1], med[2], med[3], mw, mh);
+            for (int y = 0; y < mh; y++) for (int x = 0; x < mw; x++)
+            {
+                int dx = 256 - mw / 2 + x, dy = 128 - mh / 2 + y;
+                if (dx < 0 || dy < 0 || dx >= 512 || dy >= 256) continue;
+                for (int c = 0; c < 4; c++) top[(dy * 512 + dx) * 4 + c] = mpx[(y * mw + x) * 4 + c];
+            }
         }
         var mTop = M(top, 512, 256, CLA, CLA);
         var mFrieze = M(A(fr[0], fr[1], fr[2], fr[3], 256, 128), 256, 128, REP, CLA);
         var mWall = M(Seamless(W(wb[0], wb[1], wb[2], wb[3], 256, 256), 256, 256, true, true), 256, 256, REP, REP);
         var mPlat = M(Seamless(A(pt[0], pt[1], pt[2], pt[3], 128, 128), 128, 128, true, true), 128, 128, REP, REP);
-        var eb = bf.TryGetProperty("emblem_box", out var ebx) ? ebx.EnumerateArray().Select(e => e.GetInt32()).ToArray() : med;
+        var eb = bf.TryGetProperty("emblem_box", out var ebx) ? ebx.EnumerateArray().Select(e => e.GetInt32()).ToArray() : I4("medallion");
         var mMed = M(A(eb[0], eb[1], eb[2], eb[3], 256, 256), 256, 256, CLA, CLA);
 
         float Z = R("depth").GetSingle();                 // front face at +Z, back at -Z
