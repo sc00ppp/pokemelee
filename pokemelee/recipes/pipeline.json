@@ -63,8 +63,8 @@
       "id": "costume-colors",
       "state": "verified",
       "source": "recolor.py, recolor_specs.json, recolor_install.py",
-      "implementation": "pokemelee.colors, pokemelee.costumes",
-      "result": "All 102 alternate costumes and 131 packages per variant rebuilt. Paired/team costume slots installed and exercised in game."
+      "implementation": "pokemelee.colors, pokemelee.costumes, pokemelee.rest_values",
+      "result": "All 102 alternate costumes and 131 packages per variant rebuilt. Paired/team costume slots installed and exercised in game. Captain Falcon's slot k carries vanilla colour k's joint rest values bit for bit (recipes/rest-values.json), the model kept in its rest pose, so a vanilla opponent simulates him as this disc does."
     },
     {
       "id": "iso-assembly",

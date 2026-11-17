@@ -7,7 +7,7 @@ import zipfile
 
 from PIL import Image
 
-from . import anime_cast, anime_flat
+from . import anime_cast, anime_flat, rest_values
 from .cast import MELEE_FILES, checked_component
 from .catalog import load
 from .export import fingerprint
@@ -38,6 +38,24 @@ def anime_costume(source, target, fighter):
     anime_cast.convert(target, target, fighter)
 
 
+def fit_rest_values(jobs, files):
+    """Give each slot of a fighter named in recipes/rest-values.json the joint rest values of the vanilla colour it
+    stands for online (``files``: the Melee files folder). The fitted body is written beside the package as rest.dat
+    and becomes the slot's source, so the AniMelee outline is drawn round the fitted model."""
+    slots = {}
+    for mon, row, code, choice, folder in jobs:
+        vanilla = rest_values.donors(row['fighter'])
+        if not vanilla:
+            continue
+        slot = slots[mon] = slots.get(mon, -1) + 1
+        donor = files / rest_values.donor_for(vanilla, slot)
+        if not donor.is_file():
+            raise ValueError(f'{mon}: the Melee files lack {donor.name}; rebuild melee-files')
+        data, _ = rest_values.fit(choice['dat'].read_bytes(), donor.read_bytes())
+        (folder / 'rest.dat').write_bytes(data)
+        choice['dat'] = folder / 'rest.dat'
+
+
 def package_costumes(cast, colors, portraits, color_portraits, art, targets, output, profile='normal'):
     if profile not in ('normal', 'animelee'):
         raise ValueError('Unknown costume profile')
@@ -64,6 +82,7 @@ def package_costumes(cast, colors, portraits, color_portraits, art, targets, out
                 folder = root / mon.lower() / choice['color']
                 folder.mkdir(parents=True)
                 jobs.append((mon, row, code, choice, folder))
+        fit_rest_values(jobs, paths['targets'] / 'files')
         anime = profile == 'animelee'
         outlined = [(choice['dat'], folder / 'costume.dat', paths['targets'] / 'files' / f'Pl{code}.dat')
                     for _, _, code, choice, folder in jobs if anime and code != 'Gw']

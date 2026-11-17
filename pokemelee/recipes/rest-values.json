@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "about": "Fighters whose vanilla colours differ in joint rest values, with vanilla's costume file for each colour, colour 0 first. Costume slot k takes colour k's rest values bit for bit (pokemelee/rest_values.py), so an online opponent on a vanilla disc simulates the fighter as this disc does. A slot past vanilla's colours takes colour 0's, as a vanilla client draws it. Captain Falcon's colours 1-5 differ at the arms and hands (up to about 0.2 units), which are ECB points and carry hitboxes. Elsewhere only Peach 1 and 3 and Pichu 1 differ from colour 0 in a channel an animation can leave unkeyed, by float rounding (about 1e-6); they are not listed.",
+  "fighters": {
+    "CaptainFalcon": ["PlCaNr.dat", "PlCaGy.dat", "PlCaRe.usd", "PlCaWh.dat", "PlCaGr.dat", "PlCaBu.dat"]
+  }
+}

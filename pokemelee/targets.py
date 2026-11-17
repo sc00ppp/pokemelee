@@ -28,8 +28,10 @@ def conversion_environment(runtime, files, targets, *, hsd=None, blender=None, t
 
 CODES = ("Mr", "Dr", "Lg", "Kp", "Pe", "Ca", "Gn", "Fx", "Fc", "Ss", "Zd",
          "Sk", "Lk", "Dk", "Cl", "Kb", "Ys", "Fe", "Ns", "Ms", "Gw", "Pk", "Pr", "Mt", "Pc", "Pp", "Nn")
-# Neutral costumes, move tables and animation archives of every fighter, plus PlCo.dat
-NAMES = sorted({"PlCo.dat"} | {"Pl" + code + suffix for code in CODES for suffix in (".dat", "Nr.dat", "AJ.dat")})
+# Neutral costumes, move tables and animation archives of every fighter, plus PlCo.dat, plus the vanilla colours whose
+# joint rest values costume slots carry (recipes/rest-values.json)
+NAMES = sorted({"PlCo.dat"} | {"Pl" + code + suffix for code in CODES for suffix in (".dat", "Nr.dat", "AJ.dat")}
+               | {name for files in load("rest-values.json")["fighters"].values() for name in files})
 
 
 def melee_files(melee, output):
