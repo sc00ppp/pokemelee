@@ -14,15 +14,15 @@ TRIANGLES, DIRECT, INDEX8, FLOAT = 0x90, 1, 2, 4
 LIT, UNLIT = 0x2015, 0x2011        # constant colour and a texture, with and without the lights
 
 
-def stage():
+def stage(bone_turn=(0., 0., 0.), skeleton_root=False):
     """map_head -> one group -> root -> a skinned branch (lit, facing the camera) and a rigid one (unlit)."""
     names = b"map_head\0"
     head = bytes(0x10)
     raw = struct.pack(">5I", 0x20 + len(head) + 8 + len(names), len(head), 0, 1, 0) + bytes(12) + head + struct.pack(">2I", 0, 0) + names
     d = Dat(raw)
 
-    def joint(child=None, sibling=None, dobj=None, move=(0, 0, 0)):
-        at = d.add(struct.pack(">2I", 0, 0x80) + bytes(12) + struct.pack(">9f", 0, 0, 0, 1, 1, 1, *move) + bytes(8))
+    def joint(child=None, sibling=None, dobj=None, move=(0, 0, 0), turn=(0, 0, 0), flags=0x80):
+        at = d.add(struct.pack(">2I", 0, flags) + bytes(12) + struct.pack(">9f", *turn, 1, 1, 1, *move) + bytes(8))
         for field, target in ((8, child), (0xc, sibling), (0x10, dobj)):
             if target is not None:
                 d.point(at + field, target)
@@ -57,11 +57,11 @@ def stage():
         d.point(dobj + 12, pobj)
         return dobj, pobj, mobj
 
-    bone = joint()
+    bone = joint(turn=bone_turn)
     skinned = mesh(LIT, skin_to=bone)
     rigid = mesh(UNLIT, x=50.)
     scenery = joint(dobj=rigid[0])
-    person = joint(child=bone, sibling=scenery)
+    person = joint(child=bone, sibling=scenery, flags=0x82 if skeleton_root else 0x80)
     d.point(person + 0x10, skinned[0])
     root = joint(child=person)
     group = d.add(bytes(0x34))
@@ -104,6 +104,33 @@ class StageCharacterTests(unittest.TestCase):
         self.assertEqual([a["name"] for a in attrs(d, rigid)], [POS, NRM])
         self.assertEqual(d.ptr(rigid + 16), before.ptr(rigid + 16))
         self.assertEqual(d.ptr(pobj + 16), before.ptr(pobj + 16))       # the new list took the old one's block
+
+    def test_a_vertex_on_one_bone_is_lit_in_that_bones_space(self):
+        d, _, (_, pobj, _), _ = stage(bone_turn=(np.pi / 2, 0., 0.), skeleton_root=True)      # the bone turns front to down
+        source, target = Path(self.folder.name) / "turned.dat", Path(self.folder.name) / "turned-out.dat"
+        d.save(source)
+        stage_characters.light(source, target)
+        d = Dat.read(target)
+        table = attrs(d, pobj)
+        (_, rows), = strips(d, pobj, table)
+        colour = next(a for a in table if a["name"] == CLR0)
+        levels = [d.data[colour["data"] + 3 * index[CLR0]] for _, index in rows]
+        down, front = (round(255 * stage_characters.shade(np.array(n, float))) for n in ((0, -1, 0), (0, 0, 1)))
+        self.assertEqual(levels, [down, down, front])
+
+    def test_a_recipe_and_its_stage_must_agree_on_the_characters(self):
+        with self.assertRaisesRegex(ValueError, "1 characters and its recipe places 0"):
+            stage_characters.flight_depths(self.source, {"donors": []})
+        donor = {"file": "bird.dat", "place": {"t": [0, 0, 0]}, "path": {"points": [[0, 0, -100], [0, 0, -300]]}}
+        self.assertEqual(stage_characters.flight_depths(self.source, {"donors": [donor]}), {self.skinned[1]: -200.})
+
+    def test_foliage_is_the_scenery_inside_a_recipes_box(self):
+        self.assertIsNone(stage_characters.plain_filter(self.source, {}))
+        plain = stage_characters.plain_filter(self.source, {"foliage": [[-1, -1, -1, 60, 2, 1]]})
+        inside, outside = np.array(((50., 0., 0.), (51., 1., 0.))), np.array(((50., 0., 0.), (70., 1., 0.)))
+        self.assertTrue(plain(self.rigid[1], inside))
+        self.assertFalse(plain(self.rigid[1], outside))
+        self.assertFalse(plain(self.skinned[1], inside))        # a character keeps its outline wherever it stands
 
     def test_a_stage_without_characters_is_left_alone(self):
         d = Dat.read(self.source)

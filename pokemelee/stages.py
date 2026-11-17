@@ -120,9 +120,10 @@ def stadium_meshes(inputs, runtime, root, anime=False):
         return generate(atlas, geometry, anime=anime)
 
 
-def anime_stage(source, target):
-    from . import anime_flat, anime_stage as lines
-    flat = bytearray(anime_flat.stage(source))
+def anime_stage(source, target, spec):
+    from . import anime_flat, anime_stage as lines, stage_characters as cast
+    roots = cast.item_roots(lines.Dat.read(source), spec)
+    flat = bytearray(anime_flat.stage(source, roots=roots))
     if source.name in ("GrPs.dat", "GrPs.usd"):
         raw = source.read_bytes()
         for off, image in anime_flat.stage_parts(source)[1].items():
@@ -133,8 +134,8 @@ def anime_stage(source, target):
     flat_path = source.parent.parent / "flat" / source.name
     flat_path.parent.mkdir(exist_ok=True)
     flat_path.write_bytes(flat)
-    from .stage_characters import edge_filter
-    return lines.outline(flat_path, target, edge_visible=edge_filter(flat_path))
+    return lines.outline(flat_path, target, edge_visible=cast.edge_filter(flat_path, roots), roots=roots,
+                         depths=cast.flight_depths(flat_path, spec), plain=cast.plain_filter(flat_path, spec, roots))
 
 
 def files_in(value):
@@ -196,20 +197,23 @@ def build_stages(melee, colosseum, output, runtime, selected=None, profile="norm
                 jobs.append((row, name, flavor, current, target))
 
         def build(group):
-            from .stage_characters import light
+            from .dat import Dat
+            from .stage_characters import item_roots, light
             for row, name, flavor, current, target in group:
                 run_helper(runtime, flavor, ["build", root / (name + ".json")], root / (name + ".log"))
                 if not target.is_file():
                     raise ValueError(f"Stage {name} was not generated; see its local log")
                 if profile == "normal":     # AniMelee's characters stay flat: lights off and plain colours are its style
-                    (root / (name + ".light.log")).write_text(str(light(target, target)), encoding="utf-8")
+                    done = light(target, target, item_roots(Dat.read(target), current))
+                    (root / (name + ".light.log")).write_text(str(done), encoding="utf-8")
 
         run_all(build, sharing(jobs))
         if profile == "animelee":
             # the outlines are Python through and through: one process per stage, all cores
             (root / "files").mkdir(exist_ok=True)
             with ProcessPoolExecutor(workers(len(jobs))) as pool:
-                logs = list(pool.map(anime_stage, *zip(*[(target, root / "files" / name) for _, name, _, _, target in jobs])))
+                logs = list(pool.map(anime_stage, *zip(*[(target, root / "files" / name, current)
+                                                         for _, name, _, current, target in jobs])))
             for (_, name, *_), log in zip(jobs, logs):
                 (root / (name + ".anime.log")).write_text(log, encoding="utf-8")
         outputs = []

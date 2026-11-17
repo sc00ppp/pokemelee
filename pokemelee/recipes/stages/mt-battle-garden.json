@@ -183,7 +183,7 @@
         "s": 2.2
       },
       "anim": true,
-      "anim_index": 0,
+      "anim_index": 6,
       "loop": true,
       "strip_cubes": true,
       "cut": false,
@@ -241,7 +241,7 @@
         "s": 2.0
       },
       "anim": true,
-      "anim_index": 0,
+      "anim_index": 6,
       "loop": true,
       "strip_cubes": true,
       "cut": false,
@@ -556,5 +556,39 @@
     ],
     "group": 3
   },
-  "drop_image_roots": true
+  "drop_image_roots": true,
+  "foliage": [
+    [
+      50,
+      0,
+      -625,
+      172,
+      30,
+      -310
+    ],
+    [
+      -172,
+      0,
+      -625,
+      -50,
+      30,
+      -310
+    ],
+    [
+      38,
+      0,
+      -975,
+      194,
+      30,
+      -665
+    ],
+    [
+      -194,
+      0,
+      -975,
+      -38,
+      30,
+      -665
+    ]
+  ]
 }

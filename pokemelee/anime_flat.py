@@ -226,19 +226,15 @@ def flattened(dat, images, tables, colours, passes=lambda picture: 1):
     return buf
 
 
-def stage_parts(path):
-    """(dat, images, palettes, materials) of a stage file: what its map_head groups draw, animated frames too."""
+def stage_parts(path, roots=()):
+    """(dat, images, palettes, materials) of a stage file: what its map_head groups draw, animated frames too, and
+    what any other joint tree given draws (a stage item's model)."""
     dat = datprobe.DatFile(path)
     head = dict(dat.roots)['map_head']
     groups, count = dat.ptr(head + 8), dat.u32(head + 12)
     images, tables, mobjs = {}, {}, set()
-    for group in range(groups, groups + GROUP_SIZE * count, GROUP_SIZE):
-        root, frames = dat.ptr(group), dat.ptr(group + 8)
-        while frames is not None and dat.ptr(frames) is not None:       # a null-ended list of material animation trees
-            for anim in dat.matanim_texanims(dat.ptr(frames)):
-                images.update({i.data_offset: i for i in anim.images if i.data_offset is not None})
-                tables.update({t.data_offset: t for t in anim.tluts if t.data_offset is not None})
-            frames += 4
+
+    def materials(root):
         for j in dat._iter_tree(root, 0x08, 0x0C) if root is not None else ():
             if dat.u32(j + 0x04) & ((1 << 14) | (1 << 5)):
                 continue
@@ -248,6 +244,17 @@ def stage_parts(path):
                 if mobj is not None:
                     mobjs.add(mobj)
                 dobj = dat.ptr(dobj + 0x04)
+
+    for root in roots:
+        materials(root)
+    for group in range(groups, groups + GROUP_SIZE * count, GROUP_SIZE):
+        root, frames = dat.ptr(group), dat.ptr(group + 8)
+        while frames is not None and dat.ptr(frames) is not None:       # a null-ended list of material animation trees
+            for anim in dat.matanim_texanims(dat.ptr(frames)):
+                images.update({i.data_offset: i for i in anim.images if i.data_offset is not None})
+                tables.update({t.data_offset: t for t in anim.tluts if t.data_offset is not None})
+            frames += 4
+        materials(root)
     for mobj in mobjs:
         tobj = dat.ptr(mobj + 0x08)
         while tobj is not None:
@@ -262,9 +269,9 @@ def stage_parts(path):
     return dat, images, tables, mobjs
 
 
-def stage(path, colours=STAGE_COLOURS):
+def stage(path, colours=STAGE_COLOURS, roots=()):
     """A stage to match, in place: flat colours, and the lights off. Baked vertex shading stays, as on AniMelee's own."""
-    dat, images, tables, mobjs = stage_parts(path)
+    dat, images, tables, mobjs = stage_parts(path, roots)
     buf = flattened(dat, images, tables, colours, lambda picture: max(picture.shape[:2]) // STAGE_BLUR + 1)
     for mobj in mobjs:
         mode = dat.u32(mobj + 4) & ~LIT

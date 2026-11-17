@@ -67,10 +67,10 @@ The stage revisions were resolved against the accepted local outputs:
 | Melee stage | Colosseum scene | Accepted recipe |
 | --- | --- | --- |
 | Dream Land | Agate Village | v33; house/tree lowered 2 units, Taillow set on its branch |
-| Fountain of Dreams | Realgam Colosseum | v10 |
+| Fountain of Dreams | Realgam Colosseum | v11; the crowd's flip-book plays, at a quarter of Colosseum's rate |
 | Battlefield | Phenac Stadium lobby | v10 |
 | Final Destination | Mt. Battle crater | v6 |
-| Yoshi's Story | Mt. Battle garden | second-round v9 |
+| Yoshi's Story | Mt. Battle garden | second-round v10; the Taillows fly on their flying loop |
 | Pokémon Stadium | Phenac City | second-round v7; original four transformations |
 
 The historical scripts and finished ISOs remain verification references.

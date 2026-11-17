@@ -11,7 +11,7 @@
       "approved_outputs": [
         {
           "name": "GrOp.dat",
-          "sha256": "7a68f92446eff53f279ddd6a734a09fdb053d45ad61b955a484c30c237d04e16"
+          "sha256": "2ca1668ab7151d7d3ff7d38b91547acf49c9e6e1946b23e8c127919e19c19681"
         }
       ]
     },
@@ -19,13 +19,13 @@
       "id": "realgam",
       "melee_stage": "Fountain of Dreams",
       "scene": "Realgam Colosseum",
-      "revision": "v10",
+      "revision": "v11",
       "spec": "stages/realgam.json",
       "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrIz.dat",
-          "sha256": "9c9535cec5365f1711b533dbaac1449e99dabb22167a4aee956ac7675ab09226"
+          "sha256": "066367b50d4a532e7971c12d54f5f89c8301ab5da3ec2a16edc861300c75d0ac"
         }
       ]
     },
@@ -39,7 +39,7 @@
       "approved_outputs": [
         {
           "name": "GrNBa.dat",
-          "sha256": "bbdce5d9ee0ffac06bb5e0aaaa1415e2309a23a305b96b1b0d606ca941e9e268"
+          "sha256": "c69900cc89ed9327b144ba29d427ba35c09d1d264d6e4c4d82019b42eeb9dad1"
         }
       ]
     },
@@ -53,7 +53,7 @@
       "approved_outputs": [
         {
           "name": "GrNLa.dat",
-          "sha256": "de0b17d08e4ecfa1d915fb0ebc33bfbc5da8a3b7d59477159ae5db807df41323"
+          "sha256": "17d49cc164d903d07fcd6c476d65c9835b559e2fd53772422cb84b493b37cc89"
         }
       ]
     },
@@ -61,13 +61,13 @@
       "id": "mt-battle-garden",
       "melee_stage": "Yoshi's Story",
       "scene": "Mt. Battle garden",
-      "revision": "v9",
+      "revision": "v10",
       "spec": "stages/mt-battle-garden.json",
       "recipe_state": "verified",
       "approved_outputs": [
         {
           "name": "GrSt.dat",
-          "sha256": "6329bf8979cb01331d95ae9494bdebf4dcdf8f585e4174cec9336545b59c5753"
+          "sha256": "0cd06bd3d618db2ab7f8dd11b19a859a09019acab583d03852ce834567cb27ad"
         }
       ]
     },
@@ -110,7 +110,8 @@
     "SHA-256 fingerprints identify approved local outputs; those files are not distributed.",
     "Specs contain authored graft settings, not source meshes, textures or copied stage collision.",
     "Stadium transformations retain the first-round treatment; the main stage uses the approved second-round v7.",
-    "Background characters (the models with a skeleton) carry baked shading in the normal profile; in AniMelee they keep flat colours and an outline with no lines inside it.",
+    "Background characters (the models with a skeleton, and the garden's Castform in the Shy Guy item) carry baked shading in the normal profile; in AniMelee they keep flat colours and an outline with no lines inside it, as wide as the distance they are really drawn at.",
+    "AniMelee's stage lines leave out folds a model's own normals shade smoothly, seams between meshes of one surface, and the scenery a recipe calls foliage.",
     "Both profiles reproduce their approved stage fingerprints; AniMelee includes its Phenac exception."
   ],
   "profiles": [

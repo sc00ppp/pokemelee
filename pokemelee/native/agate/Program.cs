@@ -40,6 +40,65 @@ static partial class Program
         return d as HSD_SOBJ ?? new HSD_SOBJ { _s = d._s };
     }
 
+    static HSDStruct Shallow(HSDStruct s)
+    {
+        var c = new HSDStruct((byte[])s.GetData().Clone())
+        {
+            Align = s.Align, CanBeBuffer = s.CanBeBuffer,
+            CanBeDuplicate = s.CanBeDuplicate, IsBufferAligned = s.IsBufferAligned
+        };
+        foreach (var r in s.References) c.References[r.Key] = r.Value;
+        return c;
+    }
+
+    // A donor keeps only the material animations of the meshes it keeps, so it needs tree nodes of its own. Copies of
+    // one desc used to share them, and a copy that dropped a mesh took its animation from every other copy (Realgam's
+    // crowd never moved). The tracks themselves stay shared.
+    static HSD_MatAnimJoint OwnNodes(HSD_MatAnimJoint a)
+    {
+        HSD_MatAnimJoint first = null, last = null;
+        for (; a != null; a = a.Next)
+        {
+            var n = new HSD_MatAnimJoint { Child = OwnNodes(a.Child) };
+            HSD_MatAnim head = null, tail = null;
+            for (var m = a.MaterialAnimation; m != null; m = m.Next)
+            {
+                var c = new HSD_MatAnim { _s = Shallow(m._s) };
+                c.Next = null;
+                if (head == null) head = c; else tail.Next = c;
+                tail = c;
+            }
+            n.MaterialAnimation = head;
+            if (first == null) first = n; else last.Next = n;
+            last = n;
+        }
+        return first;
+    }
+
+    // Colosseum steps a texture flip-book every other frame of its own, slower clock; at Melee's it only flickers.
+    static readonly HashSet<HSDStruct> stretched = new();
+    static void Stretch(HSD_MatAnimJoint a, float by)
+    {
+        for (; a != null; a = a.Next)
+        {
+            Stretch(a.Child, by);
+            for (var m = a.MaterialAnimation; m != null; m = m.Next)
+                for (var t = m.TextureAnimation; t != null; t = t.Next)
+                {
+                    var ao = t.AnimationObject;
+                    if (ao == null || !stretched.Add(t._s)) continue;
+                    var slow = new HSD_AOBJ { Flags = ao.Flags, EndFrame = ao.EndFrame * by };
+                    foreach (var fd in ao.FObjDesc.List)
+                    {
+                        var keys = fd.GetDecodedKeys();
+                        foreach (var k in keys) k.Frame *= by;
+                        slow.AddTrack(fd.TrackType, keys);
+                    }
+                    t.AnimationObject = slow;
+                }
+        }
+    }
+
     static void Append(HSD_JOBJ parent, HSD_JOBJ child)
     {
         if (parent.Child == null) { parent.Child = child; return; }
@@ -357,7 +416,9 @@ static partial class Program
                 bool wantJ = !d.TryGetProperty("joint_anim", out var wj) || wj.GetBoolean();   // doors etc. live here
                 bool wantM = !d.TryGetProperty("mat_anim", out var wm) || wm.GetBoolean();     // water scroll, blinks, fades
                 if (wantJ && jd.JointAnimations != null && jd.JointAnimations.Length > ai) animClone = Copy(jd.JointAnimations[ai], memo);
-                if (wantM && jd.MaterialAnimations != null && jd.MaterialAnimations.Length > ai) matClone = Copy(jd.MaterialAnimations[ai], memo);
+                // its own tree nodes: the pruning below would otherwise empty the tree every copy of this desc shares
+                if (wantM && jd.MaterialAnimations != null && jd.MaterialAnimations.Length > ai) matClone = OwnNodes(Copy(jd.MaterialAnimations[ai], memo));
+                if (matClone != null && d.TryGetProperty("mat_anim_stretch", out var mst)) Stretch(matClone, mst.GetSingle());
                 if (d.TryGetProperty("loop", out var lp) && lp.GetBoolean()) { if (animClone != null) SetLoop(animClone); if (matClone != null) SetLoop(matClone); }
                 if (animClone != null && d.TryGetProperty("pin", out var pn) && pn.GetBoolean()) StripTranslation(animClone);
             }

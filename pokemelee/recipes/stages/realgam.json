@@ -242,7 +242,8 @@
           20,
           1
         ]
-      ]
+      ],
+      "mat_anim_stretch": 4
     },
     {
       "file": "${colosseum}/D4_casino_colo/04_D4_casino_colo.rdat",
@@ -350,7 +351,8 @@
       "anim": true,
       "loop": true,
       "joint_anim": false,
-      "bake_light": true
+      "bake_light": true,
+      "mat_anim_stretch": 4
     },
     {
       "file": "${colosseum}/D4_casino_colo/04_D4_casino_colo.rdat",
