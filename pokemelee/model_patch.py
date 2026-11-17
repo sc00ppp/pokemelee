@@ -326,6 +326,11 @@ def read_patch(path):
     return header, body[:t], body[t:t + r], body[t + r:]
 
 
+def delta_has_appheader(delta):
+    """True when a VCDIFF delta carries an application header (xdelta3 writes the source and target paths there)."""
+    return delta[:4] == b'\xd6\xc3\xc4\x00' and bool(delta[4] & 0x04)
+
+
 def parse_rows(blob, arrays):
     """The entry rows again, given each array's (name, count)."""
     at, out = 0, []

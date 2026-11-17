@@ -11,12 +11,15 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {".py", ".json", ".toml", ".md", ".yml", ".yaml", ".cs", ".csproj", ".c"}
 EXACT = {".gitignore", ".gitattributes"}
+# Third-party licence texts ship verbatim, as the plain .txt their projects publish them in
+LICENCE_TEXTS = ("third_party_licenses", {".txt"})
 PERSONAL_PATH = re.compile(r"(?:[A-Z]:[\\/](?:Users|randall-runs|rigswap-core|colo_tmp|projects|SSBM Nucleus)[\\/])", re.I)
 
 
 def check(path, data):
     errors = []
-    if path.name not in EXACT and path.suffix.lower() not in ALLOWED:
+    licence_text = path.parts[:1] == (LICENCE_TEXTS[0],) and path.suffix.lower() in LICENCE_TEXTS[1]
+    if path.name not in EXACT and path.suffix.lower() not in ALLOWED and not licence_text:
         errors.append("not an allowed source extension")
     if len(data) > 512 * 1024:
         errors.append("unexpectedly large source file")

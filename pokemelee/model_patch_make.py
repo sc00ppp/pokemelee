@@ -255,14 +255,19 @@ def make_patches(melee, colosseum, cast_dir, runtime, out_dir=None, selected=Non
             header, template, rows, xors = generate(costume, model, vanilla, tmp, runtime)
             (tmp / 'vanilla.dat').write_bytes(vanilla)
             (tmp / 'template.dat').write_bytes(template)
-            subprocess.run([str(mp.xdelta_tool(runtime)), '-e', '-9', '-f', '-s', str(tmp / 'vanilla.dat'),
+            # -A= writes no VCDIFF application header: without it xdelta3 stores both file paths (the maintainer's temp
+            # folder, user name included) in every patch it makes
+            subprocess.run([str(mp.xdelta_tool(runtime)), '-e', '-9', '-f', '-A=', '-s', str(tmp / 'vanilla.dat'),
                             str(tmp / 'template.dat'), str(tmp / 'template.xd')], check=True, capture_output=True)
+            delta = (tmp / 'template.xd').read_bytes()
+            if mp.delta_has_appheader(delta):
+                raise ValueError(f'{name}: the template delta carries an application header (file paths)')
             header.update(pokemon=row['pokemon'], fighter=row['fighter'], source_archive=archive,
                           vanilla=vanilla_name, sha256=finishing[name]['sha256'],
                           source_sha256=hashlib.sha256(model).hexdigest(),
                           vanilla_sha256=hashlib.sha256(vanilla).hexdigest())
             path = out_dir / (name + '.mpatch')
-            mp.write_patch(path, header, (tmp / 'template.xd').read_bytes(), rows, xors)
+            mp.write_patch(path, header, delta, rows, xors)
             mp.rebuild(path, model, vanilla, runtime, tmp / 'check')      # raises unless byte-identical
         report.append({'pokemon': row['pokemon'], 'bytes': path.stat().st_size})
         log(f'{row["pokemon"]}: {path.stat().st_size:,d} bytes, rebuild exact', flush=True)

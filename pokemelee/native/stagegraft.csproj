@@ -7,6 +7,10 @@
     <ImplicitUsings Condition="'$(Flavor)' == 'colodump' Or '$(Flavor)' == 'texenc'">enable</ImplicitUsings>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AssemblyName>stagegraft-$(Flavor)</AssemblyName>
+    <!-- These helpers ship in the user zip: no pdb and no pdb path (it names the build folder), and no git commit
+         stamped into the version -->
+    <DebugType>none</DebugType>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(Flavor)/*.cs" />

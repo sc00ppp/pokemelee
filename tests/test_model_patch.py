@@ -18,6 +18,12 @@ class ModelPatchTests(unittest.TestCase):
             self.assertTrue(header["vanilla"].startswith("Pl") and header["vanilla"].endswith("Nr.dat"), name)
             self.assertTrue(delta and rows and header["arrays"], name)
             self.assertTrue(header["source_archive"].startswith("pkx_"), name)
+            self.assertFalse(mp.delta_has_appheader(delta), name + ": template delta carries file paths")
+
+    def test_appheader_is_detected(self):
+        self.assertTrue(mp.delta_has_appheader(b"\xd6\xc3\xc4\x00\x05rest"))
+        self.assertFalse(mp.delta_has_appheader(b"\xd6\xc3\xc4\x00\x01rest"))
+        self.assertFalse(mp.delta_has_appheader(b"\xd6\xc3\xc4\x00\x00rest"))
 
     def test_residuals_restore_exact_values(self):
         for b in ({"comp": 4, "scale": 0}, {"comp": 3, "scale": 7}, {"comp": 1, "scale": 0}):
