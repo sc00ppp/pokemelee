@@ -64,7 +64,7 @@
       "state": "verified",
       "source": "recolor.py, recolor_specs.json, recolor_install.py",
       "implementation": "pokemelee.colors, pokemelee.costumes, pokemelee.rest_values",
-      "result": "All 102 alternate costumes and 131 packages per variant rebuilt. Paired/team costume slots installed and exercised in game. Captain Falcon's slot k carries vanilla colour k's joint rest values bit for bit (recipes/rest-values.json), the model kept in its rest pose, so a vanilla opponent simulates him as this disc does."
+      "result": "All 104 alternate costumes and 133 packages per variant rebuilt. Paired/team costume slots installed and exercised in game. Every fighter's slot k carries vanilla colour k's joint rest values bit for bit (recipes/rest-values.json; past vanilla's colours, colour 0's), the model kept in its rest pose, so a vanilla opponent simulates it as this disc does. Captain Falcon has vanilla's six slots and team indices (red 2, green 4, blue 5) for Slippi's Teams mode."
     },
     {
       "id": "iso-assembly",

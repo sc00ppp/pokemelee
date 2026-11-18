@@ -44,16 +44,18 @@ def fit_rest_values(jobs, files):
     and becomes the slot's source, so the AniMelee outline is drawn round the fitted model."""
     slots = {}
     for mon, row, code, choice, folder in jobs:
-        vanilla = rest_values.donors(row['fighter'])
+        vanilla = rest_values.donors(row['fighter'], mon)
         if not vanilla:
             continue
         slot = slots[mon] = slots.get(mon, -1) + 1
         donor = files / rest_values.donor_for(vanilla, slot)
         if not donor.is_file():
             raise ValueError(f'{mon}: the Melee files lack {donor.name}; rebuild melee-files')
-        data, _ = rest_values.fit(choice['dat'].read_bytes(), donor.read_bytes())
-        (folder / 'rest.dat').write_bytes(data)
-        choice['dat'] = folder / 'rest.dat'
+        raw = choice['dat'].read_bytes()
+        data, _ = rest_values.fit(raw, donor.read_bytes())
+        if data != raw:
+            (folder / 'rest.dat').write_bytes(data)
+            choice['dat'] = folder / 'rest.dat'
 
 
 def package_costumes(cast, colors, portraits, color_portraits, art, targets, output, profile='normal'):

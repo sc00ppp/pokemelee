@@ -130,9 +130,19 @@
     ],
     "colours": {
       "shiny": "rare",
-      "blue": "body",
-      "green": "body"
-    }
+      "red": "keep",
+      "green": "body",
+      "green-team": {
+        "as": "green"
+      },
+      "blue": "body"
+    },
+    "teams": {
+      "red": "red",
+      "blue": "blue",
+      "green": "green-team"
+    },
+    "_about": "Six slots, one per vanilla Captain Falcon colour (recipes/rest-values.json): slot k carries colour k's joint rest values, and Teams uses vanilla's red 2, green 4, blue 5. Slot 2 (red team) is the default look, slot 4 repeats green."
   },
   "Machoke": {
     "idx": "067",

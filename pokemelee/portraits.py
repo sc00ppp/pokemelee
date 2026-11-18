@@ -208,7 +208,20 @@ def build_color_portraits(colosseum, colors, cast, targets, portraits, output, r
             return render(mon.lower(), fighters[mon], colors / row['dat'], folder,
                           Path(runtime).resolve(), targets / 'files', fill=fill)
 
-        outputs = [{'pokemon': mon, 'color': row['color'], 'path': path.relative_to(root).as_posix(), **fingerprint(path)}
-                   for (mon, row), path in zip(jobs, run_all(one, jobs, tries=3))]
+        def same_as(mon, row):
+            """The earlier colour a slot repeats (a recipe kind {"as": colour}): its portrait is copied, not rendered."""
+            kind = specs[mon]['colours'][row['color']]
+            return kind.get('as') if isinstance(kind, dict) else None
+
+        rendered = [job for job in jobs if not same_as(*job)]
+        paths = {(mon, row['color']): path for (mon, row), path in zip(rendered, run_all(one, rendered, tries=3))}
+        for mon, row in jobs:
+            if same_as(mon, row):
+                folder = root / mon.lower() / row['color']
+                folder.mkdir(parents=True, exist_ok=True)
+                paths[mon, row['color']] = folder / 'csp.png'
+                shutil.copyfile(paths[mon, same_as(mon, row)], folder / 'csp.png')
+        outputs = [{'pokemon': mon, 'color': row['color'], 'path': paths[mon, row['color']].relative_to(root).as_posix(),
+                    **fingerprint(paths[mon, row['color']])} for mon, row in jobs]
         return receipt(root, 'color-portraits', {'colors': str(colors), 'portraits': str(portraits),
                        'targets': str(targets), 'cast': str(cast)}, outputs)

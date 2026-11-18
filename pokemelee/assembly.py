@@ -7,7 +7,7 @@ import shutil
 import subprocess
 import sys
 
-from . import fighter_metal
+from . import fighter_metal, rest_values
 from .cast import checked_component
 from .catalog import PACKAGE, load
 from .export import fingerprint
@@ -17,6 +17,20 @@ from .workspace import output_directory, receipt, write_json
 
 PAIR = 'Plusle & Minun'
 PARTNER = 'Minun'
+
+
+def team_slots(spec, colours, fighter):
+    """Red/blue/green costume index of a mon: the slot its recolour recipe's teams name (by default the colour named
+    after the team), else 0. Slippi's online Teams mode gives each player that index from each client's own table, so
+    where recipes/rest-values.json lists vanilla's indices for the fighter, they must be the same."""
+    slots = {colour: i for i, colour in enumerate(colours)}
+    teams = {team: slots.get(spec.get('teams', {}).get(team, team), 0) for team in ('red', 'blue', 'green')}
+    vanilla = rest_values.team_indices(fighter)
+    wrong = {team: teams[team] for team, k in vanilla.items() if teams[team] != k}
+    if wrong:
+        raise ValueError(f'{fighter}: Teams costume indices {wrong} differ from vanilla\'s {vanilla}; Slippi\'s online '
+                         'Teams mode would load another joint tree on each side (recipes/rest-values.json, teams)')
+    return teams
 
 
 def install_costumes(mex, package):
@@ -56,10 +70,8 @@ def install_costumes(mex, package):
         rows = costumes[mon]
         if len(data['costumes']) != len(rows):
             raise ValueError(f'{mon}: incorrect installed costume count')
-        slots = {row['color']: i for i, row in enumerate(rows)}
-        teams = specs[mon].get('teams', {})
-        data.update({team + 'CostumeIndex': slots.get(teams.get(team, team), 0)
-                     for team in ('red', 'blue', 'green')})
+        teams = team_slots(specs[mon], [row['color'] for row in rows], rows[0]['fighter'])
+        data.update({team + 'CostumeIndex': slot for team, slot in teams.items()})
         for costume, row in zip(data['costumes'], rows):
             costume['name'] = mon + (' (Colosseum)' if row['color'] == 'default' else ' ' + row['color'].title())
         if mon in ('Plusle', 'Minun'):

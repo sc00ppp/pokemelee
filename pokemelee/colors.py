@@ -38,10 +38,15 @@ def build_colors(colosseum, cast, output, selected=None):
             spec, pal = specs[mon], load('palettes/' + mon + '.json')
             stock = stock_icon(one(bodies, 'body' + spec['idx']))
             costumes[mon] = []
+            made = {}
             for key, kind in spec['colours'].items():
                 folder = mon.lower() + '/' + key
                 gaw = None
-                if spec.get('gw'):
+                if isinstance(kind, dict) and 'as' in kind:
+                    # A second slot with an earlier colour's look (Captain Falcon's slots follow vanilla's colours
+                    # online): the very same file and stock icon, so m-ex stores its pictures once.
+                    data, icon, gaw = made[kind['as']]
+                elif spec.get('gw'):
                     gaw = {'fill': '#FF000000', 'outline': '#80FFFFFF'}
                     if key in pal:
                         gaw.update({k: pal[key][k] for k in ('fill', 'outline')})
@@ -64,6 +69,7 @@ def build_colors(colosseum, cast, output, selected=None):
                     data = base if kind == 'keep' else recolor.recolored(source, fn)
                     icon = (stock_icon(one(bodies, 'body' + spec['idx'] + '_c')) if key == 'shiny'
                             else recolor.mapped_image(stock, fn))
+                made[key] = data, icon, gaw
                 dat = write_blob(root, folder + '/costume.dat', data)
                 outputs.extend([dat, write_blob(root, folder + '/stock.png', image_bytes(icon))])
                 record = {'color': key, 'dat': dat['path'], 'stock': folder + '/stock.png', 'gaw': gaw}

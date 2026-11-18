@@ -1,7 +1,42 @@
 {
   "schema": 1,
-  "about": "Fighters whose vanilla colours differ in joint rest values, with vanilla's costume file for each colour, colour 0 first. Costume slot k takes colour k's rest values bit for bit (pokemelee/rest_values.py), so an online opponent on a vanilla disc simulates the fighter as this disc does. A slot past vanilla's colours takes colour 0's, as a vanilla client draws it. Captain Falcon's colours 1-5 differ at the arms and hands (up to about 0.2 units), which are ECB points and carry hitboxes. Elsewhere only Peach 1 and 3 and Pichu 1 differ from colour 0 in a channel an animation can leave unkeyed, by float rounding (about 1e-6); they are not listed.",
+  "about": [
+    "Vanilla's costume file for each colour of every fighter, colour 0 first (the DOL's per-fighter costume tables; PlCaRe is the English .usd the USA game loads). Costume slot k takes colour k's joint rest values bit for bit (pokemelee/rest_values.py), so an online opponent on a vanilla disc, who loads colour k for the same colour index, simulates the fighter as this disc does. A slot past vanilla's colours takes colour 0's: a vanilla client draws a colour it has no costume for as colour 0 (and so does this disc: m-ex and Slippi's CostumeBoundCheck turn an index past the fighter's count into 0).",
+    "Where vanilla's colours differ from colour 0 in a channel some animation leaves unkeyed on, or above, a joint the simulation reads (scan 2026-11-17): Captain Falcon 1-5 at the arms and hands, up to about 0.2 units (ECB points, hurtboxes, hitboxes: a proven desync); Peach 1 and 3 and Pichu 1 by float rounding (1e-6 to 3e-6). Elsewhere the differences are keyed by every animation or lie on display joints. Fighters whose colours all match colour 0 are listed anyway; fitting them changes nothing.",
+    "clones: m-ex clone fighters a vanilla client cannot load (the select icon sends external id 27); they keep their built values.",
+    "teams: vanilla's own team costume indices (gm_80169264/BC/90, table lbl_803D51A0), checked at assembly for the fighters listed. Slippi's online Teams mode gives every player the costume of their team from each client's OWN table, so this disc's red/blue/green index must land on the tree of vanilla's. Captain Falcon: red is colour 2 (PlCaRe), blue 5 (PlCaBu), green 4 (PlCaGr), and all six of his trees differ."
+  ],
   "fighters": {
-    "CaptainFalcon": ["PlCaNr.dat", "PlCaGy.dat", "PlCaRe.usd", "PlCaWh.dat", "PlCaGr.dat", "PlCaBu.dat"]
+    "Mario": ["PlMrNr.dat", "PlMrYe.dat", "PlMrBk.dat", "PlMrBu.dat", "PlMrGr.dat"],
+    "DrMario": ["PlDrNr.dat", "PlDrRe.dat", "PlDrBu.dat", "PlDrGr.dat", "PlDrBk.dat"],
+    "Luigi": ["PlLgNr.dat", "PlLgWh.dat", "PlLgAq.dat", "PlLgPi.dat"],
+    "Bowser": ["PlKpNr.dat", "PlKpRe.dat", "PlKpBu.dat", "PlKpBk.dat"],
+    "Peach": ["PlPeNr.dat", "PlPeYe.dat", "PlPeWh.dat", "PlPeBu.dat", "PlPeGr.dat"],
+    "CaptainFalcon": ["PlCaNr.dat", "PlCaGy.dat", "PlCaRe.usd", "PlCaWh.dat", "PlCaGr.dat", "PlCaBu.dat"],
+    "Ganondorf": ["PlGnNr.dat", "PlGnRe.dat", "PlGnBu.dat", "PlGnGr.dat", "PlGnLa.dat"],
+    "DonkeyKong": ["PlDkNr.dat", "PlDkBk.dat", "PlDkRe.dat", "PlDkBu.dat", "PlDkGr.dat"],
+    "Fox": ["PlFxNr.dat", "PlFxOr.dat", "PlFxLa.dat", "PlFxGr.dat"],
+    "Falco": ["PlFcNr.dat", "PlFcRe.dat", "PlFcBu.dat", "PlFcGr.dat"],
+    "Ness": ["PlNsNr.dat", "PlNsYe.dat", "PlNsBu.dat", "PlNsGr.dat"],
+    "Kirby": ["PlKbNr.dat", "PlKbYe.dat", "PlKbBu.dat", "PlKbRe.dat", "PlKbGr.dat", "PlKbWh.dat"],
+    "Samus": ["PlSsNr.dat", "PlSsPi.dat", "PlSsBk.dat", "PlSsGr.dat", "PlSsLa.dat"],
+    "Zelda": ["PlZdNr.dat", "PlZdRe.dat", "PlZdBu.dat", "PlZdGr.dat", "PlZdWh.dat"],
+    "Sheik": ["PlSkNr.dat", "PlSkRe.dat", "PlSkBu.dat", "PlSkGr.dat", "PlSkWh.dat"],
+    "Link": ["PlLkNr.dat", "PlLkRe.dat", "PlLkBu.dat", "PlLkBk.dat", "PlLkWh.dat"],
+    "YoungLink": ["PlClNr.dat", "PlClRe.dat", "PlClBu.dat", "PlClWh.dat", "PlClBk.dat"],
+    "Pichu": ["PlPcNr.dat", "PlPcRe.dat", "PlPcBu.dat", "PlPcGr.dat"],
+    "Pikachu": ["PlPkNr.dat", "PlPkRe.dat", "PlPkBu.dat", "PlPkGr.dat"],
+    "Mewtwo": ["PlMtNr.dat", "PlMtRe.dat", "PlMtBu.dat", "PlMtGr.dat"],
+    "Jigglypuff": ["PlPrNr.dat", "PlPrRe.dat", "PlPrBu.dat", "PlPrGr.dat", "PlPrYe.dat"],
+    "Marth": ["PlMsNr.dat", "PlMsRe.dat", "PlMsGr.dat", "PlMsBk.dat", "PlMsWh.dat"],
+    "Roy": ["PlFeNr.dat", "PlFeRe.dat", "PlFeBu.dat", "PlFeGr.dat", "PlFeYe.dat"],
+    "Yoshi": ["PlYsNr.dat", "PlYsRe.dat", "PlYsBu.dat", "PlYsYe.dat", "PlYsPi.dat", "PlYsAq.dat"],
+    "GameAndWatch": ["PlGwNr.dat", "PlGwNr.dat", "PlGwNr.dat", "PlGwNr.dat"],
+    "Popo": ["PlPpNr.dat", "PlPpGr.dat", "PlPpOr.dat", "PlPpRe.dat"],
+    "Nana": ["PlNnNr.dat", "PlNnYe.dat", "PlNnAq.dat", "PlNnWh.dat"]
+  },
+  "clones": ["Plusle", "Minun"],
+  "teams": {
+    "CaptainFalcon": {"red": 2, "blue": 5, "green": 4}
   }
 }

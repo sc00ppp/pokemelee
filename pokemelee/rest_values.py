@@ -1,11 +1,12 @@
 """Each colour slot carries the joint rest values of the vanilla colour it stands for online.
 
-Online, each Slippi client loads the costume file its own disc has for the colour a player picked. Vanilla's six
-Captain Falcon colours share one joint tree, but colours 1-5 have their own rest values at the arms and hands. A channel
-an animation leaves unkeyed sits at the costume's rest value, and Falcon's hands are ECB points and carry hitboxes, so a
-costume whose slot k has colour 0's tree is simulated differently on a vanilla opponent's client: Slippi's "Desync
-Risk", or a hard desync when a landing comes a frame apart. The fix is that slot k carries vanilla colour k's rest values
-bit for bit (recipes/rest-values.json names the colours).
+Online, each Slippi client loads the costume file its own disc has for the colour a player picked. A fighter's vanilla
+colours share one joint tree, but some colours have their own rest values (Captain Falcon's colours 1-5 at the arms and
+hands). A channel an animation leaves unkeyed sits at the costume's rest value, and Falcon's hands are ECB points and
+carry hitboxes, so a costume whose slot k has colour 0's tree is simulated differently on a vanilla opponent's client:
+Slippi's "Desync Risk", or a hard desync when a landing comes a frame apart. The fix is that slot k of every fighter
+carries vanilla colour k's rest values bit for bit (recipes/rest-values.json names the colours); in Teams, the team
+indices must also land on vanilla's team colour (``team_indices``, checked at assembly).
 
 ``fit`` copies the donor's rotation, scale and translation (JObj +0x14..+0x37) into every joint and keeps the model's
 rest pose where it was: for each joint whose world matrix changed, C = inverse(new world) . old world, its inverse bind
@@ -31,10 +32,18 @@ PNMTXIDX = 0
 INTS = {0: ('B', 0, 255), 1: ('b', -128, 127), 2: ('H', 0, 65535), 3: ('h', -32768, 32767)}
 
 
-def donors(fighter):
-    """The vanilla costume files whose rest values the slots of ``fighter`` carry, slot 0 first; () for a fighter whose
-    colours all share colour 0's rest values."""
-    return tuple(load('rest-values.json')['fighters'].get(fighter, ()))
+def donors(fighter, mon=None):
+    """The vanilla costume files whose rest values the slots of ``fighter`` carry, slot 0 first; () for a fighter the
+    recipe does not name, or for ``mon`` when it is an m-ex clone a vanilla client cannot load."""
+    spec = load('rest-values.json')
+    if mon in spec['clones']:
+        return ()
+    return tuple(spec['fighters'].get(fighter, ()))
+
+
+def team_indices(fighter):
+    """Vanilla's red/blue/green costume index for ``fighter`` where this disc must match it ({} when unchecked)."""
+    return dict(load('rest-values.json')['teams'].get(fighter, {}))
 
 
 def donor_for(files, slot):

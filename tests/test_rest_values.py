@@ -174,7 +174,32 @@ class RestValueTests(unittest.TestCase):
         self.assertEqual([rv.donor_for(files, k) for k in (0, 3, 5, 6)],
                          ['PlCaNr.dat', 'PlCaWh.dat', 'PlCaBu.dat', 'PlCaNr.dat'])
         self.assertTrue(set(files) <= set(NAMES))
-        self.assertEqual(rv.donors('Fox'), ())
+
+    def test_every_fighter_has_its_vanilla_colours_and_clones_none(self):
+        from pokemelee.portraits import CODES
+        for fighter, code in CODES.items():
+            files = rv.donors(fighter)
+            self.assertGreaterEqual(len(files), 4, fighter)
+            self.assertTrue(all(f[2:4] == code for f in files), fighter)
+            self.assertTrue(set(files) <= set(NAMES), fighter)
+        self.assertEqual(len(rv.donors('Pichu', 'Pichu')), 4)
+        self.assertEqual(rv.donors('Pichu', 'Plusle'), ())
+        self.assertEqual(rv.donors('Pichu', 'Minun'), ())
+
+    def test_blazikens_slots_and_team_indices_are_vanillas(self):
+        from pokemelee.assembly import team_slots
+        from pokemelee.catalog import load
+        spec = load('recolors.json')['Blaziken']
+        colours = ['default', *spec['colours']]
+        self.assertEqual(len(colours), len(rv.donors('CaptainFalcon')))
+        self.assertEqual(team_slots(spec, colours, 'CaptainFalcon'), {'red': 2, 'blue': 5, 'green': 4})
+        self.assertEqual(rv.team_indices('CaptainFalcon'), {'red': 2, 'blue': 5, 'green': 4})
+        self.assertEqual(spec['colours']['red'], 'keep')                     # red team: the default look
+        self.assertEqual(spec['colours']['green-team'], {'as': 'green'})
+        with self.assertRaisesRegex(ValueError, 'Teams costume indices'):
+            team_slots({**spec, 'teams': {}}, colours, 'CaptainFalcon')    # by colour name: green would be 3
+        self.assertEqual(team_slots({}, ['default', 'shiny', 'red', 'blue', 'green'], 'Fox'),
+                         {'red': 2, 'blue': 3, 'green': 4})                # not checked: no entry for Fox
 
     def test_packaging_fits_each_falcon_slot_to_its_colour_and_leaves_others(self):
         from pokemelee.costumes import fit_rest_values
@@ -186,18 +211,21 @@ class RestValueTests(unittest.TestCase):
                        'PlCaWh.dat': [OURS[0], OURS[1], THEIRS[2]]}
             for name, srt in colours.items():
                 (files / name).write_bytes(costume(srt))
+            for name in ('PlFxNr.dat', 'PlFxOr.dat'):              # Fox's colours: colour 0's values, nothing moves
+                (files / name).write_bytes(costume(OURS))
             jobs = []
-            for mon, fighter, slots in (('Blaziken', 'CaptainFalcon', 4), ('Quilava', 'Fox', 2)):
+            for mon, fighter, slots in (('Blaziken', 'CaptainFalcon', 4), ('Quilava', 'Fox', 2), ('Plusle', 'Pichu', 2)):
                 for k in range(slots):
                     folder = tmp / mon / str(k)
                     folder.mkdir(parents=True)
                     (folder / 'in.dat').write_bytes(costume(OURS))
                     jobs.append((mon, {'fighter': fighter}, None, {'dat': folder / 'in.dat'}, folder))
-            fit_rest_values(jobs, files)
-            for (mon, row, _, choice, folder), name in zip(jobs, list(colours) + [None, None]):
+            fit_rest_values(jobs, files)                             # Plusle, a clone, reads no Pichu file
+            for (mon, row, _, choice, folder), name in zip(jobs, list(colours) + [None] * 4):
                 rows = rv.skeleton(Dat(choice['dat'].read_bytes()))
-                if name is None:
+                if name is None or colours[name] == OURS:            # nothing to move: the source stays the slot's
                     self.assertEqual(choice['dat'], folder / 'in.dat')
+                    self.assertFalse((folder / 'rest.dat').exists())
                     continue
                 self.assertEqual(choice['dat'], folder / 'rest.dat')
                 self.assertEqual([r[3] for r in rows], [r[3] for r in rv.skeleton(Dat((files / name).read_bytes()))])
